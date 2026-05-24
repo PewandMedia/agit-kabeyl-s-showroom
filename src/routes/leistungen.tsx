@@ -123,24 +123,24 @@ function ServicesPage() {
         </div>
       </section>
 
-      <section className="border-t border-line bg-ink text-paper grain">
+      <section className="border-t border-line bg-surface grain">
         <div className="mx-auto max-w-[1400px] px-5 py-24 text-center md:px-10 md:py-32">
-          <h2 className="mx-auto max-w-3xl font-serif text-4xl text-paper md:text-5xl">
+          <h2 className="mx-auto max-w-3xl font-serif text-4xl text-ink md:text-5xl">
             Bereit für den nächsten Schritt?
           </h2>
-          <p className="mx-auto mt-6 max-w-xl text-base text-paper/70 md:text-lg">
+          <p className="mx-auto mt-6 max-w-xl text-base text-ink-soft md:text-lg">
             Ob Verkauf, Ankauf oder Beratung — wir sind direkt für Sie da.
           </p>
           <div className="mt-10 flex flex-wrap justify-center gap-3">
             <Link
               to="/kontakt"
-              className="inline-flex items-center justify-center bg-paper px-7 py-4 text-xs uppercase tracking-[0.22em] text-ink hover:opacity-90"
+              className="inline-flex items-center justify-center bg-ink px-7 py-4 text-xs uppercase tracking-[0.22em] text-paper hover:opacity-90"
             >
               Termin vereinbaren
             </Link>
             <Link
               to="/fahrzeuge"
-              className="inline-flex items-center justify-center border border-paper/40 px-7 py-4 text-xs uppercase tracking-[0.22em] text-paper hover:bg-paper hover:text-ink"
+              className="inline-flex items-center justify-center border border-champagne/60 px-7 py-4 text-xs uppercase tracking-[0.22em] text-champagne hover:bg-champagne hover:text-paper"
             >
               Fahrzeuge ansehen
             </Link>

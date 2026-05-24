@@ -65,21 +65,21 @@ function AboutPage() {
         </div>
       </section>
 
-      <section className="border-t border-line bg-ink text-paper grain">
+      <section className="border-t border-line bg-surface grain">
         <div className="mx-auto max-w-[1400px] px-5 py-24 md:px-10 md:py-40">
           <div className="grid gap-14 md:grid-cols-12 md:gap-20">
             <div className="md:col-span-5">
-              <p className="kicker text-champagne">Die Marke AK</p>
-              <h2 className="mt-4 font-serif text-4xl leading-tight text-paper md:text-5xl">
+              <p className="kicker">Die Marke AK</p>
+              <h2 className="mt-4 font-serif text-4xl leading-tight text-ink md:text-5xl">
                 Leistung auf höchstem Niveau.
               </h2>
             </div>
             <div className="md:col-span-7">
-              <p className="font-serif text-2xl leading-[1.3] text-paper md:text-3xl">
+              <p className="font-serif text-2xl leading-[1.3] text-ink md:text-3xl">
                 Die Marke AK steht für Werte, die auf dem Ring entstanden sind
-                und in unserem Autohaus weiterleben: <span className="text-champagne">Disziplin, Vertrauen, Champion-Mentalität.</span>
+                und in unserem Autohaus weiterleben: <span className="text-gradient-gold">Disziplin, Vertrauen, Champion-Mentalität.</span>
               </p>
-              <p className="mt-8 max-w-xl text-base leading-relaxed text-paper/70 md:text-lg">
+              <p className="mt-8 max-w-xl text-base leading-relaxed text-ink-soft md:text-lg">
                 Wer hier kauft, kauft mehr als ein Fahrzeug — er kauft das
                 Versprechen einer Marke, die ihren Standard ernst nimmt.
               </p>
