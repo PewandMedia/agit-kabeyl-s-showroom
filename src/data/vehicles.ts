@@ -49,7 +49,7 @@ export const vehicles: Vehicle[] = [
     ],
     description:
       "Repräsentative S-Klasse in makellosem Zustand. Scheckheftgepflegt, lückenlose Historie, frisch durch die Werkstatt. Erstbesitz, Nichtraucherfahrzeug.",
-    image: "/src/assets/hero-car.jpg",
+    image: heroCar,
     status: "active",
   },
   {
