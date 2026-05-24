@@ -9,38 +9,174 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as UeberUnsRouteImport } from './routes/ueber-uns'
+import { Route as LeistungenRouteImport } from './routes/leistungen'
+import { Route as KontaktRouteImport } from './routes/kontakt'
+import { Route as ImpressumRouteImport } from './routes/impressum'
+import { Route as FahrzeugeRouteImport } from './routes/fahrzeuge'
+import { Route as DatenschutzRouteImport } from './routes/datenschutz'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as FahrzeugeIdRouteImport } from './routes/fahrzeuge.$id'
 
+const UeberUnsRoute = UeberUnsRouteImport.update({
+  id: '/ueber-uns',
+  path: '/ueber-uns',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LeistungenRoute = LeistungenRouteImport.update({
+  id: '/leistungen',
+  path: '/leistungen',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const KontaktRoute = KontaktRouteImport.update({
+  id: '/kontakt',
+  path: '/kontakt',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ImpressumRoute = ImpressumRouteImport.update({
+  id: '/impressum',
+  path: '/impressum',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const FahrzeugeRoute = FahrzeugeRouteImport.update({
+  id: '/fahrzeuge',
+  path: '/fahrzeuge',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DatenschutzRoute = DatenschutzRouteImport.update({
+  id: '/datenschutz',
+  path: '/datenschutz',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const FahrzeugeIdRoute = FahrzeugeIdRouteImport.update({
+  id: '/$id',
+  path: '/$id',
+  getParentRoute: () => FahrzeugeRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/datenschutz': typeof DatenschutzRoute
+  '/fahrzeuge': typeof FahrzeugeRouteWithChildren
+  '/impressum': typeof ImpressumRoute
+  '/kontakt': typeof KontaktRoute
+  '/leistungen': typeof LeistungenRoute
+  '/ueber-uns': typeof UeberUnsRoute
+  '/fahrzeuge/$id': typeof FahrzeugeIdRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/datenschutz': typeof DatenschutzRoute
+  '/fahrzeuge': typeof FahrzeugeRouteWithChildren
+  '/impressum': typeof ImpressumRoute
+  '/kontakt': typeof KontaktRoute
+  '/leistungen': typeof LeistungenRoute
+  '/ueber-uns': typeof UeberUnsRoute
+  '/fahrzeuge/$id': typeof FahrzeugeIdRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/datenschutz': typeof DatenschutzRoute
+  '/fahrzeuge': typeof FahrzeugeRouteWithChildren
+  '/impressum': typeof ImpressumRoute
+  '/kontakt': typeof KontaktRoute
+  '/leistungen': typeof LeistungenRoute
+  '/ueber-uns': typeof UeberUnsRoute
+  '/fahrzeuge/$id': typeof FahrzeugeIdRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/datenschutz'
+    | '/fahrzeuge'
+    | '/impressum'
+    | '/kontakt'
+    | '/leistungen'
+    | '/ueber-uns'
+    | '/fahrzeuge/$id'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/datenschutz'
+    | '/fahrzeuge'
+    | '/impressum'
+    | '/kontakt'
+    | '/leistungen'
+    | '/ueber-uns'
+    | '/fahrzeuge/$id'
+  id:
+    | '__root__'
+    | '/'
+    | '/datenschutz'
+    | '/fahrzeuge'
+    | '/impressum'
+    | '/kontakt'
+    | '/leistungen'
+    | '/ueber-uns'
+    | '/fahrzeuge/$id'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  DatenschutzRoute: typeof DatenschutzRoute
+  FahrzeugeRoute: typeof FahrzeugeRouteWithChildren
+  ImpressumRoute: typeof ImpressumRoute
+  KontaktRoute: typeof KontaktRoute
+  LeistungenRoute: typeof LeistungenRoute
+  UeberUnsRoute: typeof UeberUnsRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/ueber-uns': {
+      id: '/ueber-uns'
+      path: '/ueber-uns'
+      fullPath: '/ueber-uns'
+      preLoaderRoute: typeof UeberUnsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/leistungen': {
+      id: '/leistungen'
+      path: '/leistungen'
+      fullPath: '/leistungen'
+      preLoaderRoute: typeof LeistungenRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/kontakt': {
+      id: '/kontakt'
+      path: '/kontakt'
+      fullPath: '/kontakt'
+      preLoaderRoute: typeof KontaktRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/impressum': {
+      id: '/impressum'
+      path: '/impressum'
+      fullPath: '/impressum'
+      preLoaderRoute: typeof ImpressumRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/fahrzeuge': {
+      id: '/fahrzeuge'
+      path: '/fahrzeuge'
+      fullPath: '/fahrzeuge'
+      preLoaderRoute: typeof FahrzeugeRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/datenschutz': {
+      id: '/datenschutz'
+      path: '/datenschutz'
+      fullPath: '/datenschutz'
+      preLoaderRoute: typeof DatenschutzRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -48,11 +184,36 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/fahrzeuge/$id': {
+      id: '/fahrzeuge/$id'
+      path: '/$id'
+      fullPath: '/fahrzeuge/$id'
+      preLoaderRoute: typeof FahrzeugeIdRouteImport
+      parentRoute: typeof FahrzeugeRoute
+    }
   }
 }
 
+interface FahrzeugeRouteChildren {
+  FahrzeugeIdRoute: typeof FahrzeugeIdRoute
+}
+
+const FahrzeugeRouteChildren: FahrzeugeRouteChildren = {
+  FahrzeugeIdRoute: FahrzeugeIdRoute,
+}
+
+const FahrzeugeRouteWithChildren = FahrzeugeRoute._addFileChildren(
+  FahrzeugeRouteChildren,
+)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  DatenschutzRoute: DatenschutzRoute,
+  FahrzeugeRoute: FahrzeugeRouteWithChildren,
+  ImpressumRoute: ImpressumRoute,
+  KontaktRoute: KontaktRoute,
+  LeistungenRoute: LeistungenRoute,
+  UeberUnsRoute: UeberUnsRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
