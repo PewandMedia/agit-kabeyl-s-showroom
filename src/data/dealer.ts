@@ -1,6 +1,6 @@
 /**
  * Stammdaten Autohaus AK GmbH.
- * Adresse / Telefon noch Platzhalter — bitte mit echten Werten ersetzen.
+ * Adresse / Telefon / Rechtliches sind Platzhalter — bitte ersetzen.
  */
 export const dealer = {
   legalName: "Autohaus AK GmbH",
@@ -9,18 +9,22 @@ export const dealer = {
   street: "Musterstraße 1", // TODO: echte Adresse
   postalCode: "42551",
   country: "DE",
-  phone: "+49 2051 000000", // TODO: echte Nummer
+  phone: "+49 2051 000000", // TODO
   phoneDisplay: "+49 2051 000 000",
-  whatsapp: "4920510000000", // TODO: echte WhatsApp-Nummer (intl. Format ohne +)
+  whatsapp: "4920510000000", // TODO: WhatsApp-Nummer im intl. Format ohne +
   email: "info@autohaus-ak.de", // TODO
   hours: [
     { day: "Mo–Fr", time: "09:00 – 18:30" },
     { day: "Sa", time: "10:00 – 15:00" },
     { day: "So", time: "Geschlossen" },
   ],
-  claim: "Champions wählen mit Bedacht.",
+  claim: "Champion-Mentalität. Premium-Fahrzeuge. Ehrlicher Service.",
   subclaim:
-    "Geprüfte Premium- und Gebrauchtfahrzeuge aus Velbert. Persönlich ausgewählt, sorgfältig aufbereitet, ehrlich verkauft.",
+    "Autohaus AK GmbH verbindet geprüfte Fahrzeuge, faire Konditionen und persönliche Beratung mit dem Anspruch, in jedem Detail Nummer 1 zu sein.",
+  // Legal — Platzhalter
+  managingDirector: "Agit Kabayel",
+  hrb: "HRB 00000 (Amtsgericht Wuppertal)",
+  ustId: "DE000000000",
 };
 
 export function whatsappLink(message: string): string {

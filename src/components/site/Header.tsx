@@ -5,7 +5,8 @@ import { dealer, telLink, whatsappLink } from "@/data/dealer";
 const NAV = [
   { to: "/", label: "Start" },
   { to: "/fahrzeuge", label: "Fahrzeuge" },
-  { to: "/leistungen", label: "Leistungen" },
+  { to: "/auto-verkaufen", label: "Auto verkaufen" },
+  { to: "/finanzierung", label: "Finanzierung" },
   { to: "/ueber-uns", label: "Über uns" },
   { to: "/kontakt", label: "Kontakt" },
 ] as const;
@@ -25,8 +26,8 @@ export function Header() {
     <header
       className={`fixed inset-x-0 top-0 z-50 transition-all duration-300 ${
         scrolled || open
-          ? "bg-paper/95 backdrop-blur-md border-b border-line"
-          : "bg-transparent"
+          ? "bg-paper/85 backdrop-blur-xl border-b border-line"
+          : "bg-gradient-to-b from-paper/60 to-transparent"
       }`}
     >
       <div className="mx-auto flex h-16 max-w-[1400px] items-center justify-between px-5 md:h-20 md:px-10">
@@ -36,7 +37,7 @@ export function Header() {
           aria-label={dealer.legalName}
           onClick={() => setOpen(false)}
         >
-          <span className="flex h-9 w-9 items-center justify-center border border-ink font-serif text-base text-ink md:h-10 md:w-10 md:text-lg">
+          <span className="flex h-9 w-9 items-center justify-center border border-champagne/60 font-serif text-base text-champagne md:h-10 md:w-10 md:text-lg">
             AK
           </span>
           <span className="hidden flex-col leading-none sm:flex">
@@ -47,12 +48,12 @@ export function Header() {
           </span>
         </Link>
 
-        <nav className="hidden items-center gap-9 lg:flex">
+        <nav className="hidden items-center gap-7 lg:flex">
           {NAV.map((item) => (
             <Link
               key={item.to}
               to={item.to}
-              className="text-[13px] uppercase tracking-[0.18em] text-ink-soft transition-colors hover:text-ink"
+              className="text-[12px] uppercase tracking-[0.2em] text-ink-soft transition-colors hover:text-ink"
               activeProps={{ className: "text-ink" }}
               activeOptions={{ exact: item.to === "/" }}
             >
@@ -64,7 +65,7 @@ export function Header() {
         <div className="hidden items-center gap-3 lg:flex">
           <a
             href={telLink()}
-            className="text-[13px] uppercase tracking-[0.18em] text-ink-soft transition-colors hover:text-ink"
+            className="text-[12px] uppercase tracking-[0.2em] text-ink-soft transition-colors hover:text-ink"
           >
             {dealer.phoneDisplay}
           </a>
@@ -101,7 +102,7 @@ export function Header() {
       </div>
 
       {open && (
-        <div className="border-t border-line bg-paper lg:hidden">
+        <div className="border-t border-line bg-paper/95 backdrop-blur-xl lg:hidden">
           <nav className="mx-auto flex max-w-[1400px] flex-col px-5 py-4">
             {NAV.map((item) => (
               <Link
