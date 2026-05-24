@@ -109,7 +109,7 @@ function VehicleDetail() {
   const whatsappText = `Hallo ${dealer.shortName}, ich interessiere mich für den ${v.title} (ID ${v.id}).`;
 
   return (
-    <SiteLayout>
+    <SiteLayout hideMobileBar>
       <article>
         <section className="bg-ink">
           <div className="mx-auto max-w-[1400px] px-5 pt-8 md:px-10 md:pt-12">
@@ -213,7 +213,8 @@ function VehicleDetail() {
 
         <OtherVehicles currentId={v.id} />
 
-        <div className="fixed inset-x-0 bottom-0 z-40 grid grid-cols-2 border-t border-line bg-paper md:hidden">
+        {/* Vehicle-specific sticky bar replaces the global one on detail pages */}
+        <div className="fixed inset-x-0 bottom-0 z-50 grid grid-cols-2 border-t border-line bg-paper/95 backdrop-blur-xl md:hidden">
           <a
             href={telLink()}
             className="flex items-center justify-center border-r border-line py-4 text-xs uppercase tracking-[0.18em] text-ink"
@@ -224,9 +225,9 @@ function VehicleDetail() {
             href={whatsappLink(whatsappText)}
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center justify-center bg-ink py-4 text-xs uppercase tracking-[0.18em] text-paper"
+            className="flex items-center justify-center bg-[oklch(0.55_0.16_150)] py-4 text-xs uppercase tracking-[0.18em] text-white"
           >
-            WhatsApp
+            WhatsApp · {dealer.phoneDisplay.split(" ").pop()}
           </a>
         </div>
       </article>

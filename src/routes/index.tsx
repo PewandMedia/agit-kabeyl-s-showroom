@@ -1,7 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { SiteLayout } from "@/components/site/SiteLayout";
 import { VehicleCard } from "@/components/site/VehicleCard";
-import { featuredVehicles } from "@/data/vehicles";
+import { featuredVehicles, vehicles } from "@/data/vehicles";
 import { dealer, telLink, whatsappLink } from "@/data/dealer";
 import heroCar from "@/assets/hero-car.jpg";
 
@@ -12,20 +12,28 @@ export const Route = createFileRoute("/")({
       {
         name: "description",
         content:
-          "Autohaus AK GmbH in Velbert — geprüfte Premium- und Gebrauchtfahrzeuge. Persönlich ausgewählt, sorgfältig aufbereitet, ehrlich verkauft.",
+          "Autohaus AK GmbH in Velbert. Champion-Mentalität, geprüfte Premium-Fahrzeuge, faire Konditionen und persönliche Beratung. Direktkontakt per WhatsApp.",
       },
-      {
-        property: "og:title",
-        content: `${dealer.legalName} — Premium-Fahrzeuge in ${dealer.city}`,
-      },
-      {
-        property: "og:description",
-        content:
-          "Geprüfte Premium- und Gebrauchtfahrzeuge in Velbert. Champions wählen mit Bedacht.",
-      },
+      { property: "og:title", content: `${dealer.legalName} — Premium-Fahrzeuge in ${dealer.city}` },
+      { property: "og:description", content: "Champion-Mentalität. Premium-Fahrzeuge. Ehrlicher Service." },
+      { property: "og:image", content: heroCar },
       { property: "og:url", content: "/" },
     ],
     links: [{ rel: "canonical", href: "/" }],
+    scripts: [
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "FAQPage",
+          mainEntity: FAQS.map((f) => ({
+            "@type": "Question",
+            name: f.q,
+            acceptedAnswer: { "@type": "Answer", text: f.a },
+          })),
+        }),
+      },
+    ],
   }),
   component: HomePage,
 });
@@ -34,59 +42,75 @@ function HomePage() {
   return (
     <SiteLayout transparentHeader>
       <Hero />
-      <FeaturedVehicles />
-      <Pillars />
-      <BrandStatement />
-      <Services />
+      <TrustBar />
+      <BrandStory />
+      <Highlights />
+      <Inventory />
+      <SellCar />
+      <Financing />
+      <WhyAK />
       <Testimonials />
-      <Location />
+      <FAQ />
+      <ContactCTA />
     </SiteLayout>
   );
 }
 
+/* ─────────────────────────── HERO ─────────────────────────── */
 function Hero() {
   return (
-    <section className="relative isolate min-h-[88vh] overflow-hidden bg-ink text-paper grain">
+    <section className="relative isolate min-h-[92vh] overflow-hidden bg-paper text-ink grain">
       <img
         src={heroCar}
         alt=""
         width={1920}
         height={1080}
         fetchPriority="high"
-        className="absolute inset-0 h-full w-full object-cover opacity-70"
+        className="absolute inset-0 h-full w-full object-cover opacity-55"
       />
-      <div className="absolute inset-0 bg-gradient-to-r from-ink via-ink/70 to-transparent" />
-      <div className="absolute inset-0 bg-gradient-to-t from-ink via-transparent to-ink/40" />
+      <div className="absolute inset-0 bg-gradient-to-r from-paper via-paper/80 to-paper/20" />
+      <div className="absolute inset-0 bg-gradient-to-t from-paper via-transparent to-paper/40" />
 
-      <div className="relative mx-auto flex min-h-[88vh] max-w-[1400px] flex-col justify-between px-5 pb-12 pt-32 md:px-10 md:pb-20 md:pt-40">
+      <div className="relative mx-auto flex min-h-[92vh] max-w-[1400px] flex-col justify-between px-5 pb-16 pt-32 md:px-10 md:pb-24 md:pt-44">
         <div className="max-w-3xl">
-          <p className="kicker text-champagne">
-            Autohaus AK GmbH · {dealer.city}
-          </p>
-          <h1 className="mt-6 font-serif text-[44px] leading-[1.02] text-paper sm:text-6xl md:text-7xl lg:text-[88px]">
-            {dealer.claim}
+          <div className="flex items-center gap-3">
+            <span className="h-px w-10 bg-champagne" />
+            <p className="kicker">Autohaus AK GmbH · {dealer.city}</p>
+          </div>
+          <h1 className="mt-7 font-serif text-[44px] leading-[1.02] text-ink sm:text-6xl md:text-7xl lg:text-[88px]">
+            Champion-Mentalität.<br />
+            <span className="text-gradient-gold">Premium-Fahrzeuge.</span><br />
+            Ehrlicher Service.
           </h1>
-          <p className="mt-8 max-w-xl text-base leading-relaxed text-paper/80 md:text-lg">
+          <p className="mt-8 max-w-xl text-base leading-relaxed text-ink-soft md:text-lg">
             {dealer.subclaim}
           </p>
 
           <div className="mt-10 flex flex-wrap items-center gap-3">
             <Link
               to="/fahrzeuge"
-              className="inline-flex items-center justify-center bg-paper px-7 py-4 text-xs font-medium uppercase tracking-[0.22em] text-ink transition-opacity hover:opacity-90"
+              className="inline-flex items-center justify-center bg-ink px-7 py-4 text-xs font-medium uppercase tracking-[0.22em] text-paper transition-opacity hover:opacity-90"
             >
               Fahrzeuge ansehen
             </Link>
             <Link
-              to="/kontakt"
-              className="inline-flex items-center justify-center border border-paper/40 px-7 py-4 text-xs font-medium uppercase tracking-[0.22em] text-paper transition-colors hover:bg-paper hover:text-ink"
+              to="/auto-verkaufen"
+              className="inline-flex items-center justify-center border border-champagne/60 px-7 py-4 text-xs font-medium uppercase tracking-[0.22em] text-champagne transition-colors hover:bg-champagne hover:text-paper"
             >
-              Termin vereinbaren
+              Auto verkaufen
             </Link>
+            <a
+              href={whatsappLink(`Hallo ${dealer.shortName}, ich habe eine Frage.`)}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center justify-center border border-ink/30 px-7 py-4 text-xs font-medium uppercase tracking-[0.22em] text-ink transition-colors hover:border-ink"
+            >
+              WhatsApp-Anfrage
+            </a>
           </div>
         </div>
 
-        <div className="mt-16 hidden grid-cols-3 gap-8 border-t border-paper/15 pt-8 md:grid">
+        <div className="mt-16 hidden grid-cols-3 gap-8 border-t border-line pt-8 md:grid">
           <Stat label="Standort" value={dealer.city} />
           <Stat label="Verkauf · Ankauf" value="Persönlich vor Ort" />
           <Stat label="Direkt erreichbar" value={dealer.phoneDisplay} />
@@ -99,21 +123,88 @@ function Hero() {
 function Stat({ label, value }: { label: string; value: string }) {
   return (
     <div>
-      <p className="kicker text-paper/60">{label}</p>
-      <p className="mt-2 font-serif text-xl text-paper md:text-2xl">{value}</p>
+      <p className="kicker">{label}</p>
+      <p className="mt-2 font-serif text-xl text-ink md:text-2xl">{value}</p>
     </div>
   );
 }
 
-function FeaturedVehicles() {
+/* ─────────────────────── TRUST BAR ─────────────────────── */
+const TRUSTS = [
+  "Geprüfte Fahrzeuge",
+  "Finanzierung möglich",
+  "Inzahlungnahme",
+  "Schnelle Abwicklung",
+  "Persönliche Beratung",
+  "Direkter WhatsApp-Kontakt",
+];
+
+function TrustBar() {
   return (
-    <section className="bg-paper">
+    <section className="border-y border-line bg-surface">
+      <div className="mx-auto max-w-[1400px] px-5 py-6 md:px-10">
+        <div className="flex flex-wrap items-center justify-center gap-x-10 gap-y-3 text-[11px] uppercase tracking-[0.22em] text-ink-soft">
+          {TRUSTS.map((t, i) => (
+            <span key={t} className="flex items-center gap-3">
+              {i > 0 && <span className="hidden h-1 w-1 rounded-full bg-champagne md:inline-block" />}
+              <span>{t}</span>
+            </span>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* ────────────────────── BRAND STORY ────────────────────── */
+function BrandStory() {
+  return (
+    <section className="relative overflow-hidden bg-paper grain">
+      <div className="mx-auto max-w-[1400px] px-5 py-24 md:px-10 md:py-40">
+        <div className="grid gap-12 md:grid-cols-12">
+          <div className="md:col-span-4">
+            <p className="kicker">Marke AK</p>
+            <p className="mt-4 font-serif text-xl text-ink-soft">
+              Gebaut mit dem Anspruch eines Champions.
+            </p>
+          </div>
+          <div className="md:col-span-8">
+            <p className="font-serif text-3xl leading-[1.18] text-ink sm:text-4xl md:text-[44px]">
+              Wer Nummer 1 sein will, akzeptiert keine Abkürzungen.
+              Jede Prüfung, jede Aufbereitung, jedes Gespräch
+              folgt einem klaren Standard —{" "}
+              <span className="text-gradient-gold">dem höchsten.</span>
+            </p>
+            <p className="mt-8 max-w-2xl text-base leading-relaxed text-ink-soft md:text-lg">
+              Autohaus AK GmbH steht für die Werte einer Marke, die Disziplin,
+              Qualität und Verantwortung lebt. Wir verkaufen keine Stückzahl —
+              wir verkaufen Vertrauen.
+            </p>
+            <div className="mt-10">
+              <Link
+                to="/ueber-uns"
+                className="inline-flex items-center gap-3 text-xs uppercase tracking-[0.22em] text-champagne hover:text-ink"
+              >
+                Über uns <span aria-hidden>→</span>
+              </Link>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* ───────────────────── HIGHLIGHTS ───────────────────── */
+function Highlights() {
+  return (
+    <section className="border-t border-line bg-paper">
       <div className="mx-auto max-w-[1400px] px-5 py-20 md:px-10 md:py-32">
         <div className="flex items-end justify-between gap-6">
           <div>
             <p className="kicker">Auswahl</p>
             <h2 className="mt-4 font-serif text-4xl text-ink md:text-5xl">
-              Aktuelle Highlights
+              Aktuelle Highlights.
             </h2>
           </div>
           <Link
@@ -133,7 +224,7 @@ function FeaturedVehicles() {
         <div className="mt-12 md:hidden">
           <Link
             to="/fahrzeuge"
-            className="block w-full border border-ink py-4 text-center text-xs uppercase tracking-[0.22em] text-ink"
+            className="block w-full border border-ink/40 py-4 text-center text-xs uppercase tracking-[0.22em] text-ink"
           >
             Alle Fahrzeuge ansehen
           </Link>
@@ -143,129 +234,215 @@ function FeaturedVehicles() {
   );
 }
 
-const PILLARS = [
-  {
-    title: "Geprüft.",
-    body:
-      "Jedes Fahrzeug durchläuft eine eigene Eingangsprüfung, bevor es bei uns steht.",
-  },
-  {
-    title: "Gepflegt.",
-    body:
-      "Aufbereitung, Service und Dokumentation gehören zum Standard — nicht zum Extra.",
-  },
-  {
-    title: "Persönlich.",
-    body:
-      "Sie sprechen mit Menschen, die ihre Fahrzeuge kennen. Keine Hotline, keine Weiterleitung.",
-  },
-];
+/* ───────────────────── INVENTORY TEASER ───────────────────── */
+function Inventory() {
+  const rest = vehicles.slice(3, 5);
+  if (rest.length === 0) return null;
+  return (
+    <section className="border-t border-line bg-surface">
+      <div className="mx-auto max-w-[1400px] px-5 py-20 md:px-10 md:py-32">
+        <div className="grid gap-12 md:grid-cols-12 md:gap-16">
+          <div className="md:col-span-4">
+            <p className="kicker">Bestand</p>
+            <h2 className="mt-4 font-serif text-4xl text-ink md:text-5xl">
+              Aus unserem Bestand.
+            </h2>
+            <p className="mt-6 text-base text-ink-soft">
+              Jedes Fahrzeug persönlich ausgewählt, geprüft und transparent
+              dokumentiert.
+            </p>
+            <Link
+              to="/fahrzeuge"
+              className="mt-8 inline-flex items-center gap-3 text-xs uppercase tracking-[0.22em] text-champagne hover:text-ink"
+            >
+              Zum kompletten Bestand →
+            </Link>
+          </div>
+          <div className="md:col-span-8 grid gap-10 sm:grid-cols-2">
+            {rest.map((v) => (
+              <VehicleCard key={v.id} vehicle={v} />
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
 
-function Pillars() {
+/* ───────────────────── SELL CAR TEASER ───────────────────── */
+function SellCar() {
   return (
     <section className="border-t border-line bg-paper">
       <div className="mx-auto max-w-[1400px] px-5 py-20 md:px-10 md:py-32">
-        <div className="grid gap-12 md:grid-cols-3 md:gap-16">
-          {PILLARS.map((p, i) => (
-            <div key={p.title}>
-              <p className="kicker">
-                {String(i + 1).padStart(2, "0")}
-              </p>
-              <h3 className="mt-4 font-serif text-3xl text-ink md:text-4xl">
-                {p.title}
-              </h3>
-              <p className="mt-4 max-w-xs text-sm leading-relaxed text-ink-soft">
-                {p.body}
-              </p>
+        <div className="grid gap-14 md:grid-cols-12 md:gap-20">
+          <div className="md:col-span-7">
+            <p className="kicker">Ankauf</p>
+            <h2 className="mt-4 font-serif text-4xl text-ink md:text-6xl">
+              Wir kaufen Ihr Fahrzeug —{" "}
+              <span className="text-gradient-gold">fair und sofort.</span>
+            </h2>
+            <p className="mt-6 max-w-xl text-base leading-relaxed text-ink-soft md:text-lg">
+              Faire Bewertung, schnelle Abwicklung, sofortige Zahlung. Egal ob
+              Marke, Alter oder Kilometer — wir machen Ihnen ein realistisches
+              Angebot.
+            </p>
+            <ul className="mt-8 grid grid-cols-1 gap-3 text-sm sm:grid-cols-2">
+              {[
+                "Bewertung innerhalb eines Termins",
+                "Sofortige Auszahlung möglich",
+                "Übernahme aller Formalitäten",
+                "Marken- und modellübergreifend",
+              ].map((b) => (
+                <li key={b} className="flex items-start gap-3">
+                  <span aria-hidden className="mt-2 h-px w-4 bg-champagne" />
+                  <span className="text-ink">{b}</span>
+                </li>
+              ))}
+            </ul>
+            <div className="mt-10 flex flex-wrap gap-3">
+              <Link
+                to="/auto-verkaufen"
+                className="inline-flex items-center justify-center bg-ink px-7 py-4 text-xs uppercase tracking-[0.22em] text-paper hover:opacity-90"
+              >
+                Angebot anfordern
+              </Link>
+              <a
+                href={whatsappLink(`Hallo ${dealer.shortName}, ich möchte mein Fahrzeug verkaufen.`)}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center justify-center border border-ink/40 px-7 py-4 text-xs uppercase tracking-[0.22em] text-ink hover:border-ink"
+              >
+                Direkt per WhatsApp
+              </a>
             </div>
-          ))}
+          </div>
+          <div className="md:col-span-5">
+            <div className="glass p-8 md:p-10">
+              <p className="kicker">Schnellbewertung</p>
+              <p className="mt-4 font-serif text-2xl leading-snug text-ink">
+                Schicken Sie uns Marke, Modell, Baujahr und Laufleistung — wir
+                melden uns mit einer ersten Hausnummer zurück.
+              </p>
+              <div className="mt-8 space-y-4 text-sm text-ink-soft">
+                <Step n="01" text="Fahrzeugdaten senden" />
+                <Step n="02" text="Bewertung innerhalb 24 h" />
+                <Step n="03" text="Persönlicher Termin in Velbert" />
+                <Step n="04" text="Sofortige Übernahme & Auszahlung" />
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </section>
   );
 }
 
-function BrandStatement() {
+function Step({ n, text }: { n: string; text: string }) {
   return (
-    <section className="relative bg-ink text-paper grain">
-      <div className="mx-auto max-w-[1400px] px-5 py-24 md:px-10 md:py-40">
-        <div className="grid gap-12 md:grid-cols-12">
-          <div className="md:col-span-3">
-            <p className="kicker text-champagne">Marke AK</p>
-          </div>
-          <div className="md:col-span-9">
-            <p className="font-serif text-3xl leading-[1.18] text-paper sm:text-4xl md:text-[44px]">
-              Autohaus AK GmbH steht für die Werte einer Marke, die Disziplin,
-              Qualität und Verantwortung lebt. Wir verkaufen keine Stückzahl —{" "}
-              <span className="text-champagne">wir verkaufen Vertrauen.</span>
+    <div className="flex items-center gap-4 border-b border-line pb-3 last:border-0">
+      <span className="font-serif text-2xl text-champagne">{n}</span>
+      <span className="text-ink">{text}</span>
+    </div>
+  );
+}
+
+/* ───────────────────── FINANCING TEASER ───────────────────── */
+function Financing() {
+  return (
+    <section className="border-t border-line bg-surface">
+      <div className="mx-auto max-w-[1400px] px-5 py-20 md:px-10 md:py-32">
+        <div className="grid gap-14 md:grid-cols-12 md:gap-20">
+          <div className="md:col-span-5">
+            <p className="kicker">Finanzierung</p>
+            <h2 className="mt-4 font-serif text-4xl text-ink md:text-5xl">
+              Champion-Konditionen.
+            </h2>
+            <p className="mt-6 text-base leading-relaxed text-ink-soft md:text-lg">
+              Transparente Konditionen, individuelle Lösungen, schnelle
+              Zusagen — durch bewährte Partnerbanken.
             </p>
-            <div className="mt-12">
+            <div className="mt-10">
               <Link
-                to="/ueber-uns"
-                className="inline-flex items-center text-xs uppercase tracking-[0.22em] text-paper/80 transition-colors hover:text-paper"
+                to="/finanzierung"
+                className="inline-flex items-center gap-3 text-xs uppercase tracking-[0.22em] text-champagne hover:text-ink"
               >
-                Mehr über uns →
+                Finanzierung berechnen →
               </Link>
             </div>
           </div>
+          <div className="md:col-span-7 grid gap-6 sm:grid-cols-3">
+            {[
+              { v: "ab 3,99%", l: "Effektivzins indikativ" },
+              { v: "12–84 Mt.", l: "Laufzeit flexibel" },
+              { v: "0 €", l: "Anzahlung möglich" },
+            ].map((s) => (
+              <div key={s.l} className="glass p-6">
+                <p className="font-serif text-3xl text-champagne md:text-4xl">{s.v}</p>
+                <p className="mt-3 text-[11px] uppercase tracking-[0.18em] text-ink-soft">
+                  {s.l}
+                </p>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     </section>
   );
 }
 
-const SERVICES = [
-  { title: "Verkauf", body: "Geprüfte Premium- und Gebrauchtfahrzeuge." },
-  { title: "Ankauf", body: "Faire Bewertung, schnelle Abwicklung, sofortige Zahlung." },
-  { title: "Inzahlungnahme", body: "Ihr aktuelles Fahrzeug fließt direkt in den Kauf ein." },
-  { title: "Finanzierung", body: "Transparente Konditionen, individuelle Lösungen." },
+/* ───────────────────── WHY AK ───────────────────── */
+const WHY = [
+  {
+    n: "01",
+    title: "Geprüft.",
+    body: "Jedes Fahrzeug durchläuft eine eigene Eingangsprüfung, bevor es bei uns steht.",
+  },
+  {
+    n: "02",
+    title: "Gepflegt.",
+    body: "Aufbereitung, Service und Dokumentation sind Standard — nicht Extra.",
+  },
+  {
+    n: "03",
+    title: "Persönlich.",
+    body: "Sie sprechen mit Menschen, die ihre Fahrzeuge kennen. Keine Hotline.",
+  },
+  {
+    n: "04",
+    title: "Direkt.",
+    body: "WhatsApp, Telefon, Termin vor Ort — Sie wählen, was schneller geht.",
+  },
 ];
 
-function Services() {
+function WhyAK() {
   return (
     <section className="border-t border-line bg-paper">
       <div className="mx-auto max-w-[1400px] px-5 py-20 md:px-10 md:py-32">
         <div className="max-w-2xl">
-          <p className="kicker">Leistungen</p>
+          <p className="kicker">Warum Autohaus AK GmbH</p>
           <h2 className="mt-4 font-serif text-4xl text-ink md:text-5xl">
-            Mehr als Verkauf.
+            Standard auf höchstem Niveau.
           </h2>
-          <p className="mt-6 text-base leading-relaxed text-ink-soft md:text-lg">
-            Wir begleiten Sie vom ersten Gespräch bis zur Übergabe — und darüber
-            hinaus.
-          </p>
         </div>
-
         <div className="mt-14 grid gap-px bg-line sm:grid-cols-2 lg:grid-cols-4">
-          {SERVICES.map((s, i) => (
-            <div
-              key={s.title}
-              className="flex flex-col bg-paper p-8 transition-colors hover:bg-secondary md:p-10"
-            >
-              <p className="kicker">{String(i + 1).padStart(2, "0")}</p>
+          {WHY.map((w) => (
+            <div key={w.title} className="bg-paper p-8 md:p-10">
+              <p className="kicker">{w.n}</p>
               <h3 className="mt-6 font-serif text-2xl text-ink md:text-3xl">
-                {s.title}
+                {w.title}
               </h3>
               <p className="mt-4 text-sm leading-relaxed text-ink-soft">
-                {s.body}
+                {w.body}
               </p>
             </div>
           ))}
-        </div>
-
-        <div className="mt-10">
-          <Link
-            to="/leistungen"
-            className="inline-flex items-center text-xs uppercase tracking-[0.22em] text-ink-soft transition-colors hover:text-ink"
-          >
-            Alle Leistungen →
-          </Link>
         </div>
       </div>
     </section>
   );
 }
 
+/* ───────────────────── TESTIMONIALS ───────────────────── */
 const TESTIMONIALS = [
   {
     quote:
@@ -280,8 +457,7 @@ const TESTIMONIALS = [
     detail: "Käuferin, Essen",
   },
   {
-    quote:
-      "Hier passt einfach das ganze Auftreten. Premium, ohne abgehoben zu sein.",
+    quote: "Hier passt einfach das ganze Auftreten. Premium, ohne abgehoben zu sein.",
     name: "D. Becker",
     detail: "Käufer, Wuppertal",
   },
@@ -289,7 +465,7 @@ const TESTIMONIALS = [
 
 function Testimonials() {
   return (
-    <section className="border-t border-line bg-secondary">
+    <section className="border-t border-line bg-surface">
       <div className="mx-auto max-w-[1400px] px-5 py-20 md:px-10 md:py-32">
         <p className="kicker">Stimmen</p>
         <h2 className="mt-4 max-w-2xl font-serif text-4xl text-ink md:text-5xl">
@@ -297,9 +473,9 @@ function Testimonials() {
         </h2>
         <div className="mt-14 grid gap-10 md:grid-cols-3 md:gap-12">
           {TESTIMONIALS.map((t) => (
-            <figure key={t.name} className="flex flex-col">
+            <figure key={t.name} className="glass p-8 md:p-10">
               <span aria-hidden className="font-serif text-5xl leading-none text-champagne">
-                “
+                "
               </span>
               <blockquote className="mt-4 font-serif text-xl leading-snug text-ink md:text-2xl">
                 {t.quote}
@@ -315,70 +491,97 @@ function Testimonials() {
   );
 }
 
-function Location() {
+/* ───────────────────── FAQ ───────────────────── */
+const FAQS = [
+  {
+    q: "Sind alle Fahrzeuge geprüft?",
+    a: "Ja. Jedes Fahrzeug durchläuft eine Eingangsprüfung, wird aufbereitet und mit lückenloser Historie übergeben.",
+  },
+  {
+    q: "Kann ich mein aktuelles Fahrzeug in Zahlung geben?",
+    a: "Ja. Wir bewerten Ihr Fahrzeug im gleichen Termin und rechnen den Wert direkt auf den Kaufpreis an.",
+  },
+  {
+    q: "Bietet das Autohaus AK GmbH Finanzierung an?",
+    a: "Ja. Wir arbeiten mit bewährten Partnerbanken und können in den meisten Fällen am selben Tag eine Indikation geben.",
+  },
+  {
+    q: "Liefern Sie deutschlandweit?",
+    a: "Auf Wunsch ja. Wir koordinieren Überführung oder Lieferung zu klaren Konditionen.",
+  },
+  {
+    q: "Wie schnell antworten Sie auf eine Anfrage?",
+    a: "In der Regel innerhalb weniger Stunden — am schnellsten per WhatsApp oder Telefon.",
+  },
+];
+
+function FAQ() {
   return (
     <section className="border-t border-line bg-paper">
       <div className="mx-auto max-w-[1400px] px-5 py-20 md:px-10 md:py-32">
-        <div className="grid gap-16 md:grid-cols-12 md:gap-20">
-          <div className="md:col-span-5">
-            <p className="kicker">Standort</p>
+        <div className="grid gap-14 md:grid-cols-12 md:gap-20">
+          <div className="md:col-span-4">
+            <p className="kicker">FAQ</p>
             <h2 className="mt-4 font-serif text-4xl text-ink md:text-5xl">
-              Sie finden uns in {dealer.city}.
+              Häufige Fragen.
             </h2>
-            <p className="mt-6 text-base leading-relaxed text-ink-soft md:text-lg">
-              Kommen Sie vorbei, machen Sie eine Probefahrt — oder schreiben Sie
-              uns kurz per WhatsApp.
-            </p>
-
-            <div className="mt-10 space-y-6">
-              <div>
-                <p className="kicker">Adresse</p>
-                <p className="mt-2 text-base text-ink">
-                  {dealer.street}<br />
-                  {dealer.postalCode} {dealer.city}
+          </div>
+          <div className="md:col-span-8 divide-y divide-line border-y border-line">
+            {FAQS.map((f) => (
+              <details key={f.q} className="group py-6">
+                <summary className="flex cursor-pointer items-center justify-between gap-6 list-none">
+                  <span className="font-serif text-xl text-ink md:text-2xl">
+                    {f.q}
+                  </span>
+                  <span className="font-serif text-3xl text-champagne transition-transform group-open:rotate-45">
+                    +
+                  </span>
+                </summary>
+                <p className="mt-4 max-w-2xl text-base leading-relaxed text-ink-soft">
+                  {f.a}
                 </p>
-              </div>
-              <div>
-                <p className="kicker">Öffnungszeiten</p>
-                <div className="mt-2 space-y-1 text-sm text-ink">
-                  {dealer.hours.map((h) => (
-                    <div key={h.day} className="flex justify-between gap-6 border-b border-line pb-1 max-w-xs">
-                      <span>{h.day}</span>
-                      <span className="text-ink-soft">{h.time}</span>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </div>
-
-            <div className="mt-10 flex flex-wrap gap-3">
-              <a
-                href={telLink()}
-                className="inline-flex items-center justify-center bg-ink px-6 py-3.5 text-xs uppercase tracking-[0.22em] text-paper hover:opacity-90"
-              >
-                {dealer.phoneDisplay}
-              </a>
-              <a
-                href={whatsappLink(`Hallo ${dealer.shortName}, ich habe eine Frage.`)}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center justify-center border border-ink px-6 py-3.5 text-xs uppercase tracking-[0.22em] text-ink hover:bg-ink hover:text-paper"
-              >
-                WhatsApp
-              </a>
-            </div>
+              </details>
+            ))}
           </div>
+        </div>
+      </div>
+    </section>
+  );
+}
 
-          <div className="md:col-span-7">
-            <div className="relative aspect-[4/3] overflow-hidden bg-ink">
-              <iframe
-                title={`Standort ${dealer.legalName}`}
-                src={`https://www.openstreetmap.org/export/embed.html?bbox=7.0%2C51.32%2C7.07%2C51.36&layer=mapnik&marker=51.34%2C7.04`}
-                className="absolute inset-0 h-full w-full grayscale"
-                loading="lazy"
-              />
-            </div>
-          </div>
+/* ───────────────────── CONTACT CTA ───────────────────── */
+function ContactCTA() {
+  return (
+    <section className="relative overflow-hidden border-t border-line bg-surface grain">
+      <div className="mx-auto max-w-[1400px] px-5 py-24 text-center md:px-10 md:py-32">
+        <p className="kicker">Direktkontakt</p>
+        <h2 className="mx-auto mt-4 max-w-3xl font-serif text-4xl leading-tight text-ink md:text-6xl">
+          Bereit für den nächsten Schritt?
+        </h2>
+        <p className="mx-auto mt-6 max-w-xl text-base text-ink-soft md:text-lg">
+          Ob Kauf, Verkauf, Finanzierung oder Beratung — wir sind direkt für Sie da.
+        </p>
+        <div className="mt-10 flex flex-wrap justify-center gap-3">
+          <a
+            href={telLink()}
+            className="inline-flex items-center justify-center bg-ink px-7 py-4 text-xs uppercase tracking-[0.22em] text-paper hover:opacity-90"
+          >
+            {dealer.phoneDisplay}
+          </a>
+          <a
+            href={whatsappLink(`Hallo ${dealer.shortName}, ich habe eine Anfrage.`)}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center justify-center border border-champagne/60 px-7 py-4 text-xs uppercase tracking-[0.22em] text-champagne hover:bg-champagne hover:text-paper"
+          >
+            WhatsApp
+          </a>
+          <Link
+            to="/kontakt"
+            className="inline-flex items-center justify-center border border-ink/30 px-7 py-4 text-xs uppercase tracking-[0.22em] text-ink hover:border-ink"
+          >
+            Anfrage senden
+          </Link>
         </div>
       </div>
     </section>

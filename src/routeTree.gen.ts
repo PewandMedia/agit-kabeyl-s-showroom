@@ -13,8 +13,10 @@ import { Route as UeberUnsRouteImport } from './routes/ueber-uns'
 import { Route as LeistungenRouteImport } from './routes/leistungen'
 import { Route as KontaktRouteImport } from './routes/kontakt'
 import { Route as ImpressumRouteImport } from './routes/impressum'
+import { Route as FinanzierungRouteImport } from './routes/finanzierung'
 import { Route as FahrzeugeRouteImport } from './routes/fahrzeuge'
 import { Route as DatenschutzRouteImport } from './routes/datenschutz'
+import { Route as AutoVerkaufenRouteImport } from './routes/auto-verkaufen'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as FahrzeugeIdRouteImport } from './routes/fahrzeuge.$id'
 
@@ -38,6 +40,11 @@ const ImpressumRoute = ImpressumRouteImport.update({
   path: '/impressum',
   getParentRoute: () => rootRouteImport,
 } as any)
+const FinanzierungRoute = FinanzierungRouteImport.update({
+  id: '/finanzierung',
+  path: '/finanzierung',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const FahrzeugeRoute = FahrzeugeRouteImport.update({
   id: '/fahrzeuge',
   path: '/fahrzeuge',
@@ -46,6 +53,11 @@ const FahrzeugeRoute = FahrzeugeRouteImport.update({
 const DatenschutzRoute = DatenschutzRouteImport.update({
   id: '/datenschutz',
   path: '/datenschutz',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AutoVerkaufenRoute = AutoVerkaufenRouteImport.update({
+  id: '/auto-verkaufen',
+  path: '/auto-verkaufen',
   getParentRoute: () => rootRouteImport,
 } as any)
 const IndexRoute = IndexRouteImport.update({
@@ -61,8 +73,10 @@ const FahrzeugeIdRoute = FahrzeugeIdRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/auto-verkaufen': typeof AutoVerkaufenRoute
   '/datenschutz': typeof DatenschutzRoute
   '/fahrzeuge': typeof FahrzeugeRouteWithChildren
+  '/finanzierung': typeof FinanzierungRoute
   '/impressum': typeof ImpressumRoute
   '/kontakt': typeof KontaktRoute
   '/leistungen': typeof LeistungenRoute
@@ -71,8 +85,10 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/auto-verkaufen': typeof AutoVerkaufenRoute
   '/datenschutz': typeof DatenschutzRoute
   '/fahrzeuge': typeof FahrzeugeRouteWithChildren
+  '/finanzierung': typeof FinanzierungRoute
   '/impressum': typeof ImpressumRoute
   '/kontakt': typeof KontaktRoute
   '/leistungen': typeof LeistungenRoute
@@ -82,8 +98,10 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/auto-verkaufen': typeof AutoVerkaufenRoute
   '/datenschutz': typeof DatenschutzRoute
   '/fahrzeuge': typeof FahrzeugeRouteWithChildren
+  '/finanzierung': typeof FinanzierungRoute
   '/impressum': typeof ImpressumRoute
   '/kontakt': typeof KontaktRoute
   '/leistungen': typeof LeistungenRoute
@@ -94,8 +112,10 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/auto-verkaufen'
     | '/datenschutz'
     | '/fahrzeuge'
+    | '/finanzierung'
     | '/impressum'
     | '/kontakt'
     | '/leistungen'
@@ -104,8 +124,10 @@ export interface FileRouteTypes {
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/auto-verkaufen'
     | '/datenschutz'
     | '/fahrzeuge'
+    | '/finanzierung'
     | '/impressum'
     | '/kontakt'
     | '/leistungen'
@@ -114,8 +136,10 @@ export interface FileRouteTypes {
   id:
     | '__root__'
     | '/'
+    | '/auto-verkaufen'
     | '/datenschutz'
     | '/fahrzeuge'
+    | '/finanzierung'
     | '/impressum'
     | '/kontakt'
     | '/leistungen'
@@ -125,8 +149,10 @@ export interface FileRouteTypes {
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AutoVerkaufenRoute: typeof AutoVerkaufenRoute
   DatenschutzRoute: typeof DatenschutzRoute
   FahrzeugeRoute: typeof FahrzeugeRouteWithChildren
+  FinanzierungRoute: typeof FinanzierungRoute
   ImpressumRoute: typeof ImpressumRoute
   KontaktRoute: typeof KontaktRoute
   LeistungenRoute: typeof LeistungenRoute
@@ -163,6 +189,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ImpressumRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/finanzierung': {
+      id: '/finanzierung'
+      path: '/finanzierung'
+      fullPath: '/finanzierung'
+      preLoaderRoute: typeof FinanzierungRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/fahrzeuge': {
       id: '/fahrzeuge'
       path: '/fahrzeuge'
@@ -175,6 +208,13 @@ declare module '@tanstack/react-router' {
       path: '/datenschutz'
       fullPath: '/datenschutz'
       preLoaderRoute: typeof DatenschutzRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/auto-verkaufen': {
+      id: '/auto-verkaufen'
+      path: '/auto-verkaufen'
+      fullPath: '/auto-verkaufen'
+      preLoaderRoute: typeof AutoVerkaufenRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/': {
@@ -208,8 +248,10 @@ const FahrzeugeRouteWithChildren = FahrzeugeRoute._addFileChildren(
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AutoVerkaufenRoute: AutoVerkaufenRoute,
   DatenschutzRoute: DatenschutzRoute,
   FahrzeugeRoute: FahrzeugeRouteWithChildren,
+  FinanzierungRoute: FinanzierungRoute,
   ImpressumRoute: ImpressumRoute,
   KontaktRoute: KontaktRoute,
   LeistungenRoute: LeistungenRoute,
