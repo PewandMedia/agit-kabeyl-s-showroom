@@ -65,45 +65,43 @@
 :root {
   --radius: 0.125rem;
 
-  /* Emerald Prestige — locked palette from chosen direction */
-  /* #064e3b ≈ oklch(0.36 0.062 161)  page background */
-  --background: oklch(0.36 0.062 161);
-  --foreground: oklch(0.94 0.018 84);
+  /* Champion White & Gold — light editorial palette */
+  --background: oklch(0.985 0.002 250);
+  --foreground: oklch(0.18 0.01 250);
 
-  /* #043d2e ≈ oklch(0.30 0.054 161)  surfaces */
-  --card: oklch(0.30 0.054 161);
-  --card-foreground: oklch(0.94 0.018 84);
-  --popover: oklch(0.30 0.054 161);
-  --popover-foreground: oklch(0.94 0.018 84);
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.18 0.01 250);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.18 0.01 250);
 
-  /* Champagne gold #c9a84c ≈ oklch(0.74 0.122 86) */
-  --primary: oklch(0.74 0.122 86);
-  --primary-foreground: oklch(0.30 0.054 161);
+  --primary: oklch(0.18 0.01 250);
+  --primary-foreground: oklch(0.985 0.002 250);
 
-  --secondary: oklch(0.26 0.046 161);
-  --secondary-foreground: oklch(0.94 0.018 84);
-  --muted: oklch(0.30 0.054 161);
-  --muted-foreground: oklch(0.78 0.022 90);
-  --accent: oklch(0.74 0.122 86);
-  --accent-foreground: oklch(0.30 0.054 161);
+  --secondary: oklch(0.95 0.004 250);
+  --secondary-foreground: oklch(0.18 0.01 250);
+  --muted: oklch(0.95 0.004 250);
+  --muted-foreground: oklch(0.45 0.008 250);
+  --accent: oklch(0.68 0.12 80);
+  --accent-foreground: oklch(0.18 0.01 250);
 
   --destructive: oklch(0.6 0.22 27);
-  --destructive-foreground: oklch(0.98 0.003 80);
+  --destructive-foreground: oklch(0.985 0.002 250);
 
-  --border: oklch(0.94 0.018 84 / 0.10);
-  --input: oklch(0.94 0.018 84 / 0.14);
-  --ring: oklch(0.74 0.122 86);
+  --border: oklch(0.18 0.01 250 / 0.12);
+  --input: oklch(0.18 0.01 250 / 0.18);
+  --ring: oklch(0.68 0.12 80);
 
-  /* Brand tokens — Tech Platform */
-  --paper: oklch(0.36 0.062 161);        /* page bg ~ #064e3b */
-  --surface: oklch(0.30 0.054 161);      /* raised ~ #043d2e */
-  --surface-2: oklch(0.26 0.046 161);    /* elevated */
-  --ink: oklch(0.94 0.018 84);           /* paper text ~ #f5f0e0 */
-  --ink-soft: oklch(0.82 0.022 88 / 0.7);/* muted text */
-  --champagne: oklch(0.74 0.122 86);     /* gold ~ #c9a84c */
-  --champagne-soft: oklch(0.66 0.106 86);
-  --emerald-deep: oklch(0.24 0.044 161);
-  --line: oklch(0.94 0.018 84 / 0.10);
+  /* Brand tokens — Champion edition */
+  --paper: oklch(0.985 0.002 250);          /* #fafbfc */
+  --surface: oklch(1 0 0);                   /* #ffffff cards */
+  --surface-2: oklch(0.955 0.006 80);       /* warm cream sections */
+  --ink: oklch(0.18 0.01 250);               /* near-black text */
+  --ink-soft: oklch(0.42 0.008 250 / 0.85); /* muted gray */
+  --champagne: oklch(0.68 0.12 80);          /* gold ~ #c9a84c */
+  --champagne-soft: oklch(0.78 0.115 86);   /* lighter gold hover */
+  --emerald-deep: oklch(0.93 0.004 250);    /* repurposed: light placeholder bg */
+  --line: oklch(0.18 0.01 250 / 0.10);
+  --champion-red: oklch(0.55 0.18 25);       /* WBC accent */
 }
 
 .dark {
