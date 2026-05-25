@@ -30,7 +30,7 @@ export function Header() {
           : "border-transparent bg-paper/60 backdrop-blur-md"
       }`}
     >
-      <div className="mx-auto flex h-20 max-w-[1400px] items-center justify-between px-5 md:px-10">
+      <div className="mx-auto flex h-16 max-w-[1400px] items-center justify-between px-4 md:h-20 md:px-10">
         <Link
           to="/"
           className="group flex items-baseline gap-2"
@@ -75,47 +75,54 @@ export function Header() {
           </a>
         </div>
 
-        <button
-          type="button"
-          onClick={() => setOpen((v) => !v)}
-          className="flex h-10 w-10 items-center justify-center text-ink lg:hidden"
-          aria-label="Menü öffnen"
-          aria-expanded={open}
-        >
-          <span className="relative block h-3 w-6">
-            <span
-              className={`absolute left-0 right-0 top-0 h-px bg-ink transition-transform ${
-                open ? "translate-y-[6px] rotate-45" : ""
-              }`}
-            />
-            <span
-              className={`absolute bottom-0 left-0 right-0 h-px bg-ink transition-transform ${
-                open ? "-translate-y-[6px] -rotate-45" : ""
-              }`}
-            />
-          </span>
-        </button>
+        {/* Mobile: Telefon-Icon + Menü-Button immer sichtbar */}
+        <div className="flex items-center gap-1 lg:hidden">
+          <a
+            href={telLink()}
+            aria-label={`Anrufen ${dealer.phoneDisplay}`}
+            className="flex h-11 w-11 items-center justify-center text-ink"
+          >
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
+              <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6A19.79 19.79 0 012.12 4.18 2 2 0 014.11 2h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z" />
+            </svg>
+          </a>
+          <button
+            type="button"
+            onClick={() => setOpen((v) => !v)}
+            className="flex h-11 w-11 items-center justify-center text-ink"
+            aria-label={open ? "Menü schließen" : "Menü öffnen"}
+            aria-expanded={open}
+          >
+            <span className="relative block h-4 w-6">
+              <span
+                className={`absolute left-0 right-0 top-0 h-[2px] bg-ink transition-transform ${
+                  open ? "translate-y-[7px] rotate-45" : ""
+                }`}
+              />
+              <span
+                className={`absolute left-0 right-0 top-1/2 h-[2px] -translate-y-1/2 bg-ink transition-opacity ${
+                  open ? "opacity-0" : ""
+                }`}
+              />
+              <span
+                className={`absolute bottom-0 left-0 right-0 h-[2px] bg-ink transition-transform ${
+                  open ? "-translate-y-[7px] -rotate-45" : ""
+                }`}
+              />
+            </span>
+          </button>
+        </div>
       </div>
 
       {open && (
         <div className="border-t border-champagne/20 bg-paper/95 backdrop-blur-xl lg:hidden">
-          <nav className="mx-auto flex max-w-[1400px] flex-col px-5 py-4">
-            {NAV.map((item) => (
-              <Link
-                key={item.to}
-                to={item.to}
-                onClick={() => setOpen(false)}
-                className="border-b border-line py-4 font-mono text-xs font-semibold uppercase tracking-[0.2em] text-ink"
-              >
-                {item.label}
-              </Link>
-            ))}
-            <div className="mt-4 grid gap-2">
+          <nav className="mx-auto flex max-w-[1400px] flex-col px-4 py-4">
+            <div className="mb-4 grid grid-cols-2 gap-2">
               <a
                 href={telLink()}
-                className="border border-line py-3 text-center font-mono text-[10px] font-bold uppercase tracking-[0.25em] text-ink"
+                className="flex min-h-[52px] items-center justify-center border border-ink/40 font-mono text-[10px] font-bold uppercase tracking-[0.22em] text-ink"
               >
-                Anrufen · {dealer.phoneDisplay}
+                Anrufen
               </a>
               <a
                 href={whatsappLink(
@@ -123,11 +130,23 @@ export function Header() {
                 )}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="bg-champagne py-3 text-center font-mono text-[10px] font-bold uppercase tracking-[0.25em] text-paper"
+                className="flex min-h-[52px] items-center justify-center bg-champagne font-mono text-[10px] font-bold uppercase tracking-[0.22em] text-paper"
               >
                 WhatsApp
               </a>
             </div>
+            {NAV.map((item) => (
+              <Link
+                key={item.to}
+                to={item.to}
+                onClick={() => setOpen(false)}
+                className="flex min-h-[56px] items-center justify-between border-b border-line font-mono text-xs font-semibold uppercase tracking-[0.2em] text-ink"
+                activeProps={{ className: "text-champagne" }}
+              >
+                {item.label}
+                <span aria-hidden className="text-champagne">→</span>
+              </Link>
+            ))}
           </nav>
         </div>
       )}
