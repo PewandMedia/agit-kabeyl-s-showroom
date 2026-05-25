@@ -399,11 +399,12 @@ function SimilarVehicles({ current }: { current: Vehicle }) {
               <div className="relative aspect-[4/3] overflow-hidden bg-surface-2">
                 <img
                   src={x.images[0]}
-                  alt={x.title}
+                  alt={`${x.title} — ${dealer.shortName}`}
                   width={1280}
                   height={832}
                   loading="lazy"
-                  className="h-full w-full object-cover opacity-80 grayscale transition-all duration-700 group-hover:scale-[1.03] group-hover:grayscale-0 group-hover:opacity-100"
+                  decoding="async"
+                  className="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.04]"
                 />
                 <div className="absolute left-3 top-3">
                   <StatusBadge status={x.status} />
