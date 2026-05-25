@@ -4,17 +4,17 @@ import { SiteLayout } from "@/components/site/SiteLayout";
 export const Route = createFileRoute("/leistungen")({
   head: () => ({
     meta: [
-      { title: "Leistungen — Autohaus AK GmbH, Velbert" },
+      { title: "Leistungen — Verkauf, Ankauf, Finanzierung | Autohaus AK" },
       {
         name: "description",
         content:
-          "Verkauf, Ankauf, Inzahlungnahme und Finanzierung beim Autohaus AK GmbH in Velbert. Persönlich, transparent, zuverlässig.",
+          "Verkauf, Ankauf, Inzahlungnahme und Finanzierung aus einer Hand. Persönlich beraten vom Autohaus AK GmbH in Velbert.",
       },
       { property: "og:title", content: "Leistungen — Autohaus AK GmbH" },
       {
         property: "og:description",
         content:
-          "Verkauf, Ankauf, Inzahlungnahme, Finanzierung — alles aus einer Hand.",
+          "Verkauf, Ankauf, Inzahlungnahme und Finanzierung aus einer Hand.",
       },
       { property: "og:url", content: "/leistungen" },
     ],
@@ -80,12 +80,16 @@ function ServicesPage() {
       <section className="border-b border-line bg-paper">
         <div className="mx-auto max-w-[1400px] px-5 pt-12 pb-20 md:px-10 md:pt-20 md:pb-32">
           <p className="kicker">Leistungen</p>
+          {/* Alt-Headlines:
+              · „Verkauf, Ankauf, Finanzierung — sauber aus einer Hand."
+              · „Ein Ansprechpartner. Alle Schritte." */}
           <h1 className="mt-4 max-w-4xl font-serif text-5xl leading-[1.05] text-ink md:text-7xl">
             Alles aus einer Hand.
           </h1>
           <p className="mt-8 max-w-2xl text-base leading-relaxed text-ink-soft md:text-lg">
-            Wir begleiten Sie vom ersten Gespräch bis zur Übergabe — und darüber
-            hinaus. Vier Leistungen, ein Anspruch: höchste Qualität.
+            Vom ersten Gespräch bis zur Übergabe — und darüber hinaus.
+            Verkauf, Ankauf, Inzahlungnahme und Finanzierung sauber
+            koordiniert, ein Ansprechpartner durchgehend.
           </p>
         </div>
       </section>
@@ -126,10 +130,11 @@ function ServicesPage() {
       <section className="border-t border-line bg-surface grain">
         <div className="mx-auto max-w-[1400px] px-5 py-24 text-center md:px-10 md:py-32">
           <h2 className="mx-auto max-w-3xl font-serif text-4xl text-ink md:text-5xl">
-            Bereit für den nächsten Schritt?
+            Sprechen wir über Ihr Vorhaben.
           </h2>
           <p className="mx-auto mt-6 max-w-xl text-base text-ink-soft md:text-lg">
-            Ob Verkauf, Ankauf oder Beratung — wir sind direkt für Sie da.
+            Verkauf, Ankauf, Finanzierung oder eine kurze Einschätzung —
+            wählen Sie den schnellsten Weg.
           </p>
           <div className="mt-10 flex flex-wrap justify-center gap-3">
             <Link

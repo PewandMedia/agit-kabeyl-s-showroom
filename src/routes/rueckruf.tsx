@@ -7,11 +7,11 @@ import { dealer, telLink, whatsappLink } from "@/data/dealer";
 export const Route = createFileRoute("/rueckruf")({
   head: () => ({
     meta: [
-      { title: "Rückruf anfordern — Autohaus AK GmbH, Velbert" },
+      { title: "Rückruf anfordern — Autohaus AK GmbH" },
       {
         name: "description",
         content:
-          "Rückruf vom Autohaus AK GmbH in Velbert anfordern. Wunsch-Zeitfenster wählen, persönlich, kein Callcenter.",
+          "Rückruf vom Autohaus AK GmbH in Velbert. Werktags melden wir uns meist innerhalb von 60 Minuten — persönlich, kein Callcenter.",
       },
       { property: "og:title", content: "Rückruf anfordern — Autohaus AK" },
       {
@@ -31,13 +31,17 @@ function CallbackPage() {
       <section className="border-b border-line bg-paper">
         <div className="mx-auto max-w-[1400px] px-5 pt-16 pb-16 md:px-10 md:pt-28 md:pb-24">
           <p className="kicker">Rückruf</p>
+          {/* Alt-Headlines:
+              · „Sie wählen das Zeitfenster. Wir melden uns."
+              · „Kurzer Rückruf, klare Antwort." */}
           <h1 className="mt-4 max-w-4xl font-display text-5xl leading-[1.04] text-ink md:text-7xl">
             Wir rufen{" "}
             <span className="text-gradient-gold">persönlich zurück.</span>
           </h1>
           <p className="mt-8 max-w-2xl text-base leading-relaxed text-ink-soft md:text-lg">
-            Zwei Felder — fertig. Sie wählen das Zeitfenster, wir melden uns
-            verbindlich. Kein Callcenter, kein Skript.
+            Zwei Felder, ein Zeitfenster — fertig. Werktags melden wir uns
+            meist innerhalb von 60 Minuten. Direkt von einem Ansprechpartner,
+            kein Callcenter.
           </p>
         </div>
       </section>

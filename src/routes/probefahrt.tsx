@@ -7,11 +7,11 @@ import { dealer, telLink, whatsappLink } from "@/data/dealer";
 export const Route = createFileRoute("/probefahrt")({
   head: () => ({
     meta: [
-      { title: "Probefahrt vereinbaren — Autohaus AK GmbH, Velbert" },
+      { title: "Probefahrt vereinbaren — Autohaus AK GmbH" },
       {
         name: "description",
         content:
-          "Vereinbaren Sie Ihre Probefahrt beim Autohaus AK GmbH in Velbert. Wunschdatum wählen, in wenigen Stunden bestätigt — persönlich, unkompliziert.",
+          "Probefahrt in Velbert oder nach Absprache. In zwei Schritten Termin sichern — persönlich bestätigt, ohne Verkaufsdruck.",
       },
       { property: "og:title", content: "Probefahrt vereinbaren — Autohaus AK" },
       {
@@ -31,14 +31,17 @@ function TestDrivePage() {
       <section className="border-b border-line bg-paper">
         <div className="mx-auto max-w-[1400px] px-5 pt-16 pb-16 md:px-10 md:pt-28 md:pb-24">
           <p className="kicker">Probefahrt</p>
+          {/* Alt-Headlines:
+              · „Erst fahren. Dann entscheiden."
+              · „Ihr Wunschfahrzeug, persönlich erlebt." */}
           <h1 className="mt-4 max-w-4xl font-display text-5xl leading-[1.04] text-ink md:text-7xl">
-            Erleben.{" "}
+            Erst fahren.{" "}
             <span className="text-gradient-gold">Dann entscheiden.</span>
           </h1>
           <p className="mt-8 max-w-2xl text-base leading-relaxed text-ink-soft md:text-lg">
-            Wunschdatum wählen, Zeitfenster angeben — wir bestätigen Ihren
-            Termin innerhalb weniger Stunden. Persönlich, ohne Druck, mit Zeit
-            für Fragen.
+            Wunschdatum und Zeitfenster wählen — wir bestätigen Ihren Termin
+            persönlich. Vor Ort in Velbert, mit Zeit für Fragen, ohne
+            Verkaufsdruck.
           </p>
         </div>
       </section>

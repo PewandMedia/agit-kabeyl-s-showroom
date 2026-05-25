@@ -10,12 +10,12 @@ export const Route = createFileRoute("/kontakt")({
       { title: "Kontakt — Autohaus AK GmbH, Velbert" },
       {
         name: "description",
-        content: `Kontakt zum Autohaus AK GmbH in ${dealer.city}. Telefon, WhatsApp, E-Mail und Standort.`,
+        content: `Telefon, WhatsApp, E-Mail oder vor Ort: Sprechen Sie das Autohaus AK GmbH in ${dealer.city} direkt an. Persönlich erreichbar.`,
       },
       { property: "og:title", content: "Kontakt — Autohaus AK GmbH" },
       {
         property: "og:description",
-        content: "Direkter Draht — Telefon, WhatsApp, E-Mail.",
+        content: "Telefon, WhatsApp, E-Mail oder vor Ort — wir sind persönlich erreichbar.",
       },
       { property: "og:url", content: "/kontakt" },
     ],
@@ -30,12 +30,16 @@ function ContactPage() {
       <section className="border-b border-line bg-paper">
         <div className="mx-auto max-w-[1400px] px-5 pt-12 pb-16 md:px-10 md:pt-20 md:pb-24">
           <p className="kicker">Kontakt</p>
+          {/* Alt-Headlines:
+              · „Direkter Draht nach Velbert."
+              · „Sprechen Sie uns an." */}
           <h1 className="mt-4 max-w-4xl font-display text-5xl leading-[1.05] text-ink md:text-7xl">
-            Sprechen wir.
+            Sprechen Sie uns an.
           </h1>
           <p className="mt-8 max-w-2xl text-base leading-relaxed text-ink-soft md:text-lg">
-            Telefon, WhatsApp oder ein kurzes Formular — wählen Sie, was am
-            schnellsten geht. Wir melden uns persönlich zurück.
+            Telefon, WhatsApp, E-Mail oder ein kurzes Formular — wählen Sie
+            den Weg, der für Sie am schnellsten ist. Werktags antworten wir
+            meist innerhalb weniger Stunden.
           </p>
         </div>
       </section>

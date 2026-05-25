@@ -7,17 +7,17 @@ import { dealer, telLink, whatsappLink } from "@/data/dealer";
 export const Route = createFileRoute("/auto-verkaufen")({
   head: () => ({
     meta: [
-      { title: "Auto verkaufen — Autohaus AK GmbH, Velbert" },
+      { title: "Auto verkaufen in Velbert — Autohaus AK GmbH" },
       {
         name: "description",
         content:
-          "Verkaufen Sie Ihr Fahrzeug an das Autohaus AK GmbH in Velbert. Faire Bewertung, sofortige Auszahlung, alles aus einer Hand.",
+          "Faire Bewertung, schnelle Abwicklung, sofortige Auszahlung. Markenübergreifender Fahrzeugankauf vom Autohaus AK GmbH in Velbert.",
       },
       { property: "og:title", content: "Auto verkaufen — Autohaus AK GmbH" },
       {
         property: "og:description",
         content:
-          "Faire Bewertung, sofortige Auszahlung. Champion-Konditionen für Ihr Fahrzeug.",
+          "Faire Bewertung, schnelle Abwicklung, sofortige Auszahlung. Markenübergreifender Ankauf.",
       },
       { property: "og:url", content: "/auto-verkaufen" },
     ],
@@ -32,13 +32,17 @@ function SellCarPage() {
       <section className="border-b border-line bg-paper">
         <div className="mx-auto max-w-[1400px] px-5 pt-16 pb-16 md:px-10 md:pt-28 md:pb-24">
           <p className="kicker">Ankauf</p>
+          {/* Alt-Headlines:
+              · „Fairer Ankauf. Schnelle Abwicklung."
+              · „Ihr Fahrzeug verdient eine faire Bewertung." */}
           <h1 className="mt-4 max-w-4xl font-display text-5xl leading-[1.04] text-ink md:text-7xl">
             Wir kaufen Ihr Fahrzeug —{" "}
-            <span className="text-gradient-gold">fair und sofort.</span>
+            <span className="text-gradient-gold">fair bewertet, schnell abgewickelt.</span>
           </h1>
           <p className="mt-8 max-w-2xl text-base leading-relaxed text-ink-soft md:text-lg">
             Marken- und modellübergreifend. Bewertung innerhalb eines Termins,
-            sofortige Auszahlung möglich, alle Formalitäten übernehmen wir.
+            Auszahlung auf Wunsch sofort, alle Formalitäten übernehmen wir —
+            auch bei laufender Finanzierung.
           </p>
         </div>
       </section>
@@ -49,10 +53,10 @@ function SellCarPage() {
             <p className="kicker">So läuft es ab</p>
             <ol className="mt-8 space-y-8">
               {[
-                ["01", "Daten senden", "Marke, Modell, Erstzulassung, Laufleistung, Zustand — gerne mit Fotos per WhatsApp."],
-                ["02", "Bewertung", "Wir prüfen Markt, Historie und Zustand und melden uns mit einem klaren Angebot."],
-                ["03", "Termin", "Persönliche Begutachtung in Velbert."],
-                ["04", "Übergabe & Auszahlung", "Sofortige Übernahme, sofortige Zahlung, alle Formalitäten erledigt."],
+                ["01", "Daten senden", "Marke, Modell, Erstzulassung, Laufleistung und Zustand — gern mit Fotos per WhatsApp."],
+                ["02", "Bewertung", "Wir prüfen Markt, Historie und Zustand und melden uns mit einem realistischen Angebot."],
+                ["03", "Termin in Velbert", "Persönliche Begutachtung — ohne Druck, mit Zeit für Fragen."],
+                ["04", "Übergabe & Auszahlung", "Übernahme inklusive Abmeldung und Auszahlung am selben Tag."],
               ].map(([n, t, d]) => (
                 <li key={n} className="flex gap-6 border-b border-line pb-6">
                   <span className="font-display text-3xl text-champagne">{n}</span>
