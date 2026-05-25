@@ -1,94 +1,106 @@
+
 ## Ziel
 
-Die Website auf "Nummer-1-Premium-Level" heben — Mischung aus Luxus-Autohaus, High-End-Sportmarke und Tech-Plattform. Basis: gewählte Richtung **Tech Platform** mit **Emerald Prestige** Palette, **Sora + Manrope + JetBrains Mono** Typografie und **Split-Screen Hero**.
+Aus dem aktuellen einfachen Bestand (5 Demo-Fahrzeuge, ein Bild pro Fahrzeug, nur Marken-Filter) wird ein vollständiges Bestands-System mit Galerie, Status-Logik, Filtern, Suche, Sortierung und einer hochwertigen Detailseite mit Anfrage-Formular.
 
-## 1. Design Tokens (`src/styles.css`)
+Es bleibt rein Frontend (keine DB, keine Cloud) — Daten kommen aus `src/data/vehicles.ts`. Lovable Cloud-Anbindung (Admin/Import) ist eine separate Phase.
 
-Komplette Token-Überarbeitung — verbatim aus dem gewählten Prototyp:
+## 1. Datenmodell (`src/data/vehicles.ts`)
 
-- `--background: #064e3b` (deep emerald)
-- `--surface / card: #043d2e` (deeper emerald)
-- `--foreground / paper: #f5f0e0` (warm off-white)
-- `--primary / gold: #c9a84c` (champagne gold)
-- `--border: #f5f0e0` @ 10% / `--border-strong: #c9a84c` @ 40%
-- Neue Utilities: `.font-display` (Sora), `.font-mono` (JetBrains Mono), `.text-eyebrow` (10px uppercase tracking-[0.4em] gold), `.tech-card`, `.gold-rule`, `.spec-grid`
-- Subtile Animationen: `scan-line` keyframe, längere `duration-700` hover-grayscale-out, image-zoom-on-hover
-- Body-Font auf Manrope, Headlines auf Sora, technische Labels/Stock-Refs/Specs auf JetBrains Mono
-- Globaler dunkler Emerald-Hintergrund statt anthrazit
+Typ `Vehicle` wird erweitert auf alle gewünschten Felder:
 
-## 2. Font-Import (`src/routes/__root.tsx`)
+```ts
+type VehicleStatus = "available" | "reserved" | "sold" | "new-arrival" | "highlight";
 
-Sora + Manrope + JetBrains Mono via Google Fonts laden (preconnect + display=swap).
+type Vehicle = {
+  id: string;                 // z. B. "AK-2024-001"
+  make: string;               // Marke
+  model: string;              // Modell
+  variant: string;            // Variante / Ausstattungslinie
+  title: string;              // abgeleitet: `${make} ${model} ${variant}`
+  priceEur: number;
+  mileageKm: number;
+  firstRegistration: string;  // "MM/YYYY"
+  year: number;               // aus EZ abgeleitet
+  fuel: "Benzin" | "Diesel" | "Hybrid" | "Elektro";
+  transmission: "Automatik" | "Schaltgetriebe";
+  powerKw: number;            // + abgeleitete PS
+  exteriorColor: string;
+  condition: "Neuwagen" | "Jahreswagen" | "Gebraucht" | "Vorführwagen";
+  previousOwners: number;
+  images: string[];           // Bildergalerie (mind. 3 pro Fahrzeug aus vorhandenen Assets rotiert)
+  features: string[];         // Ausstattung
+  description: string;
+  financingAvailable: boolean;
+  monthlyRateEur?: number;    // optionale Beispielrate
+  status: VehicleStatus;
+};
+```
 
-## 3. Shared Components (`src/components/site/`)
+Hilfsfunktionen bleiben: `formatPrice`, `formatKm`, `formatKw`, `getVehicle`. Neu:
+- `statusMeta(status)` → `{ label, tone }` (Tone für Badge-Farbe: champagne/emerald/muted/red)
+- `featuredVehicles` = alle mit Status `highlight` oder `new-arrival`, fallback erste 3.
 
-- **Header.tsx** — Logo-Block mit AK + Gold-Eyebrow, Sora-Brand, Mono-Telefonnummer, klare Tracking-Widest-Links, Border-Bottom in Gold/20, Sticky + Backdrop-Blur
-- **Footer.tsx** — drei Spalten mit Mono-Labels, Gold-Hairlines, "System"-Footer-Note
-- **VehicleCard.tsx** — Komplett-Redesign nach Tech-Card-Vorlage:
-  - Aspect-Video Bild, grayscale → group-hover farbig + scale
-  - Top-Left Gold-Badge ("Geprüft"/"Sofort verfügbar") in Mono
-  - Marke/Modell-Header (Mono-Eyebrow + Sora-Bold), Preis rechts in Gold
-  - 2-Spalten Mono-Spec-Grid (Power, Mileage, Year, Fuel) mit 1px-Gap-Linien
-  - Full-width CTA "Datenblatt öffnen" mit Gold-Hover-Invert
-- **MobileStickyBar.tsx** — Polishing: gold/paper Buttons in 10px-Mono-Uppercase, klare Trennung
-- **Eyebrow.tsx** (neu) — wiederverwendbares `--/SYSTEM STATUS: …` Label
-- **DataBadge.tsx** (neu) — Mono-Label + Wert für Hero/Trust-Sektionen
-- **PrecisionConversionBand.tsx** (neu) — wiederverwendbare CTA-Sektion mit AK-Logomark, Response-Time, Call+WhatsApp
+## 2. Demo-Bestand
 
-## 4. Homepage (`src/routes/index.tsx`)
+10 hochwertige Demo-Fahrzeuge (Mercedes S/G/AMG GT, BMW M3/M4/X5M, Porsche 911/Cayenne, Audi RS5/RSQ8, Range Rover) mit unterschiedlichen Status (`highlight`, `new-arrival`, `available`, `reserved`, `sold`) und realistischen Daten. Bilder werden aus den vorhandenen Assets (`hero-car`, `car-1` … `car-4`) zu Galerien à 3–4 Bildern kombiniert.
 
-Komplette Neukomposition entlang des Prototyps:
+## 3. Bestandsseite (`src/routes/fahrzeuge.tsx`)
 
-1. **Hero (Split-Screen)** — links: Eyebrow "System Status: Active" + Sora-Display "Champion / Mentalität." (Gold-Zeile 2) + Manrope-Lead + zwei CTAs (Gold solid + Gold-outline). Rechts: cinematisches Fahrzeugbild mit Overlay-DataPanels (Available Units / Quality Score), Mono-Stock-Ref oben links.
-2. **Trust-Band** — vier Mono-Datenbadges (Geprüft 110-Punkte / Finanzierung 3,99 % / Ankauf 24 h / WhatsApp < 15 min) auf surface mit Gold-Trennlinien
-3. **Highlights** — `Current / Selection` H2 (Sora) + "Browse System [01–03]" Mono-Link → 3 VehicleCards im Tech-Stil
-4. **Brand Story (Champion-Standard)** — bestehender Text in neuer Typo, große Sora-Numerik (01/02/03)
-5. **Bestand-Teaser**, **Ankauf-Teaser**, **Finanzierung-Teaser** — als Bento-artige Surface-Cards mit Gold-left-border
-6. **Stimmen** (Testimonials) — typografische Karten, Mono-Attribution
-7. **FAQ** — gleiche Inhalte, neues Styling (Gold-Hairlines, Sora-Fragen, Manrope-Antworten)
-8. **Precision Conversion Band** (neue Komponente) als finaler CTA
-9. **Standort** — beibehaltene OSM-Map mit neuem Frame
+Komplett überarbeitet:
 
-JSON-LD AutoDealer / FAQPage bleiben erhalten.
+**Filterleiste (Desktop sticky links/oben, Mobile als Slide-Panel):**
+- Suche (freier Text über Titel, Marke, Modell, Variante)
+- Marke (Multi-Select Chips)
+- Preis (Range: min / max)
+- Kilometerstand (Range: max)
+- Baujahr (Range: min / max)
+- Kraftstoff (Chips)
+- Getriebe (Chips)
+- Status (Chips)
+- „Filter zurücksetzen"
 
-## 5. Unterseiten (visueller Sweep)
+**Sortierung:** Neueste · Preis ↑ · Preis ↓ · Kilometer ↑
 
-Alle Routes erben automatisch die neuen Tokens. Spezifische Anpassungen:
+**Mobile Filter-Slide-Panel:** Button „Filter (n)" öffnet ein vollflächiges Slide-Panel von rechts mit allen Filtern + großem „Ergebnisse anzeigen"-Button.
 
-- **`/fahrzeuge`** — Filter-Bar im Mono-Stil, VehicleCards neu, Grid-Spacing erhöht
-- **`/fahrzeuge/$id`** — Spec-Tabelle als 2-Spalten Mono-Grid mit Gold-Akzentlinien, große Bildgalerie (grayscale-hover), CTA-Band unten
-- **`/auto-verkaufen`**, **`/finanzierung`**, **`/kontakt`** — Form-Styling: dunkle Surface-Inputs, Gold-Focus-Ring, Mono-Labels, Sora-H1
-- **`/ueber-uns`**, **`/leistungen`** — Eyebrows + Sora-Display + ruhige Bildränder
-- **`/impressum`**, **`/datenschutz`** — typografisches Refresh
+**Ergebnis-Grid:** Bestehende `VehicleCard` (bekommt zusätzlich Status-Badge mit korrekter Farbe je `status`).
 
-## 6. Mobile
+## 4. Fahrzeugdetailseite (`src/routes/fahrzeuge.$id.tsx`)
 
-- Sticky Bottom-Bar (3 Buttons: Anrufen | WhatsApp | Anfrage) in Gold/Paper
-- Hero stapelt: Bild zuerst (cinematic), dann Text mit reduzierter Schriftgröße
-- Trust-Band wird zu 2×2 Grid
-- VehicleCards einspaltig, größere Bilder
+Erweitert um:
 
-## 7. Animationen (subtil)
+- **Bildergalerie**: Hauptbild + Thumbnail-Reihe darunter, Klick wechselt Hauptbild; Tastatur-Navigation links/rechts; Lightbox-ähnliche Vergrößerung beim Klick aufs Hauptbild (CSS-only Overlay).
+- **Sticky Sidebar**: Preis, Status-Badge, Fahrzeug-ID, WhatsApp-CTA, Anruf-CTA, „Finanzierungsanfrage"-CTA, „Probefahrt vereinbaren".
+- **Technische Daten** als zweispaltige Spec-Grid (alle neuen Felder: Variante, Zustand, Vorbesitzer, Farbe, Leistung kW/PS, EZ, Kraftstoff, Getriebe).
+- **Ausstattung** Liste (bestehend, leicht aufgewertet).
+- **Beschreibung** Block.
+- **Anfrageformular** (neue Komponente): Name, E-Mail, Telefon, Nachricht (vorbefüllt mit Fahrzeug-Titel und ID). Zod-Validierung. Submit öffnet `mailto:` an Dealer-E-Mail mit vorgefülltem Body (kein Backend nötig).
+- **WhatsApp-Text** auf den vom Nutzer geforderten Wortlaut:
+  `Hallo Autohaus AK GmbH, ich interessiere mich für [Fahrzeugname]. Ist das Fahrzeug noch verfügbar?`
+- **Finanzierungsanfrage-CTA**: Link zu `/finanzierung?fahrzeug={id}`; auf der Finanzierungsseite wird der Query-Param als vorbefüllter Hinweis angezeigt.
+- **Ähnliche Fahrzeuge**: Filterung nach gleicher Marke oder gleichem Preissegment (±25 %), max. 3, fallback auf neueste.
+- **Status-Behandlung**: Bei `sold` werden CTAs deaktiviert/grau, Hinweis „Bereits verkauft — sprechen Sie uns für ähnliche Fahrzeuge an".
 
-- Hero-Headline: fade-up beim Mount
-- Bilder: grayscale → color + scale-105 over 700ms on hover
-- Buttons: bg-Invert (Gold ↔ Paper) over 500ms
-- Section-Reveal via Intersection Observer (fade-in-up, einmalig)
+## 5. Komponenten (neu / aktualisiert)
 
-## 8. Was bleibt unverändert
+- `src/components/site/VehicleCard.tsx` — Status-Badge nutzt `statusMeta` (Farbtokens), zeigt korrekten Label-Text.
+- `src/components/site/VehicleFilters.tsx` (neu) — Filter-UI, wiederverwendet für Desktop und Mobile-Panel.
+- `src/components/site/VehicleGallery.tsx` (neu) — Galerie mit Thumbnails + Lightbox.
+- `src/components/site/InquiryForm.tsx` (neu) — Anfrageformular mit Zod-Validierung, `mailto:`-Submit.
+- `src/components/site/StatusBadge.tsx` (neu) — gemeinsame Badge-Komponente.
 
-- Daten in `src/data/vehicles.ts` und `src/data/dealer.ts` (nur Anzeige-Layer)
-- Routing-Struktur
-- Server-/Cloud-Setup (nicht angefragt)
+## 6. Styling
 
-## Technische Hinweise
+Bleibt im bestehenden Tech-Platform-Prestige-System (Emerald/Champagner, Sora/Manrope/JetBrains Mono). Filter-Chips und Status-Badges nutzen vorhandene Tokens (`--champagne`, `--ink`, `--line`, `--surface-2`); für `new-arrival`/`highlight` wird Champagner verwendet, für `reserved` ein gedämpftes Muted-Token, für `sold` ein dezentes Rot-Token (neu in `src/styles.css` als `--status-sold`).
 
-- Tokens werden in `oklch()` in `src/styles.css` definiert; Hex-Werte oben sind Referenz.
-- Keine willkürlichen `bg-[#…]`-Klassen in Komponenten — alles via semantische Tokens (`bg-background`, `bg-card`, `text-primary`, …).
-- Sora wird als `font-display`, Manrope als Default-Body, JetBrains Mono als `font-mono` via Tailwind theme erweitert.
-- Bestehende AI-Fahrzeugbilder werden weiterverwendet; Filter `grayscale group-hover:grayscale-0` schafft den editorial-tech Look ohne neue Asset-Generierung.
+## 7. Nicht im Scope
 
-## Offen / nicht im Scope
+- Lovable Cloud / Datenbank, Admin-Backend, mobile.de-Import — separate Phase.
+- Echte Anfrage-Übermittlung per E-Mail/Server (statt `mailto:`).
+- Bezahlte Bildlizenzen / neue Fahrzeugfotos — wir bleiben bei den vorhandenen Assets.
 
-- Cloud-Aktivierung (DB, Admin, mobile.de-Import) — separate Phase
-- Echte Dealer-Daten (Adresse, Telefon, WhatsApp, HRB, USt-ID) — Platzhalter bleiben bis du sie lieferst
+## Geänderte / neue Dateien
+
+- aktualisiert: `src/data/vehicles.ts`, `src/routes/fahrzeuge.tsx`, `src/routes/fahrzeuge.$id.tsx`, `src/components/site/VehicleCard.tsx`, `src/routes/finanzierung.tsx` (Query-Param-Hinweis), `src/styles.css` (Status-Tokens)
+- neu: `src/components/site/VehicleFilters.tsx`, `src/components/site/VehicleGallery.tsx`, `src/components/site/InquiryForm.tsx`, `src/components/site/StatusBadge.tsx`
