@@ -5,9 +5,8 @@
 @custom-variant dark (&:is(.dark *));
 
 /*
- * Autohaus AK GmbH — Premium Dark Design System
- * Anthrazit + Off-white, Akzent Champagner-Gold.
- * Dark als Default. Alle Farben in oklch.
+ * Autohaus AK GmbH — Premium "Tech Platform" Design System
+ * Emerald Prestige (deep emerald + champagne gold) · Sora / Manrope / JetBrains Mono
  */
 
 @theme inline {
@@ -38,7 +37,7 @@
   --color-input: var(--input);
   --color-ring: var(--ring);
 
-  /* Brand-spezifische Tokens */
+  /* Brand tokens */
   --color-ink: var(--ink);
   --color-ink-soft: var(--ink-soft);
   --color-paper: var(--paper);
@@ -49,55 +48,66 @@
   --color-emerald-deep: var(--emerald-deep);
   --color-line: var(--line);
 
-  --font-serif: "Instrument Serif", ui-serif, Georgia, serif;
-  --font-sans:
-    "Inter", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto,
+  /* font-serif kept for backward compatibility — now mapped to display (Sora) */
+  --font-serif:
+    "Sora", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto,
     sans-serif;
+  --font-display:
+    "Sora", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto,
+    sans-serif;
+  --font-sans:
+    "Manrope", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto,
+    sans-serif;
+  --font-mono:
+    "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
 }
 
 :root {
-  --radius: 0.375rem;
+  --radius: 0.125rem;
 
-  /* Dark premium */
-  --background: oklch(0.13 0.005 270);
-  --foreground: oklch(0.965 0.005 80);
+  /* Emerald Prestige — locked palette from chosen direction */
+  /* #064e3b ≈ oklch(0.36 0.062 161)  page background */
+  --background: oklch(0.36 0.062 161);
+  --foreground: oklch(0.94 0.018 84);
 
-  --card: oklch(0.17 0.006 270);
-  --card-foreground: oklch(0.965 0.005 80);
-  --popover: oklch(0.17 0.006 270);
-  --popover-foreground: oklch(0.965 0.005 80);
+  /* #043d2e ≈ oklch(0.30 0.054 161)  surfaces */
+  --card: oklch(0.30 0.054 161);
+  --card-foreground: oklch(0.94 0.018 84);
+  --popover: oklch(0.30 0.054 161);
+  --popover-foreground: oklch(0.94 0.018 84);
 
-  --primary: oklch(0.965 0.005 80);
-  --primary-foreground: oklch(0.13 0.005 270);
+  /* Champagne gold #c9a84c ≈ oklch(0.74 0.122 86) */
+  --primary: oklch(0.74 0.122 86);
+  --primary-foreground: oklch(0.30 0.054 161);
 
-  --secondary: oklch(0.22 0.006 270);
-  --secondary-foreground: oklch(0.965 0.005 80);
-  --muted: oklch(0.22 0.006 270);
-  --muted-foreground: oklch(0.7 0.008 270);
-  --accent: oklch(0.7 0.085 75);
-  --accent-foreground: oklch(0.13 0.005 270);
+  --secondary: oklch(0.26 0.046 161);
+  --secondary-foreground: oklch(0.94 0.018 84);
+  --muted: oklch(0.30 0.054 161);
+  --muted-foreground: oklch(0.78 0.022 90);
+  --accent: oklch(0.74 0.122 86);
+  --accent-foreground: oklch(0.30 0.054 161);
 
   --destructive: oklch(0.6 0.22 27);
   --destructive-foreground: oklch(0.98 0.003 80);
 
-  --border: oklch(1 0 0 / 0.1);
-  --input: oklch(1 0 0 / 0.14);
-  --ring: oklch(0.7 0.085 75);
+  --border: oklch(0.94 0.018 84 / 0.10);
+  --input: oklch(0.94 0.018 84 / 0.14);
+  --ring: oklch(0.74 0.122 86);
 
-  /* Brand tokens — DARK premium */
-  --paper: oklch(0.13 0.005 270);    /* Page background (~#0B0B0E) */
-  --surface: oklch(0.17 0.006 270);   /* Raised panels (~#141416) */
-  --surface-2: oklch(0.21 0.006 270); /* Elevated panels */
-  --ink: oklch(0.965 0.005 80);       /* Primary text / light surfaces (~#F5F4F1) */
-  --ink-soft: oklch(0.7 0.008 270);   /* Muted text */
-  --champagne: oklch(0.78 0.09 78);   /* Champagner-Gold ~ #C9A14A */
-  --champagne-soft: oklch(0.68 0.07 78);
-  --emerald-deep: oklch(0.36 0.06 160); /* Tiefes Grün, dezent */
-  --line: oklch(1 0 0 / 0.1);
+  /* Brand tokens — Tech Platform */
+  --paper: oklch(0.36 0.062 161);        /* page bg ~ #064e3b */
+  --surface: oklch(0.30 0.054 161);      /* raised ~ #043d2e */
+  --surface-2: oklch(0.26 0.046 161);    /* elevated */
+  --ink: oklch(0.94 0.018 84);           /* paper text ~ #f5f0e0 */
+  --ink-soft: oklch(0.82 0.022 88 / 0.7);/* muted text */
+  --champagne: oklch(0.74 0.122 86);     /* gold ~ #c9a84c */
+  --champagne-soft: oklch(0.66 0.106 86);
+  --emerald-deep: oklch(0.24 0.044 161);
+  --line: oklch(0.94 0.018 84 / 0.10);
 }
 
 .dark {
-  /* Already dark by default — keep identical tokens. */
+  /* Default theme is already dark — keep tokens identical. */
 }
 
 @layer base {
@@ -122,22 +132,37 @@
   h1,
   h2,
   h3,
+  .font-display,
   .font-serif {
-    font-family: var(--font-serif);
-    font-weight: 400;
+    font-family: var(--font-display);
+    font-weight: 700;
     letter-spacing: -0.02em;
   }
 
-  /* Form controls inherit dark theme */
+  .font-mono {
+    font-family: var(--font-mono);
+  }
+
   input, textarea, select {
     color-scheme: dark;
+    background-color: var(--color-surface);
+    color: var(--color-ink);
+    border: 1px solid var(--color-line);
+  }
+  input:focus, textarea:focus, select:focus {
+    outline: none;
+    border-color: var(--color-champagne);
+    box-shadow: 0 0 0 1px var(--color-champagne);
   }
 }
 
 @layer utilities {
-  .kicker {
-    font-size: 0.6875rem;
-    letter-spacing: 0.24em;
+  /* Eyebrow / mono label */
+  .kicker,
+  .text-eyebrow {
+    font-family: var(--font-mono);
+    font-size: 0.625rem;
+    letter-spacing: 0.4em;
     text-transform: uppercase;
     color: var(--color-champagne);
     font-weight: 500;
@@ -159,31 +184,43 @@
     opacity: 0.5;
   }
 
+  .gold-rule {
+    height: 1px;
+    background-color: var(--color-champagne);
+    opacity: 0.35;
+  }
+
   .glass {
-    background-color: oklch(1 0 0 / 0.04);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-    border: 1px solid oklch(1 0 0 / 0.08);
+    background-color: var(--color-surface);
+    border: 1px solid var(--color-line);
   }
 
   .glass-strong {
-    background-color: oklch(1 0 0 / 0.06);
-    backdrop-filter: blur(28px);
-    -webkit-backdrop-filter: blur(28px);
-    border: 1px solid oklch(1 0 0 / 0.1);
+    background-color: var(--color-surface);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+    border: 1px solid oklch(0.74 0.122 86 / 0.25);
   }
 
-  .grain {
-    position: relative;
+  /* Tech card hover transition baseline */
+  .tech-card {
+    background-color: var(--color-surface);
+    border: 1px solid var(--color-line);
+    transition: border-color 500ms ease, transform 500ms ease;
   }
-  .grain::after {
-    content: "";
-    position: absolute;
-    inset: 0;
-    pointer-events: none;
-    opacity: 0.08;
-    mix-blend-mode: overlay;
-    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+  .tech-card:hover {
+    border-color: oklch(0.74 0.122 86 / 0.45);
+  }
+
+  /* Spec grid pattern — 1px gold-ish separators */
+  .spec-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1px;
+    background-color: var(--color-line);
+  }
+  .spec-grid > * {
+    background-color: var(--color-surface);
   }
 
   .text-gradient-gold {
@@ -196,5 +233,42 @@
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
+  }
+
+  /* Subtle scan-line for hero data panel */
+  @keyframes scan-line {
+    0%   { transform: translateY(-100%); opacity: 0; }
+    20%  { opacity: 0.8; }
+    100% { transform: translateY(100%); opacity: 0; }
+  }
+  .scan-line::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background: linear-gradient(to bottom, transparent, var(--color-champagne) 50%, transparent);
+    opacity: 0.15;
+    animation: scan-line 4.5s linear infinite;
+  }
+
+  @keyframes fade-up {
+    from { opacity: 0; transform: translateY(12px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  .animate-fade-up {
+    animation: fade-up 700ms ease-out both;
+  }
+
+  .grain {
+    position: relative;
+  }
+  .grain::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    opacity: 0.05;
+    mix-blend-mode: overlay;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
   }
 }
