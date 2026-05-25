@@ -56,9 +56,10 @@ export function VehicleFilters({
           value={filters.q}
           onChange={(e) => setFilters({ ...filters, q: e.target.value })}
           placeholder="Marke, Modell, Variante…"
-          className="mt-2 w-full bg-surface px-4 py-3 text-sm text-ink"
+          className="mt-2 block w-full min-h-[48px] bg-surface px-4 py-3 text-base text-ink"
         />
       </div>
+
 
       <ChipGroup
         label="Marke"
