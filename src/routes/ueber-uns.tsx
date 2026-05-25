@@ -8,13 +8,13 @@ export const Route = createFileRoute("/ueber-uns")({
       {
         name: "description",
         content:
-          "Autohaus AK GmbH in Velbert. Die Werte der Marke AK: Disziplin, Qualität, Verantwortung. Lernen Sie unser Team kennen.",
+          "Persönlich, geprüft, verbindlich. Die Werte hinter dem Autohaus AK GmbH in Velbert — und die Menschen dahinter.",
       },
       { property: "og:title", content: "Über uns — Autohaus AK GmbH" },
       {
         property: "og:description",
         content:
-          "Die Werte der Marke AK: Disziplin, Qualität, Verantwortung.",
+          "Persönlich, geprüft, verbindlich. Die Werte hinter dem Autohaus AK in Velbert.",
       },
       { property: "og:url", content: "/ueber-uns" },
     ],
@@ -29,13 +29,16 @@ function AboutPage() {
       <section className="border-b border-line bg-paper">
         <div className="mx-auto max-w-[1400px] px-5 pt-12 pb-20 md:px-10 md:pt-20 md:pb-32">
           <p className="kicker">Über uns</p>
+          {/* Alt-Headlines:
+              · „Persönlich. Geprüft. Verbindlich."
+              · „Ein Autohaus, das Verantwortung übernimmt." */}
           <h1 className="mt-4 max-w-4xl font-serif text-5xl leading-[1.05] text-ink md:text-7xl">
-            Eine Marke, die <span className="italic text-champagne">Haltung</span> hat.
+            Ein Autohaus mit <span className="italic text-champagne">Haltung</span>.
           </h1>
           <p className="mt-8 max-w-2xl text-base leading-relaxed text-ink-soft md:text-lg">
-            Autohaus AK GmbH ist mehr als ein Händler. Wir verstehen uns als
-            Plattform für Käufer, die Wert auf Auswahl, Qualität und ehrliche
-            Beratung legen.
+            Autohaus AK GmbH ist ein inhabergeführtes Autohaus in Velbert.
+            Wir arbeiten für Käufer, die Wert auf eine sorgfältige Auswahl,
+            saubere Aufbereitung und eine ehrliche Beratung legen.
           </p>
         </div>
       </section>
@@ -48,18 +51,18 @@ function AboutPage() {
           <div className="md:col-span-9 space-y-12">
             <ValueBlock
               n="01"
-              title="Disziplin"
-              body="Jede Aufbereitung, jede Prüfung, jede Übergabe folgt einem klaren Standard. Keine Abkürzungen — auch dann nicht, wenn niemand zusieht."
+              title="Sorgfalt"
+              body="Eingangsprüfung, Aufbereitung und Dokumentation folgen einem festen Ablauf. Was nicht passt, kommt nicht in den Verkauf."
             />
             <ValueBlock
               n="02"
               title="Qualität"
-              body="Wir wählen nicht nach Stückzahl, sondern nach Zustand. Ein Fahrzeug, das bei uns steht, hat eine Geschichte, die wir kennen — und vertreten."
+              body="Wir kaufen nach Zustand, nicht nach Stückzahl. Jedes Fahrzeug, das bei uns steht, hat eine Geschichte, die wir kennen und vertreten."
             />
             <ValueBlock
               n="03"
               title="Verantwortung"
-              body="Vor dem Kauf, nach dem Kauf, bei jeder Frage. Unsere Kunden bekommen Antworten von Menschen, die ihre Fahrzeuge kennen."
+              body="Vor dem Kauf, beim Kauf, nach dem Kauf. Sie sprechen mit Menschen, die ihr Fahrzeug und ihre Aussage kennen."
             />
           </div>
         </div>
@@ -69,19 +72,20 @@ function AboutPage() {
         <div className="mx-auto max-w-[1400px] px-4 py-14 md:px-10 md:py-40">
           <div className="grid gap-14 md:grid-cols-12 md:gap-20">
             <div className="md:col-span-5">
-              <p className="kicker">Die Marke AK</p>
+              <p className="kicker">Unser Versprechen</p>
               <h2 className="mt-4 font-serif text-4xl leading-tight text-ink md:text-5xl">
-                Leistung auf höchstem Niveau.
+                Klar in der Aussage. Sauber in der Übergabe.
               </h2>
             </div>
             <div className="md:col-span-7">
               <p className="font-serif text-2xl leading-[1.3] text-ink md:text-3xl">
-                Die Marke AK steht für Werte, die auf dem Ring entstanden sind
-                und in unserem Autohaus weiterleben: <span className="text-gradient-gold">Disziplin, Vertrauen, Champion-Mentalität.</span>
+                Wir versprechen kein günstigstes Angebot. Wir versprechen ein
+                Fahrzeug, das hält, was wir sagen — <span className="text-gradient-gold">und einen Ansprechpartner, der bleibt.</span>
               </p>
               <p className="mt-8 max-w-xl text-base leading-relaxed text-ink-soft md:text-lg">
-                Wer hier kauft, kauft mehr als ein Fahrzeug — er kauft das
-                Versprechen einer Marke, die ihren Standard ernst nimmt.
+                Geprüfter Bestand, faire Konditionen, ein direkter Draht.
+                Daran lassen wir uns messen — vom ersten Gespräch bis lange
+                nach der Übergabe.
               </p>
             </div>
           </div>
@@ -91,11 +95,11 @@ function AboutPage() {
       <section className="border-t border-line bg-paper">
         <div className="mx-auto max-w-[1400px] px-5 py-20 text-center md:px-10 md:py-32">
           <h2 className="mx-auto max-w-3xl font-serif text-4xl text-ink md:text-5xl">
-            Sie wollen mehr erfahren?
+            Lernen Sie uns kennen.
           </h2>
           <p className="mx-auto mt-6 max-w-xl text-base text-ink-soft md:text-lg">
-            Wir freuen uns auf Ihren Besuch im Autohaus oder Ihre direkte
-            Anfrage.
+            Vor Ort in Velbert oder direkt per Telefon, WhatsApp und E-Mail —
+            wir nehmen uns Zeit für Ihre Fragen.
           </p>
           <div className="mt-10 flex flex-wrap justify-center gap-3">
             <Link

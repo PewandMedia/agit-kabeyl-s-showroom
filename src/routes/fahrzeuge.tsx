@@ -16,12 +16,12 @@ export const Route = createFileRoute("/fahrzeuge")({
       {
         name: "description",
         content:
-          "Aktueller Fahrzeugbestand des Autohaus AK GmbH in Velbert. Geprüfte Premium- und Gebrauchtfahrzeuge — filtern nach Marke, Preis, Kilometerstand und mehr.",
+          "Aktueller Bestand: geprüfte Premium- und Gebrauchtfahrzeuge vom Autohaus AK GmbH in Velbert. Filter nach Marke, Preis, Kilometerstand und Kraftstoff.",
       },
       { property: "og:title", content: "Fahrzeugbestand — Autohaus AK GmbH" },
       {
         property: "og:description",
-        content: "Geprüfte Premium-Fahrzeuge aus Velbert.",
+        content: "Geprüfte Premium- und Gebrauchtfahrzeuge aus Velbert — transparent dokumentiert.",
       },
       { property: "og:url", content: "/fahrzeuge" },
     ],
@@ -123,12 +123,16 @@ function VehiclesPage() {
       <section className="border-b border-line bg-paper">
         <div className="mx-auto max-w-[1400px] px-4 pt-8 pb-6 md:px-10 md:pt-20 md:pb-16">
           <p className="kicker">Bestand · {vehicles.length} Fahrzeuge</p>
+          {/* Alt-Headlines:
+              · „Fahrzeuge, die wir verantworten."
+              · „Aktuell verfügbar." */}
           <h1 className="mt-3 font-display text-4xl text-ink md:text-6xl">
-            Unsere Fahrzeuge.
+            Unser Bestand.
           </h1>
           <p className="mt-4 max-w-2xl text-base leading-relaxed text-ink-soft md:mt-6 md:text-lg">
-            Persönlich ausgewählt, geprüft und aufbereitet. Direktkontakt
-            per Telefon oder WhatsApp.
+            Persönlich ausgewählt, geprüft und vollständig aufbereitet.
+            Auf Wunsch mit Finanzierung oder Inzahlungnahme — Anfrage per
+            Telefon oder WhatsApp.
           </p>
         </div>
       </section>

@@ -15,16 +15,16 @@ export const Route = createFileRoute("/finanzierung")({
   validateSearch: searchSchema,
   head: () => ({
     meta: [
-      { title: "Finanzierung — Autohaus AK GmbH, Velbert" },
+      { title: "Fahrzeug-Finanzierung — Autohaus AK GmbH, Velbert" },
       {
         name: "description",
         content:
-          "Fahrzeugfinanzierung beim Autohaus AK GmbH in Velbert. Rechnen Sie Ihre Rate, fordern Sie unverbindlich Konditionen an — schnelle Zusagen, faire Konditionen.",
+          "Passende Finanzierung für Ihr Wunschfahrzeug. Transparente Konditionen, flexible Laufzeiten, schnelle Zusage über etablierte Partnerbanken.",
       },
       { property: "og:title", content: "Finanzierung — Autohaus AK GmbH" },
       {
         property: "og:description",
-        content: "Champion-Konditionen. Rate berechnen, Anfrage stellen, schnelle Zusage.",
+        content: "Transparente Konditionen, flexible Laufzeiten, schnelle Zusage.",
       },
       { property: "og:url", content: "/finanzierung" },
     ],
@@ -57,12 +57,16 @@ function FinancingPage() {
       <section className="border-b border-line bg-paper">
         <div className="mx-auto max-w-[1400px] px-5 pt-16 pb-16 md:px-10 md:pt-28 md:pb-24">
           <p className="kicker">Finanzierung</p>
+          {/* Alt-Headlines:
+              · „Konditionen, die zu Ihnen passen."
+              · „Ihr Wunschfahrzeug. In Raten gedacht." */}
           <h1 className="mt-4 max-w-4xl font-display text-5xl leading-[1.04] text-ink md:text-7xl">
-            Champion-Konditionen.
+            Finanzierung, die passt.
           </h1>
           <p className="mt-8 max-w-2xl text-base leading-relaxed text-ink-soft md:text-lg">
-            Transparente Konditionen, individuelle Lösungen, schnelle Zusagen —
-            in Zusammenarbeit mit bewährten Partnerbanken.
+            Transparente Konditionen, flexible Laufzeiten und schnelle
+            Zusagen — über etablierte Partnerbanken. Endgültige Konditionen
+            nach individueller Bonitätsprüfung.
           </p>
         </div>
       </section>

@@ -8,14 +8,14 @@ import heroCar from "@/assets/hero-car.jpg";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: `${dealer.legalName} — Premium-Fahrzeuge in ${dealer.city}` },
+      { title: `${dealer.legalName} — Premium-Fahrzeuge aus ${dealer.city}` },
       {
         name: "description",
         content:
-          "Autohaus AK GmbH in Velbert. Champion-Mentalität, geprüfte Premium-Fahrzeuge, faire Konditionen und persönliche Beratung. Direktkontakt per WhatsApp.",
+          "Geprüfte Fahrzeuge, ehrliche Beratung, Finanzierung und fairer Ankauf. Persönlich betreut vom Autohaus AK GmbH in Velbert.",
       },
-      { property: "og:title", content: `${dealer.legalName} — Premium-Fahrzeuge in ${dealer.city}` },
-      { property: "og:description", content: "Champion-Mentalität. Premium-Fahrzeuge. Ehrlicher Service." },
+      { property: "og:title", content: `${dealer.legalName} — Premium-Fahrzeuge aus ${dealer.city}` },
+      { property: "og:description", content: "Geprüfte Fahrzeuge, ehrliche Beratung, Finanzierung & Ankauf in Velbert." },
       { property: "og:image", content: heroCar },
       { property: "og:url", content: "/" },
     ],
@@ -67,16 +67,19 @@ function Hero() {
             <div className="flex items-center gap-3">
               <span className="h-px w-8 bg-champagne" />
               <span className="font-mono text-[10px] font-medium uppercase tracking-[0.4em] text-champagne">
-                Premium-Fahrzeuge · Velbert
+                Autohaus AK · Velbert
               </span>
             </div>
+            {/* Alt-Headlines:
+                · „Geprüfte Fahrzeuge aus Velbert — mit Haltung verkauft."
+                · „Ihr nächstes Fahrzeug. Ehrlich beraten, sauber übergeben." */}
             <h1 className="font-display text-[40px] font-extrabold leading-[0.95] tracking-tighter text-ink sm:text-6xl md:text-7xl lg:text-[88px]">
-              Champion-<wbr />
-              <span className="text-champagne">Mentalität.</span>
+              Premium-Fahrzeuge.<wbr />{" "}
+              <span className="text-champagne">Persönlich übergeben.</span>
             </h1>
             <p className="max-w-md text-base leading-relaxed text-ink-soft md:text-lg">
-              Geprüfte Premium-Fahrzeuge, transparente Daten,
-              kompromisslosen Service — direkt von {dealer.legalName}.
+              Persönlich ausgewählt, geprüft und transparent dokumentiert.
+              Beratung, Finanzierung und Ankauf aus einer Hand — vom Autohaus AK in Velbert.
             </p>
           </div>
 
@@ -142,10 +145,10 @@ function DataPanel({ label, value }: { label: string; value: string }) {
 
 /* ─────────────────────── TRUST BAR ─────────────────────── */
 const TRUSTS: { label: string; value: string }[] = [
-  { label: "Geprüft", value: "110-Punkte Check" },
-  { label: "Finanzierung", value: "ab 3,99 % p.a." },
-  { label: "Ankauf", value: "24 h Auszahlung" },
-  { label: "Persönlich", value: "WhatsApp < 15 min" },
+  { label: "Geprüft", value: "Eigene Eingangsprüfung" },
+  { label: "Finanzierung", value: "Auf Wunsch" },
+  { label: "Ankauf", value: "Faire Bewertung" },
+  { label: "Persönlich", value: "Direkter Ansprechpartner" },
 ];
 
 function TrustBar() {
@@ -174,22 +177,22 @@ function BrandStory() {
       <div className="mx-auto max-w-[1400px] px-4 py-14 md:px-10 md:py-40">
         <div className="grid gap-12 md:grid-cols-12">
           <div className="md:col-span-4">
-            <p className="kicker">Marke AK</p>
+            <p className="kicker">Unser Anspruch</p>
             <p className="mt-4 font-serif text-xl text-ink-soft">
-              Gebaut mit dem Anspruch eines Champions.
+              Auswahl, Prüfung, Übergabe — sauber gemacht.
             </p>
           </div>
           <div className="md:col-span-8">
             <p className="font-serif text-3xl leading-[1.18] text-ink sm:text-4xl md:text-[44px]">
-              Wer Nummer 1 sein will, akzeptiert keine Abkürzungen.
-              Jede Prüfung, jede Aufbereitung, jedes Gespräch
-              folgt einem klaren Standard —{" "}
-              <span className="text-gradient-gold">dem höchsten.</span>
+              Wir kaufen nicht nach Stückzahl, sondern nach Zustand.
+              Jedes Fahrzeug, das bei uns steht, hat eine Geschichte,
+              die wir kennen —{" "}
+              <span className="text-gradient-gold">und vertreten.</span>
             </p>
             <p className="mt-8 max-w-2xl text-base leading-relaxed text-ink-soft md:text-lg">
-              Autohaus AK GmbH steht für die Werte einer Marke, die Disziplin,
-              Qualität und Verantwortung lebt. Wir verkaufen keine Stückzahl —
-              wir verkaufen Vertrauen.
+              Eingangsprüfung, Aufbereitung und vollständige Dokumentation
+              gehören für uns zum Standard, nicht zum Extra. Sie kaufen ein
+              Fahrzeug, das wir verantworten können.
             </p>
             <div className="mt-10">
               <Link
@@ -214,17 +217,17 @@ function Highlights() {
         <div className="flex items-end justify-between gap-6 border-b border-line pb-6">
           <div>
             <p className="font-mono text-[10px] font-bold uppercase tracking-[0.4em] text-champagne">
-              Selected Inventory
+              Aus unserem Bestand
             </p>
             <h2 className="mt-4 font-display text-4xl font-extrabold tracking-tight text-ink md:text-5xl">
-              Current / <span className="text-champagne">Selection</span>
+              Aktuelle <span className="text-champagne">Auswahl</span>
             </h2>
           </div>
           <Link
             to="/fahrzeuge"
             className="hidden font-mono text-[10px] font-bold uppercase tracking-[0.3em] text-champagne transition-opacity hover:opacity-70 md:inline-flex"
           >
-            Browse System [01–{String(vehicles.length).padStart(2, "0")}] →
+            Gesamten Bestand ansehen →
           </Link>
         </div>
 
@@ -368,27 +371,29 @@ function Financing() {
         <div className="grid gap-14 md:grid-cols-12 md:gap-20">
           <div className="md:col-span-5">
             <p className="kicker">Finanzierung</p>
+            {/* Alt: „Konditionen, die zu Ihnen passen." */}
             <h2 className="mt-4 font-serif text-4xl text-ink md:text-5xl">
-              Champion-Konditionen.
+              Finanzierung, die passt.
             </h2>
             <p className="mt-6 text-base leading-relaxed text-ink-soft md:text-lg">
-              Transparente Konditionen, individuelle Lösungen, schnelle
-              Zusagen — durch bewährte Partnerbanken.
+              Transparente Konditionen, individuelle Laufzeiten und schnelle
+              Zusagen — über etablierte Partnerbanken. Rate berechnen oder
+              direkt anfragen.
             </p>
             <div className="mt-10">
               <Link
                 to="/finanzierung"
                 className="inline-flex items-center gap-3 text-xs uppercase tracking-[0.22em] text-champagne hover:text-ink"
               >
-                Finanzierung berechnen →
+                Rate berechnen →
               </Link>
             </div>
           </div>
           <div className="md:col-span-7 grid gap-6 sm:grid-cols-3">
             {[
-              { v: "ab 3,99%", l: "Effektivzins indikativ" },
               { v: "12–84 Mt.", l: "Laufzeit flexibel" },
-              { v: "0 €", l: "Anzahlung möglich" },
+              { v: "Individuell", l: "Anzahlung wählbar" },
+              { v: "Schnell", l: "Zusage über Partnerbank" },
             ].map((s) => (
               <div key={s.l} className="glass p-6">
                 <p className="font-serif text-3xl text-champagne md:text-4xl">{s.v}</p>
@@ -433,9 +438,10 @@ function WhyAK() {
     <section className="border-t border-line bg-paper">
       <div className="mx-auto max-w-[1400px] px-4 py-14 md:px-10 md:py-32">
         <div className="max-w-2xl">
-          <p className="kicker">Warum Autohaus AK GmbH</p>
+          <p className="kicker">Warum Autohaus AK</p>
+          {/* Alt: „Vier Gründe, mit uns zu sprechen." */}
           <h2 className="mt-4 font-serif text-4xl text-ink md:text-5xl">
-            Standard auf höchstem Niveau.
+            Was Sie bei uns erwartet.
           </h2>
         </div>
         <div className="mt-14 grid gap-px bg-line sm:grid-cols-2 lg:grid-cols-4">
@@ -569,11 +575,12 @@ function ContactCTA() {
     <section className="relative overflow-hidden border-t border-line bg-surface grain">
       <div className="mx-auto max-w-[1400px] px-5 py-24 text-center md:px-10 md:py-32">
         <p className="kicker">Direktkontakt</p>
+        {/* Alt: „Sprechen wir über Ihr nächstes Fahrzeug." */}
         <h2 className="mx-auto mt-4 max-w-3xl font-serif text-4xl leading-tight text-ink md:text-6xl">
-          Bereit für den nächsten Schritt?
+          Sie haben ein Fahrzeug im Blick?
         </h2>
         <p className="mx-auto mt-6 max-w-xl text-base text-ink-soft md:text-lg">
-          Ob Kauf, Verkauf, Finanzierung oder Beratung — wir sind direkt für Sie da.
+          Kauf, Verkauf, Finanzierung oder ein kurzer Rückruf — wählen Sie den Weg, der für Sie am schnellsten ist.
         </p>
         <div className="mt-10 flex flex-wrap justify-center gap-3">
           <a

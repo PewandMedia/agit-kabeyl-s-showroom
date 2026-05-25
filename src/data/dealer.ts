@@ -18,9 +18,9 @@ export const dealer = {
     { day: "Sa", time: "10:00 – 15:00" },
     { day: "So", time: "Geschlossen" },
   ],
-  claim: "Champion-Mentalität. Premium-Fahrzeuge. Ehrlicher Service.",
+  claim: "Geprüfte Fahrzeuge. Ehrliche Beratung. Faire Konditionen.",
   subclaim:
-    "Autohaus AK GmbH verbindet geprüfte Fahrzeuge, faire Konditionen und persönliche Beratung mit dem Anspruch, in jedem Detail Nummer 1 zu sein.",
+    "Autohaus AK GmbH steht für persönlich ausgewählte Fahrzeuge, transparente Daten und einen Service, der nach dem Kauf weitergeht.",
   // Legal — Platzhalter
   managingDirector: "Agit Kabayel",
   hrb: "HRB 00000 (Amtsgericht Wuppertal)",
