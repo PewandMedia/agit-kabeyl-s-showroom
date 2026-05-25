@@ -27,8 +27,8 @@ export const Route = createFileRoute("/fahrzeuge/$id")({
   head: ({ loaderData, params }) => {
     const v = loaderData?.vehicle;
     if (!v) return { meta: [{ title: "Fahrzeug nicht gefunden" }] };
-    const title = `${v.title} · ${v.firstRegistration} · ${formatPrice(v.priceEur)} — Autohaus AK`;
-    const description = `${v.title}, EZ ${v.firstRegistration}, ${formatKm(v.mileageKm)}, ${v.fuel}, ${formatKw(v.powerKw)}. Verfügbar beim Autohaus AK GmbH in Velbert.`;
+    const title = `${v.make} ${v.model} ${v.firstRegistration} — Autohaus AK Velbert`;
+    const description = `${v.title}, EZ ${v.firstRegistration}, ${formatKm(v.mileageKm)}. Geprüft vom ${dealer.legalName} in ${dealer.city}. Probefahrt und Finanzierung möglich.`;
     return {
       meta: [
         { title },
@@ -36,6 +36,7 @@ export const Route = createFileRoute("/fahrzeuge/$id")({
         { property: "og:title", content: title },
         { property: "og:description", content: description },
         { property: "og:image", content: v.images[0] },
+        { name: "twitter:image", content: v.images[0] },
         { property: "og:url", content: `/fahrzeuge/${params.id}` },
         { property: "og:type", content: "product" },
       ],
@@ -72,6 +73,18 @@ export const Route = createFileRoute("/fahrzeuge/$id")({
               seller: { "@type": "AutoDealer", name: dealer.legalName },
             },
             image: v.images,
+          }),
+        },
+        {
+          type: "application/ld+json",
+          children: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "BreadcrumbList",
+            itemListElement: [
+              { "@type": "ListItem", position: 1, name: "Start", item: "/" },
+              { "@type": "ListItem", position: 2, name: "Fahrzeuge", item: "/fahrzeuge" },
+              { "@type": "ListItem", position: 3, name: v.title, item: `/fahrzeuge/${params.id}` },
+            ],
           }),
         },
       ],
