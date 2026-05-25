@@ -590,39 +590,52 @@ function FAQ() {
 /* ───────────────────── CONTACT CTA ───────────────────── */
 function ContactCTA() {
   return (
-    <section className="relative overflow-hidden border-t border-line bg-surface grain">
-      <div className="mx-auto max-w-[1400px] px-5 py-24 text-center md:px-10 md:py-32">
-        <p className="kicker">Direktkontakt</p>
-        {/* Alt: „Sprechen wir über Ihr nächstes Fahrzeug." */}
-        <h2 className="mx-auto mt-4 max-w-3xl font-serif text-4xl leading-tight text-ink md:text-6xl">
-          Sie haben ein Fahrzeug im Blick?
-        </h2>
-        <p className="mx-auto mt-6 max-w-xl text-base text-ink-soft md:text-lg">
-          Kauf, Verkauf, Finanzierung oder ein kurzer Rückruf — wählen Sie den Weg, der für Sie am schnellsten ist.
-        </p>
-        <div className="mt-10 flex flex-wrap justify-center gap-3">
-          <a
-            href={telLink()}
-            className="inline-flex items-center justify-center bg-ink px-7 py-4 text-xs uppercase tracking-[0.22em] text-paper hover:opacity-90"
-          >
-            {dealer.phoneDisplay}
-          </a>
-          <a
-            href={whatsappLink(`Hallo ${dealer.shortName}, ich habe eine Anfrage.`)}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center justify-center border border-champagne/60 px-7 py-4 text-xs uppercase tracking-[0.22em] text-champagne hover:bg-champagne hover:text-paper"
-          >
-            WhatsApp
-          </a>
-          <Link
-            to="/kontakt"
-            className="inline-flex items-center justify-center border border-ink/30 px-7 py-4 text-xs uppercase tracking-[0.22em] text-ink hover:border-ink"
-          >
-            Anfrage senden
-          </Link>
+    <section className="relative overflow-hidden border-t border-line bg-surface">
+      <div className="mx-auto max-w-[1440px] px-6 py-28 md:px-12 md:py-40">
+        <div className="grid gap-12 md:grid-cols-12 md:items-end md:gap-20">
+          <div className="md:col-span-7">
+            <p className="kicker">Direktkontakt</p>
+            <h2 className="mt-6 font-display text-4xl font-extrabold leading-[1.02] tracking-[-0.03em] text-ink md:text-6xl lg:text-7xl">
+              Sprechen wir über
+              <br />
+              <span className="text-champagne">Ihr nächstes Fahrzeug.</span>
+            </h2>
+            <p className="mt-8 max-w-lg text-base leading-relaxed text-ink/80 md:text-lg">
+              Kauf, Verkauf, Finanzierung oder ein kurzer Rückruf — wählen Sie
+              den Weg, der für Sie am schnellsten ist.
+            </p>
+            <div className="mt-10 flex flex-col items-start gap-6 sm:flex-row sm:items-center sm:gap-8">
+              <BtnLink to="/kontakt" variant="primary" size="lg">
+                Anfrage senden
+              </BtnLink>
+              <BtnA href={telLink()} variant="ghost">
+                {dealer.phoneDisplay}
+              </BtnA>
+            </div>
+          </div>
+          <div className="md:col-span-5">
+            <div className="border-l border-champagne/40 pl-8 md:pl-12">
+              <p className="font-mono text-[10px] uppercase tracking-[0.35em] text-champagne">
+                Vor Ort
+              </p>
+              <p className="mt-4 font-display text-xl leading-snug text-ink">
+                {dealer.legalName}<br />
+                {dealer.street}<br />
+                {dealer.zip} {dealer.city}
+              </p>
+              <a
+                href={whatsappLink(`Hallo ${dealer.shortName}, ich habe eine Anfrage.`)}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="mt-8 inline-flex items-center gap-3 font-mono text-[10px] font-bold uppercase tracking-[0.25em] text-champagne hover:text-ink transition-colors"
+              >
+                Oder direkt per WhatsApp →
+              </a>
+            </div>
+          </div>
         </div>
       </div>
     </section>
   );
 }
+
