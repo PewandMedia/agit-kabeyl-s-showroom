@@ -63,7 +63,11 @@ export function Footer() {
               Geprüfte Premium- und Gebrauchtfahrzeuge aus Velbert. Persönliche
               Beratung, faire Konditionen, sauberer Service.
             </p>
-            <p className="mt-8 font-mono text-[10px] uppercase tracking-[0.3em] text-champagne/60">
+            <p className="mt-6 inline-flex items-center gap-2 border border-champagne/40 bg-paper px-3 py-2 font-mono text-[10px] font-bold uppercase tracking-[0.22em] text-champagne">
+              <span aria-hidden className="h-1 w-1 rotate-45 bg-champagne" />
+              Stolzer Partner · Agit Kabayel · WBC #1
+            </p>
+            <p className="mt-6 font-mono text-[10px] uppercase tracking-[0.3em] text-champagne/60">
               SYS · AK_V01 · LOC: VELBERT_DE
             </p>
           </div>
