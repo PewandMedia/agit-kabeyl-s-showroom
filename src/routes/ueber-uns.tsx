@@ -1,5 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { SiteLayout } from "@/components/site/SiteLayout";
+import championPortrait from "@/assets/champion-portrait.jpg";
 
 export const Route = createFileRoute("/ueber-uns")({
   head: () => ({
