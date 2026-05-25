@@ -141,11 +141,11 @@ export function RadioChips({
         {label}
         {required && <span aria-hidden className="ml-1 text-ink-soft">*</span>}
       </legend>
-      <div className="mt-3 flex flex-wrap gap-2">
+      <div className="mt-3 grid grid-cols-3 gap-2 sm:flex sm:flex-wrap">
         {options.map((o) => (
           <label
             key={o.value}
-            className="cursor-pointer border border-line bg-paper/40 px-4 py-2.5 text-xs text-ink-soft transition-colors has-[:checked]:border-champagne has-[:checked]:bg-champagne/10 has-[:checked]:text-ink"
+            className="flex min-h-[44px] cursor-pointer items-center justify-center border border-line bg-paper/40 px-3 py-2.5 text-center text-sm text-ink-soft transition-colors has-[:checked]:border-champagne has-[:checked]:bg-champagne/15 has-[:checked]:text-ink sm:text-xs"
           >
             <input
               type="radio"
@@ -162,6 +162,7 @@ export function RadioChips({
     </fieldset>
   );
 }
+
 
 export function PrivacyConsent({ name = "privacy" }: { name?: string }) {
   return (
