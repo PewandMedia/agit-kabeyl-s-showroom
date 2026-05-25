@@ -121,20 +121,20 @@ function VehiclesPage() {
   return (
     <SiteLayout>
       <section className="border-b border-line bg-paper">
-        <div className="mx-auto max-w-[1400px] px-5 pt-12 pb-10 md:px-10 md:pt-20 md:pb-16">
+        <div className="mx-auto max-w-[1400px] px-4 pt-8 pb-6 md:px-10 md:pt-20 md:pb-16">
           <p className="kicker">Bestand · {vehicles.length} Fahrzeuge</p>
-          <h1 className="mt-4 font-display text-5xl text-ink md:text-6xl">
+          <h1 className="mt-3 font-display text-4xl text-ink md:text-6xl">
             Unsere Fahrzeuge.
           </h1>
-          <p className="mt-6 max-w-2xl text-base leading-relaxed text-ink-soft md:text-lg">
-            Jedes Fahrzeug persönlich ausgewählt, geprüft und aufbereitet. Bei
-            Interesse erreichen Sie uns direkt — telefonisch oder per WhatsApp.
+          <p className="mt-4 max-w-2xl text-base leading-relaxed text-ink-soft md:mt-6 md:text-lg">
+            Persönlich ausgewählt, geprüft und aufbereitet. Direktkontakt
+            per Telefon oder WhatsApp.
           </p>
         </div>
       </section>
 
       <section className="bg-paper">
-        <div className="mx-auto max-w-[1400px] px-5 py-10 md:px-10 md:py-14">
+        <div className="mx-auto max-w-[1400px] px-4 py-8 md:px-10 md:py-14">
           <div className="grid gap-10 md:grid-cols-12 md:gap-10">
             {/* Desktop sidebar */}
             <aside className="hidden md:col-span-3 md:block">
@@ -151,24 +151,24 @@ function VehiclesPage() {
             </aside>
 
             <div className="md:col-span-9">
-              {/* Top bar: filter (mobile) + sort */}
-              <div className="mb-8 flex items-center justify-between gap-4">
+              {/* Top bar: Mobile = Filter+Sort in 2 columns */}
+              <div className="mb-6 grid grid-cols-2 gap-2 md:mb-8 md:flex md:items-center md:justify-between md:gap-4">
                 <button
                   type="button"
                   onClick={() => setPanelOpen(true)}
-                  className="border border-line bg-surface px-4 py-3 font-mono text-[10px] uppercase tracking-[0.22em] text-ink md:hidden"
+                  className="flex min-h-[48px] items-center justify-center border border-line bg-surface px-4 font-mono text-[11px] uppercase tracking-[0.2em] text-ink md:hidden"
                 >
                   Filter {activeCount > 0 && `(${activeCount})`}
                 </button>
                 <p className="hidden font-mono text-[10px] uppercase tracking-[0.22em] text-ink-soft md:block">
                   {filtered.length} Treffer
                 </p>
-                <label className="ml-auto flex items-center gap-3 font-mono text-[10px] uppercase tracking-[0.22em] text-ink-soft">
-                  Sortierung
+                <label className="flex min-h-[48px] items-center justify-end gap-2 font-mono text-[10px] uppercase tracking-[0.2em] text-ink-soft md:ml-auto md:gap-3">
+                  <span className="hidden sm:inline">Sortierung</span>
                   <select
                     value={sort}
                     onChange={(e) => setSort(e.target.value as Sort)}
-                    className="bg-surface px-3 py-2 font-mono text-[10px] uppercase tracking-[0.18em] text-ink"
+                    className="min-h-[48px] bg-surface px-3 py-2 font-mono text-[12px] uppercase tracking-[0.16em] text-ink md:text-[10px]"
                   >
                     <option value="newest">Neueste</option>
                     <option value="price-asc">Preis ↑</option>
@@ -178,8 +178,12 @@ function VehiclesPage() {
                 </label>
               </div>
 
+              <p className="mb-4 font-mono text-[11px] uppercase tracking-[0.2em] text-ink-soft md:hidden">
+                {filtered.length} Treffer
+              </p>
+
               {filtered.length === 0 ? (
-                <div className="border border-line bg-surface p-12 text-center">
+                <div className="border border-line bg-surface p-10 text-center md:p-12">
                   <p className="kicker">Keine Treffer</p>
                   <p className="mt-4 text-sm text-ink-soft">
                     Keine Fahrzeuge passen zu den Filtern.
@@ -187,15 +191,15 @@ function VehiclesPage() {
                   <button
                     type="button"
                     onClick={reset}
-                    className="mt-6 border border-champagne px-5 py-3 font-mono text-[10px] uppercase tracking-[0.22em] text-champagne hover:bg-champagne hover:text-paper"
+                    className="mt-6 min-h-[48px] border border-champagne px-5 py-3 font-mono text-[11px] uppercase tracking-[0.22em] text-champagne hover:bg-champagne hover:text-paper"
                   >
                     Filter zurücksetzen
                   </button>
                 </div>
               ) : (
-                <div className="grid gap-8 sm:grid-cols-2 xl:grid-cols-3">
-                  {filtered.map((v) => (
-                    <VehicleCard key={v.id} vehicle={v} />
+                <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 md:gap-8 xl:grid-cols-3">
+                  {filtered.map((v, i) => (
+                    <VehicleCard key={v.id} vehicle={v} priority={i < 2} />
                   ))}
                 </div>
               )}
@@ -203,6 +207,7 @@ function VehiclesPage() {
           </div>
         </div>
       </section>
+
 
       {/* Mobile filter slide panel */}
       <div
@@ -244,11 +249,11 @@ function VehiclesPage() {
               resultCount={filtered.length}
             />
           </div>
-          <div className="border-t border-line bg-surface p-4">
+          <div className="border-t border-line bg-surface p-4 pb-safe">
             <button
               type="button"
               onClick={() => setPanelOpen(false)}
-              className="block w-full bg-champagne py-4 font-mono text-[11px] font-bold uppercase tracking-[0.22em] text-paper"
+              className="block min-h-[56px] w-full bg-champagne font-mono text-[12px] font-bold uppercase tracking-[0.22em] text-paper"
             >
               {filtered.length} Ergebnisse anzeigen
             </button>
@@ -258,3 +263,4 @@ function VehiclesPage() {
     </SiteLayout>
   );
 }
+

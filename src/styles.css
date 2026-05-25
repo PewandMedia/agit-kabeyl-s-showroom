@@ -271,4 +271,33 @@
     mix-blend-mode: overlay;
     background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
   }
+
+  /* Mobile-first tap target — WCAG AA min 44×44 */
+  .tap { min-height: 44px; min-width: 44px; }
+
+  /* Safe-area bottom padding for sticky elements above iOS home-indicator */
+  .pb-safe { padding-bottom: max(0.5rem, env(safe-area-inset-bottom)); }
+  .mb-safe { margin-bottom: env(safe-area-inset-bottom); }
 }
+
+/* ---------- Mobile performance & UX tweaks ---------- */
+@media (max-width: 767px) {
+  /* Lighter blur on low-end devices */
+  .backdrop-blur-xl {
+    backdrop-filter: blur(10px) !important;
+    -webkit-backdrop-filter: blur(10px) !important;
+  }
+  /* Drop grain overlay — extra paint pass */
+  .grain::after { display: none; }
+  /* Block iOS focus-zoom by forcing 16px on form fields */
+  input, textarea, select { font-size: 16px; }
+  /* Snappier hero fade-up */
+  .animate-fade-up { animation-duration: 320ms; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-fade-up,
+  .scan-line::after { animation: none !important; }
+  * { transition-duration: 0.01ms !important; }
+}
+

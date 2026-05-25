@@ -59,38 +59,45 @@ function HomePage() {
 /* ─────────────────────────── HERO ─────────────────────────── */
 function Hero() {
   return (
-    <section className="relative overflow-hidden bg-paper pt-28 md:pt-32">
-      <div className="mx-auto grid max-w-[1400px] gap-10 px-5 pb-16 md:grid-cols-2 md:gap-12 md:px-10 md:pb-24 lg:items-stretch">
+    <section className="relative overflow-hidden bg-paper pt-20 md:pt-32">
+      <div className="mx-auto grid max-w-[1400px] gap-8 px-4 pb-12 md:grid-cols-2 md:gap-12 md:px-10 md:pb-24 lg:items-stretch">
         {/* LEFT — Headline */}
-        <div className="flex animate-fade-up flex-col justify-between py-6 md:py-12">
-          <div className="space-y-7">
+        <div className="flex animate-fade-up flex-col justify-between md:py-12">
+          <div className="space-y-5 md:space-y-7">
             <div className="flex items-center gap-3">
-              <span className="h-px w-10 bg-champagne" />
+              <span className="h-px w-8 bg-champagne" />
               <span className="font-mono text-[10px] font-medium uppercase tracking-[0.4em] text-champagne">
-                System Status · Active
+                Premium-Fahrzeuge · Velbert
               </span>
             </div>
-            <h1 className="font-display text-[44px] font-extrabold leading-[0.9] tracking-tighter text-ink sm:text-6xl md:text-7xl lg:text-[88px]">
-              Champion-<br />
+            <h1 className="font-display text-[40px] font-extrabold leading-[0.95] tracking-tighter text-ink sm:text-6xl md:text-7xl lg:text-[88px]">
+              Champion-<wbr />
               <span className="text-champagne">Mentalität.</span>
             </h1>
             <p className="max-w-md text-base leading-relaxed text-ink-soft md:text-lg">
-              Präzision trifft Performance. {dealer.legalName} steht für
-              geprüfte Premium-Fahrzeuge, transparente Daten und
-              kompromisslosen Service — Nummer 1 im Segment.
+              Geprüfte Premium-Fahrzeuge, transparente Daten,
+              kompromisslosen Service — direkt von {dealer.legalName}.
             </p>
           </div>
 
-          <div className="mt-10 flex flex-wrap gap-3">
+          <div className="mt-7 grid grid-cols-1 gap-3 sm:grid-cols-2 md:mt-10 md:flex md:flex-wrap">
             <Link
               to="/fahrzeuge"
-              className="inline-flex items-center justify-center bg-champagne px-8 py-5 font-mono text-[10px] font-bold uppercase tracking-[0.3em] text-paper transition-colors duration-500 hover:bg-ink hover:text-paper"
+              className="inline-flex min-h-[56px] items-center justify-center bg-champagne px-6 py-4 font-mono text-[11px] font-bold uppercase tracking-[0.25em] text-paper transition-colors md:px-8 md:py-5 md:text-[10px] md:tracking-[0.3em] md:hover:bg-ink md:hover:text-paper"
             >
-              Bestand analysieren
+              Bestand ansehen
             </Link>
+            <a
+              href={whatsappLink(`Hallo ${dealer.shortName}, ich habe eine Anfrage.`)}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex min-h-[56px] items-center justify-center border border-champagne/50 px-6 py-4 font-mono text-[11px] font-bold uppercase tracking-[0.25em] text-ink md:hidden"
+            >
+              WhatsApp
+            </a>
             <Link
               to="/auto-verkaufen"
-              className="inline-flex items-center justify-center border border-champagne/40 px-8 py-5 font-mono text-[10px] font-bold uppercase tracking-[0.3em] text-ink transition-colors duration-500 hover:border-champagne hover:text-champagne"
+              className="hidden md:inline-flex md:items-center md:justify-center md:border md:border-champagne/40 md:px-8 md:py-5 md:font-mono md:text-[10px] md:font-bold md:uppercase md:tracking-[0.3em] md:text-ink md:transition-colors md:duration-500 md:hover:border-champagne md:hover:text-champagne"
             >
               Ankauf-Portal
             </Link>
@@ -98,30 +105,20 @@ function Hero() {
         </div>
 
         {/* RIGHT — Cinematic image + data overlays */}
-        <div className="relative min-h-[440px] overflow-hidden border border-champagne/15 bg-surface p-2 md:min-h-[560px]">
+        <div className="relative h-[280px] overflow-hidden border border-champagne/15 bg-surface p-2 md:h-auto md:min-h-[560px]">
           <img
             src={heroCar}
             alt=""
             width={1200}
             height={1500}
             fetchPriority="high"
-            className="absolute inset-0 h-full w-full object-cover opacity-55 mix-blend-luminosity transition-all duration-1000 hover:opacity-70 hover:mix-blend-normal"
+            decoding="async"
+            className="absolute inset-0 h-full w-full object-cover opacity-90 md:opacity-55 md:mix-blend-luminosity md:transition-all md:duration-1000 md:hover:opacity-70 md:hover:mix-blend-normal"
           />
-          <div className="absolute inset-0 bg-gradient-to-tr from-paper/80 via-paper/10 to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-t from-paper/70 via-paper/10 to-transparent md:bg-gradient-to-tr md:from-paper/80" />
 
-          {/* Top status row */}
-          <div className="absolute inset-x-0 top-0 flex items-start justify-between p-6 md:p-8">
-            <div className="font-mono text-[10px] leading-relaxed text-champagne/70">
-              REF: AK_SYS_2024<br />
-              LOC: VELBERT_DE
-            </div>
-            <div className="flex h-8 w-8 items-center justify-center border border-champagne/30">
-              <span className="block h-1 w-1 bg-champagne" />
-            </div>
-          </div>
-
-          {/* Bottom data panels */}
-          <div className="absolute inset-x-0 bottom-0 grid grid-cols-2 gap-3 p-6 md:p-8">
+          {/* Bottom data panels — Desktop only */}
+          <div className="absolute inset-x-0 bottom-0 hidden grid-cols-2 gap-3 p-6 md:grid md:p-8">
             <DataPanel label="Available Units" value={String(vehicles.length).padStart(2, "0")} />
             <DataPanel label="Quality Score" value="99,8 %" />
           </div>
@@ -141,6 +138,7 @@ function DataPanel({ label, value }: { label: string; value: string }) {
     </div>
   );
 }
+
 
 /* ─────────────────────── TRUST BAR ─────────────────────── */
 const TRUSTS: { label: string; value: string }[] = [
@@ -173,7 +171,7 @@ function TrustBar() {
 function BrandStory() {
   return (
     <section className="relative overflow-hidden bg-paper grain">
-      <div className="mx-auto max-w-[1400px] px-5 py-24 md:px-10 md:py-40">
+      <div className="mx-auto max-w-[1400px] px-4 py-14 md:px-10 md:py-40">
         <div className="grid gap-12 md:grid-cols-12">
           <div className="md:col-span-4">
             <p className="kicker">Marke AK</p>
@@ -212,7 +210,7 @@ function BrandStory() {
 function Highlights() {
   return (
     <section className="border-t border-line bg-paper">
-      <div className="mx-auto max-w-[1400px] px-5 py-24 md:px-10 md:py-32">
+      <div className="mx-auto max-w-[1400px] px-4 py-14 md:px-10 md:py-32">
         <div className="flex items-end justify-between gap-6 border-b border-line pb-6">
           <div>
             <p className="font-mono text-[10px] font-bold uppercase tracking-[0.4em] text-champagne">
@@ -230,11 +228,12 @@ function Highlights() {
           </Link>
         </div>
 
-        <div className="mt-12 grid gap-6 md:mt-14 md:grid-cols-3">
-          {featuredVehicles.map((v) => (
-            <VehicleCard key={v.id} vehicle={v} />
+        <div className="mt-10 grid gap-6 md:mt-14 md:grid-cols-3">
+          {featuredVehicles.map((v, i) => (
+            <VehicleCard key={v.id} vehicle={v} priority={i < 2} />
           ))}
         </div>
+
 
         <div className="mt-10 md:hidden">
           <Link
@@ -255,7 +254,7 @@ function Inventory() {
   if (rest.length === 0) return null;
   return (
     <section className="border-t border-line bg-surface">
-      <div className="mx-auto max-w-[1400px] px-5 py-20 md:px-10 md:py-32">
+      <div className="mx-auto max-w-[1400px] px-4 py-14 md:px-10 md:py-32">
         <div className="grid gap-12 md:grid-cols-12 md:gap-16">
           <div className="md:col-span-4">
             <p className="kicker">Bestand</p>
@@ -288,7 +287,7 @@ function Inventory() {
 function SellCar() {
   return (
     <section className="border-t border-line bg-paper">
-      <div className="mx-auto max-w-[1400px] px-5 py-20 md:px-10 md:py-32">
+      <div className="mx-auto max-w-[1400px] px-4 py-14 md:px-10 md:py-32">
         <div className="grid gap-14 md:grid-cols-12 md:gap-20">
           <div className="md:col-span-7">
             <p className="kicker">Ankauf</p>
@@ -365,7 +364,7 @@ function Step({ n, text }: { n: string; text: string }) {
 function Financing() {
   return (
     <section className="border-t border-line bg-surface">
-      <div className="mx-auto max-w-[1400px] px-5 py-20 md:px-10 md:py-32">
+      <div className="mx-auto max-w-[1400px] px-4 py-14 md:px-10 md:py-32">
         <div className="grid gap-14 md:grid-cols-12 md:gap-20">
           <div className="md:col-span-5">
             <p className="kicker">Finanzierung</p>
@@ -432,7 +431,7 @@ const WHY = [
 function WhyAK() {
   return (
     <section className="border-t border-line bg-paper">
-      <div className="mx-auto max-w-[1400px] px-5 py-20 md:px-10 md:py-32">
+      <div className="mx-auto max-w-[1400px] px-4 py-14 md:px-10 md:py-32">
         <div className="max-w-2xl">
           <p className="kicker">Warum Autohaus AK GmbH</p>
           <h2 className="mt-4 font-serif text-4xl text-ink md:text-5xl">
@@ -481,7 +480,7 @@ const TESTIMONIALS = [
 function Testimonials() {
   return (
     <section className="border-t border-line bg-surface">
-      <div className="mx-auto max-w-[1400px] px-5 py-20 md:px-10 md:py-32">
+      <div className="mx-auto max-w-[1400px] px-4 py-14 md:px-10 md:py-32">
         <p className="kicker">Stimmen</p>
         <h2 className="mt-4 max-w-2xl font-serif text-4xl text-ink md:text-5xl">
           Was unsere Kunden sagen.
@@ -533,7 +532,7 @@ const FAQS = [
 function FAQ() {
   return (
     <section className="border-t border-line bg-paper">
-      <div className="mx-auto max-w-[1400px] px-5 py-20 md:px-10 md:py-32">
+      <div className="mx-auto max-w-[1400px] px-4 py-14 md:px-10 md:py-32">
         <div className="grid gap-14 md:grid-cols-12 md:gap-20">
           <div className="md:col-span-4">
             <p className="kicker">FAQ</p>

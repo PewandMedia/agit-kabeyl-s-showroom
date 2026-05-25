@@ -21,10 +21,13 @@ export function SiteLayout({
         {children}
       </main>
       <Footer />
+      {/* FAB: desktop only — Mobile-Sticky-Bar deckt WhatsApp bereits ab */}
       {!hideFab && <StickyWhatsAppFab />}
       {!hideMobileBar && <MobileStickyBar />}
-      {/* Spacer so content isn't hidden behind sticky bar */}
-      {!hideMobileBar && <div className="h-16 md:hidden" aria-hidden />}
+      {/* Spacer so content isn't hidden behind sticky bar (incl. safe-area) */}
+      {!hideMobileBar && (
+        <div className="h-[72px] pb-safe md:hidden" aria-hidden />
+      )}
     </div>
   );
 }

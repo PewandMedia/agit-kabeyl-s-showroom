@@ -59,7 +59,7 @@ export function Field({
         placeholder={placeholder}
         autoComplete={autoComplete}
         inputMode={inputMode}
-        className="mt-2 w-full border border-line bg-paper/40 px-4 py-3 text-sm text-ink transition-colors focus:border-champagne focus:outline-none"
+        className="mt-2 block w-full min-h-[48px] border border-line bg-paper/40 px-4 py-3 text-base text-ink transition-colors focus:border-champagne focus:outline-none"
       />
     </div>
   );
@@ -85,7 +85,7 @@ export function Textarea({
         defaultValue={defaultValue}
         placeholder={placeholder}
         rows={rows}
-        className="mt-2 w-full border border-line bg-paper/40 px-4 py-3 text-sm text-ink transition-colors focus:border-champagne focus:outline-none"
+        className="mt-2 block w-full border border-line bg-paper/40 px-4 py-3 text-base text-ink transition-colors focus:border-champagne focus:outline-none"
       />
     </div>
   );
@@ -108,7 +108,7 @@ export function Select({
         name={name}
         required={required}
         defaultValue={defaultValue}
-        className="mt-2 w-full border border-line bg-paper/40 px-4 py-3 text-sm text-ink transition-colors focus:border-champagne focus:outline-none"
+        className="mt-2 block w-full min-h-[48px] border border-line bg-paper/40 px-4 py-3 text-base text-ink transition-colors focus:border-champagne focus:outline-none"
       >
         <option value="">Bitte wählen</option>
         {options.map((o) => (
@@ -120,6 +120,7 @@ export function Select({
     </div>
   );
 }
+
 
 export function RadioChips({
   label,
@@ -140,11 +141,11 @@ export function RadioChips({
         {label}
         {required && <span aria-hidden className="ml-1 text-ink-soft">*</span>}
       </legend>
-      <div className="mt-3 flex flex-wrap gap-2">
+      <div className="mt-3 grid grid-cols-3 gap-2 sm:flex sm:flex-wrap">
         {options.map((o) => (
           <label
             key={o.value}
-            className="cursor-pointer border border-line bg-paper/40 px-4 py-2.5 text-xs text-ink-soft transition-colors has-[:checked]:border-champagne has-[:checked]:bg-champagne/10 has-[:checked]:text-ink"
+            className="flex min-h-[44px] cursor-pointer items-center justify-center border border-line bg-paper/40 px-3 py-2.5 text-center text-sm text-ink-soft transition-colors has-[:checked]:border-champagne has-[:checked]:bg-champagne/15 has-[:checked]:text-ink sm:text-xs"
           >
             <input
               type="radio"
@@ -162,14 +163,15 @@ export function RadioChips({
   );
 }
 
+
 export function PrivacyConsent({ name = "privacy" }: { name?: string }) {
   return (
-    <label className="flex items-start gap-3 text-xs leading-relaxed text-ink-soft">
+    <label className="flex min-h-[44px] cursor-pointer items-start gap-3 py-2 text-sm leading-relaxed text-ink-soft">
       <input
         type="checkbox"
         name={name}
         required
-        className="mt-0.5 h-4 w-4 flex-shrink-0 accent-[var(--color-champagne)]"
+        className="mt-1 h-5 w-5 flex-shrink-0 accent-[var(--color-champagne)]"
       />
       <span>
         Ich habe die{" "}
@@ -204,7 +206,7 @@ export function SubmitButton({
   variant?: "gold" | "ink";
 }) {
   const base =
-    "w-full px-6 py-4 font-mono text-[11px] font-bold uppercase tracking-[0.22em] transition-opacity hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-40";
+    "block w-full min-h-[52px] px-6 py-4 font-mono text-[12px] font-bold uppercase tracking-[0.22em] transition-opacity hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-40";
   const cls =
     variant === "gold" ? `${base} bg-champagne text-paper` : `${base} bg-ink text-paper`;
   return (
@@ -213,6 +215,7 @@ export function SubmitButton({
     </button>
   );
 }
+
 
 export function ErrorText({ children }: { children: React.ReactNode }) {
   if (!children) return null;

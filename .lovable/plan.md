@@ -1,84 +1,113 @@
+# Mobile-First Überarbeitung
 
-## Ziel
+Ziel: Smartphone-Erlebnis besser als typische Autohaus-Portale (Mobile.de, AutoScout24). Desktop bleibt visuell unverändert — alle Änderungen greifen nur unter `md:`.
 
-Ein einheitliches Lead-System mit fünf konversionsoptimierten Formularen plus zusätzlichen Conversion-Elementen (Sticky WhatsApp, Sektion-CTAs, Erfolgsmeldungen, Trust-Hinweise). Alle Formulare bleiben Frontend-only — Versand via `mailto:` (konsistent mit bestehendem `InquiryForm`-Pattern). Anbindung an eine Leads-Tabelle in Lovable Cloud ist eine separate Phase.
+## 1. Globales Layout & Sticky Conversion-Layer
 
-## 1. Geteilte Form-Primitives (`src/components/forms/`)
+**`MobileStickyBar.tsx`**
+- Höhe auf min. 56px, Buttons min. 48px Touch-Target.
+- Safe-Area: `pb-[env(safe-area-inset-bottom)]` damit iPhone-Home-Indicator nicht überlappt.
+- Icons 20px, Label 10px, klarere aktive Farbe (Champagne) auf der gerade aktiven Route.
+- WhatsApp + Anfrage als primäre farbige Buttons, Bestand + Anrufen als Sekundär.
 
-Neue, wiederverwendbare Bausteine, damit alle Formulare gleich edel und konsistent aussehen:
+**`SiteLayout.tsx`**
+- Bottom-Padding `pb-[88px] md:pb-0` damit Sticky-Bar Inhalte nie verdeckt.
+- `StickyWhatsAppFab` auf Mobile ausblenden (Sticky-Bar deckt WhatsApp bereits ab) — verhindert doppelte CTAs und Overlap mit dem Inhalt.
 
-- `FormField.tsx` — Input, Textarea, Select mit einheitlichem Label-Stil (Mono-Eyebrow, Champagner-Fokus).
-- `RadioGroup.tsx` — Chip-Stil-Radios (z. B. „Kontaktwunsch: Telefon / WhatsApp / E-Mail").
-- `Checkbox.tsx` — Datenschutz-Checkbox mit Link zu `/datenschutz`.
-- `TrustBlock.tsx` — Vertrauensliste neben Formularen: „Antwort i. d. R. < 2 h", „Persönlich, kein Callcenter", „Daten verschlüsselt übertragen", „DSGVO-konform".
-- `SuccessState.tsx` — Wiederverwendbare Erfolgs-Karte (Champagner-Akzent, WhatsApp-/Anruf-Fallback-CTAs „Lieber sofort sprechen?").
-- `useLeadSubmit.ts` — Hook, der Subject + strukturierten Body baut, `mailto:` öffnet, Erfolgs-State setzt. Enthält Zod-Validierung und Honeypot-Check.
+**`Header.tsx`**
+- Höhe `h-16` mobil (statt h-20), kompaktere Logo-Zeile.
+- Telefonnummer-Icon-Button immer sichtbar in der mobilen Top-Bar (Tel:-Link, 44×44).
+- Menübutton 44×44, klar erkennbares Burger-Icon (3 Linien statt 2).
+- Mobile-Menü: jeder Eintrag min. 56px hoch, primäre CTAs (Anrufen, WhatsApp) als 2-Spalten oben, Nav darunter.
 
-Alle Formulare nutzen diese Primitives.
+## 2. Startseite (`routes/index.tsx`)
 
-## 2. Lead-Formulare (`src/components/forms/`)
+**Hero (above the fold)**
+- Mobile-Reihenfolge: kleines Eyebrow → H1 (kompakter, max. 2 Zeilen, kein `<br>` der bricht) → 1 Satz Subline → **2 große CTAs nebeneinander/gestapelt** (Bestand + WhatsApp statt Ankauf, weil Ankauf weiter unten teaserd).
+- H1-Größe mobil: `text-[40px] leading-[0.95]` (verhindert Überlauf auf 360px).
+- Bild: mobil unterhalb des Textblocks, max. 320px hoch, `object-cover`. Data-Panels (Available Units / Quality Score) auf mobil ausblenden — zu viel Detail.
+- `mix-blend-luminosity` und `hover:opacity` auf Mobile entfernen (langsam, Touch hat kein Hover).
+- Section-Padding mobil: `pt-24 pb-10` statt 28/16.
 
-### `VehicleInquiryForm.tsx` (ersetzt heutige `InquiryForm.tsx`)
-Felder: Name, Telefon, E-Mail, Fahrzeug (vorbefüllt), Nachricht (vorbefüllt), Kontaktwunsch (Radio: Telefon/WhatsApp/E-Mail), Datenschutz-Checkbox (Pflicht). Submit per `mailto:` an `dealer.email`; bei Kontaktwunsch „WhatsApp" zusätzlich Hinweis „Per WhatsApp kontaktieren" als Sekundär-CTA, der direkt `wa.me` öffnet.
+**Trust-Bar**
+- 2 Spalten (statt 4) auf Mobile, Werte kompakt.
 
-### `TestDriveForm.tsx` (neu)
-Felder: Fahrzeug (vorbefüllt oder Freitext), Wunschdatum, Wunschzeit (Vormittag / Nachmittag / Samstag), Name, Telefon, E-Mail (optional), Datenschutz.
+**Highlights/Inventory**
+- Mobil: 1-spaltig (statt 2-spaltig durch `sm:grid-cols-2`), damit Karten groß und lesbar bleiben.
+- Featured-Auswahl auf 3 Fahrzeuge begrenzt + sichtbarer „Alle Fahrzeuge"-Button.
 
-### `FinancingLeadForm.tsx` (neu — ersetzt einfache Form in `finanzierung.tsx`)
-Felder: Fahrzeug (Freitext, vorbefüllt aus `?fahrzeug=`-Query-Param), Kaufpreis (aus Rechner), Anzahlung, Wunschrate (€/Monat), Laufzeit (12/24/36/48/60/72/84), Name, Telefon, E-Mail, Datenschutz.
+**Sektion-Padding global**: alle Home-Sektionen mobil von `py-24/py-32/py-40` auf `py-14/py-16` reduzieren — kürzere Scrolldistanz, weniger gefühlte Wartezeit.
 
-### `PurchaseForm.tsx` (Ankauf — ersetzt Inline-Form in `auto-verkaufen.tsx`)
-Felder: Marke, Modell, Baujahr, Kilometerstand, Kraftstoff (Chips), Getriebe (Chips), Zustand (Chips: Sehr gut / Gut / Gebrauchsspuren / Reparaturbedürftig), Unfallfrei (Radio: Ja/Nein), Wunschpreis (optional), Name, Telefon, E-Mail, Datenschutz. **Fotos**: kein echter Upload (kein Backend) — stattdessen prominenter Hinweis nach Submit „Senden Sie uns Fotos direkt per WhatsApp" mit One-Tap-WhatsApp-Link, der die soeben eingegebenen Eckdaten als Text mitschickt.
+**FAQ/Why-AK/SellCar**
+- Schriftgrößen mobil ein Schritt kleiner (z.B. `text-3xl` statt `text-4xl/text-6xl`), damit nichts abschneidet.
+- CTA-Buttons mindestens 48px hoch, volle Breite mobil.
 
-### `CallbackForm.tsx` (neu, Rückruf)
-Felder: Name, Telefon, Wunsch-Zeitfenster (Radio: Jetzt / Heute / Morgen / Diese Woche), kurze Notiz (optional), Datenschutz. Sehr kurz und mobil-first, dafür für Modal-Einsatz geeignet.
+## 3. Fahrzeugbestand (`routes/fahrzeuge.tsx`)
 
-Alle Formulare:
-- Zod-Validierung, deutsche Fehlertexte.
-- Honeypot-Feld `company` (hidden).
-- Pflicht-Datenschutz-Checkbox.
-- `aria-`-Labels, keyboard-fokussierbar.
-- Mobile-first: Inputs `inputMode` korrekt (`tel`, `email`, `numeric`).
-- `SuccessState` mit Anruf- und WhatsApp-Fallback.
+- Header-Sektion mobil kompakter (`pt-8 pb-6`), H1 `text-4xl`.
+- Top-Bar: Filter-Button + Treffer-Anzahl + Sortierung als 2-Zeilen-Layout mobil (Filter+Treffer oben, Sortierung unten), beide Controls min. 44px hoch.
+- Grid mobil **1-spaltig** (`grid-cols-1`, ab `sm` 2-spaltig) — Karten werden vollformatig lesbar.
+- Slide-Panel:
+  - Header sticky innerhalb des Panels.
+  - „Schließen"-Button als großes X (44×44) oben rechts.
+  - Footer-Button mit Safe-Area-Padding.
+  - Panel deckt 100% Breite (statt `max-w-md`) auf Geräten < 420px.
 
-## 3. Neue Routes
+## 4. Fahrzeugkarte (`VehicleCard.tsx`)
 
-- `src/routes/probefahrt.tsx` — Hero + `TestDriveForm` + Ablauf-Steps + Trust-Block.
-- `src/routes/rueckruf.tsx` — Hero + `CallbackForm` (kurz) + „Sofort sprechen"-Block (Telefon-/WhatsApp-Buttons).
+- `aspect-video` zu `aspect-[4/3]` auf Mobile — mehr Bildhöhe.
+- `grayscale` auf Mobile **entfernen** (echte Farbe verkauft besser; Hover-Color-Reveal funktioniert auf Touch nicht).
+- Titel min. `text-base`, Preis prominent als zweite Zeile rechts ausgerichtet (eigene Zeile auf 360px, damit nichts umbricht).
+- Spec-Grid: 2×2, jede Zelle min. 44px hoch, Werte `text-sm` statt `text-xs`.
+- CTA-Pille „Datenblatt öffnen" auf Mobile als klare Champagne-Border statt Hover-Effekt.
+- `loading="lazy"` bleibt; `decoding="async"` ergänzen; `fetchpriority="high"` für die ersten 3 Karten in Featured.
 
-## 4. Integration in bestehende Seiten
+## 5. Fahrzeug-Detail (`routes/fahrzeuge.$id.tsx`)
 
-- `src/routes/fahrzeuge.$id.tsx`: nutzt neue `VehicleInquiryForm`; in der Sticky-Sidebar zusätzlicher Button „Probefahrt anfragen" → öffnet Modal mit `TestDriveForm` (vorbefülltes Fahrzeug) statt nur Link nach `/kontakt`. „Rückruf anfordern"-Button öffnet Modal mit `CallbackForm`.
-- `src/routes/finanzierung.tsx`: rechte Spalte nutzt `FinancingLeadForm`; Query-Param `?fahrzeug=<id>` füllt das Feld vor. Versteckte Felder aus dem Rechner werden weiterhin mitgesendet.
-- `src/routes/auto-verkaufen.tsx`: rechte Spalte nutzt `PurchaseForm` (mit Unfallfrei, Wunschpreis, Foto-via-WhatsApp).
-- `src/routes/kontakt.tsx`: Form wird auf `VehicleInquiryForm`-Variante umgestellt (ohne vorbefülltes Fahrzeug-Feld, mit Kontaktwunsch + Datenschutz).
-- `src/routes/index.tsx`: nach Hero und nach Bestand jeweils ein CTA-Band („Rückruf anfordern" + „WhatsApp"), am Ende ein großer Conversion-Block.
+- Mobile-Reihenfolge anpassen: Galerie → Preis-Block (aus Sidebar nach oben hochgezogen) → Titel/Specs → CTAs als Vollbreite-Buttons → Beschreibung → Ausstattung → Anfrageformular → ähnliche Fahrzeuge.
+- Preis-Karte mobil als eigene Sektion direkt unter der Galerie, nicht erst nach Specs.
+- Alle CTA-Buttons mobil min. 52px hoch, `font-size 12px`, ausreichend Tap-Spacing (≥12px Gap).
+- Sticky Bottom-Bar erweitern auf **3 Spalten**: Anrufen / WhatsApp / Anfrage (Anchor zum Formular) — derzeit nur 2.
+- Modals (Probefahrt/Rückruf): mobil als Bottom-Sheet (slide-up von unten, full-width, Header sticky, Safe-Area-Footer). Schließen-Button 44×44.
 
-### Modal-Mechanik
-Eine minimale `Modal.tsx`-Komponente (Overlay + ESC-/Outside-Close + Focus-Trap-light), wiederverwendet für Test-Drive- und Callback-Form auf der Detailseite.
+## 6. Formulare (`components/forms/*`, `primitives.tsx`)
 
-## 5. Conversion-Elemente
+- Alle Inputs min. 48px Höhe, `text-base` (verhindert iOS-Auto-Zoom bei Fokus).
+- `inputMode` + `autoComplete` korrekt setzen: `tel` für Telefon, `email` für E-Mail, `numeric` für Anzahlung/Rate/Laufzeit.
+- Submit-Buttons mobil full-width, min. 52px, primär Champagne.
+- Radio-Chips (Kontaktwunsch) mobil als 3 gleich breite Buttons in einer Zeile, Touch-Target 44px.
+- Fehlermeldungen direkt unter dem Feld, rot/lesbar, nicht als Toast.
+- DSGVO-Checkbox mit größerer Klickfläche (`label` umfasst Checkbox + Text).
+- Erfolgs-State: scrollt automatisch in den Viewport.
 
-- **`StickyWhatsAppFab.tsx`** (neu): rundes Floating-WhatsApp-Icon unten rechts, sichtbar auf Desktop **und** Mobile (auf Mobile oberhalb der `MobileStickyBar` positioniert, damit nichts überdeckt wird). Auf Detailseiten ausgeblendet, weil dort eine spezifische Sticky-Bar greift.
-- **`MobileStickyBar`** bleibt: Fahrzeuge / Anrufen / WhatsApp / Anfrage. Aktiver-Tab-Indikator wird leicht aufgewertet.
-- **Sektion-CTAs**: nach jeder Hauptsektion (Bestand-Auszug, Leistungen, Über uns) ein dezenter „Anfragen / Anrufen / WhatsApp"-Streifen.
-- **Trust-Block** (`TrustBlock`) neben jedem Formular.
-- **Erfolgsmeldung** einheitlich via `SuccessState`.
-- **2-Klick-Regel**: WhatsApp-Fab + Mobile-Bar liefern Kontakt mit 1 Tap; alle Formulare sind mit ≤ 4 Pflichtfeldern auf Mobile in einem Screen sichtbar.
+## 7. Andere Seiten (`finanzierung`, `auto-verkaufen`, `kontakt`, `probefahrt`, `rueckruf`, `leistungen`, `ueber-uns`)
 
-## 6. Datenschutz
+- Einheitliche mobile Section-Paddings (`py-14`), H1 `text-4xl`, H2 `text-2xl`.
+- Jede Seite: Telefon + WhatsApp-CTA als Vertrauensbalken direkt unter dem Hero.
+- Formularseiten: Formular sofort sichtbar (kein langer Intro-Block davor) — wichtigsten Trust-Block links daneben/darüber kürzen.
 
-- Jedes Formular: Pflicht-Checkbox „Ich habe die Datenschutzerklärung gelesen…" mit Link zu `/datenschutz`. Submit-Button bleibt disabled, solange ungecheckt.
-- Hinweistext unter Submit-Button: „Wir nutzen Ihre Daten ausschließlich zur Beantwortung Ihrer Anfrage. Keine Weitergabe an Dritte."
-- Honeypot bleibt.
+## 8. Performance & Bilder
 
-## 7. Out of Scope
+- Hero-Bild: `width/height` setzen (bereits OK), zusätzlich `decoding="async"`.
+- Galerie-Thumbnails: `loading="lazy"`, `decoding="async"`.
+- `transition-all duration-1000` / `duration-700` auf Mobile durch `duration-200` ersetzen oder via `motion-reduce:transition-none` — wirkt schneller, kein „Laggy"-Gefühl.
+- `backdrop-blur-xl` auf Mobile zu `backdrop-blur-md` reduzieren (GPU-günstiger auf Low-End).
+- `grain`-Overlay auf Mobile deaktivieren (CSS Hintergrund).
 
-- Echte Server-Übermittlung / Lovable-Cloud-Leads-Tabelle / Admin-Inbox → separate Phase.
-- Echter Bilder-Upload beim Ankauf (benötigt Storage). Stattdessen WhatsApp-Foto-Shortcut nach Submit.
-- E-Mail-Transactional-Provider (Resend o. ä.).
+## 9. Tap-Target & Typografie Audit
 
-## Geänderte / neue Dateien
+- Globale CSS-Regel in `styles.css`: alle `a, button` min. `min-h-[44px]` standard via Utility-Klasse `.tap` (anwenden wo nötig statt überall).
+- Kicker/Mono-Labels mobil nicht kleiner als 10px, sonst unleserlich.
+- Body-Text mobil min. `text-base` (16px) für Lesbarkeit.
+- Niemals `whitespace-nowrap` ohne `truncate` — bricht aktuell den Preis ab.
 
-- **neu**: `src/components/forms/FormField.tsx`, `RadioGroup.tsx`, `Checkbox.tsx`, `TrustBlock.tsx`, `SuccessState.tsx`, `useLeadSubmit.ts`, `VehicleInquiryForm.tsx`, `TestDriveForm.tsx`, `FinancingLeadForm.tsx`, `PurchaseForm.tsx`, `CallbackForm.tsx`, `src/components/site/Modal.tsx`, `src/components/site/StickyWhatsAppFab.tsx`, `src/routes/probefahrt.tsx`, `src/routes/rueckruf.tsx`
-- **aktualisiert**: `src/components/site/SiteLayout.tsx` (FAB einbinden), `src/components/site/InquiryForm.tsx` (Re-Export auf neue `VehicleInquiryForm` oder löschen), `src/components/site/MobileStickyBar.tsx` (kleine Politur), `src/routes/fahrzeuge.$id.tsx` (Modals + neue Form), `src/routes/finanzierung.tsx` (neue Form, Query-Param-Prefill), `src/routes/auto-verkaufen.tsx` (neue Form), `src/routes/kontakt.tsx` (neue Form), `src/routes/index.tsx` (Sektion-CTAs), `src/components/site/Header.tsx` (Rückruf-Link in Nav)
+## Out of Scope
+- Keine Backend-Änderungen, keine echten Bild-Uploads, keine Service-Worker/PWA.
+- Keine Logikänderungen an Filter-/Sortier-Mechanik, nur Layout/UX.
+- Desktop bleibt visuell wie heute.
+
+## Technische Datei-Liste
+- Edit: `src/components/site/MobileStickyBar.tsx`, `Header.tsx`, `SiteLayout.tsx`, `VehicleCard.tsx`, `Modal.tsx`, `StickyWhatsAppFab.tsx`, `VehicleFilters.tsx`, `VehicleGallery.tsx`
+- Edit: `src/components/forms/primitives.tsx` und alle 5 Form-Komponenten
+- Edit: `src/routes/index.tsx`, `fahrzeuge.tsx`, `fahrzeuge.$id.tsx`, `finanzierung.tsx`, `auto-verkaufen.tsx`, `kontakt.tsx`, `probefahrt.tsx`, `rueckruf.tsx`, `leistungen.tsx`, `ueber-uns.tsx`
+- Edit: `src/styles.css` (Safe-Area-Utility, `.tap`, motion-reduce Defaults)

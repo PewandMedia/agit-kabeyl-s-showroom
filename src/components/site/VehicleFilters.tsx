@@ -56,9 +56,10 @@ export function VehicleFilters({
           value={filters.q}
           onChange={(e) => setFilters({ ...filters, q: e.target.value })}
           placeholder="Marke, Modell, Variante…"
-          className="mt-2 w-full bg-surface px-4 py-3 text-sm text-ink"
+          className="mt-2 block w-full min-h-[48px] bg-surface px-4 py-3 text-base text-ink"
         />
       </div>
+
 
       <ChipGroup
         label="Marke"
@@ -95,7 +96,7 @@ export function VehicleFilters({
                 onClick={() =>
                   setFilters({ ...filters, statuses: toggle(filters.statuses, s.value) })
                 }
-                className={`border px-3 py-1.5 font-mono text-[10px] uppercase tracking-[0.18em] transition-colors ${
+                className={`min-h-[40px] border px-3.5 py-2 font-mono text-[11px] uppercase tracking-[0.18em] transition-colors ${
                   on
                     ? "border-champagne bg-champagne text-paper"
                     : "border-line text-ink-soft hover:border-champagne hover:text-ink"
@@ -106,6 +107,7 @@ export function VehicleFilters({
             );
           })}
         </div>
+
       </div>
 
       <RangeRow
@@ -184,7 +186,7 @@ function ChipGroup({
               key={it}
               type="button"
               onClick={() => onToggle(it)}
-              className={`border px-3 py-1.5 text-[11px] uppercase tracking-[0.16em] transition-colors ${
+              className={`min-h-[40px] border px-3.5 py-2 text-[12px] uppercase tracking-[0.16em] transition-colors ${
                 on
                   ? "border-champagne bg-champagne text-paper"
                   : "border-line text-ink-soft hover:border-champagne hover:text-ink"
@@ -195,6 +197,7 @@ function ChipGroup({
           );
         })}
       </div>
+
     </div>
   );
 }
