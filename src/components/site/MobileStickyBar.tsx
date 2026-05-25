@@ -9,18 +9,18 @@ export function MobileStickyBar() {
   const wa = whatsappLink(`Hallo ${dealer.shortName}, ich habe eine Anfrage.`);
   return (
     <div className="fixed inset-x-0 bottom-0 z-40 md:hidden">
-      <div className="border-t border-line bg-paper/95 backdrop-blur-xl">
+      <div className="border-t border-champagne/30 bg-paper/95 backdrop-blur-xl">
         <div className="grid grid-cols-4">
           <Link
             to="/fahrzeuge"
-            className="flex flex-col items-center justify-center gap-1 py-2.5 text-[10px] uppercase tracking-[0.18em] text-ink-soft transition-colors hover:text-ink"
+            className="flex flex-col items-center justify-center gap-1 py-3 font-mono text-[9px] font-bold uppercase tracking-[0.18em] text-ink/70 transition-colors hover:text-champagne"
           >
             <IconCar />
-            Fahrzeuge
+            Bestand
           </Link>
           <a
             href={telLink()}
-            className="flex flex-col items-center justify-center gap-1 py-2.5 text-[10px] uppercase tracking-[0.18em] text-ink-soft transition-colors hover:text-ink"
+            className="flex flex-col items-center justify-center gap-1 py-3 font-mono text-[9px] font-bold uppercase tracking-[0.18em] text-ink/70 transition-colors hover:text-champagne"
           >
             <IconPhone />
             Anrufen
@@ -29,14 +29,14 @@ export function MobileStickyBar() {
             href={wa}
             target="_blank"
             rel="noopener noreferrer"
-            className="flex flex-col items-center justify-center gap-1 bg-[oklch(0.55_0.16_150)] py-2.5 text-[10px] uppercase tracking-[0.18em] text-white"
+            className="flex flex-col items-center justify-center gap-1 bg-champagne py-3 font-mono text-[9px] font-bold uppercase tracking-[0.18em] text-paper"
           >
             <IconWa />
             WhatsApp
           </a>
           <Link
             to="/kontakt"
-            className="flex flex-col items-center justify-center gap-1 bg-ink py-2.5 text-[10px] uppercase tracking-[0.18em] text-paper"
+            className="flex flex-col items-center justify-center gap-1 bg-ink py-3 font-mono text-[9px] font-bold uppercase tracking-[0.18em] text-paper"
           >
             <IconMail />
             Anfrage
