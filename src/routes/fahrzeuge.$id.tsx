@@ -178,7 +178,7 @@ function VehicleDetail() {
               <div className="mt-12">
                 <p className="kicker">Ausstattung</p>
                 <ul className="mt-6 grid grid-cols-1 gap-y-3 text-sm text-ink sm:grid-cols-2">
-                  {v.features.map((f) => (
+                  {v.features.map((f: string) => (
                     <li key={f} className="flex items-start gap-3">
                       <span aria-hidden className="mt-2 h-px w-4 bg-champagne" />
                       {f}
