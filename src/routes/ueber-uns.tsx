@@ -193,3 +193,16 @@ function ValueBlock({ n, title, body }: { n: string; title: string; body: string
     </div>
   );
 }
+
+function KStat({ label, value }: { label: string; value: string }) {
+  return (
+    <div className="bg-ink px-4 py-5">
+      <div className="font-mono text-[9px] font-semibold uppercase tracking-[0.28em] text-champagne/80">
+        {label}
+      </div>
+      <div className="mt-2 font-display text-xl font-extrabold leading-none text-paper md:text-2xl">
+        {value}
+      </div>
+    </div>
+  );
+}
