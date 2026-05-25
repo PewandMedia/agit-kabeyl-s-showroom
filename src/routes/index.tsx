@@ -116,7 +116,7 @@ function Hero() {
         <div className="relative h-[280px] overflow-hidden border border-champagne/15 bg-surface p-2 md:h-auto md:min-h-[560px]">
           <img
             src={heroCar}
-            alt=""
+            alt={`Verkaufsraum ${dealer.legalName} in ${dealer.city}`}
             width={1200}
             height={1500}
             fetchPriority="high"
