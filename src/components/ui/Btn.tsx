@@ -23,11 +23,11 @@ const sizes: Record<Size, string> = {
 
 const variants: Record<Variant, string> = {
   primary:
-    "bg-champagne text-paper hover:bg-ink hover:text-champagne",
+    "bg-ink text-paper hover:bg-champagne hover:text-ink",
   secondary:
-    "border border-champagne/70 text-champagne hover:bg-champagne hover:text-paper",
+    "border border-ink/80 text-ink hover:bg-ink hover:text-paper",
   ghost:
-    "px-0 text-champagne after:absolute after:bottom-0 after:left-0 after:h-px after:w-full after:origin-left after:scale-x-0 after:bg-champagne after:transition-transform after:duration-500 hover:after:scale-x-100",
+    "px-0 text-ink after:absolute after:bottom-0 after:left-0 after:h-px after:w-full after:origin-left after:scale-x-0 after:bg-champagne after:transition-transform after:duration-500 hover:text-champagne hover:after:scale-x-100",
 };
 
 function Arrow() {
