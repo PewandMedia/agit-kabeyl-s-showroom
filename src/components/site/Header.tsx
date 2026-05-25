@@ -33,15 +33,21 @@ export function Header() {
       <div className="mx-auto flex h-16 max-w-[1400px] items-center justify-between px-4 md:h-20 md:px-10">
         <Link
           to="/"
-          className="group flex items-baseline gap-2"
+          className="group flex items-center gap-3"
           aria-label={dealer.legalName}
           onClick={() => setOpen(false)}
         >
-          <span className="font-display text-2xl font-extrabold tracking-tighter text-ink">
-            AK
-          </span>
-          <span className="font-mono text-[10px] font-semibold uppercase tracking-[0.3em] text-champagne">
-            Autohaus
+          <div className="flex items-baseline gap-2">
+            <span className="font-display text-2xl font-extrabold tracking-tighter text-ink">
+              AK
+            </span>
+            <span className="font-mono text-[10px] font-semibold uppercase tracking-[0.3em] text-champagne">
+              Autohaus
+            </span>
+          </div>
+          <span className="hidden items-center gap-1.5 border border-champagne/60 bg-paper px-2 py-1 font-mono text-[9px] font-bold uppercase tracking-[0.22em] text-champagne sm:inline-flex">
+            <span aria-hidden className="h-1 w-1 rotate-45 bg-champagne" />
+            Team Kabayel · WBC #1
           </span>
         </Link>
 
