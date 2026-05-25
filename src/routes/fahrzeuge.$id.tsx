@@ -1,11 +1,15 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { SiteLayout } from "@/components/site/SiteLayout";
+import { VehicleGallery } from "@/components/site/VehicleGallery";
+import { InquiryForm } from "@/components/site/InquiryForm";
+import { StatusBadge } from "@/components/site/StatusBadge";
 import {
   formatKm,
   formatKw,
   formatPrice,
   getVehicle,
   vehicles,
+  type Vehicle,
 } from "@/data/vehicles";
 import { dealer, telLink, whatsappLink } from "@/data/dealer";
 
@@ -26,7 +30,7 @@ export const Route = createFileRoute("/fahrzeuge/$id")({
         { name: "description", content: description },
         { property: "og:title", content: title },
         { property: "og:description", content: description },
-        { property: "og:image", content: v.image },
+        { property: "og:image", content: v.images[0] },
         { property: "og:url", content: `/fahrzeuge/${params.id}` },
         { property: "og:type", content: "product" },
       ],
@@ -49,17 +53,20 @@ export const Route = createFileRoute("/fahrzeuge/$id")({
             fuelType: v.fuel,
             vehicleTransmission: v.transmission,
             color: v.exteriorColor,
+            numberOfPreviousOwners: v.previousOwners,
             offers: {
               "@type": "Offer",
               price: v.priceEur,
               priceCurrency: "EUR",
               availability:
-                v.status === "active"
-                  ? "https://schema.org/InStock"
-                  : "https://schema.org/SoldOut",
+                v.status === "sold"
+                  ? "https://schema.org/SoldOut"
+                  : v.status === "reserved"
+                    ? "https://schema.org/Reserved"
+                    : "https://schema.org/InStock",
               seller: { "@type": "AutoDealer", name: dealer.legalName },
             },
-            image: v.image,
+            image: v.images,
           }),
         },
       ],
@@ -69,7 +76,7 @@ export const Route = createFileRoute("/fahrzeuge/$id")({
     <SiteLayout>
       <div className="mx-auto max-w-[1400px] px-5 py-32 text-center md:px-10">
         <p className="kicker">404</p>
-        <h1 className="mt-4 font-serif text-5xl text-ink">
+        <h1 className="mt-4 font-display text-5xl text-ink">
           Fahrzeug nicht gefunden
         </h1>
         <p className="mt-6 text-sm text-ink-soft">
@@ -77,7 +84,7 @@ export const Route = createFileRoute("/fahrzeuge/$id")({
         </p>
         <Link
           to="/fahrzeuge"
-          className="mt-8 inline-flex items-center justify-center bg-ink px-6 py-3 text-xs uppercase tracking-[0.22em] text-paper"
+          className="mt-8 inline-flex items-center justify-center bg-champagne px-6 py-3 font-mono text-[11px] uppercase tracking-[0.22em] text-paper"
         >
           Zum Bestand
         </Link>
@@ -88,13 +95,13 @@ export const Route = createFileRoute("/fahrzeuge/$id")({
     <SiteLayout>
       <div className="mx-auto max-w-[1400px] px-5 py-32 text-center md:px-10">
         <p className="kicker">Fehler</p>
-        <h1 className="mt-4 font-serif text-4xl text-ink">
+        <h1 className="mt-4 font-display text-4xl text-ink">
           Fahrzeug konnte nicht geladen werden.
         </h1>
         <p className="mt-4 text-sm text-ink-soft">{error.message}</p>
         <button
           onClick={reset}
-          className="mt-8 inline-flex items-center justify-center border border-ink px-6 py-3 text-xs uppercase tracking-[0.22em] text-ink"
+          className="mt-8 inline-flex items-center justify-center border border-champagne px-6 py-3 font-mono text-[11px] uppercase tracking-[0.22em] text-champagne"
         >
           Erneut versuchen
         </button>
@@ -106,60 +113,72 @@ export const Route = createFileRoute("/fahrzeuge/$id")({
 
 function VehicleDetail() {
   const { vehicle: v } = Route.useLoaderData();
-  const whatsappText = `Hallo ${dealer.shortName}, ich interessiere mich für den ${v.title} (ID ${v.id}).`;
+  const isSold = v.status === "sold";
+  const whatsappText = `Hallo ${dealer.legalName}, ich interessiere mich für ${v.title}. Ist das Fahrzeug noch verfügbar?`;
 
   return (
     <SiteLayout hideMobileBar>
       <article>
-        <section className="bg-ink">
+        <section className="bg-paper">
           <div className="mx-auto max-w-[1400px] px-5 pt-8 md:px-10 md:pt-12">
             <Link
               to="/fahrzeuge"
-              className="inline-flex items-center text-[11px] uppercase tracking-[0.22em] text-paper/60 hover:text-paper"
+              className="inline-flex items-center font-mono text-[10px] uppercase tracking-[0.22em] text-ink-soft hover:text-champagne"
             >
               ← Bestand
             </Link>
           </div>
           <div className="mx-auto max-w-[1400px] px-5 pb-10 pt-6 md:px-10 md:pb-16">
-            <div className="relative aspect-[16/10] overflow-hidden bg-ink">
-              <img
-                src={v.image}
-                alt={`${v.title}, ${v.firstRegistration}`}
-                width={1920}
-                height={1200}
-                className="h-full w-full object-cover"
-              />
-            </div>
+            <VehicleGallery
+              images={v.images}
+              alt={`${v.title}, ${v.firstRegistration}`}
+            />
           </div>
         </section>
 
         <section className="bg-paper">
-          <div className="mx-auto grid max-w-[1400px] gap-14 px-5 py-16 md:grid-cols-12 md:gap-16 md:px-10 md:py-24">
+          <div className="mx-auto grid max-w-[1400px] gap-14 px-5 py-12 md:grid-cols-12 md:gap-16 md:px-10 md:py-20">
             <div className="md:col-span-7">
-              <p className="kicker">{v.make}</p>
-              <h1 className="mt-4 font-serif text-4xl text-ink md:text-6xl">
+              <div className="flex flex-wrap items-center gap-3">
+                <p className="kicker">{v.make}</p>
+                <StatusBadge status={v.status} />
+              </div>
+              <h1 className="mt-4 font-display text-4xl text-ink md:text-6xl">
                 {v.title}
               </h1>
-              <p className="mt-6 max-w-xl text-base leading-relaxed text-ink-soft md:text-lg">
+              <p className="mt-3 font-mono text-[11px] uppercase tracking-[0.22em] text-ink-soft">
+                ID {v.id}  ·  EZ {v.firstRegistration}  ·  {formatKm(v.mileageKm)}
+              </p>
+
+              <p className="mt-8 max-w-2xl text-base leading-relaxed text-ink-soft md:text-lg">
                 {v.description}
               </p>
 
               <div className="mt-12">
                 <p className="kicker">Technische Daten</p>
                 <dl className="mt-6 grid grid-cols-2 gap-y-5 text-sm md:grid-cols-3">
+                  <SpecItem label="Marke" value={v.make} />
+                  <SpecItem label="Modell" value={v.model} />
+                  <SpecItem label="Variante" value={v.variant} />
                   <SpecItem label="Erstzulassung" value={v.firstRegistration} />
                   <SpecItem label="Kilometerstand" value={formatKm(v.mileageKm)} />
                   <SpecItem label="Leistung" value={formatKw(v.powerKw)} />
                   <SpecItem label="Kraftstoff" value={v.fuel} />
                   <SpecItem label="Getriebe" value={v.transmission} />
                   <SpecItem label="Farbe" value={v.exteriorColor} />
+                  <SpecItem label="Zustand" value={v.condition} />
+                  <SpecItem label="Vorbesitzer" value={String(v.previousOwners)} />
+                  <SpecItem
+                    label="Finanzierung"
+                    value={v.financingAvailable ? "Verfügbar" : "Auf Anfrage"}
+                  />
                 </dl>
               </div>
 
               <div className="mt-12">
                 <p className="kicker">Ausstattung</p>
                 <ul className="mt-6 grid grid-cols-1 gap-y-3 text-sm text-ink sm:grid-cols-2">
-                  {v.features.map((f: string) => (
+                  {v.features.map((f) => (
                     <li key={f} className="flex items-start gap-3">
                       <span aria-hidden className="mt-2 h-px w-4 bg-champagne" />
                       {f}
@@ -167,69 +186,118 @@ function VehicleDetail() {
                   ))}
                 </ul>
               </div>
+
+              <div className="mt-16 border-t border-line pt-12">
+                <p className="kicker">Anfrage</p>
+                <h2 className="mt-3 font-display text-2xl text-ink md:text-3xl">
+                  Direkt zu diesem Fahrzeug.
+                </h2>
+                <p className="mt-3 max-w-xl text-sm text-ink-soft">
+                  Hinterlassen Sie kurz Ihre Kontaktdaten — wir melden uns
+                  innerhalb weniger Stunden mit allen Details.
+                </p>
+                <div className="mt-8 max-w-xl">
+                  <InquiryForm
+                    vehicleTitle={v.title}
+                    vehicleId={v.id}
+                    disabled={isSold}
+                  />
+                </div>
+              </div>
             </div>
 
             <aside className="md:col-span-5">
-              <div className="sticky top-24 border border-line bg-paper p-6 md:p-8">
-                <p className="kicker">Preis</p>
-                <p className="mt-3 font-serif text-4xl text-ink md:text-5xl">
+              <div className="sticky top-24 border border-line bg-surface p-6 md:p-8">
+                <div className="flex items-center justify-between">
+                  <p className="kicker">Preis</p>
+                  <StatusBadge status={v.status} />
+                </div>
+                <p className="mt-3 font-display text-4xl text-champagne md:text-5xl">
                   {formatPrice(v.priceEur)}
                 </p>
                 <p className="mt-2 text-xs text-ink-soft">
                   Inkl. MwSt. ausweisbar · zzgl. Überführung
                 </p>
+                {v.monthlyRateEur && (
+                  <p className="mt-4 font-mono text-[11px] uppercase tracking-[0.18em] text-ink-soft">
+                    ab{" "}
+                    <span className="text-ink">
+                      {formatPrice(v.monthlyRateEur)} / Monat
+                    </span>
+                  </p>
+                )}
+
+                {isSold && (
+                  <div className="mt-6 border border-line bg-paper/40 p-4 text-xs text-ink-soft">
+                    Dieses Fahrzeug ist bereits verkauft. Sprechen Sie uns für
+                    ähnliche Modelle an — wir finden Ihr Wunschfahrzeug.
+                  </div>
+                )}
 
                 <div className="mt-8 space-y-3">
                   <a
                     href={whatsappLink(whatsappText)}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex w-full items-center justify-center bg-ink px-6 py-4 text-xs uppercase tracking-[0.22em] text-paper hover:opacity-90"
+                    className={`flex w-full items-center justify-center bg-champagne px-6 py-4 font-mono text-[11px] font-bold uppercase tracking-[0.22em] text-paper transition-opacity hover:opacity-90 ${
+                      isSold ? "pointer-events-none opacity-40" : ""
+                    }`}
                   >
                     Anfrage per WhatsApp
                   </a>
                   <a
                     href={telLink()}
-                    className="flex w-full items-center justify-center border border-ink px-6 py-4 text-xs uppercase tracking-[0.22em] text-ink hover:bg-ink hover:text-paper"
+                    className="flex w-full items-center justify-center border border-champagne px-6 py-4 font-mono text-[11px] uppercase tracking-[0.22em] text-champagne hover:bg-champagne hover:text-paper"
                   >
                     {dealer.phoneDisplay}
                   </a>
                   <Link
+                    to="/finanzierung"
+                    search={{ fahrzeug: v.id } as never}
+                    className={`block w-full border border-line py-3 text-center font-mono text-[11px] uppercase tracking-[0.22em] text-ink hover:border-champagne hover:text-champagne ${
+                      isSold ? "pointer-events-none opacity-40" : ""
+                    }`}
+                  >
+                    Finanzierung anfragen
+                  </Link>
+                  <Link
                     to="/kontakt"
-                    className="block w-full text-center text-xs uppercase tracking-[0.22em] text-ink-soft hover:text-ink"
+                    className="block w-full text-center font-mono text-[11px] uppercase tracking-[0.22em] text-ink-soft hover:text-champagne"
                   >
                     Probefahrt vereinbaren →
                   </Link>
                 </div>
 
-                <div className="mt-8 border-t border-line pt-6 text-xs text-ink-soft">
+                <div className="mt-8 border-t border-line pt-6 font-mono text-[10px] uppercase tracking-[0.18em] text-ink-soft">
                   <p>Fahrzeug-ID</p>
-                  <p className="mt-1 font-mono text-ink">{v.id.toUpperCase()}</p>
+                  <p className="mt-1 text-ink">{v.id}</p>
                 </div>
               </div>
             </aside>
           </div>
         </section>
 
-        <OtherVehicles currentId={v.id} />
+        <SimilarVehicles current={v} />
 
         {/* Vehicle-specific sticky bar replaces the global one on detail pages */}
-        <div className="fixed inset-x-0 bottom-0 z-50 grid grid-cols-2 border-t border-line bg-paper/95 backdrop-blur-xl md:hidden">
-          <a
-            href={telLink()}
-            className="flex items-center justify-center border-r border-line py-4 text-xs uppercase tracking-[0.18em] text-ink"
-          >
-            Anrufen
-          </a>
-          <a
-            href={whatsappLink(whatsappText)}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex items-center justify-center bg-[oklch(0.55_0.16_150)] py-4 text-xs uppercase tracking-[0.18em] text-white"
-          >
-            WhatsApp · {dealer.phoneDisplay.split(" ").pop()}
-          </a>
-        </div>
+        {!isSold && (
+          <div className="fixed inset-x-0 bottom-0 z-50 grid grid-cols-2 border-t border-line bg-paper/95 backdrop-blur-xl md:hidden">
+            <a
+              href={telLink()}
+              className="flex items-center justify-center border-r border-line py-4 font-mono text-[11px] uppercase tracking-[0.18em] text-ink"
+            >
+              Anrufen
+            </a>
+            <a
+              href={whatsappLink(whatsappText)}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center justify-center bg-champagne py-4 font-mono text-[11px] font-bold uppercase tracking-[0.18em] text-paper"
+            >
+              WhatsApp
+            </a>
+          </div>
+        )}
       </article>
     </SiteLayout>
   );
@@ -238,7 +306,7 @@ function VehicleDetail() {
 function SpecItem({ label, value }: { label: string; value: string }) {
   return (
     <div className="border-b border-line pb-3">
-      <dt className="text-[11px] uppercase tracking-[0.18em] text-ink-soft">
+      <dt className="font-mono text-[10px] uppercase tracking-[0.18em] text-ink-soft">
         {label}
       </dt>
       <dd className="mt-2 text-ink">{value}</dd>
@@ -246,41 +314,61 @@ function SpecItem({ label, value }: { label: string; value: string }) {
   );
 }
 
-function OtherVehicles({ currentId }: { currentId: string }) {
-  const others = vehicles.filter((v) => v.id !== currentId).slice(0, 3);
-  if (others.length === 0) return null;
+function SimilarVehicles({ current }: { current: Vehicle }) {
+  const sameMake = vehicles.filter(
+    (x) => x.id !== current.id && x.make === current.make,
+  );
+  const closePrice = vehicles.filter(
+    (x) =>
+      x.id !== current.id &&
+      x.make !== current.make &&
+      Math.abs(x.priceEur - current.priceEur) / current.priceEur < 0.25,
+  );
+  const seen = new Set<string>();
+  const picks = [...sameMake, ...closePrice, ...vehicles]
+    .filter((x) => {
+      if (x.id === current.id) return false;
+      if (seen.has(x.id)) return false;
+      seen.add(x.id);
+      return true;
+    })
+    .slice(0, 3);
+
+  if (picks.length === 0) return null;
   return (
     <section className="border-t border-line bg-paper">
       <div className="mx-auto max-w-[1400px] px-5 py-20 md:px-10 md:py-28">
-        <p className="kicker">Weitere Fahrzeuge</p>
-        <h2 className="mt-4 font-serif text-3xl text-ink md:text-4xl">
+        <p className="kicker">Ähnliche Fahrzeuge</p>
+        <h2 className="mt-4 font-display text-3xl text-ink md:text-4xl">
           Aus unserem Bestand.
         </h2>
-        <div className="mt-12 grid gap-10 md:grid-cols-3">
-          {others.map((v) => (
-            <div key={v.id}>
-              <Link
-                to="/fahrzeuge/$id"
-                params={{ id: v.id }}
-                className="group block"
-              >
-                <div className="relative aspect-[4/3] overflow-hidden bg-ink">
-                  <img
-                    src={v.image}
-                    alt={v.title}
-                    width={1280}
-                    height={832}
-                    loading="lazy"
-                    className="h-full w-full object-cover transition-transform duration-[1200ms] group-hover:scale-[1.03]"
-                  />
+        <div className="mt-12 grid gap-8 md:grid-cols-3">
+          {picks.map((x) => (
+            <Link
+              key={x.id}
+              to="/fahrzeuge/$id"
+              params={{ id: x.id }}
+              className="group block"
+            >
+              <div className="relative aspect-[4/3] overflow-hidden bg-surface-2">
+                <img
+                  src={x.images[0]}
+                  alt={x.title}
+                  width={1280}
+                  height={832}
+                  loading="lazy"
+                  className="h-full w-full object-cover opacity-80 grayscale transition-all duration-700 group-hover:scale-[1.03] group-hover:grayscale-0 group-hover:opacity-100"
+                />
+                <div className="absolute left-3 top-3">
+                  <StatusBadge status={x.status} />
                 </div>
-                <p className="kicker mt-5">{v.make}</p>
-                <h3 className="mt-2 font-serif text-xl text-ink">{v.title}</h3>
-                <p className="mt-2 text-xs uppercase tracking-[0.18em] text-ink-soft">
-                  {formatPrice(v.priceEur)}
-                </p>
-              </Link>
-            </div>
+              </div>
+              <p className="kicker mt-5">{x.make}</p>
+              <h3 className="mt-2 font-display text-xl text-ink">{x.title}</h3>
+              <p className="mt-2 font-mono text-[11px] uppercase tracking-[0.18em] text-champagne">
+                {formatPrice(x.priceEur)}
+              </p>
+            </Link>
           ))}
         </div>
       </div>
