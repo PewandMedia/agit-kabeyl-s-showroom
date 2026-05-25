@@ -121,9 +121,10 @@ function Hero() {
             height={1500}
             fetchPriority="high"
             decoding="async"
-            className="absolute inset-0 h-full w-full object-cover opacity-90 md:opacity-55 md:mix-blend-luminosity md:transition-all md:duration-1000 md:hover:opacity-70 md:hover:mix-blend-normal"
+            className="absolute inset-0 h-full w-full object-cover transition-transform duration-1000 ease-out hover:scale-[1.02]"
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-paper/70 via-paper/10 to-transparent md:bg-gradient-to-tr md:from-paper/80" />
+          <div className="absolute inset-0 bg-gradient-to-t from-paper/55 via-transparent to-transparent md:bg-gradient-to-tr md:from-paper/40 md:via-transparent md:to-transparent" />
+
 
           {/* Bottom data panels — Desktop only */}
           <div className="absolute inset-x-0 bottom-0 hidden grid-cols-2 gap-3 p-6 md:grid md:p-8">

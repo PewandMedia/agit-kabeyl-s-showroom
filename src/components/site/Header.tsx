@@ -45,12 +45,12 @@ export function Header() {
           </span>
         </Link>
 
-        <nav className="hidden items-center gap-10 lg:flex">
+        <nav className="hidden items-center gap-6 lg:flex xl:gap-9">
           {NAV.map((item) => (
             <Link
               key={item.to}
               to={item.to}
-              className="font-mono text-[11px] font-semibold uppercase tracking-[0.2em] text-ink/70 transition-colors hover:text-champagne"
+              className="font-mono text-[11px] font-semibold uppercase tracking-[0.18em] text-ink/70 transition-colors hover:text-champagne xl:tracking-[0.2em]"
               activeProps={{ className: "text-champagne" }}
             >
               {item.label}
@@ -58,10 +58,10 @@ export function Header() {
           ))}
         </nav>
 
-        <div className="hidden items-center gap-5 lg:flex">
+        <div className="hidden items-center gap-4 lg:flex">
           <a
             href={telLink()}
-            className="font-mono text-[11px] font-semibold tracking-widest text-ink/80 hover:text-champagne"
+            className="hidden whitespace-nowrap font-mono text-[11px] font-semibold tracking-widest text-ink/80 hover:text-champagne xl:inline"
           >
             {dealer.phoneDisplay}
           </a>
@@ -69,11 +69,12 @@ export function Header() {
             href={whatsappLink(`Hallo ${dealer.shortName}, ich habe eine Anfrage.`)}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center justify-center border border-champagne px-5 py-2.5 font-mono text-[10px] font-bold uppercase tracking-[0.25em] text-champagne transition-colors hover:bg-champagne hover:text-paper"
+            className="inline-flex items-center justify-center whitespace-nowrap border border-champagne px-4 py-2.5 font-mono text-[10px] font-bold uppercase tracking-[0.22em] text-champagne transition-colors hover:bg-champagne hover:text-paper xl:px-5 xl:tracking-[0.25em]"
           >
             WhatsApp
           </a>
         </div>
+
 
         {/* Mobile: Telefon-Icon + Menü-Button immer sichtbar */}
         <div className="flex items-center gap-1 lg:hidden">
