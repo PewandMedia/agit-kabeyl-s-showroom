@@ -22,7 +22,7 @@ export function SiteLayout({
         {children}
       </main>
       <Footer />
-      {!hideFab && <StickyWhatsAppFab />}
+      {!hideFab && false && <StickyWhatsAppFab />}
       {!hideMobileBar && <MobileStickyBar />}
       <BackToTop />
       {!hideMobileBar && (
