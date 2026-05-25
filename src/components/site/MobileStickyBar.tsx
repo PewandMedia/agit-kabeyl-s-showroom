@@ -1,82 +1,148 @@
-import { Link } from "@tanstack/react-router";
+import { Link, useRouterState } from "@tanstack/react-router";
+import { useEffect, useRef, useState } from "react";
 import { dealer, telLink, whatsappLink } from "@/data/dealer";
 
 /**
- * Bottom-Sticky-Bar nur auf Mobile. Vier Aktionen:
- * Fahrzeuge / Anrufen / WhatsApp / Anfrage
- * — Safe-area-aware, 56px+ Touch-Targets, primäre CTAs farbig.
+ * Premium Bottom-Bar — nur Mobile.
+ * - 3 Slots gleichmäßig: Anrufen · WhatsApp · Termin
+ * - Aktiver Slot: Champagner Top-Strich
+ * - Hide-on-Scroll-Down, Show-on-Scroll-Up
+ * - Safe-Area + 72px Höhe
  */
 export function MobileStickyBar() {
   const wa = whatsappLink(`Hallo ${dealer.shortName}, ich habe eine Anfrage.`);
+  const [hidden, setHidden] = useState(false);
+  const lastY = useRef(0);
+  const { location } = useRouterState();
+
+  useEffect(() => {
+    const onScroll = () => {
+      const y = window.scrollY;
+      if (y < 80) {
+        setHidden(false);
+      } else if (y > lastY.current + 6) {
+        setHidden(true);
+      } else if (y < lastY.current - 6) {
+        setHidden(false);
+      }
+      lastY.current = y;
+    };
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
+  const isContact = location.pathname === "/kontakt";
+
   return (
-    <div className="fixed inset-x-0 bottom-0 z-40 md:hidden">
-      <div className="border-t border-champagne/30 bg-paper/95 backdrop-blur-xl pb-safe">
-        <div className="grid grid-cols-4">
-          <Link
-            to="/fahrzeuge"
-            className="flex min-h-[56px] flex-col items-center justify-center gap-1 py-2 font-mono text-[10px] font-bold uppercase tracking-[0.16em] text-ink/80 transition-colors active:bg-ink/5"
-            activeProps={{ className: "text-champagne" }}
-          >
-            <IconCar />
-            Bestand
-          </Link>
-          <a
+    <div
+      className={`fixed inset-x-0 bottom-0 z-40 md:hidden transform-gpu transition-transform duration-500 ease-[cubic-bezier(0.22,0.61,0.36,1)] ${
+        hidden ? "translate-y-full" : "translate-y-0"
+      }`}
+    >
+      <div className="border-t border-champagne/20 bg-emerald-deep/95 backdrop-blur-xl pb-safe">
+        <div className="grid grid-cols-3">
+          <BarSlot
             href={telLink()}
-            className="flex min-h-[56px] flex-col items-center justify-center gap-1 py-2 font-mono text-[10px] font-bold uppercase tracking-[0.16em] text-ink/80 active:bg-ink/5"
-            aria-label={`Anrufen ${dealer.phoneDisplay}`}
-          >
-            <IconPhone />
-            Anrufen
-          </a>
-          <a
+            label="Anrufen"
+            icon={<IconPhone />}
+            active={false}
+            ariaLabel={`Anrufen ${dealer.phoneDisplay}`}
+          />
+          <BarSlot
             href={wa}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex min-h-[56px] flex-col items-center justify-center gap-1 bg-[oklch(0.62_0.17_150)] py-2 font-mono text-[10px] font-bold uppercase tracking-[0.16em] text-white"
-            aria-label="WhatsApp Chat starten"
-          >
-            <IconWa />
-            WhatsApp
-          </a>
-          <Link
+            label="WhatsApp"
+            icon={<IconWa />}
+            active={false}
+            external
+            ariaLabel="WhatsApp Chat starten"
+          />
+          <BarSlot
             to="/kontakt"
-            className="flex min-h-[56px] flex-col items-center justify-center gap-1 bg-champagne py-2 font-mono text-[10px] font-bold uppercase tracking-[0.16em] text-paper"
-          >
-            <IconMail />
-            Anfrage
-          </Link>
+            label="Termin"
+            icon={<IconCalendar />}
+            active={isContact}
+          />
         </div>
       </div>
     </div>
   );
 }
 
-function IconCar() {
+function BarSlot({
+  to,
+  href,
+  label,
+  icon,
+  active,
+  external,
+  ariaLabel,
+}: {
+  to?: string;
+  href?: string;
+  label: string;
+  icon: React.ReactNode;
+  active: boolean;
+  external?: boolean;
+  ariaLabel?: string;
+}) {
+  const cls = `relative flex h-[72px] flex-col items-center justify-center gap-1.5 font-mono text-[9px] font-bold uppercase tracking-[0.22em] transition-colors duration-300 ${
+    active ? "text-champagne" : "text-ink/85 active:text-champagne"
+  }`;
+  const accent = (
+    <span
+      aria-hidden
+      className={`absolute inset-x-0 top-0 h-[3px] bg-champagne transition-opacity duration-300 ${
+        active ? "opacity-100" : "opacity-0"
+      }`}
+    />
+  );
+  const inner = (
+    <>
+      {accent}
+      <span className="text-champagne">{icon}</span>
+      <span>{label}</span>
+    </>
+  );
+
+  if (to) {
+    return (
+      <Link to={to} className={cls} activeProps={{ className: "text-champagne" }}>
+        {inner}
+      </Link>
+    );
+  }
   return (
-    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" aria-hidden>
-      <path d="M3 13l2-5h14l2 5M3 13v5h2v-2h14v2h2v-5M3 13h18M7 16h.01M17 16h.01" />
-    </svg>
+    <a
+      href={href}
+      target={external ? "_blank" : undefined}
+      rel={external ? "noopener noreferrer" : undefined}
+      aria-label={ariaLabel}
+      className={cls}
+    >
+      {inner}
+    </a>
   );
 }
+
 function IconPhone() {
   return (
-    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" aria-hidden>
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" aria-hidden>
       <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6A19.79 19.79 0 012.12 4.18 2 2 0 014.11 2h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z" />
     </svg>
   );
 }
 function IconWa() {
   return (
-    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden>
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" aria-hidden>
       <path d="M17.5 14.4c-.3-.1-1.6-.8-1.9-.9-.3-.1-.4-.1-.6.1s-.7.9-.9 1.1c-.2.2-.3.2-.6.1-.3-.1-1.2-.4-2.3-1.4-.9-.8-1.4-1.7-1.6-2-.2-.3 0-.5.1-.6.1-.1.3-.3.4-.5.1-.2.2-.3.3-.5.1-.2 0-.4 0-.5 0-.1-.6-1.4-.8-1.9-.2-.5-.4-.4-.6-.4h-.5c-.2 0-.5.1-.7.3-.2.2-.9.9-.9 2.2 0 1.3.9 2.5 1 2.7.1.2 1.8 2.7 4.3 3.8 1.6.6 2.2.7 3 .6.5-.1 1.6-.6 1.8-1.3.2-.6.2-1.2.2-1.3-.1-.1-.3-.2-.6-.3zM12 2a10 10 0 00-8.5 15.2L2 22l4.9-1.5A10 10 0 1012 2z" />
     </svg>
   );
 }
-function IconMail() {
+function IconCalendar() {
   return (
-    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" aria-hidden>
-      <rect x="3" y="5" width="18" height="14" rx="1" />
-      <path d="M3 7l9 6 9-6" />
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" aria-hidden>
+      <rect x="3" y="5" width="18" height="16" rx="1" />
+      <path d="M3 9h18M8 3v4M16 3v4" />
     </svg>
   );
 }
