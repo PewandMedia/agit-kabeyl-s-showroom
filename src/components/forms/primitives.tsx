@@ -166,12 +166,12 @@ export function RadioChips({
 
 export function PrivacyConsent({ name = "privacy" }: { name?: string }) {
   return (
-    <label className="flex items-start gap-3 text-xs leading-relaxed text-ink-soft">
+    <label className="flex min-h-[44px] cursor-pointer items-start gap-3 py-2 text-sm leading-relaxed text-ink-soft">
       <input
         type="checkbox"
         name={name}
         required
-        className="mt-0.5 h-4 w-4 flex-shrink-0 accent-[var(--color-champagne)]"
+        className="mt-1 h-5 w-5 flex-shrink-0 accent-[var(--color-champagne)]"
       />
       <span>
         Ich habe die{" "}
@@ -206,7 +206,7 @@ export function SubmitButton({
   variant?: "gold" | "ink";
 }) {
   const base =
-    "w-full px-6 py-4 font-mono text-[11px] font-bold uppercase tracking-[0.22em] transition-opacity hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-40";
+    "block w-full min-h-[52px] px-6 py-4 font-mono text-[12px] font-bold uppercase tracking-[0.22em] transition-opacity hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-40";
   const cls =
     variant === "gold" ? `${base} bg-champagne text-paper` : `${base} bg-ink text-paper`;
   return (
@@ -215,6 +215,7 @@ export function SubmitButton({
     </button>
   );
 }
+
 
 export function ErrorText({ children }: { children: React.ReactNode }) {
   if (!children) return null;
