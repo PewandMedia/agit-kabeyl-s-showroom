@@ -186,7 +186,7 @@ function ChipGroup({
               key={it}
               type="button"
               onClick={() => onToggle(it)}
-              className={`border px-3 py-1.5 text-[11px] uppercase tracking-[0.16em] transition-colors ${
+              className={`min-h-[40px] border px-3.5 py-2 text-[12px] uppercase tracking-[0.16em] transition-colors ${
                 on
                   ? "border-champagne bg-champagne text-paper"
                   : "border-line text-ink-soft hover:border-champagne hover:text-ink"
@@ -197,6 +197,7 @@ function ChipGroup({
           );
         })}
       </div>
+
     </div>
   );
 }
