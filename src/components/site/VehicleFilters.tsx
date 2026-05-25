@@ -96,7 +96,7 @@ export function VehicleFilters({
                 onClick={() =>
                   setFilters({ ...filters, statuses: toggle(filters.statuses, s.value) })
                 }
-                className={`border px-3 py-1.5 font-mono text-[10px] uppercase tracking-[0.18em] transition-colors ${
+                className={`min-h-[40px] border px-3.5 py-2 font-mono text-[11px] uppercase tracking-[0.18em] transition-colors ${
                   on
                     ? "border-champagne bg-champagne text-paper"
                     : "border-line text-ink-soft hover:border-champagne hover:text-ink"
@@ -107,6 +107,7 @@ export function VehicleFilters({
             );
           })}
         </div>
+
       </div>
 
       <RangeRow
