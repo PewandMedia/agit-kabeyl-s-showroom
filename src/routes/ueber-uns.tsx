@@ -66,7 +66,7 @@ function AboutPage() {
       </section>
 
       <section className="border-t border-line bg-surface grain">
-        <div className="mx-auto max-w-[1400px] px-5 py-24 md:px-10 md:py-40">
+        <div className="mx-auto max-w-[1400px] px-4 py-14 md:px-10 md:py-40">
           <div className="grid gap-14 md:grid-cols-12 md:gap-20">
             <div className="md:col-span-5">
               <p className="kicker">Die Marke AK</p>

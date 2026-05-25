@@ -171,7 +171,7 @@ function TrustBar() {
 function BrandStory() {
   return (
     <section className="relative overflow-hidden bg-paper grain">
-      <div className="mx-auto max-w-[1400px] px-5 py-24 md:px-10 md:py-40">
+      <div className="mx-auto max-w-[1400px] px-4 py-14 md:px-10 md:py-40">
         <div className="grid gap-12 md:grid-cols-12">
           <div className="md:col-span-4">
             <p className="kicker">Marke AK</p>
@@ -210,7 +210,7 @@ function BrandStory() {
 function Highlights() {
   return (
     <section className="border-t border-line bg-paper">
-      <div className="mx-auto max-w-[1400px] px-5 py-24 md:px-10 md:py-32">
+      <div className="mx-auto max-w-[1400px] px-4 py-14 md:px-10 md:py-32">
         <div className="flex items-end justify-between gap-6 border-b border-line pb-6">
           <div>
             <p className="font-mono text-[10px] font-bold uppercase tracking-[0.4em] text-champagne">
@@ -254,7 +254,7 @@ function Inventory() {
   if (rest.length === 0) return null;
   return (
     <section className="border-t border-line bg-surface">
-      <div className="mx-auto max-w-[1400px] px-5 py-20 md:px-10 md:py-32">
+      <div className="mx-auto max-w-[1400px] px-4 py-14 md:px-10 md:py-32">
         <div className="grid gap-12 md:grid-cols-12 md:gap-16">
           <div className="md:col-span-4">
             <p className="kicker">Bestand</p>
@@ -287,7 +287,7 @@ function Inventory() {
 function SellCar() {
   return (
     <section className="border-t border-line bg-paper">
-      <div className="mx-auto max-w-[1400px] px-5 py-20 md:px-10 md:py-32">
+      <div className="mx-auto max-w-[1400px] px-4 py-14 md:px-10 md:py-32">
         <div className="grid gap-14 md:grid-cols-12 md:gap-20">
           <div className="md:col-span-7">
             <p className="kicker">Ankauf</p>
@@ -364,7 +364,7 @@ function Step({ n, text }: { n: string; text: string }) {
 function Financing() {
   return (
     <section className="border-t border-line bg-surface">
-      <div className="mx-auto max-w-[1400px] px-5 py-20 md:px-10 md:py-32">
+      <div className="mx-auto max-w-[1400px] px-4 py-14 md:px-10 md:py-32">
         <div className="grid gap-14 md:grid-cols-12 md:gap-20">
           <div className="md:col-span-5">
             <p className="kicker">Finanzierung</p>
@@ -431,7 +431,7 @@ const WHY = [
 function WhyAK() {
   return (
     <section className="border-t border-line bg-paper">
-      <div className="mx-auto max-w-[1400px] px-5 py-20 md:px-10 md:py-32">
+      <div className="mx-auto max-w-[1400px] px-4 py-14 md:px-10 md:py-32">
         <div className="max-w-2xl">
           <p className="kicker">Warum Autohaus AK GmbH</p>
           <h2 className="mt-4 font-serif text-4xl text-ink md:text-5xl">
@@ -480,7 +480,7 @@ const TESTIMONIALS = [
 function Testimonials() {
   return (
     <section className="border-t border-line bg-surface">
-      <div className="mx-auto max-w-[1400px] px-5 py-20 md:px-10 md:py-32">
+      <div className="mx-auto max-w-[1400px] px-4 py-14 md:px-10 md:py-32">
         <p className="kicker">Stimmen</p>
         <h2 className="mt-4 max-w-2xl font-serif text-4xl text-ink md:text-5xl">
           Was unsere Kunden sagen.
@@ -532,7 +532,7 @@ const FAQS = [
 function FAQ() {
   return (
     <section className="border-t border-line bg-paper">
-      <div className="mx-auto max-w-[1400px] px-5 py-20 md:px-10 md:py-32">
+      <div className="mx-auto max-w-[1400px] px-4 py-14 md:px-10 md:py-32">
         <div className="grid gap-14 md:grid-cols-12 md:gap-20">
           <div className="md:col-span-4">
             <p className="kicker">FAQ</p>

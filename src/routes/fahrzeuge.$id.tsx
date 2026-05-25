@@ -306,10 +306,10 @@ function VehicleDetail() {
 
         {/* Vehicle-specific sticky bar replaces the global one on detail pages */}
         {!isSold && (
-          <div className="fixed inset-x-0 bottom-0 z-50 grid grid-cols-2 border-t border-line bg-paper/95 backdrop-blur-xl md:hidden">
+          <div className="fixed inset-x-0 bottom-0 z-50 grid grid-cols-3 border-t border-line bg-paper/95 backdrop-blur-xl pb-safe md:hidden">
             <a
               href={telLink()}
-              className="flex items-center justify-center border-r border-line py-4 font-mono text-[11px] uppercase tracking-[0.18em] text-ink"
+              className="flex min-h-[56px] items-center justify-center border-r border-line font-mono text-[11px] font-bold uppercase tracking-[0.18em] text-ink"
             >
               Anrufen
             </a>
@@ -317,12 +317,20 @@ function VehicleDetail() {
               href={whatsappLink(whatsappText)}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center justify-center bg-champagne py-4 font-mono text-[11px] font-bold uppercase tracking-[0.18em] text-paper"
+              className="flex min-h-[56px] items-center justify-center border-r border-line bg-[oklch(0.62_0.17_150)] font-mono text-[11px] font-bold uppercase tracking-[0.18em] text-white"
             >
               WhatsApp
             </a>
+            <button
+              type="button"
+              onClick={() => setTestDriveOpen(true)}
+              className="flex min-h-[56px] items-center justify-center bg-champagne font-mono text-[11px] font-bold uppercase tracking-[0.18em] text-paper"
+            >
+              Probefahrt
+            </button>
           </div>
         )}
+
       </article>
     </SiteLayout>
   );
