@@ -1,9 +1,11 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { SiteLayout } from "@/components/site/SiteLayout";
 import { VehicleCard } from "@/components/site/VehicleCard";
+import { BtnLink, BtnA } from "@/components/ui/Btn";
 import { featuredVehicles, vehicles } from "@/data/vehicles";
 import { dealer, telLink, whatsappLink } from "@/data/dealer";
 import heroCar from "@/assets/hero-car.jpg";
+
 
 export const Route = createFileRoute("/")({
   head: () => ({
