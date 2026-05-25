@@ -58,9 +58,8 @@ export function BtnLink({
   ...rest
 }: CommonProps & LinkProps) {
   return (
-    // @ts-expect-error tanstack Link generic props
     <Link
-      {...rest}
+      {...(rest as LinkProps)}
       className={`${base} ${sizes[size]} ${variants[variant]} ${className}`}
     >
       {children}
@@ -69,6 +68,7 @@ export function BtnLink({
     </Link>
   );
 }
+
 
 export function BtnA({
   children,
