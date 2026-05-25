@@ -45,7 +45,7 @@ export function Header() {
               Autohaus
             </span>
           </div>
-          <span className="hidden items-center gap-1.5 border border-champagne/60 bg-paper px-2 py-1 font-mono text-[9px] font-bold uppercase tracking-[0.22em] text-champagne sm:inline-flex">
+          <span className="hidden items-center gap-1.5 whitespace-nowrap border border-champagne/60 bg-paper px-2 py-1 font-mono text-[9px] font-bold uppercase tracking-[0.2em] text-champagne 2xl:inline-flex">
             <span aria-hidden className="h-1 w-1 rotate-45 bg-champagne" />
             Team Kabayel · WBC #1
           </span>
