@@ -2,6 +2,7 @@ import { Header } from "./Header";
 import { Footer } from "./Footer";
 import { MobileStickyBar } from "./MobileStickyBar";
 import { StickyWhatsAppFab } from "./StickyWhatsAppFab";
+import { BackToTop } from "./BackToTop";
 
 export function SiteLayout({
   children,
@@ -21,10 +22,9 @@ export function SiteLayout({
         {children}
       </main>
       <Footer />
-      {/* FAB: desktop only — Mobile-Sticky-Bar deckt WhatsApp bereits ab */}
       {!hideFab && <StickyWhatsAppFab />}
       {!hideMobileBar && <MobileStickyBar />}
-      {/* Spacer so content isn't hidden behind sticky bar (incl. safe-area) */}
+      <BackToTop />
       {!hideMobileBar && (
         <div className="h-[72px] pb-safe md:hidden" aria-hidden />
       )}

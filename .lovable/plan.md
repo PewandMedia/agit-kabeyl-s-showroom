@@ -1,148 +1,115 @@
 
-# Knallharter Audit — Autohaus AK GmbH
+# Umsetzung — Premium-Upgrade auf Nummer-1-Niveau
 
-Bewertung wie eine Premium-Agentur (Awwwards/Brand-Niveau). Schulnoten 1 (sehr gut) bis 6.
+Fokus auf alles, was ohne externe Daten (echte Stammdaten/Fotos) machbar ist. Keine Vermischung mit Backend-Setup — das bleibt separater Schritt.
 
-## 1. Erster Eindruck — Note 2−
+## 1. Header & Navigation
+- Logo-Mark redesignen: monogramm „AK" mit feinem Champagne-Underline statt zwei kollidierender Labels.
+- Sticky-Header bekommt subtilen Glas-Effekt + dünne Trennlinie nur nach Scroll.
+- Aktive Route mit Champagne-Underline (statt nur Farbe).
+- Mobile Menü: Full-Screen-Overlay mit großer Typo + Sekundär-Block (Telefon/WhatsApp/Adresse) unten.
+- Telefonnummer mit Icon im Header ab `xl`.
 
-Stark: Hero-Typografie hat Charakter, Champagne-Akzent + Dark-Green wirken eigenständig. Nicht 08/15-Autohaus.
-Schwach:
-- **Header bricht im Desktop-Mid-Range (≈980–1100 px)**: „AUTOHAUS"-Label kollidiert mit „BESTAND", Telefonnummer umbricht zweizeilig mitten in der Navi. Sofort sichtbarer Layout-Bruch zerstört Premium-Anmutung.
-- WhatsApp-FAB ist auf Tablets/kleinem Desktop sichtbar UND die Mobile Sticky-Bar greift erst < md → redundant am Übergang.
-- Hero-Bild wirkt durch `mix-blend-luminosity` + 55 % opacity tot. Premium-Autohäuser zeigen Lack mit Reflexionen, kein verwaschenes Stockfoto.
+## 2. Hero
+- Hintergrund: dunkler Verlauf (`bg-ink` → `bg-paper`) statt flach grün → cineastischer.
+- H1-Kontrast erhöhen (text-paper auf dunklem Bereich), Champagne-Akzent bleibt.
+- Neue Sub-Reassurance-Zeile mit 3 Inline-Trust-Punkten („Eingangsprüfung · 12 Monate Garantie · Finanzierung möglich") mit Mini-Icons.
+- Daten-Panels (Available Units / Quality Score) durch echte Differenzierung ersetzen: „Bestand · Ø Lieferzeit · Bewertung".
+- Smooth Parallax (subtil, nur Desktop, prefers-reduced-motion respektiert).
+- CTAs hierarchisch: primär „Bestand ansehen" solid Champagne, sekundär „Fahrzeug verkaufen" Outline.
 
-## 2. Designqualität — Note 2
+## 3. Fahrzeugkarten
+- Bereits letzte Iteration: Highlight-Chips + Monatsrate.
+- Zusätzlich: Hover-Reveal mit „Details ansehen →" Bar, Preis-Hierarchie sauberer (Preis groß, Rate dezent darunter).
+- „Neu im Bestand"-Badge für Fahrzeuge < 14 Tage.
+- Bild mit `aspect-[16/10]` einheitlich, object-position für bessere Komposition.
+- Skeleton-Loader-Stil für leere Slots.
 
-- Typografie-System (Sora/Manrope/JetBrains Mono) ist konsistent, Kicker-Pattern sauber.
-- Farbsystem solide, aber: Champagne (`oklch(...)`) wird inflationär als Akzent benutzt — verliert Wirkung. Premium = Akzent sparsam.
-- Detailseite arbeitet mit harten Linien (Web-1.0-Tabellen-Look). Wirkt eher „Tech-Brutalismus" als Luxus-Autohaus. Entscheidung treffen: Brutalist oder Luxury — aktuell Mischmasch.
-- Keine echten Mikro-Interaktionen (kein Hover-Reveal auf Cards, keine Bildscale, kein Cursor-Detail).
-- Grain-Overlay mobil deaktiviert (gut), Desktop teilweise zu körnig auf grünem Hintergrund → wirkt nach Kompressionsartefakt.
+## 4. Fahrzeug-Detailseite
+- CTA-Hierarchie: ein dominanter Primär-Button („Probefahrt buchen"), zwei sekundäre (Call/WhatsApp) kleiner.
+- Sticky-CTA-Bar am unteren Bildschirmrand (Desktop seitlich, Mobile bottom) mit Preis + Rate + Primär-CTA.
+- Galerie mit Vollbild-Lightbox (Klick auf Hauptbild), Tastatur-Navigation, Thumbnail-Strip.
+- „Highlights"-Block oberhalb der Tech-Daten mit Icons.
+- Redaktioneller „Über dieses Fahrzeug"-Absatz (dynamisch generiert aus Marke/Modell/Features).
+- Finanzierungs-Box mit Rate, Laufzeit-Slider (3/4/5/7 Jahre) und „Anfrage senden" Pre-Fill.
 
-## 3. Mobile UX — Note 2+
+## 5. Formulare
+- Floating-Label-Stil statt Top-Labels (sauberer Premium-Look).
+- Inline-Validierung mit ruhigen Microcopy-Hinweisen (kein rotes Schreien).
+- Multi-Step für Probefahrt/Ankauf (2–3 Schritte) mit Fortschrittsbalken.
+- Submit-State: animierter Loading-Indikator + Success-Karte mit klarem nächsten Schritt.
+- Honeypot + zeitbasierter Spamschutz.
 
-- Bottom-Bar 4-Tap-Buttons ist sehr gut.
-- 16 px Input-Font verhindert iOS-Zoom — gut.
-- Probleme:
-  - Hero-H1 mit `text-[40px]` immer noch knapp an Viewport-Rand bei kleinen Geräten (320 px).
-  - Filter-Slide-Panel öffnet → kein klarer „Anwenden"-CTA sichtbar ohne Scrollen (zu prüfen).
-  - Fahrzeugkarten 4:3 → bei vielen Karten viel Scroll. Lazy-Loading + Intersection-Observer für Hero-Bild ist da, aber kein `srcset`/responsive `sizes`.
+## 6. Trust
+- Neue „Trust-Stack"-Sektion auf Home: 4 Säulen mit Icons (Eingangsprüfung, Garantie, Finanzierung, persönliche Übergabe) statt Text-only.
+- Testimonial-Block aufwerten: 3 Karten mit Initial-Avatar + Standort + Sterne, Schema.org Review (auch wenn Beispieldaten — mit `aria-label="Beispielbewertung"` gekennzeichnet, damit nicht irreführend).
+- „Ihr Ansprechpartner"-Karte mit Platzhalter-Bild + Direkt-Kontakt (Telefon/WhatsApp/Mail).
+- Garantie/Zertifikat-Strip („TÜV-geprüft · 12 Monate Gewährleistung · DAT-bewertet") in monochromem Logo-Stil.
 
-## 4. Conversion — Note 2
+## 7. Texte (Feinschliff)
+- Hero alternative final wählen: „Geprüfte Fahrzeuge. Persönlich übergeben." (kürzer, härter).
+- FAQ um 3 echte Sorgen ergänzen (Mängel nach Übergabe, TÜV-Kosten, Lieferradius).
+- Detailseite: redaktionelle Vorlage pro Fahrzeug.
+- Microcopy in Formularen (z. B. „Antwort meist innerhalb von 60 Min").
 
-Sehr gut: 5 Formulare, WhatsApp/Phone überall, Sticky Mobile Bar, Trust-Blöcke neben Formularen.
-Lücken:
-- **Keine Lead-Erfassung im Backend** — Forms simulieren Submit (`useLeadSubmit`). Ohne echten Endpunkt = 0 Conversions.
-- Kein Exit-Intent, kein „letzte Anfrage vor 12 Min" Social-Proof.
-- Finanzierungsrechner ohne direkten „Rate übernehmen → Anfrage" Pre-Fill war's mal — aktuell schickt er Werte, aber kein sichtbares „Diese Rate sichern" CTA neben dem Ergebnis.
-- Detailseite: 3 Buttons (Call/WA/Probefahrt) konkurrieren. Hauptaktion sollte visuell dominieren.
-- Keine Bewertungs-/Google-Sterne sichtbar → fehlt für „social proof".
+## 8. SEO
+- Pro Route saubere H1/H2-Hierarchie prüfen, doppelte H1 entfernen.
+- `og:image` pro Hauptroute (relativ zur Domain, später absolute URL via `getRequestOrigin`).
+- `Article` Schema vorbereiten (für späteren Blog) — Infrastruktur via `head()` Helper.
+- `Service` Schema für `/auto-verkaufen` und `/finanzierung`.
+- `AggregateRating` mit Beispieldaten **NICHT** ausspielen (Google-Strafe-Risiko bei Fake). Stattdessen Platzhalter-Hook, der erst aktiv wird wenn echte Bewertungen kommen.
+- Sitemap mit `lastmod` ergänzen.
 
-## 5. Fahrzeugpräsentation — Note 3
+## 9. Geschwindigkeit
+- `vite-imagetools` einbauen → Hero und Fahrzeugbilder als AVIF + WebP mit `<picture>` und `srcset`.
+- LCP-Bild Preload via `head().links`.
+- Google Fonts: lokale Variable-Fonts (Sora, Manrope) statt CDN-Link, `font-display: swap`.
+- Grain-Overlay komplett raus (war ein Performance-Tax ohne Premium-Gewinn).
+- Code-Split: schwerere Inseln (Finanzierungsrechner, Lightbox) lazy.
 
-- Galerie funktioniert, aber: keine Vollbild-Zoom-Lupe, keine 360°, keine Innenraum-Schnellnavigation.
-- Karten zeigen Titel/EZ/km/Preis — solide. Aber: kein „Highlights"-Chip (z. B. „Standheizung · AHK · 360°-Kamera"), keine Finanzierungs-Rate auf der Karte.
-- Premium-Portale (mobile.de, Auto1) zeigen Rate prominent — fehlt hier.
-- Bilder sind Stockfotos? Konsistente Studio-Optik fehlt. Premium = einheitlicher Bildstil (gleicher Hintergrund/Lichtsetup).
-- Kein Vergleichsmodus, kein Merkliste.
+## 10. Animationen
+- Globale Regel: Easing `[0.22, 0.61, 0.36, 1]`, Dauer 400–600 ms, keine Bounces.
+- `prefers-reduced-motion: reduce` respektieren — alle dekorativen Anims aus.
+- Scroll-reveal nur einmal pro Element (IntersectionObserver, dann unsubscribe).
+- Kein paralleles Animieren mehrerer Layers (verhindert Jank auf mobil).
 
-## 6. Vertrauen — Note 3−
+## 11. Footer
+- Komplett-Redesign: 4-Spalten-Grid (Marke/Adresse · Bestand-Links · Service-Links · Rechtliches), oben „Bereit zur Probefahrt?"-CTA-Strip.
+- Mini-Map-Snippet (statisches Bild, kein iframe — lädt nicht extern) mit Klick → Google Maps.
+- Öffnungszeiten als Liste mit „Jetzt geöffnet/geschlossen"-Indikator (Client-side).
+- Newsletter weglassen (für Autohaus selten relevant, würde DSGVO-Aufwand erzeugen).
 
-- TrustBlock ist da, aber generisch (keine echten Zahlen, keine Logos).
-- Keine echten Kundenstimmen mit Foto/Standort.
-- Keine Google-Bewertung („4,9 ★ aus 312 Bewertungen") verlinkt.
-- Inhaber-Story fehlt auf /ueber-uns mit Foto.
-- Impressum-Platzhalter (`HRB 00000`) ist ein **Vertrauenskiller** — wenn live, sofort schließen.
-- Keine Garantie-/Gewährleistungs-Siegel (z. B. „24 Monate Gebrauchtwagengarantie") visualisiert.
-- WhatsApp-Nummer + Telefonnummer in `dealer.ts` sind Platzhalter — bei echtem Launch tot.
+## 12. Mobile (Feinschliff)
+- Sticky Bottom-Bar bekommt Icon + Label statt nur Label, 4 gleich breite Slots.
+- Tap-Targets durchgehend min. 48 px.
+- Filter-Slide-Panel: „Anwenden"-CTA als Sticky-Footer im Panel.
+- Hero-H1 ab 360 px sauber (testen, ggf. text-balance + manuelles `<wbr>`).
+- Zurück-zum-Top-Button nach 600 px Scroll, dezent rechts unten (ersetzt FAB auf Mobile nicht).
 
-## 7. Texte — Note 2
-
-- Tonalität konsistent „seriös-direkt", keine Marketing-Lyrik. Stark.
-- Aber: viele Headlines klingen ähnlich („geprüft · ehrlich · fair") → wiederholtes Vokabular über alle Seiten.
-- Detailseite hat fast keinen redaktionellen Text pro Fahrzeug — fehlt ein „Warum dieses Fahrzeug" Absatz pro Inserat (auch SEO-relevant).
-- FAQs sind okay, könnten aber 2–3 echte Sorgen aufnehmen („Was passiert bei Mängeln nach Übergabe?", „TÜV-Kosten?").
-- Keine lokalen Anker im Text („Anfahrt aus Essen 15 Min", „Stellplätze direkt vor der Tür").
-
-## 8. SEO — Note 2
-
-Bereits umgesetzt (letzte Iteration): AutoDealer/Vehicle/FAQPage/BreadcrumbList JSON-LD, saubere Meta-Titles ≤ 60, Descriptions ≤ 160, dynamische `sitemap.xml`, `robots.txt`.
-Offen:
-- **Keine echte Domain** → alle canonicals relativ, OG-Bilder ohne absolute URL → schlechte Social-Previews.
-- Keine `Article`-Inhalte (Blog/Ratgeber) → Long-Tail-Keywords fehlen komplett („Was kostet eine Inzahlungnahme?", „BMW X5 vs. Audi Q7").
-- Keine internen Hub-Links Marke→Modell (`/fahrzeuge/marke/bmw`).
-- Bilder ohne `srcset`/AVIF → Core Web Vitals leiden, LCP hoch.
-- Kein `hreflang` (irrelevant solange nur DE).
-- Google Business Profile nicht verlinkt/eingebettet.
-
-## 9. Geschwindigkeit — Note 3
-
-- Google Fonts via CDN-Link blockiert Render (kein `font-display: swap` Override garantiert).
-- Hero-Bild als `.jpg` ohne `srcset` → potenziell überdimensioniert auf Mobile.
-- Keine sichtbare Optimierung der Fahrzeug-Galerien (Vorschaubilder = Original?).
-- Kein Service-Worker / kein Preload außer Fonts.
-- TanStack Start SSR + Vite ist solide Basis, aber Bilder = größter Hebel.
-- Verdächtig: `oklch` + `mix-blend-luminosity` + Backdrop-Blur kosten auf älteren Androids.
-
-## 10. Unterschied zu normalen Autohaus-Websites — Note 2+
-
-Stärker als 90 % der DACH-Autohäuser:
-- Eigenständige Designsprache (kein Bootstrap-Template).
-- Saubere Forms statt mailto:.
-- Mobile Bottom Bar.
-- Strukturierte Daten.
-
-Aber noch **nicht** wie Top-Player (Senger, AMG-Center, Tesla, Polestar):
-- Keine Konfigurator-Anmutung.
-- Keine cineastischen Hero-Videos.
-- Kein Inventory-Streaming/Live-Status.
-- Kein Online-Reservierungs-Flow mit Bezahlung.
-- Keine Marken-eigene Bildwelt (Inhaber, Showroom, Team).
+## 13. Stilentscheidung
+Premium-Brutalism beibehalten (harte Linien, Mono-Akzente), aber konsequenter: keine runden Buttons, keine Schatten ohne Zweck, Champagne nur für Akzent-Trigger (CTAs, aktive Zustände, Preise) — nicht für Body-Text.
 
 ---
 
-# Konkrete Verbesserungsliste (priorisiert)
+## Was bewusst NICHT in dieser Runde
 
-## P0 — Blocker vor Launch (1–2 Tage)
+- **Lead-Backend** (Lovable Cloud + Resend) — separater Schritt, gibst du Freigabe?
+- **Echte Stammdaten/Bilder** — brauche Input von dir.
+- **Reservierung mit Stripe-Anzahlung** — P3.
+- **Blog/Ratgeber-Inhalte** — Infrastruktur ja, Inhalte separat.
+- **3D/360°-Modul** — P3.
 
-1. Header-Layout fixen: Telefonnummer ab `lg` einblenden, ab `md` nur Icon; Navi-Spacing reduzieren oder Burger ab `lg` aktivieren.
-2. WhatsApp-FAB nur ab `lg` zeigen (nicht `md`), Konflikt mit Bottom-Bar entschärfen.
-3. `dealer.ts` Platzhalter ersetzen (Adresse, Telefon, WhatsApp, HRB, USt-ID) — sonst ist die Seite rechtlich und SEO-technisch unbrauchbar.
-4. Echten Lead-Endpoint anschließen (Lovable Cloud Tabelle `leads` + Resend-E-Mail an Inhaber + Bestätigungs-Mail).
-5. Echte Fahrzeugbilder + Studio-Look prüfen; sonst konsistenter Look-Filter.
+## Reihenfolge der Umsetzung
 
-## P1 — Premium-Aufwertung (3–5 Tage)
+1. Design-Foundation (Tokens, Animation-System, Reduced-Motion).
+2. Header + Footer + Navigation.
+3. Hero + Trust-Stack + Testimonials.
+4. Fahrzeugkarten + Detailseite + Lightbox.
+5. Formulare (Floating-Label, Multi-Step, Honeypot).
+6. SEO-Feinschliff (H-Hierarchie, Service-Schema, Sitemap-lastmod).
+7. Performance (vite-imagetools, Font-Self-Host, Preload).
+8. Mobile-Feinschliff + QA-Screenshots Desktop/Tablet/Mobile.
 
-6. Bild-Pipeline: AVIF/WebP, `srcset`/`sizes`, Sharp-basiertes Resize (Cloudflare Images oder Server-Route).
-7. Hero-Bild austauschen oder unbearbeitet zeigen — `mix-blend-luminosity` raus.
-8. Fahrzeugkarte um Finanzierungs-Rate + 3 Highlight-Chips erweitern.
-9. Detailseite: visuelle Hauptaktion definieren (CTA-Hierarchie), Vollbild-Galerie + Innenraum-Sprung, Redaktionstext pro Fahrzeug.
-10. Merkzettel (localStorage) + Vergleichsleiste (2–3 Fahrzeuge).
-11. Inhaber-Story + Team-Foto auf /ueber-uns, echte Bewertungen einbinden (Google Reviews API oder kuratierter Block).
-12. Mikro-Interaktionen: Card-Hover-Reveal, Bild-Parallax light, Cursor-Polish.
+Geschätzter Umfang: ca. 12–15 Dateien geändert, 2–3 neu (Lightbox, FloatingField, BackToTop).
 
-## P2 — Inhalt & SEO-Tiefe (laufend)
-
-13. Blog/Ratgeber starten: 8–12 Artikel rund um Gebrauchtwagenkauf, Finanzierung, Ankauf, Velbert-spezifisch. JSON-LD `Article`.
-14. Marken-Hub-Seiten `/fahrzeuge/marke/$brand` mit kuratierten Modellen.
-15. Google Business Profile einbetten + Bewertungen abrufen.
-16. Long-Tail-Landingpages: „BMW gebraucht kaufen Velbert", „Mercedes Ankauf NRW".
-17. Schema erweitern: `Review`, `AggregateRating`, `Service` für Ankauf/Finanzierung.
-18. Domain registrieren → absolute OG-URLs, Sitemap-Direktive in robots.txt.
-
-## P3 — Differenzierung Top-Tier (1–2 Wochen)
-
-19. Cineastisches Showroom-Video als optionales Hero (mit Poster-Fallback).
-20. „Reservieren mit 500 €" — Stripe-Anzahlung statt nur Anfrage.
-21. Live-Bestandsstatus (Realtime via Lovable Cloud) — „Vor 4 Min angesehen von 3 Personen".
-22. Konfigurator-Anmutung für Finanzierung (Step-by-Step, animierte Übergänge).
-23. PWA + Offline-Fähigkeit für Bestandsliste, Push-Benachrichtigungen bei Preisänderung.
-24. Eigenes 3D/360°-Modul für Top-Fahrzeuge.
-
----
-
-## Tatsächliche Gesamtnote: **2+ (gut bis sehr gut)**
-
-Bereits über dem Marktdurchschnitt. Für „Nummer 1 in NRW" fehlen: echte Inhalte (Bilder/Bewertungen/Stammdaten), eine Stilentscheidung (Brutalist vs. Luxury), Bild-Performance, Backend-Leads, redaktionelle Tiefe.
-
-Soll ich nach Freigabe in der nächsten Iteration mit **P0** starten (Header-Fix, FAB, Lead-Backend) oder direkt mit **P1** (Bild-Pipeline + Detailseite-Upgrade)?
+Soll ich genau so loslegen, oder willst du etwas raus/dazu?

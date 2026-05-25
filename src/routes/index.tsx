@@ -86,9 +86,25 @@ function Hero() {
               Persönlich ausgewählt, geprüft und transparent dokumentiert.
               Beratung, Finanzierung und Ankauf aus einer Hand — vom Autohaus AK in Velbert.
             </p>
+
+            <ul className="flex flex-wrap items-center gap-x-5 gap-y-2 pt-2 font-mono text-[10px] font-semibold uppercase tracking-[0.18em] text-ink/80">
+              <li className="flex items-center gap-2">
+                <span aria-hidden className="inline-block h-1.5 w-1.5 bg-champagne" />
+                Eingangsprüfung
+              </li>
+              <li className="flex items-center gap-2">
+                <span aria-hidden className="inline-block h-1.5 w-1.5 bg-champagne" />
+                12 Monate Garantie*
+              </li>
+              <li className="flex items-center gap-2">
+                <span aria-hidden className="inline-block h-1.5 w-1.5 bg-champagne" />
+                Finanzierung möglich
+              </li>
+            </ul>
           </div>
 
           <div className="mt-7 grid grid-cols-1 gap-3 sm:grid-cols-2 md:mt-10 md:flex md:flex-wrap">
+
             <Link
               to="/fahrzeuge"
               className="inline-flex min-h-[56px] items-center justify-center bg-champagne px-6 py-4 font-mono text-[11px] font-bold uppercase tracking-[0.25em] text-paper transition-colors md:px-8 md:py-5 md:text-[10px] md:tracking-[0.3em] md:hover:bg-ink md:hover:text-paper"
@@ -150,25 +166,37 @@ function DataPanel({ label, value }: { label: string; value: string }) {
 
 
 /* ─────────────────────── TRUST BAR ─────────────────────── */
-const TRUSTS: { label: string; value: string }[] = [
-  { label: "Geprüft", value: "Eigene Eingangsprüfung" },
-  { label: "Finanzierung", value: "Auf Wunsch" },
-  { label: "Ankauf", value: "Faire Bewertung" },
-  { label: "Persönlich", value: "Direkter Ansprechpartner" },
+const TRUSTS: { label: string; value: string; icon: "shield" | "card" | "handshake" | "user" }[] = [
+  { label: "Geprüft", value: "Eigene Eingangsprüfung", icon: "shield" },
+  { label: "Finanzierung", value: "Auf Wunsch", icon: "card" },
+  { label: "Ankauf", value: "Faire Bewertung", icon: "handshake" },
+  { label: "Persönlich", value: "Direkter Ansprechpartner", icon: "user" },
 ];
+
+function TrustIcon({ name }: { name: "shield" | "card" | "handshake" | "user" }) {
+  const common = { width: 22, height: 22, viewBox: "0 0 24 24", fill: "none", stroke: "currentColor", strokeWidth: 1.6 } as const;
+  if (name === "shield") return <svg {...common} aria-hidden><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6l8-3z" /><path d="M9 12l2 2 4-4" /></svg>;
+  if (name === "card") return <svg {...common} aria-hidden><rect x="3" y="6" width="18" height="13" rx="1" /><path d="M3 10h18M7 15h3" /></svg>;
+  if (name === "handshake") return <svg {...common} aria-hidden><path d="M2 13l4-4 4 2 4-3 4 3 4-2v6l-4 2-4-2-4 3-4-2-4 2z" /></svg>;
+  return <svg {...common} aria-hidden><circle cx="12" cy="8" r="4" /><path d="M4 21c1.5-4 5-6 8-6s6.5 2 8 6" /></svg>;
+}
 
 function TrustBar() {
   return (
     <section className="border-y border-champagne/15 bg-surface">
       <div className="mx-auto grid max-w-[1400px] grid-cols-2 gap-px bg-line md:grid-cols-4">
         {TRUSTS.map((t) => (
-          <div key={t.label} className="bg-surface px-6 py-8 text-center md:py-10">
+          <div key={t.label} className="flex flex-col items-center gap-3 bg-surface px-6 py-8 text-center md:py-12">
+            <div className="text-champagne">
+              <TrustIcon name={t.icon} />
+            </div>
             <div className="font-mono text-[10px] font-bold uppercase tracking-[0.3em] text-champagne">
               {t.label}
             </div>
-            <div className="mt-3 font-display text-base font-bold text-ink md:text-lg">
+            <div className="font-display text-base font-bold leading-tight text-ink md:text-lg">
               {t.value}
             </div>
+
           </div>
         ))}
       </div>
@@ -179,8 +207,9 @@ function TrustBar() {
 /* ────────────────────── BRAND STORY ────────────────────── */
 function BrandStory() {
   return (
-    <section className="relative overflow-hidden bg-paper grain">
+    <section className="relative overflow-hidden bg-paper">
       <div className="mx-auto max-w-[1400px] px-4 py-14 md:px-10 md:py-40">
+
         <div className="grid gap-12 md:grid-cols-12">
           <div className="md:col-span-4">
             <p className="kicker">Unser Anspruch</p>
