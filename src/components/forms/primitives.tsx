@@ -59,7 +59,7 @@ export function Field({
         placeholder={placeholder}
         autoComplete={autoComplete}
         inputMode={inputMode}
-        className="mt-2 w-full border border-line bg-paper/40 px-4 py-3 text-sm text-ink transition-colors focus:border-champagne focus:outline-none"
+        className="mt-2 block w-full min-h-[48px] border border-line bg-paper/40 px-4 py-3 text-base text-ink transition-colors focus:border-champagne focus:outline-none"
       />
     </div>
   );
@@ -85,7 +85,7 @@ export function Textarea({
         defaultValue={defaultValue}
         placeholder={placeholder}
         rows={rows}
-        className="mt-2 w-full border border-line bg-paper/40 px-4 py-3 text-sm text-ink transition-colors focus:border-champagne focus:outline-none"
+        className="mt-2 block w-full border border-line bg-paper/40 px-4 py-3 text-base text-ink transition-colors focus:border-champagne focus:outline-none"
       />
     </div>
   );
@@ -108,7 +108,7 @@ export function Select({
         name={name}
         required={required}
         defaultValue={defaultValue}
-        className="mt-2 w-full border border-line bg-paper/40 px-4 py-3 text-sm text-ink transition-colors focus:border-champagne focus:outline-none"
+        className="mt-2 block w-full min-h-[48px] border border-line bg-paper/40 px-4 py-3 text-base text-ink transition-colors focus:border-champagne focus:outline-none"
       >
         <option value="">Bitte wählen</option>
         {options.map((o) => (
@@ -120,6 +120,7 @@ export function Select({
     </div>
   );
 }
+
 
 export function RadioChips({
   label,
