@@ -7,10 +7,11 @@ import { dealer, telLink, whatsappLink } from "@/data/dealer";
 export const Route = createFileRoute("/kontakt")({
   head: () => ({
     meta: [
-      { title: "Kontakt — Autohaus AK GmbH, Velbert" },
+      { title: "Kontakt & Anfahrt — Autohaus AK Velbert" },
       {
         name: "description",
-        content: `Telefon, WhatsApp, E-Mail oder vor Ort: Sprechen Sie das Autohaus AK GmbH in ${dealer.city} direkt an. Persönlich erreichbar.`,
+        content:
+          "Telefon, WhatsApp, E-Mail oder vor Ort in Velbert. Werktags Antwort meist innerhalb weniger Stunden.",
       },
       { property: "og:title", content: "Kontakt — Autohaus AK GmbH" },
       {
@@ -20,6 +21,39 @@ export const Route = createFileRoute("/kontakt")({
       { property: "og:url", content: "/kontakt" },
     ],
     links: [{ rel: "canonical", href: "/kontakt" }],
+    scripts: [
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "LocalBusiness",
+          name: dealer.legalName,
+          telephone: dealer.phone,
+          email: dealer.email,
+          address: {
+            "@type": "PostalAddress",
+            streetAddress: dealer.street,
+            postalCode: dealer.postalCode,
+            addressLocality: dealer.city,
+            addressCountry: dealer.country,
+          },
+          openingHoursSpecification: [
+            {
+              "@type": "OpeningHoursSpecification",
+              dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+              opens: "09:00",
+              closes: "18:30",
+            },
+            {
+              "@type": "OpeningHoursSpecification",
+              dayOfWeek: "Saturday",
+              opens: "10:00",
+              closes: "15:00",
+            },
+          ],
+        }),
+      },
+    ],
   }),
   component: ContactPage,
 });
