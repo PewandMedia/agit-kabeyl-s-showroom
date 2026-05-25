@@ -1,7 +1,12 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
+import { useState } from "react";
 import { SiteLayout } from "@/components/site/SiteLayout";
 import { VehicleGallery } from "@/components/site/VehicleGallery";
-import { InquiryForm } from "@/components/site/InquiryForm";
+import { VehicleInquiryForm } from "@/components/forms/VehicleInquiryForm";
+import { TestDriveForm } from "@/components/forms/TestDriveForm";
+import { CallbackForm } from "@/components/forms/CallbackForm";
+import { Modal } from "@/components/site/Modal";
+import { TrustBlock } from "@/components/forms/primitives";
 import { StatusBadge } from "@/components/site/StatusBadge";
 import {
   formatKm,
