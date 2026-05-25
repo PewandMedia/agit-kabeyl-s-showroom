@@ -3,9 +3,8 @@ import { useEffect, useState } from "react";
 import { dealer, telLink, whatsappLink } from "@/data/dealer";
 
 const NAV = [
-  { to: "/", label: "Start" },
-  { to: "/fahrzeuge", label: "Fahrzeuge" },
-  { to: "/auto-verkaufen", label: "Auto verkaufen" },
+  { to: "/fahrzeuge", label: "Bestand" },
+  { to: "/auto-verkaufen", label: "Ankauf" },
   { to: "/finanzierung", label: "Finanzierung" },
   { to: "/ueber-uns", label: "Über uns" },
   { to: "/kontakt", label: "Kontakt" },
@@ -24,48 +23,44 @@ export function Header() {
 
   return (
     <header
-      className={`fixed inset-x-0 top-0 z-50 transition-all duration-300 ${
+      className={`fixed inset-x-0 top-0 z-50 border-b transition-all duration-300 ${
         scrolled || open
-          ? "bg-paper/85 backdrop-blur-xl border-b border-line"
-          : "bg-gradient-to-b from-paper/60 to-transparent"
+          ? "border-champagne/20 bg-paper/90 backdrop-blur-xl"
+          : "border-transparent bg-paper/60 backdrop-blur-md"
       }`}
     >
-      <div className="mx-auto flex h-16 max-w-[1400px] items-center justify-between px-5 md:h-20 md:px-10">
+      <div className="mx-auto flex h-20 max-w-[1400px] items-center justify-between px-5 md:px-10">
         <Link
           to="/"
-          className="flex items-center gap-3"
+          className="group flex items-baseline gap-2"
           aria-label={dealer.legalName}
           onClick={() => setOpen(false)}
         >
-          <span className="flex h-9 w-9 items-center justify-center border border-champagne/60 font-serif text-base text-champagne md:h-10 md:w-10 md:text-lg">
+          <span className="font-display text-2xl font-extrabold tracking-tighter text-ink">
             AK
           </span>
-          <span className="hidden flex-col leading-none sm:flex">
-            <span className="font-serif text-base text-ink md:text-lg">
-              Autohaus AK
-            </span>
-            <span className="kicker mt-1 text-[10px]">Velbert</span>
+          <span className="font-mono text-[10px] font-semibold uppercase tracking-[0.3em] text-champagne">
+            Autohaus
           </span>
         </Link>
 
-        <nav className="hidden items-center gap-7 lg:flex">
+        <nav className="hidden items-center gap-10 lg:flex">
           {NAV.map((item) => (
             <Link
               key={item.to}
               to={item.to}
-              className="text-[12px] uppercase tracking-[0.2em] text-ink-soft transition-colors hover:text-ink"
-              activeProps={{ className: "text-ink" }}
-              activeOptions={{ exact: item.to === "/" }}
+              className="font-mono text-[11px] font-semibold uppercase tracking-[0.2em] text-ink/70 transition-colors hover:text-champagne"
+              activeProps={{ className: "text-champagne" }}
             >
               {item.label}
             </Link>
           ))}
         </nav>
 
-        <div className="hidden items-center gap-3 lg:flex">
+        <div className="hidden items-center gap-5 lg:flex">
           <a
             href={telLink()}
-            className="text-[12px] uppercase tracking-[0.2em] text-ink-soft transition-colors hover:text-ink"
+            className="font-mono text-[11px] font-semibold tracking-widest text-ink/80 hover:text-champagne"
           >
             {dealer.phoneDisplay}
           </a>
@@ -73,7 +68,7 @@ export function Header() {
             href={whatsappLink(`Hallo ${dealer.shortName}, ich habe eine Anfrage.`)}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center justify-center bg-ink px-5 py-2.5 text-[12px] font-medium uppercase tracking-[0.18em] text-paper transition-opacity hover:opacity-90"
+            className="inline-flex items-center justify-center border border-champagne px-5 py-2.5 font-mono text-[10px] font-bold uppercase tracking-[0.25em] text-champagne transition-colors hover:bg-champagne hover:text-paper"
           >
             WhatsApp
           </a>
@@ -102,22 +97,22 @@ export function Header() {
       </div>
 
       {open && (
-        <div className="border-t border-line bg-paper/95 backdrop-blur-xl lg:hidden">
+        <div className="border-t border-champagne/20 bg-paper/95 backdrop-blur-xl lg:hidden">
           <nav className="mx-auto flex max-w-[1400px] flex-col px-5 py-4">
             {NAV.map((item) => (
               <Link
                 key={item.to}
                 to={item.to}
                 onClick={() => setOpen(false)}
-                className="border-b border-line py-4 text-sm uppercase tracking-[0.18em] text-ink"
+                className="border-b border-line py-4 font-mono text-xs font-semibold uppercase tracking-[0.2em] text-ink"
               >
                 {item.label}
               </Link>
             ))}
-            <div className="mt-4 flex flex-col gap-2">
+            <div className="mt-4 grid gap-2">
               <a
                 href={telLink()}
-                className="border border-ink py-3 text-center text-xs uppercase tracking-[0.18em] text-ink"
+                className="border border-line py-3 text-center font-mono text-[10px] font-bold uppercase tracking-[0.25em] text-ink"
               >
                 Anrufen · {dealer.phoneDisplay}
               </a>
@@ -127,7 +122,7 @@ export function Header() {
                 )}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="bg-ink py-3 text-center text-xs uppercase tracking-[0.18em] text-paper"
+                className="bg-champagne py-3 text-center font-mono text-[10px] font-bold uppercase tracking-[0.25em] text-paper"
               >
                 WhatsApp
               </a>
