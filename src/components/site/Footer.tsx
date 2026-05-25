@@ -8,18 +8,20 @@ export function Footer() {
       <div className="mx-auto max-w-[1400px] px-5 py-16 md:px-10 md:py-24">
         <div className="grid gap-12 md:grid-cols-12">
           <div className="md:col-span-5">
-            <div className="flex items-center gap-3">
-              <span className="flex h-10 w-10 items-center justify-center border border-champagne/60 font-serif text-lg text-champagne">
+            <div className="flex items-baseline gap-2">
+              <span className="font-display text-2xl font-extrabold tracking-tighter text-ink">
                 AK
               </span>
-              <div className="flex flex-col leading-none">
-                <span className="font-serif text-lg">Autohaus AK</span>
-                <span className="kicker mt-1 text-[10px]">Velbert</span>
-              </div>
+              <span className="font-mono text-[10px] font-semibold uppercase tracking-[0.3em] text-champagne">
+                Autohaus · Velbert
+              </span>
             </div>
             <p className="mt-6 max-w-sm text-sm leading-relaxed text-ink-soft">
               Geprüfte Premium- und Gebrauchtfahrzeuge aus Velbert. Champion-
               Mentalität, ehrlicher Service, faire Konditionen.
+            </p>
+            <p className="mt-6 font-mono text-[10px] uppercase tracking-[0.3em] text-champagne/70">
+              SYS · AK_V01 · LOC: VELBERT_DE
             </p>
           </div>
 

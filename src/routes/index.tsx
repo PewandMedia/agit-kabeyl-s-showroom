@@ -59,98 +59,111 @@ function HomePage() {
 /* ─────────────────────────── HERO ─────────────────────────── */
 function Hero() {
   return (
-    <section className="relative isolate min-h-[92vh] overflow-hidden bg-paper text-ink grain">
-      <img
-        src={heroCar}
-        alt=""
-        width={1920}
-        height={1080}
-        fetchPriority="high"
-        className="absolute inset-0 h-full w-full object-cover opacity-55"
-      />
-      <div className="absolute inset-0 bg-gradient-to-r from-paper via-paper/80 to-paper/20" />
-      <div className="absolute inset-0 bg-gradient-to-t from-paper via-transparent to-paper/40" />
-
-      <div className="relative mx-auto flex min-h-[92vh] max-w-[1400px] flex-col justify-between px-5 pb-16 pt-32 md:px-10 md:pb-24 md:pt-44">
-        <div className="max-w-3xl">
-          <div className="flex items-center gap-3">
-            <span className="h-px w-10 bg-champagne" />
-            <p className="kicker">Autohaus AK GmbH · {dealer.city}</p>
+    <section className="relative overflow-hidden bg-paper pt-28 md:pt-32">
+      <div className="mx-auto grid max-w-[1400px] gap-10 px-5 pb-16 md:grid-cols-2 md:gap-12 md:px-10 md:pb-24 lg:items-stretch">
+        {/* LEFT — Headline */}
+        <div className="flex animate-fade-up flex-col justify-between py-6 md:py-12">
+          <div className="space-y-7">
+            <div className="flex items-center gap-3">
+              <span className="h-px w-10 bg-champagne" />
+              <span className="font-mono text-[10px] font-medium uppercase tracking-[0.4em] text-champagne">
+                System Status · Active
+              </span>
+            </div>
+            <h1 className="font-display text-[44px] font-extrabold leading-[0.9] tracking-tighter text-ink sm:text-6xl md:text-7xl lg:text-[88px]">
+              Champion-<br />
+              <span className="text-champagne">Mentalität.</span>
+            </h1>
+            <p className="max-w-md text-base leading-relaxed text-ink-soft md:text-lg">
+              Präzision trifft Performance. {dealer.legalName} steht für
+              geprüfte Premium-Fahrzeuge, transparente Daten und
+              kompromisslosen Service — Nummer 1 im Segment.
+            </p>
           </div>
-          <h1 className="mt-7 font-serif text-[44px] leading-[1.02] text-ink sm:text-6xl md:text-7xl lg:text-[88px]">
-            Champion-Mentalität.<br />
-            <span className="text-gradient-gold">Premium-Fahrzeuge.</span><br />
-            Ehrlicher Service.
-          </h1>
-          <p className="mt-8 max-w-xl text-base leading-relaxed text-ink-soft md:text-lg">
-            {dealer.subclaim}
-          </p>
 
-          <div className="mt-10 flex flex-wrap items-center gap-3">
+          <div className="mt-10 flex flex-wrap gap-3">
             <Link
               to="/fahrzeuge"
-              className="inline-flex items-center justify-center bg-ink px-7 py-4 text-xs font-medium uppercase tracking-[0.22em] text-paper transition-opacity hover:opacity-90"
+              className="inline-flex items-center justify-center bg-champagne px-8 py-5 font-mono text-[10px] font-bold uppercase tracking-[0.3em] text-paper transition-colors duration-500 hover:bg-ink hover:text-paper"
             >
-              Fahrzeuge ansehen
+              Bestand analysieren
             </Link>
             <Link
               to="/auto-verkaufen"
-              className="inline-flex items-center justify-center border border-champagne/60 px-7 py-4 text-xs font-medium uppercase tracking-[0.22em] text-champagne transition-colors hover:bg-champagne hover:text-paper"
+              className="inline-flex items-center justify-center border border-champagne/40 px-8 py-5 font-mono text-[10px] font-bold uppercase tracking-[0.3em] text-ink transition-colors duration-500 hover:border-champagne hover:text-champagne"
             >
-              Auto verkaufen
+              Ankauf-Portal
             </Link>
-            <a
-              href={whatsappLink(`Hallo ${dealer.shortName}, ich habe eine Frage.`)}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center justify-center border border-ink/30 px-7 py-4 text-xs font-medium uppercase tracking-[0.22em] text-ink transition-colors hover:border-ink"
-            >
-              WhatsApp-Anfrage
-            </a>
           </div>
         </div>
 
-        <div className="mt-16 hidden grid-cols-3 gap-8 border-t border-line pt-8 md:grid">
-          <Stat label="Standort" value={dealer.city} />
-          <Stat label="Verkauf · Ankauf" value="Persönlich vor Ort" />
-          <Stat label="Direkt erreichbar" value={dealer.phoneDisplay} />
+        {/* RIGHT — Cinematic image + data overlays */}
+        <div className="relative min-h-[440px] overflow-hidden border border-champagne/15 bg-surface p-2 md:min-h-[560px]">
+          <img
+            src={heroCar}
+            alt=""
+            width={1200}
+            height={1500}
+            fetchPriority="high"
+            className="absolute inset-0 h-full w-full object-cover opacity-55 mix-blend-luminosity transition-all duration-1000 hover:opacity-70 hover:mix-blend-normal"
+          />
+          <div className="absolute inset-0 bg-gradient-to-tr from-paper/80 via-paper/10 to-transparent" />
+
+          {/* Top status row */}
+          <div className="absolute inset-x-0 top-0 flex items-start justify-between p-6 md:p-8">
+            <div className="font-mono text-[10px] leading-relaxed text-champagne/70">
+              REF: AK_SYS_2024<br />
+              LOC: VELBERT_DE
+            </div>
+            <div className="flex h-8 w-8 items-center justify-center border border-champagne/30">
+              <span className="block h-1 w-1 bg-champagne" />
+            </div>
+          </div>
+
+          {/* Bottom data panels */}
+          <div className="absolute inset-x-0 bottom-0 grid grid-cols-2 gap-3 p-6 md:p-8">
+            <DataPanel label="Available Units" value={String(vehicles.length).padStart(2, "0")} />
+            <DataPanel label="Quality Score" value="99,8 %" />
+          </div>
         </div>
       </div>
     </section>
   );
 }
 
-function Stat({ label, value }: { label: string; value: string }) {
+function DataPanel({ label, value }: { label: string; value: string }) {
   return (
-    <div>
-      <p className="kicker">{label}</p>
-      <p className="mt-2 font-serif text-xl text-ink md:text-2xl">{value}</p>
+    <div className="border-l-2 border-champagne bg-paper/80 p-4 backdrop-blur-md">
+      <div className="font-mono text-[9px] uppercase tracking-widest text-ink-soft opacity-70">
+        {label}
+      </div>
+      <div className="mt-1 font-display text-2xl font-extrabold text-ink">{value}</div>
     </div>
   );
 }
 
 /* ─────────────────────── TRUST BAR ─────────────────────── */
-const TRUSTS = [
-  "Geprüfte Fahrzeuge",
-  "Finanzierung möglich",
-  "Inzahlungnahme",
-  "Schnelle Abwicklung",
-  "Persönliche Beratung",
-  "Direkter WhatsApp-Kontakt",
+const TRUSTS: { label: string; value: string }[] = [
+  { label: "Geprüft", value: "110-Punkte Check" },
+  { label: "Finanzierung", value: "ab 3,99 % p.a." },
+  { label: "Ankauf", value: "24 h Auszahlung" },
+  { label: "Persönlich", value: "WhatsApp < 15 min" },
 ];
 
 function TrustBar() {
   return (
-    <section className="border-y border-line bg-surface">
-      <div className="mx-auto max-w-[1400px] px-5 py-6 md:px-10">
-        <div className="flex flex-wrap items-center justify-center gap-x-10 gap-y-3 text-[11px] uppercase tracking-[0.22em] text-ink-soft">
-          {TRUSTS.map((t, i) => (
-            <span key={t} className="flex items-center gap-3">
-              {i > 0 && <span className="hidden h-1 w-1 rounded-full bg-champagne md:inline-block" />}
-              <span>{t}</span>
-            </span>
-          ))}
-        </div>
+    <section className="border-y border-champagne/15 bg-surface">
+      <div className="mx-auto grid max-w-[1400px] grid-cols-2 gap-px bg-line md:grid-cols-4">
+        {TRUSTS.map((t) => (
+          <div key={t.label} className="bg-surface px-6 py-8 text-center md:py-10">
+            <div className="font-mono text-[10px] font-bold uppercase tracking-[0.3em] text-champagne">
+              {t.label}
+            </div>
+            <div className="mt-3 font-display text-base font-bold text-ink md:text-lg">
+              {t.value}
+            </div>
+          </div>
+        ))}
       </div>
     </section>
   );
@@ -199,32 +212,34 @@ function BrandStory() {
 function Highlights() {
   return (
     <section className="border-t border-line bg-paper">
-      <div className="mx-auto max-w-[1400px] px-5 py-20 md:px-10 md:py-32">
-        <div className="flex items-end justify-between gap-6">
+      <div className="mx-auto max-w-[1400px] px-5 py-24 md:px-10 md:py-32">
+        <div className="flex items-end justify-between gap-6 border-b border-line pb-6">
           <div>
-            <p className="kicker">Auswahl</p>
-            <h2 className="mt-4 font-serif text-4xl text-ink md:text-5xl">
-              Aktuelle Highlights.
+            <p className="font-mono text-[10px] font-bold uppercase tracking-[0.4em] text-champagne">
+              Selected Inventory
+            </p>
+            <h2 className="mt-4 font-display text-4xl font-extrabold tracking-tight text-ink md:text-5xl">
+              Current / <span className="text-champagne">Selection</span>
             </h2>
           </div>
           <Link
             to="/fahrzeuge"
-            className="hidden text-xs uppercase tracking-[0.22em] text-ink-soft transition-colors hover:text-ink md:inline-flex"
+            className="hidden font-mono text-[10px] font-bold uppercase tracking-[0.3em] text-champagne transition-opacity hover:opacity-70 md:inline-flex"
           >
-            Alle ansehen →
+            Browse System [01–{String(vehicles.length).padStart(2, "0")}] →
           </Link>
         </div>
 
-        <div className="mt-12 grid gap-10 md:mt-16 md:grid-cols-3">
+        <div className="mt-12 grid gap-6 md:mt-14 md:grid-cols-3">
           {featuredVehicles.map((v) => (
             <VehicleCard key={v.id} vehicle={v} />
           ))}
         </div>
 
-        <div className="mt-12 md:hidden">
+        <div className="mt-10 md:hidden">
           <Link
             to="/fahrzeuge"
-            className="block w-full border border-ink/40 py-4 text-center text-xs uppercase tracking-[0.22em] text-ink"
+            className="block w-full border border-champagne/40 py-4 text-center font-mono text-[10px] font-bold uppercase tracking-[0.3em] text-champagne"
           >
             Alle Fahrzeuge ansehen
           </Link>
