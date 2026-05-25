@@ -621,7 +621,7 @@ function ContactCTA() {
               <p className="mt-4 font-display text-xl leading-snug text-ink">
                 {dealer.legalName}<br />
                 {dealer.street}<br />
-                {dealer.zip} {dealer.city}
+                {dealer.postalCode} {dealer.city}
               </p>
               <a
                 href={whatsappLink(`Hallo ${dealer.shortName}, ich habe eine Anfrage.`)}
