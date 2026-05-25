@@ -5,6 +5,7 @@ import { BtnLink, BtnA } from "@/components/ui/Btn";
 import { featuredVehicles, vehicles } from "@/data/vehicles";
 import { dealer, telLink, whatsappLink } from "@/data/dealer";
 import heroCar from "@/assets/hero-car.jpg";
+import championPortrait from "@/assets/champion-portrait.jpg";
 
 
 export const Route = createFileRoute("/")({
@@ -63,86 +64,99 @@ function HomePage() {
   );
 }
 
-/* ─────────────────────────── HERO ─────────────────────────── */
+/* ─────────────────────────── HERO — Champion Edition ─────────────────────────── */
 function Hero() {
   return (
-    <section className="relative isolate min-h-[92vh] overflow-hidden bg-paper">
-      {/* Cinematic full-bleed image */}
-      <div className="absolute inset-0 -z-10">
-        <img
-          src={heroCar}
-          alt={`Verkaufsraum ${dealer.legalName} in ${dealer.city}`}
-          width={1920}
-          height={1280}
-          fetchPriority="high"
-          decoding="async"
-          className="h-full w-full object-cover"
-        />
-        {/* Layered gradients for editorial depth */}
-        <div className="absolute inset-0 bg-gradient-to-r from-paper via-paper/85 to-paper/30" />
-        <div className="absolute inset-0 bg-gradient-to-t from-paper via-transparent to-paper/40" />
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_50%,transparent_0%,oklch(0.18_0.03_161/0.4)_100%)]" />
-      </div>
+    <section className="relative isolate overflow-hidden bg-paper pt-24 md:pt-28">
+      <div className="mx-auto grid max-w-[1440px] grid-cols-1 gap-10 px-6 pb-16 md:grid-cols-12 md:gap-12 md:px-12 md:pb-24 md:pt-12">
+        {/* LEFT — Portrait */}
+        <div className="relative md:col-span-5 lg:col-span-5">
+          <div className="relative aspect-[4/5] w-full overflow-hidden bg-ink">
+            {/* TODO: Echtes Pressefoto von Agit Kabayel hier einsetzen, sobald Lizenz geklärt. */}
+            <img
+              src={championPortrait}
+              alt="Agit Kabayel — WBC #1 Contender Heavyweight, Markenbotschafter des Autohaus AK"
+              width={1024}
+              height={1280}
+              fetchPriority="high"
+              decoding="async"
+              className="h-full w-full object-cover"
+            />
+            <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-ink/70 via-transparent to-transparent" />
 
-      <div className="relative mx-auto flex min-h-[92vh] max-w-[1440px] flex-col justify-between px-6 pb-12 pt-32 md:px-12 md:pt-40">
-        {/* Top label */}
-        <div className="flex items-center gap-4 animate-fade-up">
-          <span className="h-px w-12 bg-champagne" />
-          <span className="font-mono text-[10px] font-medium uppercase tracking-[0.45em] text-champagne">
-            Autohaus · {dealer.city}
-          </span>
+            {/* Floating champion badge */}
+            <div className="absolute left-5 top-5 flex items-center gap-2.5 border border-champagne/60 bg-ink/70 px-3 py-2 backdrop-blur-sm">
+              <span aria-hidden className="h-1.5 w-1.5 rotate-45 bg-champagne" />
+              <span className="font-mono text-[10px] font-bold uppercase tracking-[0.3em] text-champagne">
+                WBC · #1 Contender
+              </span>
+            </div>
+
+            {/* Bottom caption */}
+            <div className="absolute inset-x-0 bottom-0 p-5 md:p-6">
+              <div className="font-mono text-[10px] font-medium uppercase tracking-[0.32em] text-champagne">
+                Heavyweight · Bochum
+              </div>
+              <div className="mt-1 font-display text-2xl font-extrabold text-paper md:text-3xl">
+                Agit Kabayel
+              </div>
+            </div>
+          </div>
         </div>
 
-        {/* Headline + CTA block */}
-        <div className="max-w-3xl py-16 animate-fade-up">
-          <h1 className="font-display text-[44px] font-extrabold leading-[0.95] tracking-[-0.035em] text-ink sm:text-6xl md:text-7xl lg:text-[92px]">
-            Geprüfte Fahrzeuge.
+        {/* RIGHT — Story */}
+        <div className="md:col-span-7 lg:col-span-7 md:py-6 lg:py-10">
+          <div className="flex items-center gap-3 animate-fade-up">
+            <span className="h-px w-10 bg-champagne" />
+            <span className="font-mono text-[10px] font-semibold uppercase tracking-[0.4em] text-champagne">
+              Team Kabayel · {dealer.city}
+            </span>
+          </div>
+
+          <h1 className="mt-6 font-display text-[40px] font-extrabold leading-[0.98] tracking-[-0.035em] text-ink sm:text-5xl md:text-6xl lg:text-[76px] animate-fade-up">
+            Das Autohaus
             <br />
-            <span className="text-champagne">Persönlich übergeben.</span>
+            des <span className="text-champagne">WBC #1 Contender</span>.
           </h1>
-          <p className="mt-8 max-w-xl text-lg leading-relaxed text-ink/80 md:text-xl">
-            Eigene Eingangsprüfung, lückenlose Dokumentation, klare Beratung —
-            vom Autohaus AK in {dealer.city}.
+
+          <p className="mt-7 max-w-xl text-base leading-relaxed text-ink-soft md:text-lg animate-fade-up">
+            Hinter dem Autohaus AK steht das Team von <strong className="font-semibold text-ink">Agit Kabayel</strong> —
+            Schwergewichts-Boxer aus Bochum, aktuell <strong className="font-semibold text-ink">Nummer 1 im
+            WBC-Ranking</strong>. Die gleiche Disziplin, die ihn zur Weltspitze
+            gebracht hat, prägt unsere Auswahl, Prüfung und Übergabe.
           </p>
 
-          <div className="mt-12 flex flex-col items-start gap-6 sm:flex-row sm:items-center sm:gap-8">
+          <div className="mt-9 flex flex-col items-start gap-5 sm:flex-row sm:items-center sm:gap-6 animate-fade-up">
             <BtnLink to="/fahrzeuge" variant="primary" size="lg">
-              Bestand ansehen
+              Fahrzeuge ansehen
             </BtnLink>
-            <BtnLink to="/kontakt" variant="ghost" arrow>
-              Termin vereinbaren
+            <BtnLink to="/ueber-uns" variant="ghost" arrow>
+              Story lesen
             </BtnLink>
           </div>
-        </div>
 
-        {/* Bottom strip — Trust + Live counter */}
-        <div className="flex flex-col gap-8 border-t border-champagne/15 pt-8 md:flex-row md:items-end md:justify-between md:gap-12">
-          <ul className="flex flex-wrap items-center gap-x-8 gap-y-3 font-mono text-[10px] font-semibold uppercase tracking-[0.22em] text-ink/80">
-            <HeroTrust label="Eingangsprüfung" />
-            <HeroTrust label="12 Monate Garantie" />
-            <HeroTrust label="Finanzierung möglich" />
-            <HeroTrust label="Ankauf zum Tagespreis" />
-          </ul>
-          <div className="flex items-baseline gap-4 border-l border-champagne/30 pl-6">
-            <span className="font-display text-5xl font-extrabold leading-none text-champagne md:text-6xl">
-              {String(vehicles.length).padStart(2, "0")}
-            </span>
-            <span className="font-mono text-[10px] uppercase tracking-[0.3em] text-ink-soft">
-              Fahrzeuge<br />im Bestand
-            </span>
-          </div>
+          {/* Stat strip */}
+          <dl className="mt-12 grid grid-cols-3 gap-px overflow-hidden border border-line bg-line">
+            <Stat label="Bestand" value={String(vehicles.length).padStart(2, "0")} />
+            <Stat label="WBC Rang" value="#1" />
+            <Stat label="Garantie" value="12 Mt." />
+          </dl>
         </div>
       </div>
     </section>
   );
 }
 
-function HeroTrust({ label }: { label: string }) {
+function Stat({ label, value }: { label: string; value: string }) {
   return (
-    <li className="flex items-center gap-2.5">
-      <span aria-hidden className="inline-block h-1 w-1 rotate-45 bg-champagne" />
-      {label}
-    </li>
+    <div className="bg-surface px-5 py-5 md:px-6 md:py-6">
+      <div className="font-mono text-[9px] font-semibold uppercase tracking-[0.3em] text-ink-soft">
+        {label}
+      </div>
+      <div className="mt-2 font-display text-3xl font-extrabold leading-none text-champagne md:text-4xl">
+        {value}
+      </div>
+    </div>
   );
 }
 
