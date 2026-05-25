@@ -228,11 +228,12 @@ function Highlights() {
           </Link>
         </div>
 
-        <div className="mt-12 grid gap-6 md:mt-14 md:grid-cols-3">
-          {featuredVehicles.map((v) => (
-            <VehicleCard key={v.id} vehicle={v} />
+        <div className="mt-10 grid gap-6 md:mt-14 md:grid-cols-3">
+          {featuredVehicles.map((v, i) => (
+            <VehicleCard key={v.id} vehicle={v} priority={i < 2} />
           ))}
         </div>
+
 
         <div className="mt-10 md:hidden">
           <Link
