@@ -1,66 +1,66 @@
-# Plan: Fahrzeuge von mobile.de (AK Autohaus GmbH) importieren
+# Redesign — Champion Edition
 
-## Ziel
-Alle aktiven Inserate von `home.mobile.de` (Kunden-ID 36122940, AK Autohaus GmbH) einmalig in die Website übernehmen — mit Bildern direkt vom mobile.de-CDN (Hotlink).
+Komplette Abkehr vom dunklen Grün. Neue Identität: **helles Editorial-Weiß + Champagner-Gold + tiefes Schwarz**, mit Agit Kabayel als sichtbarem Markenbotschafter (WBC #1 Contender).
 
-## Schritte
+## 1. Neue Farbpalette (src/styles.css)
 
-### 1. Firecrawl-Connector aktivieren
-mobile.de rendert mit JavaScript und hat Bot-Schutz. `fetch_website` reicht nicht — Firecrawl ist nötig.
-→ Tool `standard_connectors--connect` mit `connector_id: firecrawl`
-→ Nutzer klickt einmal auf Connect.
+| Token | Wert | Verwendung |
+|---|---|---|
+| `--paper` | `#fafbfc` (oklch 0.985) | Seiten-Hintergrund |
+| `--surface` | `#ffffff` | Karten |
+| `--surface-2` | `#f3f1ec` | Sektions-Bänder |
+| `--ink` | `#0d0d0d` | Haupttext, Headlines |
+| `--ink-soft` | `#5a5a5a` | Sekundärtext |
+| `--champagne` | `#c9a84c` (Gold) | Akzent, Preise, CTAs |
+| `--champagne-soft` | `#e0c97a` | Hover |
+| `--line` | `#0d0d0d / 10%` | Trennlinien |
+| `--ring-rot` | `#c44545` | Champion-Badge "WBC #1" |
 
-### 2. Inseratsliste mappen
-- `firecrawl.map` auf `https://home.mobile.de/AKAUTOHAUSGMBH` (bzw. die Kunden-ID-URL).
-- Filter auf URLs nach Schema `mobile.de/auto-inserat/.../*` oder `home.mobile.de/.../vehicle/*`.
-- Resultat: vollständige Liste aktiver Inserats-URLs.
+Alle bisherigen `bg-emerald-deep`, `text-paper` etc. bleiben Klassennamen — nur die CSS-Variablen werden umgemappt. Dadurch hellt sich die komplette Seite automatisch auf, ohne jede Komponente anzufassen.
 
-### 3. Detailseiten scrapen (strukturiert)
-- `firecrawl.scrape` mit `formats: [{ type: 'json', schema: {...} }]` für jede URL.
-- Extrahiertes Schema pro Fahrzeug:
-  - `mobileId` (aus URL)
-  - `marke`, `modell`, `variante`
-  - `preis` (EUR, brutto/netto-Flag)
-  - `erstzulassung` (MM/YYYY)
-  - `kilometer`
-  - `leistungKw`, `leistungPs`
-  - `getriebe`, `kraftstoff`, `farbe`, `karosserie`
-  - `hu` (TÜV)
-  - `ausstattung[]` (Top-Features)
-  - `beschreibung`
-  - `bilder[]` (mobile.de-CDN-URLs, max. 20)
+## 2. Kabayel-Branding (neu)
 
-### 4. Daten in `vehicles.ts` schreiben
-- Mapping auf bestehendes `Vehicle`-Schema in `src/data/vehicles.ts`.
-- Slug-Generierung: `marke-modell-mobileId` (URL-safe).
-- `featured`: 3 teuerste Fahrzeuge automatisch markieren.
-- Bilder als `https://img.classistatic.de/...` direkt referenzieren (Hotlink, kein Download).
+**Hero-Bereich (`src/routes/index.tsx`)** — neue Sektion **direkt unter dem Header**, vor den Fahrzeugen:
+- Split-Layout: links Portrait, rechts Text
+- Headline: „Das Autohaus des **WBC #1 Contender**"
+- Sub: „Agit Kabayel — Schwergewicht aus Bochum. Sein Team, Ihre Garantie für ehrliche Auto-Beratung."
+- Gold-Badge: „WBC #1 CONTENDER · HEAVYWEIGHT"
+- CTA: „Fahrzeuge ansehen" / „Story lesen"
 
-### 5. Verifikation
-- Build-Check
-- Stichprobe: Homepage, `/fahrzeuge`, eine Detailseite per Screenshot prüfen.
+**Bild**: KI-generierter stilisierter Boxer-Schattenriss (kein Foto von Kabayel — rechtssicher). Schwarz-Weiß, dramatisch, mit Gold-Akzent. Datei: `src/assets/champion-portrait.jpg`.
+TODO-Hinweis im Code: „Echtes Pressefoto hier einsetzen, sobald Lizenz geklärt."
 
-## Wichtige Hinweise
+**Header (`Header.tsx`)**: kleines Gold-Badge neben dem Logo: „TEAM KABAYEL · WBC #1".
 
-**Hotlink-Risiko (transparent):**
-- Bilder werden direkt von `img.classistatic.de` geladen — kein eigener Speicherbedarf.
-- ABER: Wenn mobile.de Hotlinking blockiert oder das Inserat gelöscht wird, erscheinen leere/fehlerhafte Bilder.
-- Bei Problemen können wir später auf lokales WebP-Caching umstellen.
+**Über-Uns-Seite (`ueber-uns.tsx`)**: eigene Story-Sektion „Boxen & Autos — gleiche Haltung" mit Bild, Karriere-Eckdaten (38 Kämpfe, 25 K.o., WBC-Ranking), Zitat-Block.
 
-**Statischer Import:**
-- Einmaliger Snapshot — wenn AK Autohaus neue Fahrzeuge auf mobile.de einstellt oder verkauft, müssen Sie mich erneut anweisen, den Import zu wiederholen.
+**Footer**: Zeile „Stolzer Partner von Agit Kabayel — WBC #1 Contender Heavyweight".
 
-**Stammdaten / mobile.de-Logo:**
-- Unverändert (keine echten Firmendaten ohne Ihre Bestätigung).
+## 3. Visuelle Anpassungen
 
-**Rechtliches:**
-- Da Sie im Auftrag von AK Autohaus arbeiten, dürfen die eigenen Inserate übernommen werden. Bei Bedarf Freigabe vom Kunden einholen.
+- **VehicleCard**: helle Karten mit dünner schwarzer Linie statt grünem Surface; Preis in Gold bleibt
+- **Buttons (`Btn.tsx`)**: Primary = schwarz/Gold-Text → Hover Gold/Schwarz; Secondary = Gold-Border auf Weiß
+- **Header**: weiß/transparent statt dunkel, Logo in Schwarz
+- **Forms**: weiße Inputs mit grauer Border, Gold-Focus-Ring
+- **Mobile Sticky Bar**: weißer Hintergrund + Gold-Akzent
 
-## Nicht enthalten
-- Backend/Datenbank für Leads
-- Echte Bilder-Downloads/WebP-Optimierung
-- Automatische Synchronisation
-- mobile.de-Logo-Entfernung aus Bildern (nur mit Original-Files möglich)
+## 4. SEO / Meta
+
+Title & Description auf allen Routen anpassen: „Autohaus AK · Team Kabayel — Premium Gebrauchtwagen Velbert".
+
+## Technische Details
+
+- **Keine** Komponenten-Logik ändert sich. Nur CSS-Variablen + neue Hero-Sektion + neues Bild.
+- Generiertes Portrait via `imagegen` (stilisierter Boxer-Schattenriss, premium quality).
+- Box-Daten (Kampfbilanz, WBC-Position) im Code als TODO markiert — Stand Mai 2026 sollte vom Kunden bestätigt werden.
+- Runtime-Fehler (dynamic import) wird durch das automatische Rebuild nach den Edits behoben.
+
+## Aus dem Scope
+
+- Echtes Pressefoto von Kabayel (Lizenz fehlt) — Platzhalter mit klarem TODO
+- Backend / Datenbank
+- mobile.de-Import (separater Auftrag)
 
 ## Nächster Schritt
-Firecrawl-Connector aktivieren — danach starte ich Scrape + Import direkt.
+
+Switch to Build Mode → Farb-Tokens tauschen, Hero-Sektion bauen, Portrait generieren, Header/Footer/About anpassen, visuell auf Preview prüfen.
