@@ -243,7 +243,7 @@ export function TrustBlock({
 }) {
   return (
     <ul
-      className={`space-y-${compact ? 2 : 3} font-mono text-[10px] uppercase tracking-[0.18em] text-ink-soft`}
+      className={`${compact ? "space-y-2" : "space-y-3"} font-mono text-[10px] uppercase tracking-[0.18em] text-ink-soft`}
     >
       {items.map((t) => (
         <li key={t} className="flex items-start gap-3">
