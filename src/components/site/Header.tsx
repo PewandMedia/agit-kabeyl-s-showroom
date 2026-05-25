@@ -6,6 +6,7 @@ const NAV = [
   { to: "/fahrzeuge", label: "Bestand" },
   { to: "/auto-verkaufen", label: "Ankauf" },
   { to: "/finanzierung", label: "Finanzierung" },
+  { to: "/rueckruf", label: "Rückruf" },
   { to: "/ueber-uns", label: "Über uns" },
   { to: "/kontakt", label: "Kontakt" },
 ] as const;

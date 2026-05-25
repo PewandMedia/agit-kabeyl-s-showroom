@@ -1,7 +1,12 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
+import { useState } from "react";
 import { SiteLayout } from "@/components/site/SiteLayout";
 import { VehicleGallery } from "@/components/site/VehicleGallery";
-import { InquiryForm } from "@/components/site/InquiryForm";
+import { VehicleInquiryForm } from "@/components/forms/VehicleInquiryForm";
+import { TestDriveForm } from "@/components/forms/TestDriveForm";
+import { CallbackForm } from "@/components/forms/CallbackForm";
+import { Modal } from "@/components/site/Modal";
+import { TrustBlock } from "@/components/forms/primitives";
 import { StatusBadge } from "@/components/site/StatusBadge";
 import {
   formatKm,
@@ -115,9 +120,17 @@ function VehicleDetail() {
   const { vehicle: v } = Route.useLoaderData();
   const isSold = v.status === "sold";
   const whatsappText = `Hallo ${dealer.legalName}, ich interessiere mich für ${v.title}. Ist das Fahrzeug noch verfügbar?`;
+  const [testDriveOpen, setTestDriveOpen] = useState(false);
+  const [callbackOpen, setCallbackOpen] = useState(false);
 
   return (
-    <SiteLayout hideMobileBar>
+    <SiteLayout hideMobileBar hideFab>
+      <Modal open={testDriveOpen} onClose={() => setTestDriveOpen(false)} title={`Probefahrt: ${v.title}`}>
+        <TestDriveForm vehicleTitle={v.title} vehicleId={v.id} />
+      </Modal>
+      <Modal open={callbackOpen} onClose={() => setCallbackOpen(false)} title="Rückruf anfordern">
+        <CallbackForm context={`Fahrzeug ${v.title} (ID ${v.id})`} />
+      </Modal>
       <article>
         <section className="bg-paper">
           <div className="mx-auto max-w-[1400px] px-5 pt-8 md:px-10 md:pt-12">
@@ -197,11 +210,14 @@ function VehicleDetail() {
                   innerhalb weniger Stunden mit allen Details.
                 </p>
                 <div className="mt-8 max-w-xl">
-                  <InquiryForm
+                  <VehicleInquiryForm
                     vehicleTitle={v.title}
                     vehicleId={v.id}
                     disabled={isSold}
                   />
+                </div>
+                <div className="mt-10 max-w-xl">
+                  <TrustBlock />
                 </div>
               </div>
             </div>
@@ -260,12 +276,21 @@ function VehicleDetail() {
                   >
                     Finanzierung anfragen
                   </Link>
-                  <Link
-                    to="/kontakt"
-                    className="block w-full text-center font-mono text-[11px] uppercase tracking-[0.22em] text-ink-soft hover:text-champagne"
+                  <button
+                    type="button"
+                    onClick={() => setTestDriveOpen(true)}
+                    disabled={isSold}
+                    className="block w-full border border-line py-3 text-center font-mono text-[11px] uppercase tracking-[0.22em] text-ink transition-colors hover:border-champagne hover:text-champagne disabled:cursor-not-allowed disabled:opacity-40"
                   >
-                    Probefahrt vereinbaren →
-                  </Link>
+                    Probefahrt anfragen
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => setCallbackOpen(true)}
+                    className="block w-full text-center font-mono text-[11px] uppercase tracking-[0.22em] text-ink-soft transition-colors hover:text-champagne"
+                  >
+                    Rückruf anfordern →
+                  </button>
                 </div>
 
                 <div className="mt-8 border-t border-line pt-6 font-mono text-[10px] uppercase tracking-[0.18em] text-ink-soft">

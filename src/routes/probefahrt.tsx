@@ -1,44 +1,44 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { SiteLayout } from "@/components/site/SiteLayout";
-import { PurchaseForm } from "@/components/forms/PurchaseForm";
+import { TestDriveForm } from "@/components/forms/TestDriveForm";
 import { TrustBlock } from "@/components/forms/primitives";
 import { dealer, telLink, whatsappLink } from "@/data/dealer";
 
-export const Route = createFileRoute("/auto-verkaufen")({
+export const Route = createFileRoute("/probefahrt")({
   head: () => ({
     meta: [
-      { title: "Auto verkaufen — Autohaus AK GmbH, Velbert" },
+      { title: "Probefahrt vereinbaren — Autohaus AK GmbH, Velbert" },
       {
         name: "description",
         content:
-          "Verkaufen Sie Ihr Fahrzeug an das Autohaus AK GmbH in Velbert. Faire Bewertung, sofortige Auszahlung, alles aus einer Hand.",
+          "Vereinbaren Sie Ihre Probefahrt beim Autohaus AK GmbH in Velbert. Wunschdatum wählen, in wenigen Stunden bestätigt — persönlich, unkompliziert.",
       },
-      { property: "og:title", content: "Auto verkaufen — Autohaus AK GmbH" },
+      { property: "og:title", content: "Probefahrt vereinbaren — Autohaus AK" },
       {
         property: "og:description",
-        content:
-          "Faire Bewertung, sofortige Auszahlung. Champion-Konditionen für Ihr Fahrzeug.",
+        content: "Wunschtermin wählen — wir bestätigen persönlich.",
       },
-      { property: "og:url", content: "/auto-verkaufen" },
+      { property: "og:url", content: "/probefahrt" },
     ],
-    links: [{ rel: "canonical", href: "/auto-verkaufen" }],
+    links: [{ rel: "canonical", href: "/probefahrt" }],
   }),
-  component: SellCarPage,
+  component: TestDrivePage,
 });
 
-function SellCarPage() {
+function TestDrivePage() {
   return (
     <SiteLayout>
       <section className="border-b border-line bg-paper">
         <div className="mx-auto max-w-[1400px] px-5 pt-16 pb-16 md:px-10 md:pt-28 md:pb-24">
-          <p className="kicker">Ankauf</p>
+          <p className="kicker">Probefahrt</p>
           <h1 className="mt-4 max-w-4xl font-display text-5xl leading-[1.04] text-ink md:text-7xl">
-            Wir kaufen Ihr Fahrzeug —{" "}
-            <span className="text-gradient-gold">fair und sofort.</span>
+            Erleben.{" "}
+            <span className="text-gradient-gold">Dann entscheiden.</span>
           </h1>
           <p className="mt-8 max-w-2xl text-base leading-relaxed text-ink-soft md:text-lg">
-            Marken- und modellübergreifend. Bewertung innerhalb eines Termins,
-            sofortige Auszahlung möglich, alle Formalitäten übernehmen wir.
+            Wunschdatum wählen, Zeitfenster angeben — wir bestätigen Ihren
+            Termin innerhalb weniger Stunden. Persönlich, ohne Druck, mit Zeit
+            für Fragen.
           </p>
         </div>
       </section>
@@ -46,13 +46,12 @@ function SellCarPage() {
       <section className="bg-paper">
         <div className="mx-auto grid max-w-[1400px] gap-14 px-5 py-16 md:grid-cols-12 md:gap-20 md:px-10 md:py-24">
           <div className="md:col-span-5">
-            <p className="kicker">So läuft es ab</p>
+            <p className="kicker">So einfach geht's</p>
             <ol className="mt-8 space-y-8">
               {[
-                ["01", "Daten senden", "Marke, Modell, Erstzulassung, Laufleistung, Zustand — gerne mit Fotos per WhatsApp."],
-                ["02", "Bewertung", "Wir prüfen Markt, Historie und Zustand und melden uns mit einem klaren Angebot."],
-                ["03", "Termin", "Persönliche Begutachtung in Velbert."],
-                ["04", "Übergabe & Auszahlung", "Sofortige Übernahme, sofortige Zahlung, alle Formalitäten erledigt."],
+                ["01", "Termin wählen", "Datum und Zeitfenster (Vormittag, Nachmittag, Samstag)."],
+                ["02", "Bestätigung", "Wir bestätigen telefonisch oder per WhatsApp."],
+                ["03", "Probefahrt", "Persönlich vor Ort in Velbert — ohne Verkaufsdruck."],
               ].map(([n, t, d]) => (
                 <li key={n} className="flex gap-6 border-b border-line pb-6">
                   <span className="font-display text-3xl text-champagne">{n}</span>
@@ -81,7 +80,7 @@ function SellCarPage() {
                   {dealer.phoneDisplay}
                 </a>
                 <a
-                  href={whatsappLink(`Hallo ${dealer.shortName}, ich möchte mein Fahrzeug verkaufen.`)}
+                  href={whatsappLink(`Hallo ${dealer.shortName}, ich möchte eine Probefahrt vereinbaren.`)}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center bg-champagne px-5 py-3 font-mono text-[10px] font-bold uppercase tracking-[0.22em] text-paper"
@@ -94,12 +93,12 @@ function SellCarPage() {
 
           <div className="md:col-span-7">
             <div className="border border-line bg-surface p-6 md:p-10">
-              <p className="kicker">Bewertung anfragen</p>
-              <h2 className="mt-4 font-display text-3xl text-ink md:text-4xl">
-                Fahrzeug-Daten senden.
+              <p className="kicker">Probefahrt-Anfrage</p>
+              <h2 className="mt-3 font-display text-3xl text-ink md:text-4xl">
+                Termin vereinbaren.
               </h2>
               <div className="mt-8">
-                <PurchaseForm />
+                <TestDriveForm />
               </div>
             </div>
           </div>

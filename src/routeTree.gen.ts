@@ -10,6 +10,8 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as UeberUnsRouteImport } from './routes/ueber-uns'
+import { Route as RueckrufRouteImport } from './routes/rueckruf'
+import { Route as ProbefahrtRouteImport } from './routes/probefahrt'
 import { Route as LeistungenRouteImport } from './routes/leistungen'
 import { Route as KontaktRouteImport } from './routes/kontakt'
 import { Route as ImpressumRouteImport } from './routes/impressum'
@@ -23,6 +25,16 @@ import { Route as FahrzeugeIdRouteImport } from './routes/fahrzeuge.$id'
 const UeberUnsRoute = UeberUnsRouteImport.update({
   id: '/ueber-uns',
   path: '/ueber-uns',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const RueckrufRoute = RueckrufRouteImport.update({
+  id: '/rueckruf',
+  path: '/rueckruf',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ProbefahrtRoute = ProbefahrtRouteImport.update({
+  id: '/probefahrt',
+  path: '/probefahrt',
   getParentRoute: () => rootRouteImport,
 } as any)
 const LeistungenRoute = LeistungenRouteImport.update({
@@ -80,6 +92,8 @@ export interface FileRoutesByFullPath {
   '/impressum': typeof ImpressumRoute
   '/kontakt': typeof KontaktRoute
   '/leistungen': typeof LeistungenRoute
+  '/probefahrt': typeof ProbefahrtRoute
+  '/rueckruf': typeof RueckrufRoute
   '/ueber-uns': typeof UeberUnsRoute
   '/fahrzeuge/$id': typeof FahrzeugeIdRoute
 }
@@ -92,6 +106,8 @@ export interface FileRoutesByTo {
   '/impressum': typeof ImpressumRoute
   '/kontakt': typeof KontaktRoute
   '/leistungen': typeof LeistungenRoute
+  '/probefahrt': typeof ProbefahrtRoute
+  '/rueckruf': typeof RueckrufRoute
   '/ueber-uns': typeof UeberUnsRoute
   '/fahrzeuge/$id': typeof FahrzeugeIdRoute
 }
@@ -105,6 +121,8 @@ export interface FileRoutesById {
   '/impressum': typeof ImpressumRoute
   '/kontakt': typeof KontaktRoute
   '/leistungen': typeof LeistungenRoute
+  '/probefahrt': typeof ProbefahrtRoute
+  '/rueckruf': typeof RueckrufRoute
   '/ueber-uns': typeof UeberUnsRoute
   '/fahrzeuge/$id': typeof FahrzeugeIdRoute
 }
@@ -119,6 +137,8 @@ export interface FileRouteTypes {
     | '/impressum'
     | '/kontakt'
     | '/leistungen'
+    | '/probefahrt'
+    | '/rueckruf'
     | '/ueber-uns'
     | '/fahrzeuge/$id'
   fileRoutesByTo: FileRoutesByTo
@@ -131,6 +151,8 @@ export interface FileRouteTypes {
     | '/impressum'
     | '/kontakt'
     | '/leistungen'
+    | '/probefahrt'
+    | '/rueckruf'
     | '/ueber-uns'
     | '/fahrzeuge/$id'
   id:
@@ -143,6 +165,8 @@ export interface FileRouteTypes {
     | '/impressum'
     | '/kontakt'
     | '/leistungen'
+    | '/probefahrt'
+    | '/rueckruf'
     | '/ueber-uns'
     | '/fahrzeuge/$id'
   fileRoutesById: FileRoutesById
@@ -156,6 +180,8 @@ export interface RootRouteChildren {
   ImpressumRoute: typeof ImpressumRoute
   KontaktRoute: typeof KontaktRoute
   LeistungenRoute: typeof LeistungenRoute
+  ProbefahrtRoute: typeof ProbefahrtRoute
+  RueckrufRoute: typeof RueckrufRoute
   UeberUnsRoute: typeof UeberUnsRoute
 }
 
@@ -166,6 +192,20 @@ declare module '@tanstack/react-router' {
       path: '/ueber-uns'
       fullPath: '/ueber-uns'
       preLoaderRoute: typeof UeberUnsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/rueckruf': {
+      id: '/rueckruf'
+      path: '/rueckruf'
+      fullPath: '/rueckruf'
+      preLoaderRoute: typeof RueckrufRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/probefahrt': {
+      id: '/probefahrt'
+      path: '/probefahrt'
+      fullPath: '/probefahrt'
+      preLoaderRoute: typeof ProbefahrtRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/leistungen': {
@@ -255,6 +295,8 @@ const rootRouteChildren: RootRouteChildren = {
   ImpressumRoute: ImpressumRoute,
   KontaktRoute: KontaktRoute,
   LeistungenRoute: LeistungenRoute,
+  ProbefahrtRoute: ProbefahrtRoute,
+  RueckrufRoute: RueckrufRoute,
   UeberUnsRoute: UeberUnsRoute,
 }
 export const routeTree = rootRouteImport
