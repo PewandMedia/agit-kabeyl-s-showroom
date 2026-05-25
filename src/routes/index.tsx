@@ -101,9 +101,10 @@ function Hero() {
                 Finanzierung möglich
               </li>
             </ul>
-
+          </div>
 
           <div className="mt-7 grid grid-cols-1 gap-3 sm:grid-cols-2 md:mt-10 md:flex md:flex-wrap">
+
             <Link
               to="/fahrzeuge"
               className="inline-flex min-h-[56px] items-center justify-center bg-champagne px-6 py-4 font-mono text-[11px] font-bold uppercase tracking-[0.25em] text-paper transition-colors md:px-8 md:py-5 md:text-[10px] md:tracking-[0.3em] md:hover:bg-ink md:hover:text-paper"
