@@ -7,11 +7,11 @@ import { dealer, telLink, whatsappLink } from "@/data/dealer";
 export const Route = createFileRoute("/auto-verkaufen")({
   head: () => ({
     meta: [
-      { title: "Auto verkaufen in Velbert — Autohaus AK GmbH" },
+      { title: "Auto verkaufen Velbert — Ankauf | Autohaus AK" },
       {
         name: "description",
         content:
-          "Faire Bewertung, schnelle Abwicklung, sofortige Auszahlung. Markenübergreifender Fahrzeugankauf vom Autohaus AK GmbH in Velbert.",
+          "Wir kaufen Ihr Fahrzeug — markenübergreifend, fair bewertet, sofort ausgezahlt. Ankauf in Velbert und NRW.",
       },
       { property: "og:title", content: "Auto verkaufen — Autohaus AK GmbH" },
       {
@@ -22,9 +22,42 @@ export const Route = createFileRoute("/auto-verkaufen")({
       { property: "og:url", content: "/auto-verkaufen" },
     ],
     links: [{ rel: "canonical", href: "/auto-verkaufen" }],
+    scripts: [
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "FAQPage",
+          mainEntity: PURCHASE_FAQS.map((f) => ({
+            "@type": "Question",
+            name: f.q,
+            acceptedAnswer: { "@type": "Answer", text: f.a },
+          })),
+        }),
+      },
+    ],
   }),
   component: SellCarPage,
 });
+
+const PURCHASE_FAQS = [
+  {
+    q: "Welche Fahrzeuge kaufen Sie an?",
+    a: "Marken- und modellübergreifend — Pkw, SUV und Transporter. Auch Unfall- oder Reparaturfahrzeuge bewerten wir gern.",
+  },
+  {
+    q: "Wie schnell erfolgt die Auszahlung?",
+    a: "Auf Wunsch noch am Tag der Übergabe — per Überweisung oder in bar nach Vereinbarung.",
+  },
+  {
+    q: "Übernehmen Sie die Abmeldung?",
+    a: "Ja. Wir übernehmen Abmeldung und alle Formalitäten — Sie geben das Fahrzeug ab und sind fertig.",
+  },
+  {
+    q: "Kaufen Sie auch bei laufender Finanzierung?",
+    a: "Ja. Wir lösen die Restschuld direkt bei Ihrer Bank ab und rechnen die Differenz mit Ihnen ab.",
+  },
+];
 
 function SellCarPage() {
   return (
@@ -105,6 +138,32 @@ function SellCarPage() {
               <div className="mt-8">
                 <PurchaseForm />
               </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="border-t border-line bg-paper">
+        <div className="mx-auto max-w-[1400px] px-5 py-16 md:px-10 md:py-24">
+          <div className="grid gap-14 md:grid-cols-12 md:gap-20">
+            <div className="md:col-span-4">
+              <p className="kicker">FAQ Ankauf</p>
+              <h2 className="mt-4 font-display text-3xl text-ink md:text-4xl">
+                Häufige Fragen zum Ankauf.
+              </h2>
+            </div>
+            <div className="md:col-span-8 divide-y divide-line border-y border-line">
+              {PURCHASE_FAQS.map((f) => (
+                <details key={f.q} className="group py-5">
+                  <summary className="flex cursor-pointer items-center justify-between gap-6 list-none">
+                    <span className="font-display text-lg text-ink md:text-xl">{f.q}</span>
+                    <span className="font-display text-2xl text-champagne transition-transform group-open:rotate-45">+</span>
+                  </summary>
+                  <p className="mt-3 max-w-2xl text-sm leading-relaxed text-ink-soft md:text-base">
+                    {f.a}
+                  </p>
+                </details>
+              ))}
             </div>
           </div>
         </div>

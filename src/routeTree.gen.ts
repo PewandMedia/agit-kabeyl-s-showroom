@@ -10,6 +10,7 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as UeberUnsRouteImport } from './routes/ueber-uns'
+import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as RueckrufRouteImport } from './routes/rueckruf'
 import { Route as ProbefahrtRouteImport } from './routes/probefahrt'
 import { Route as LeistungenRouteImport } from './routes/leistungen'
@@ -25,6 +26,11 @@ import { Route as FahrzeugeIdRouteImport } from './routes/fahrzeuge.$id'
 const UeberUnsRoute = UeberUnsRouteImport.update({
   id: '/ueber-uns',
   path: '/ueber-uns',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
+  id: '/sitemap.xml',
+  path: '/sitemap.xml',
   getParentRoute: () => rootRouteImport,
 } as any)
 const RueckrufRoute = RueckrufRouteImport.update({
@@ -94,6 +100,7 @@ export interface FileRoutesByFullPath {
   '/leistungen': typeof LeistungenRoute
   '/probefahrt': typeof ProbefahrtRoute
   '/rueckruf': typeof RueckrufRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
   '/ueber-uns': typeof UeberUnsRoute
   '/fahrzeuge/$id': typeof FahrzeugeIdRoute
 }
@@ -108,6 +115,7 @@ export interface FileRoutesByTo {
   '/leistungen': typeof LeistungenRoute
   '/probefahrt': typeof ProbefahrtRoute
   '/rueckruf': typeof RueckrufRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
   '/ueber-uns': typeof UeberUnsRoute
   '/fahrzeuge/$id': typeof FahrzeugeIdRoute
 }
@@ -123,6 +131,7 @@ export interface FileRoutesById {
   '/leistungen': typeof LeistungenRoute
   '/probefahrt': typeof ProbefahrtRoute
   '/rueckruf': typeof RueckrufRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
   '/ueber-uns': typeof UeberUnsRoute
   '/fahrzeuge/$id': typeof FahrzeugeIdRoute
 }
@@ -139,6 +148,7 @@ export interface FileRouteTypes {
     | '/leistungen'
     | '/probefahrt'
     | '/rueckruf'
+    | '/sitemap.xml'
     | '/ueber-uns'
     | '/fahrzeuge/$id'
   fileRoutesByTo: FileRoutesByTo
@@ -153,6 +163,7 @@ export interface FileRouteTypes {
     | '/leistungen'
     | '/probefahrt'
     | '/rueckruf'
+    | '/sitemap.xml'
     | '/ueber-uns'
     | '/fahrzeuge/$id'
   id:
@@ -167,6 +178,7 @@ export interface FileRouteTypes {
     | '/leistungen'
     | '/probefahrt'
     | '/rueckruf'
+    | '/sitemap.xml'
     | '/ueber-uns'
     | '/fahrzeuge/$id'
   fileRoutesById: FileRoutesById
@@ -182,6 +194,7 @@ export interface RootRouteChildren {
   LeistungenRoute: typeof LeistungenRoute
   ProbefahrtRoute: typeof ProbefahrtRoute
   RueckrufRoute: typeof RueckrufRoute
+  SitemapDotxmlRoute: typeof SitemapDotxmlRoute
   UeberUnsRoute: typeof UeberUnsRoute
 }
 
@@ -192,6 +205,13 @@ declare module '@tanstack/react-router' {
       path: '/ueber-uns'
       fullPath: '/ueber-uns'
       preLoaderRoute: typeof UeberUnsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/sitemap.xml': {
+      id: '/sitemap.xml'
+      path: '/sitemap.xml'
+      fullPath: '/sitemap.xml'
+      preLoaderRoute: typeof SitemapDotxmlRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/rueckruf': {
@@ -297,18 +317,9 @@ const rootRouteChildren: RootRouteChildren = {
   LeistungenRoute: LeistungenRoute,
   ProbefahrtRoute: ProbefahrtRoute,
   RueckrufRoute: RueckrufRoute,
+  SitemapDotxmlRoute: SitemapDotxmlRoute,
   UeberUnsRoute: UeberUnsRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { startInstance } from './start.ts'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-    config: Awaited<ReturnType<typeof startInstance.getOptions>>
-  }
-}

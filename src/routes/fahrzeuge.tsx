@@ -12,16 +12,16 @@ import { vehicles, statusMeta, type VehicleStatus } from "@/data/vehicles";
 export const Route = createFileRoute("/fahrzeuge")({
   head: () => ({
     meta: [
-      { title: "Fahrzeugbestand — Autohaus AK GmbH, Velbert" },
+      { title: "Gebrauchtwagen Velbert — Bestand | Autohaus AK" },
       {
         name: "description",
         content:
-          "Aktueller Bestand: geprüfte Premium- und Gebrauchtfahrzeuge vom Autohaus AK GmbH in Velbert. Filter nach Marke, Preis, Kilometerstand und Kraftstoff.",
+          "Aktueller Fahrzeugbestand des Autohaus AK GmbH in Velbert. Geprüft, aufbereitet, mit transparenter Historie.",
       },
-      { property: "og:title", content: "Fahrzeugbestand — Autohaus AK GmbH" },
+      { property: "og:title", content: "Gebrauchtwagen Velbert — Autohaus AK GmbH" },
       {
         property: "og:description",
-        content: "Geprüfte Premium- und Gebrauchtfahrzeuge aus Velbert — transparent dokumentiert.",
+        content: "Geprüfte Gebrauchtwagen aus Velbert — transparent dokumentiert.",
       },
       { property: "og:url", content: "/fahrzeuge" },
     ],

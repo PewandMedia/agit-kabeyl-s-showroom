@@ -15,11 +15,11 @@ export const Route = createFileRoute("/finanzierung")({
   validateSearch: searchSchema,
   head: () => ({
     meta: [
-      { title: "Fahrzeug-Finanzierung — Autohaus AK GmbH, Velbert" },
+      { title: "Autofinanzierung Velbert — Autohaus AK GmbH" },
       {
         name: "description",
         content:
-          "Passende Finanzierung für Ihr Wunschfahrzeug. Transparente Konditionen, flexible Laufzeiten, schnelle Zusage über etablierte Partnerbanken.",
+          "Autofinanzierung mit klaren Konditionen: Ballon- oder Ratenfinanzierung, schnelle Zusage. Beratung in Velbert.",
       },
       { property: "og:title", content: "Finanzierung — Autohaus AK GmbH" },
       {
@@ -29,9 +29,42 @@ export const Route = createFileRoute("/finanzierung")({
       { property: "og:url", content: "/finanzierung" },
     ],
     links: [{ rel: "canonical", href: "/finanzierung" }],
+    scripts: [
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "FAQPage",
+          mainEntity: FINANCING_FAQS.map((f) => ({
+            "@type": "Question",
+            name: f.q,
+            acceptedAnswer: { "@type": "Answer", text: f.a },
+          })),
+        }),
+      },
+    ],
   }),
   component: FinancingPage,
 });
+
+const FINANCING_FAQS = [
+  {
+    q: "Welche Unterlagen brauche ich?",
+    a: "Personalausweis, aktuelle Gehaltsnachweise und einen Nachweis des Wohnsitzes. Selbstständige reichen zusätzlich BWA oder Steuerbescheid ein.",
+  },
+  {
+    q: "Wie schnell kommt die Zusage?",
+    a: "In der Regel am selben Werktag — unsere Partnerbanken entscheiden meist innerhalb weniger Stunden.",
+  },
+  {
+    q: "Ist eine Anzahlung Pflicht?",
+    a: "Nein. Eine Anzahlung senkt die monatliche Rate, ist aber nicht erforderlich.",
+  },
+  {
+    q: "Ballon- oder Ratenfinanzierung — was passt?",
+    a: "Ratenfinanzierung tilgt das Fahrzeug vollständig. Ballonfinanzierung senkt die Rate über eine Schlussrate. Wir vergleichen beides für Sie.",
+  },
+];
 
 function FinancingPage() {
   const { fahrzeug } = Route.useSearch();
@@ -141,6 +174,32 @@ function FinancingPage() {
                   Per WhatsApp
                 </a>
               </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="border-t border-line bg-paper">
+        <div className="mx-auto max-w-[1400px] px-5 py-16 md:px-10 md:py-24">
+          <div className="grid gap-14 md:grid-cols-12 md:gap-20">
+            <div className="md:col-span-4">
+              <p className="kicker">FAQ Finanzierung</p>
+              <h2 className="mt-4 font-display text-3xl text-ink md:text-4xl">
+                Häufige Fragen zur Finanzierung.
+              </h2>
+            </div>
+            <div className="md:col-span-8 divide-y divide-line border-y border-line">
+              {FINANCING_FAQS.map((f) => (
+                <details key={f.q} className="group py-5">
+                  <summary className="flex cursor-pointer items-center justify-between gap-6 list-none">
+                    <span className="font-display text-lg text-ink md:text-xl">{f.q}</span>
+                    <span className="font-display text-2xl text-champagne transition-transform group-open:rotate-45">+</span>
+                  </summary>
+                  <p className="mt-3 max-w-2xl text-sm leading-relaxed text-ink-soft md:text-base">
+                    {f.a}
+                  </p>
+                </details>
+              ))}
             </div>
           </div>
         </div>

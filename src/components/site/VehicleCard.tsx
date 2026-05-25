@@ -22,7 +22,7 @@ export function VehicleCard({
       <div className="relative aspect-[4/3] overflow-hidden bg-surface-2 md:aspect-video">
         <img
           src={vehicle.images[0]}
-          alt={`${vehicle.title}, Baujahr ${vehicle.year}`}
+          alt={`${vehicle.title} ${vehicle.firstRegistration} — Gebrauchtwagen bei Autohaus AK Velbert`}
           width={1280}
           height={960}
           loading={priority ? "eager" : "lazy"}
