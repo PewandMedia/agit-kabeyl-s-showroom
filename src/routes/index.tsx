@@ -8,15 +8,20 @@ import heroCar from "@/assets/hero-car.jpg";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: `${dealer.legalName} — Premium-Fahrzeuge aus ${dealer.city}` },
+      { title: `${dealer.legalName} — Gebrauchtwagen in ${dealer.city}` },
       {
         name: "description",
         content:
-          "Geprüfte Fahrzeuge, ehrliche Beratung, Finanzierung und fairer Ankauf. Persönlich betreut vom Autohaus AK GmbH in Velbert.",
+          "Geprüfte Gebrauchtwagen, ehrliche Beratung und faire Konditionen in Velbert. Verkauf, Ankauf und Finanzierung aus einer Hand.",
       },
-      { property: "og:title", content: `${dealer.legalName} — Premium-Fahrzeuge aus ${dealer.city}` },
-      { property: "og:description", content: "Geprüfte Fahrzeuge, ehrliche Beratung, Finanzierung & Ankauf in Velbert." },
+      { property: "og:title", content: `${dealer.legalName} — Gebrauchtwagen in ${dealer.city}` },
+      {
+        property: "og:description",
+        content:
+          "Geprüfte Gebrauchtwagen, ehrliche Beratung, Finanzierung und Ankauf in Velbert.",
+      },
       { property: "og:image", content: heroCar },
+      { name: "twitter:image", content: heroCar },
       { property: "og:url", content: "/" },
     ],
     links: [{ rel: "canonical", href: "/" }],
