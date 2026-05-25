@@ -1,15 +1,11 @@
 import { Link } from "@tanstack/react-router";
 import type { Vehicle } from "@/data/vehicles";
 import { formatKm, formatPrice, formatKw } from "@/data/vehicles";
+import { StatusBadge } from "@/components/site/StatusBadge";
 
 export function VehicleCard({ vehicle }: { vehicle: Vehicle }) {
   const ps = Math.round(vehicle.powerKw * 1.359);
-  const statusLabel =
-    vehicle.status === "reserved"
-      ? "Reserviert"
-      : vehicle.status === "sold"
-        ? "Verkauft"
-        : "Geprüft";
+  const isSold = vehicle.status === "sold";
 
   return (
     <Link
@@ -19,17 +15,22 @@ export function VehicleCard({ vehicle }: { vehicle: Vehicle }) {
     >
       <div className="relative aspect-video overflow-hidden bg-surface-2">
         <img
-          src={vehicle.image}
+          src={vehicle.images[0]}
           alt={`${vehicle.title}, Baujahr ${vehicle.year}`}
           width={1280}
           height={720}
           loading="lazy"
-          className="h-full w-full object-cover opacity-80 grayscale transition-all duration-700 ease-out group-hover:scale-105 group-hover:grayscale-0 group-hover:opacity-100"
+          className={`h-full w-full object-cover transition-all duration-700 ease-out group-hover:scale-105 ${
+            isSold
+              ? "opacity-40 grayscale"
+              : "opacity-80 grayscale group-hover:grayscale-0 group-hover:opacity-100"
+          }`}
         />
         <div className="absolute left-3 top-3">
-          <span className="bg-champagne px-2 py-0.5 font-mono text-[9px] font-bold uppercase tracking-tight text-paper">
-            {statusLabel}
-          </span>
+          <StatusBadge status={vehicle.status} />
+        </div>
+        <div className="absolute bottom-3 right-3 font-mono text-[9px] uppercase tracking-tight text-paper/70">
+          {vehicle.id}
         </div>
       </div>
 
@@ -74,5 +75,4 @@ function Spec({ label, value }: { label: string; value: string }) {
   );
 }
 
-// Re-export for compatibility
 export { formatKw };
