@@ -1,14 +1,12 @@
 import { Header } from "./Header";
 import { Footer } from "./Footer";
 import { MobileStickyBar } from "./MobileStickyBar";
-import { StickyWhatsAppFab } from "./StickyWhatsAppFab";
 import { BackToTop } from "./BackToTop";
 
 export function SiteLayout({
   children,
   transparentHeader = false,
   hideMobileBar = false,
-  hideFab = false,
 }: {
   children: React.ReactNode;
   transparentHeader?: boolean;
@@ -22,7 +20,6 @@ export function SiteLayout({
         {children}
       </main>
       <Footer />
-      {!hideFab && <StickyWhatsAppFab />}
       {!hideMobileBar && <MobileStickyBar />}
       <BackToTop />
       {!hideMobileBar && (

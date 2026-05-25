@@ -1,115 +1,82 @@
 
-# Umsetzung — Premium-Upgrade auf Nummer-1-Niveau
+# Premium-Redesign Autohaus AK
 
-Fokus auf alles, was ohne externe Daten (echte Stammdaten/Fotos) machbar ist. Keine Vermischung mit Backend-Setup — das bleibt separater Schritt.
+Ziel: Editorial-High-End-Look (Aston Martin / Porsche Studio Niveau), kein Template-Geruch. Sichtbare, mutige Änderungen — keine Mikro-Tweaks.
 
-## 1. Header & Navigation
-- Logo-Mark redesignen: monogramm „AK" mit feinem Champagne-Underline statt zwei kollidierender Labels.
-- Sticky-Header bekommt subtilen Glas-Effekt + dünne Trennlinie nur nach Scroll.
-- Aktive Route mit Champagne-Underline (statt nur Farbe).
-- Mobile Menü: Full-Screen-Overlay mit großer Typo + Sekundär-Block (Telefon/WhatsApp/Adresse) unten.
-- Telefonnummer mit Icon im Header ab `xl`.
+## 0. Vorab
+- SSR-Fehler in `index.tsx` (JSX-Tag-Bruch ~Z. 151) beim Refactor mit beheben.
 
-## 2. Hero
-- Hintergrund: dunkler Verlauf (`bg-ink` → `bg-paper`) statt flach grün → cineastischer.
-- H1-Kontrast erhöhen (text-paper auf dunklem Bereich), Champagne-Akzent bleibt.
-- Neue Sub-Reassurance-Zeile mit 3 Inline-Trust-Punkten („Eingangsprüfung · 12 Monate Garantie · Finanzierung möglich") mit Mini-Icons.
-- Daten-Panels (Available Units / Quality Score) durch echte Differenzierung ersetzen: „Bestand · Ø Lieferzeit · Bewertung".
-- Smooth Parallax (subtil, nur Desktop, prefers-reduced-motion respektiert).
-- CTAs hierarchisch: primär „Bestand ansehen" solid Champagne, sekundär „Fahrzeug verkaufen" Outline.
+## 1. Design-Tokens (`src/styles.css`)
+- Neue Palette: `--ink: oklch(0.14 0.01 270)`, `--paper: oklch(0.97 0.005 90)`, `--bone: oklch(0.93 0.008 80)`, Akzent `--champagne: oklch(0.78 0.07 80)` raffinieren (kühler, weniger gelb), zusätzlich `--accent-deep: oklch(0.32 0.05 80)` für Hover.
+- Typo-Skala neu: Display 72/88, H1 56, H2 40, H3 24, Body 16/26. `tracking-[-0.03em]` für Display.
+- Einheitliche Easing-Token `--ease-premium: cubic-bezier(0.22, 0.61, 0.36, 1)`, Dauer 500–700 ms.
+- Spacing-Rhythm: Sections `py-32 md:py-40`, Container `max-w-[1440px] px-6 md:px-12`.
+- Globale Regeln: keine `rounded-*` außer `rounded-none`; alle Buttons scharfkantig. Border standard `border-ink/8`.
 
-## 3. Fahrzeugkarten
-- Bereits letzte Iteration: Highlight-Chips + Monatsrate.
-- Zusätzlich: Hover-Reveal mit „Details ansehen →" Bar, Preis-Hierarchie sauberer (Preis groß, Rate dezent darunter).
-- „Neu im Bestand"-Badge für Fahrzeuge < 14 Tage.
-- Bild mit `aspect-[16/10]` einheitlich, object-position für bessere Komposition.
-- Skeleton-Loader-Stil für leere Slots.
+## 2. Hero (`src/routes/index.tsx`)
+- Full-bleed Split 55/45, Höhe `min-h-[92vh]`.
+- Links: Eyebrow-Strich + Kicker („Autohaus · Düsseldorf"), riesiger Display-Headline 2-zeilig mit Wechsel-Akzentwort in Champagner-Outline-Schrift, Subline max. 16 Wörter, danach **eine** primäre CTA „Fahrzeuge ansehen" (massive schwarze Pille, Pfeil-Icon, Hover füllt Champagner) + Textlink „oder Termin vereinbaren →".
+- Unter den CTAs eine schmale Trust-Leiste (4 Items mit dünnen Icons, Trennstrichen).
+- Rechts: cinematisches Bild full-height ohne Padding/Border, dezenter Vignette-Gradient, untenrechts Live-Counter „24 Fahrzeuge im Bestand" als Glas-Chip.
+- Scroll-Indikator dezent unten.
 
-## 4. Fahrzeug-Detailseite
-- CTA-Hierarchie: ein dominanter Primär-Button („Probefahrt buchen"), zwei sekundäre (Call/WhatsApp) kleiner.
-- Sticky-CTA-Bar am unteren Bildschirmrand (Desktop seitlich, Mobile bottom) mit Preis + Rate + Primär-CTA.
-- Galerie mit Vollbild-Lightbox (Klick auf Hauptbild), Tastatur-Navigation, Thumbnail-Strip.
-- „Highlights"-Block oberhalb der Tech-Daten mit Icons.
-- Redaktioneller „Über dieses Fahrzeug"-Absatz (dynamisch generiert aus Marke/Modell/Features).
-- Finanzierungs-Box mit Rate, Laufzeit-Slider (3/4/5/7 Jahre) und „Anfrage senden" Pre-Fill.
+## 3. Fahrzeugkarten (`VehicleCard.tsx`)
+- Format `aspect-[4/5]` Bild, darunter Info-Block auf Bone.
+- Oben links Statuschip (Neu/Reserviert) als reines Text-Label mit Strich.
+- Marke in Mono-Caps oben, Modell als Display-Serif darunter (große H3), Eckdaten (km · EZ · PS · Kraftstoff) als Mono-Reihe mit Punkten als Trenner.
+- Preis rechtsbündig, große Zahl + kleinere „MwSt." Zeile; Monatsrate als Sub-Text klein darunter.
+- Hover: Bild Zoom 1.04 + Vignette dunkler, unten Slide-In-Leiste „Details ansehen →" in Champagner.
+- Feature-Chips entfernt (zu „Template"). Stattdessen max. 3 dezente Tags als kleine Mono-Caps unter dem Modellnamen.
 
-## 5. Formulare
-- Floating-Label-Stil statt Top-Labels (sauberer Premium-Look).
-- Inline-Validierung mit ruhigen Microcopy-Hinweisen (kein rotes Schreien).
-- Multi-Step für Probefahrt/Ankauf (2–3 Schritte) mit Fortschrittsbalken.
-- Submit-State: animierter Loading-Indikator + Success-Karte mit klarem nächsten Schritt.
-- Honeypot + zeitbasierter Spamschutz.
+## 4. Buttons (neue `Button.tsx` Variants)
+- `primary`: bg-ink, text-paper, Höhe 56px, padding-x 32px, Mono-Caps tracking-[0.2em], Pfeil-Icon, Hover swap zu Champagner-bg + ink-text mit 400ms.
+- `secondary`: 1px border-ink, transparent, gleiche Geometrie, Hover invertiert.
+- `ghost`: nur Text mit animiertem Underline (left→right).
+- Keine Schatten, keine Radius.
 
-## 6. Trust
-- Neue „Trust-Stack"-Sektion auf Home: 4 Säulen mit Icons (Eingangsprüfung, Garantie, Finanzierung, persönliche Übergabe) statt Text-only.
-- Testimonial-Block aufwerten: 3 Karten mit Initial-Avatar + Standort + Sterne, Schema.org Review (auch wenn Beispieldaten — mit `aria-label="Beispielbewertung"` gekennzeichnet, damit nicht irreführend).
-- „Ihr Ansprechpartner"-Karte mit Platzhalter-Bild + Direkt-Kontakt (Telefon/WhatsApp/Mail).
-- Garantie/Zertifikat-Strip („TÜV-geprüft · 12 Monate Gewährleistung · DAT-bewertet") in monochromem Logo-Stil.
+## 5. Mobile Bottom Bar (`MobileStickyBar.tsx`)
+- Höhe 72px, voll-breite, bg-ink, 3 Slots gleichmäßig: Anrufen · WhatsApp · Termin.
+- Icons 22px outline + Mini-Label 10px Mono-Caps darunter.
+- Aktiver Slot bekommt Champagner-Top-Strich (3px).
+- Safe-Area `pb-[env(safe-area-inset-bottom)]`, dezenter Top-Border ink/20.
+- Verschwindet beim Scrollen nach unten, erscheint beim Scrollen nach oben (Hide-on-scroll).
 
-## 7. Texte (Feinschliff)
-- Hero alternative final wählen: „Geprüfte Fahrzeuge. Persönlich übergeben." (kürzer, härter).
-- FAQ um 3 echte Sorgen ergänzen (Mängel nach Übergabe, TÜV-Kosten, Lieferradius).
-- Detailseite: redaktionelle Vorlage pro Fahrzeug.
-- Microcopy in Formularen (z. B. „Antwort meist innerhalb von 60 Min").
+## 6. Typografie
+- Headings: `Instrument Serif` (Display) für Hero/Modellnamen, `Sora` für UI/Mono für Daten.
+- Body `Manrope` 16/26, `text-ink/80`.
+- Komplette Site auf max. 2 Schriftgrößen pro Section.
 
-## 8. SEO
-- Pro Route saubere H1/H2-Hierarchie prüfen, doppelte H1 entfernen.
-- `og:image` pro Hauptroute (relativ zur Domain, später absolute URL via `getRequestOrigin`).
-- `Article` Schema vorbereiten (für späteren Blog) — Infrastruktur via `head()` Helper.
-- `Service` Schema für `/auto-verkaufen` und `/finanzierung`.
-- `AggregateRating` mit Beispieldaten **NICHT** ausspielen (Google-Strafe-Risiko bei Fake). Stattdessen Platzhalter-Hook, der erst aktiv wird wenn echte Bewertungen kommen.
-- Sitemap mit `lastmod` ergänzen.
+## 7. Trust-Elemente
+- Neue Komponente `TrustStack`: 4 große Pillars als horizontale Cards mit Zahl (Display 64px) + Untertitel — direkt unter Hero.
+- Bewertungs-Strip mit echtem Hinweis „Bewertungen werden geladen" (kein Fake bis Daten existieren).
+- Garantie-Siegel-Reihe in monochrom (SVG outline) unter Fahrzeugliste.
+- „Ihr Ansprechpartner" Card mit Portrait-Platzhalter + direktem Mobilkontakt im Footer-Bereich jeder Hauptseite.
 
-## 9. Geschwindigkeit
-- `vite-imagetools` einbauen → Hero und Fahrzeugbilder als AVIF + WebP mit `<picture>` und `srcset`.
-- LCP-Bild Preload via `head().links`.
-- Google Fonts: lokale Variable-Fonts (Sora, Manrope) statt CDN-Link, `font-display: swap`.
-- Grain-Overlay komplett raus (war ein Performance-Tax ohne Premium-Gewinn).
-- Code-Split: schwerere Inseln (Finanzierungsrechner, Lightbox) lazy.
+## 8. CTAs
+- Pro Seite **eine** primäre CTA. Sekundäres immer als Ghost-Link.
+- Sticky Sub-Header CTA „Termin vereinbaren" ab Scroll 400px (Desktop).
 
-## 10. Animationen
-- Globale Regel: Easing `[0.22, 0.61, 0.36, 1]`, Dauer 400–600 ms, keine Bounces.
-- `prefers-reduced-motion: reduce` respektieren — alle dekorativen Anims aus.
-- Scroll-reveal nur einmal pro Element (IntersectionObserver, dann unsubscribe).
-- Kein paralleles Animieren mehrerer Layers (verhindert Jank auf mobil).
+## 9. Formulare (`InquiryForm.tsx`, Kontakt, Rückruf, Probefahrt)
+- Reduktion auf **3 Felder**: Name · Telefon · Nachricht (optional). E-Mail nur wenn nötig.
+- Floating Labels, 1px Bottom-Border-Stil (kein Box-Look), Fokus-Border Champagner.
+- Submit-Button full-width Primary, Loading-State mit animiertem Strich.
+- Success-State inline (kein Toast): großes „Danke." Display + Rückrufzeit.
+- Honeypot + Zeitfalle gegen Spam.
+
+## 10. Abstände & Grid
+- Globaler 12-col Grid mit 24px Gutter.
+- Section-Padding `py-32 md:py-40`, Headings immer mit 96px Abstand zum Folgeblock.
+- Konsequente vertikale Rhythmik via `space-y-*` statt margin-Mix.
 
 ## 11. Footer
-- Komplett-Redesign: 4-Spalten-Grid (Marke/Adresse · Bestand-Links · Service-Links · Rechtliches), oben „Bereit zur Probefahrt?"-CTA-Strip.
-- Mini-Map-Snippet (statisches Bild, kein iframe — lädt nicht extern) mit Klick → Google Maps.
-- Öffnungszeiten als Liste mit „Jetzt geöffnet/geschlossen"-Indikator (Client-side).
-- Newsletter weglassen (für Autohaus selten relevant, würde DSGVO-Aufwand erzeugen).
+- Reduziert auf 3 Spalten + Bottom-Bar. Mega-CTA-Strip oben raus (zu laut), stattdessen schlanker Subscribe-freier Block „Besuchen Sie uns" mit Adresse, Öffnungszeiten, Telefon.
 
-## 12. Mobile (Feinschliff)
-- Sticky Bottom-Bar bekommt Icon + Label statt nur Label, 4 gleich breite Slots.
-- Tap-Targets durchgehend min. 48 px.
-- Filter-Slide-Panel: „Anwenden"-CTA als Sticky-Footer im Panel.
-- Hero-H1 ab 360 px sauber (testen, ggf. text-balance + manuelles `<wbr>`).
-- Zurück-zum-Top-Button nach 600 px Scroll, dezent rechts unten (ersetzt FAB auf Mobile nicht).
+## 12. Performance
+- `font-display: swap`, Preload Hero-Bild, AVIF/WebP wo möglich.
+- Framer-Motion-Imports auf `m` + LazyMotion umstellen.
 
-## 13. Stilentscheidung
-Premium-Brutalism beibehalten (harte Linien, Mono-Akzente), aber konsequenter: keine runden Buttons, keine Schatten ohne Zweck, Champagne nur für Akzent-Trigger (CTAs, aktive Zustände, Preise) — nicht für Body-Text.
+## Geänderte Dateien (≈14)
+`src/styles.css`, `src/routes/index.tsx`, `VehicleCard.tsx`, `VehicleFilters.tsx`, `Header.tsx`, `Footer.tsx`, `MobileStickyBar.tsx`, `StickyWhatsAppFab.tsx` (entfernen — redundant zur neuen Bar), `InquiryForm.tsx`, `fahrzeuge.tsx`, `fahrzeuge.$id.tsx`, `kontakt.tsx`, `probefahrt.tsx`, `rueckruf.tsx`. Neu: `src/components/ui/Button.tsx`, `src/components/site/TrustStack.tsx`.
 
----
-
-## Was bewusst NICHT in dieser Runde
-
-- **Lead-Backend** (Lovable Cloud + Resend) — separater Schritt, gibst du Freigabe?
-- **Echte Stammdaten/Bilder** — brauche Input von dir.
-- **Reservierung mit Stripe-Anzahlung** — P3.
-- **Blog/Ratgeber-Inhalte** — Infrastruktur ja, Inhalte separat.
-- **3D/360°-Modul** — P3.
-
-## Reihenfolge der Umsetzung
-
-1. Design-Foundation (Tokens, Animation-System, Reduced-Motion).
-2. Header + Footer + Navigation.
-3. Hero + Trust-Stack + Testimonials.
-4. Fahrzeugkarten + Detailseite + Lightbox.
-5. Formulare (Floating-Label, Multi-Step, Honeypot).
-6. SEO-Feinschliff (H-Hierarchie, Service-Schema, Sitemap-lastmod).
-7. Performance (vite-imagetools, Font-Self-Host, Preload).
-8. Mobile-Feinschliff + QA-Screenshots Desktop/Tablet/Mobile.
-
-Geschätzter Umfang: ca. 12–15 Dateien geändert, 2–3 neu (Lightbox, FloatingField, BackToTop).
-
-Soll ich genau so loslegen, oder willst du etwas raus/dazu?
+## Ausgeschlossen
+- Lead-Backend, Stammdaten, echte Bilder, Stripe — separate Runden.

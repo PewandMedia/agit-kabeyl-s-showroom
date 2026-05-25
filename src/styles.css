@@ -145,15 +145,23 @@
 
   input, textarea, select {
     color-scheme: dark;
-    background-color: var(--color-surface);
     color: var(--color-ink);
+  }
+  /* Default field chrome only when not explicitly overridden */
+  input:not(.peer):not([type="checkbox"]):not([type="radio"]),
+  textarea:not(.peer),
+  select:not(.peer) {
+    background-color: var(--color-surface);
     border: 1px solid var(--color-line);
   }
-  input:focus, textarea:focus, select:focus {
+  input:not(.peer):not([type="checkbox"]):not([type="radio"]):focus,
+  textarea:not(.peer):focus,
+  select:not(.peer):focus {
     outline: none;
     border-color: var(--color-champagne);
     box-shadow: 0 0 0 1px var(--color-champagne);
   }
+
 }
 
 @layer utilities {

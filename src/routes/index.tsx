@@ -1,9 +1,11 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { SiteLayout } from "@/components/site/SiteLayout";
 import { VehicleCard } from "@/components/site/VehicleCard";
+import { BtnLink, BtnA } from "@/components/ui/Btn";
 import { featuredVehicles, vehicles } from "@/data/vehicles";
 import { dealer, telLink, whatsappLink } from "@/data/dealer";
 import heroCar from "@/assets/hero-car.jpg";
+
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -64,88 +66,70 @@ function HomePage() {
 /* ─────────────────────────── HERO ─────────────────────────── */
 function Hero() {
   return (
-    <section className="relative overflow-hidden bg-paper pt-20 md:pt-32">
-      <div className="mx-auto grid max-w-[1400px] gap-8 px-4 pb-12 md:grid-cols-2 md:gap-12 md:px-10 md:pb-24 lg:items-stretch">
-        {/* LEFT — Headline */}
-        <div className="flex animate-fade-up flex-col justify-between md:py-12">
-          <div className="space-y-5 md:space-y-7">
-            <div className="flex items-center gap-3">
-              <span className="h-px w-8 bg-champagne" />
-              <span className="font-mono text-[10px] font-medium uppercase tracking-[0.4em] text-champagne">
-                Autohaus AK · Velbert
-              </span>
-            </div>
-            {/* Alt-Headlines:
-                · „Geprüfte Fahrzeuge aus Velbert — mit Haltung verkauft."
-                · „Ihr nächstes Fahrzeug. Ehrlich beraten, sauber übergeben." */}
-            <h1 className="font-display text-[40px] font-extrabold leading-[0.95] tracking-tighter text-ink sm:text-6xl md:text-7xl lg:text-[88px]">
-              Premium-Fahrzeuge.<wbr />{" "}
-              <span className="text-champagne">Persönlich übergeben.</span>
-            </h1>
-            <p className="max-w-md text-base leading-relaxed text-ink-soft md:text-lg">
-              Persönlich ausgewählt, geprüft und transparent dokumentiert.
-              Beratung, Finanzierung und Ankauf aus einer Hand — vom Autohaus AK in Velbert.
-            </p>
+    <section className="relative isolate min-h-[92vh] overflow-hidden bg-paper">
+      {/* Cinematic full-bleed image */}
+      <div className="absolute inset-0 -z-10">
+        <img
+          src={heroCar}
+          alt={`Verkaufsraum ${dealer.legalName} in ${dealer.city}`}
+          width={1920}
+          height={1280}
+          fetchPriority="high"
+          decoding="async"
+          className="h-full w-full object-cover"
+        />
+        {/* Layered gradients for editorial depth */}
+        <div className="absolute inset-0 bg-gradient-to-r from-paper via-paper/85 to-paper/30" />
+        <div className="absolute inset-0 bg-gradient-to-t from-paper via-transparent to-paper/40" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_50%,transparent_0%,oklch(0.18_0.03_161/0.4)_100%)]" />
+      </div>
 
-            <ul className="flex flex-wrap items-center gap-x-5 gap-y-2 pt-2 font-mono text-[10px] font-semibold uppercase tracking-[0.18em] text-ink/80">
-              <li className="flex items-center gap-2">
-                <span aria-hidden className="inline-block h-1.5 w-1.5 bg-champagne" />
-                Eingangsprüfung
-              </li>
-              <li className="flex items-center gap-2">
-                <span aria-hidden className="inline-block h-1.5 w-1.5 bg-champagne" />
-                12 Monate Garantie*
-              </li>
-              <li className="flex items-center gap-2">
-                <span aria-hidden className="inline-block h-1.5 w-1.5 bg-champagne" />
-                Finanzierung möglich
-              </li>
-            </ul>
-          </div>
+      <div className="relative mx-auto flex min-h-[92vh] max-w-[1440px] flex-col justify-between px-6 pb-12 pt-32 md:px-12 md:pt-40">
+        {/* Top label */}
+        <div className="flex items-center gap-4 animate-fade-up">
+          <span className="h-px w-12 bg-champagne" />
+          <span className="font-mono text-[10px] font-medium uppercase tracking-[0.45em] text-champagne">
+            Autohaus · {dealer.city}
+          </span>
+        </div>
 
-          <div className="mt-7 grid grid-cols-1 gap-3 sm:grid-cols-2 md:mt-10 md:flex md:flex-wrap">
+        {/* Headline + CTA block */}
+        <div className="max-w-3xl py-16 animate-fade-up">
+          <h1 className="font-display text-[44px] font-extrabold leading-[0.95] tracking-[-0.035em] text-ink sm:text-6xl md:text-7xl lg:text-[92px]">
+            Geprüfte Fahrzeuge.
+            <br />
+            <span className="text-champagne">Persönlich übergeben.</span>
+          </h1>
+          <p className="mt-8 max-w-xl text-lg leading-relaxed text-ink/80 md:text-xl">
+            Eigene Eingangsprüfung, lückenlose Dokumentation, klare Beratung —
+            vom Autohaus AK in {dealer.city}.
+          </p>
 
-            <Link
-              to="/fahrzeuge"
-              className="inline-flex min-h-[56px] items-center justify-center bg-champagne px-6 py-4 font-mono text-[11px] font-bold uppercase tracking-[0.25em] text-paper transition-colors md:px-8 md:py-5 md:text-[10px] md:tracking-[0.3em] md:hover:bg-ink md:hover:text-paper"
-            >
+          <div className="mt-12 flex flex-col items-start gap-6 sm:flex-row sm:items-center sm:gap-8">
+            <BtnLink to="/fahrzeuge" variant="primary" size="lg">
               Bestand ansehen
-            </Link>
-            <a
-              href={whatsappLink(`Hallo ${dealer.shortName}, ich habe eine Anfrage.`)}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex min-h-[56px] items-center justify-center border border-champagne/50 px-6 py-4 font-mono text-[11px] font-bold uppercase tracking-[0.25em] text-ink md:hidden"
-            >
-              WhatsApp
-            </a>
-            <Link
-              to="/auto-verkaufen"
-              className="hidden md:inline-flex md:items-center md:justify-center md:border md:border-champagne/40 md:px-8 md:py-5 md:font-mono md:text-[10px] md:font-bold md:uppercase md:tracking-[0.3em] md:text-ink md:transition-colors md:duration-500 md:hover:border-champagne md:hover:text-champagne"
-            >
-              Ankauf-Portal
-            </Link>
+            </BtnLink>
+            <BtnLink to="/kontakt" variant="ghost" arrow>
+              Termin vereinbaren
+            </BtnLink>
           </div>
         </div>
 
-        {/* RIGHT — Cinematic image + data overlays */}
-        <div className="relative h-[280px] overflow-hidden border border-champagne/15 bg-surface p-2 md:h-auto md:min-h-[560px]">
-          <img
-            src={heroCar}
-            alt={`Verkaufsraum ${dealer.legalName} in ${dealer.city}`}
-            width={1200}
-            height={1500}
-            fetchPriority="high"
-            decoding="async"
-            className="absolute inset-0 h-full w-full object-cover transition-transform duration-1000 ease-out hover:scale-[1.02]"
-          />
-          <div className="absolute inset-0 bg-gradient-to-t from-paper/55 via-transparent to-transparent md:bg-gradient-to-tr md:from-paper/40 md:via-transparent md:to-transparent" />
-
-
-          {/* Bottom data panels — Desktop only */}
-          <div className="absolute inset-x-0 bottom-0 hidden grid-cols-2 gap-3 p-6 md:grid md:p-8">
-            <DataPanel label="Available Units" value={String(vehicles.length).padStart(2, "0")} />
-            <DataPanel label="Quality Score" value="99,8 %" />
+        {/* Bottom strip — Trust + Live counter */}
+        <div className="flex flex-col gap-8 border-t border-champagne/15 pt-8 md:flex-row md:items-end md:justify-between md:gap-12">
+          <ul className="flex flex-wrap items-center gap-x-8 gap-y-3 font-mono text-[10px] font-semibold uppercase tracking-[0.22em] text-ink/80">
+            <HeroTrust label="Eingangsprüfung" />
+            <HeroTrust label="12 Monate Garantie" />
+            <HeroTrust label="Finanzierung möglich" />
+            <HeroTrust label="Ankauf zum Tagespreis" />
+          </ul>
+          <div className="flex items-baseline gap-4 border-l border-champagne/30 pl-6">
+            <span className="font-display text-5xl font-extrabold leading-none text-champagne md:text-6xl">
+              {String(vehicles.length).padStart(2, "0")}
+            </span>
+            <span className="font-mono text-[10px] uppercase tracking-[0.3em] text-ink-soft">
+              Fahrzeuge<br />im Bestand
+            </span>
           </div>
         </div>
       </div>
@@ -153,19 +137,16 @@ function Hero() {
   );
 }
 
-function DataPanel({ label, value }: { label: string; value: string }) {
+function HeroTrust({ label }: { label: string }) {
   return (
-    <div className="border-l-2 border-champagne bg-paper/80 p-4 backdrop-blur-md">
-      <div className="font-mono text-[9px] uppercase tracking-widest text-ink-soft opacity-70">
-        {label}
-      </div>
-      <div className="mt-1 font-display text-2xl font-extrabold text-ink">{value}</div>
-    </div>
+    <li className="flex items-center gap-2.5">
+      <span aria-hidden className="inline-block h-1 w-1 rotate-45 bg-champagne" />
+      {label}
+    </li>
   );
 }
 
-
-/* ─────────────────────── TRUST BAR ─────────────────────── */
+/* ─────────────────────── TRUST BAR (compact) ─────────────────────── */
 const TRUSTS: { label: string; value: string; icon: "shield" | "card" | "handshake" | "user" }[] = [
   { label: "Geprüft", value: "Eigene Eingangsprüfung", icon: "shield" },
   { label: "Finanzierung", value: "Auf Wunsch", icon: "card" },
@@ -174,7 +155,7 @@ const TRUSTS: { label: string; value: string; icon: "shield" | "card" | "handsha
 ];
 
 function TrustIcon({ name }: { name: "shield" | "card" | "handshake" | "user" }) {
-  const common = { width: 22, height: 22, viewBox: "0 0 24 24", fill: "none", stroke: "currentColor", strokeWidth: 1.6 } as const;
+  const common = { width: 28, height: 28, viewBox: "0 0 24 24", fill: "none", stroke: "currentColor", strokeWidth: 1.25 } as const;
   if (name === "shield") return <svg {...common} aria-hidden><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6l8-3z" /><path d="M9 12l2 2 4-4" /></svg>;
   if (name === "card") return <svg {...common} aria-hidden><rect x="3" y="6" width="18" height="13" rx="1" /><path d="M3 10h18M7 15h3" /></svg>;
   if (name === "handshake") return <svg {...common} aria-hidden><path d="M2 13l4-4 4 2 4-3 4 3 4-2v6l-4 2-4-2-4 3-4-2-4 2z" /></svg>;
@@ -184,25 +165,27 @@ function TrustIcon({ name }: { name: "shield" | "card" | "handshake" | "user" })
 function TrustBar() {
   return (
     <section className="border-y border-champagne/15 bg-surface">
-      <div className="mx-auto grid max-w-[1400px] grid-cols-2 gap-px bg-line md:grid-cols-4">
+      <div className="mx-auto grid max-w-[1440px] grid-cols-2 gap-px bg-line md:grid-cols-4">
         {TRUSTS.map((t) => (
-          <div key={t.label} className="flex flex-col items-center gap-3 bg-surface px-6 py-8 text-center md:py-12">
+          <div key={t.label} className="group flex flex-col gap-5 bg-surface px-8 py-12 transition-colors duration-500 hover:bg-surface-2 md:py-16">
             <div className="text-champagne">
               <TrustIcon name={t.icon} />
             </div>
-            <div className="font-mono text-[10px] font-bold uppercase tracking-[0.3em] text-champagne">
-              {t.label}
+            <div>
+              <div className="font-mono text-[10px] font-medium uppercase tracking-[0.35em] text-champagne">
+                {t.label}
+              </div>
+              <div className="mt-3 font-display text-xl font-bold leading-tight text-ink md:text-2xl">
+                {t.value}
+              </div>
             </div>
-            <div className="font-display text-base font-bold leading-tight text-ink md:text-lg">
-              {t.value}
-            </div>
-
           </div>
         ))}
       </div>
     </section>
   );
 }
+
 
 /* ────────────────────── BRAND STORY ────────────────────── */
 function BrandStory() {
@@ -607,39 +590,52 @@ function FAQ() {
 /* ───────────────────── CONTACT CTA ───────────────────── */
 function ContactCTA() {
   return (
-    <section className="relative overflow-hidden border-t border-line bg-surface grain">
-      <div className="mx-auto max-w-[1400px] px-5 py-24 text-center md:px-10 md:py-32">
-        <p className="kicker">Direktkontakt</p>
-        {/* Alt: „Sprechen wir über Ihr nächstes Fahrzeug." */}
-        <h2 className="mx-auto mt-4 max-w-3xl font-serif text-4xl leading-tight text-ink md:text-6xl">
-          Sie haben ein Fahrzeug im Blick?
-        </h2>
-        <p className="mx-auto mt-6 max-w-xl text-base text-ink-soft md:text-lg">
-          Kauf, Verkauf, Finanzierung oder ein kurzer Rückruf — wählen Sie den Weg, der für Sie am schnellsten ist.
-        </p>
-        <div className="mt-10 flex flex-wrap justify-center gap-3">
-          <a
-            href={telLink()}
-            className="inline-flex items-center justify-center bg-ink px-7 py-4 text-xs uppercase tracking-[0.22em] text-paper hover:opacity-90"
-          >
-            {dealer.phoneDisplay}
-          </a>
-          <a
-            href={whatsappLink(`Hallo ${dealer.shortName}, ich habe eine Anfrage.`)}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center justify-center border border-champagne/60 px-7 py-4 text-xs uppercase tracking-[0.22em] text-champagne hover:bg-champagne hover:text-paper"
-          >
-            WhatsApp
-          </a>
-          <Link
-            to="/kontakt"
-            className="inline-flex items-center justify-center border border-ink/30 px-7 py-4 text-xs uppercase tracking-[0.22em] text-ink hover:border-ink"
-          >
-            Anfrage senden
-          </Link>
+    <section className="relative overflow-hidden border-t border-line bg-surface">
+      <div className="mx-auto max-w-[1440px] px-6 py-28 md:px-12 md:py-40">
+        <div className="grid gap-12 md:grid-cols-12 md:items-end md:gap-20">
+          <div className="md:col-span-7">
+            <p className="kicker">Direktkontakt</p>
+            <h2 className="mt-6 font-display text-4xl font-extrabold leading-[1.02] tracking-[-0.03em] text-ink md:text-6xl lg:text-7xl">
+              Sprechen wir über
+              <br />
+              <span className="text-champagne">Ihr nächstes Fahrzeug.</span>
+            </h2>
+            <p className="mt-8 max-w-lg text-base leading-relaxed text-ink/80 md:text-lg">
+              Kauf, Verkauf, Finanzierung oder ein kurzer Rückruf — wählen Sie
+              den Weg, der für Sie am schnellsten ist.
+            </p>
+            <div className="mt-10 flex flex-col items-start gap-6 sm:flex-row sm:items-center sm:gap-8">
+              <BtnLink to="/kontakt" variant="primary" size="lg">
+                Anfrage senden
+              </BtnLink>
+              <BtnA href={telLink()} variant="ghost">
+                {dealer.phoneDisplay}
+              </BtnA>
+            </div>
+          </div>
+          <div className="md:col-span-5">
+            <div className="border-l border-champagne/40 pl-8 md:pl-12">
+              <p className="font-mono text-[10px] uppercase tracking-[0.35em] text-champagne">
+                Vor Ort
+              </p>
+              <p className="mt-4 font-display text-xl leading-snug text-ink">
+                {dealer.legalName}<br />
+                {dealer.street}<br />
+                {dealer.postalCode} {dealer.city}
+              </p>
+              <a
+                href={whatsappLink(`Hallo ${dealer.shortName}, ich habe eine Anfrage.`)}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="mt-8 inline-flex items-center gap-3 font-mono text-[10px] font-bold uppercase tracking-[0.25em] text-champagne hover:text-ink transition-colors"
+              >
+                Oder direkt per WhatsApp →
+              </a>
+            </div>
+          </div>
         </div>
       </div>
     </section>
   );
 }
+

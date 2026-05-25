@@ -46,21 +46,30 @@ export function Field({
   inputMode,
 }: BaseFieldProps & { type?: string }) {
   return (
-    <div>
-      <Label htmlFor={name} required={required}>
-        {label}
-      </Label>
+    <div className="group relative">
       <input
         id={name}
         type={type}
         name={name}
         required={required}
         defaultValue={defaultValue}
-        placeholder={placeholder}
+        placeholder=" "
         autoComplete={autoComplete}
         inputMode={inputMode}
-        className="mt-2 block w-full min-h-[48px] border border-line bg-paper/40 px-4 py-3 text-base text-ink transition-colors focus:border-champagne focus:outline-none"
+        className="peer block w-full min-h-[56px] border-0 border-b border-line bg-transparent px-0 pb-2 pt-6 text-base text-ink transition-colors focus:border-champagne focus:outline-none focus:ring-0"
       />
+      <label
+        htmlFor={name}
+        className="pointer-events-none absolute left-0 top-4 origin-left font-mono text-[11px] uppercase tracking-[0.22em] text-ink-soft transition-all duration-300 peer-placeholder-shown:top-4 peer-placeholder-shown:text-sm peer-placeholder-shown:tracking-normal peer-placeholder-shown:normal-case peer-focus:top-0 peer-focus:text-[10px] peer-focus:uppercase peer-focus:tracking-[0.22em] peer-focus:text-champagne peer-[:not(:placeholder-shown)]:top-0 peer-[:not(:placeholder-shown)]:text-[10px] peer-[:not(:placeholder-shown)]:uppercase peer-[:not(:placeholder-shown)]:tracking-[0.22em] peer-[:not(:placeholder-shown)]:text-champagne"
+      >
+        {label}
+        {required && <span aria-hidden className="ml-1 text-ink-soft">*</span>}
+      </label>
+      {placeholder && (
+        <p className="mt-2 font-mono text-[9px] uppercase tracking-[0.18em] text-ink-soft/70">
+          {placeholder}
+        </p>
+      )}
     </div>
   );
 }
@@ -74,22 +83,32 @@ export function Textarea({
   placeholder,
 }: BaseFieldProps & { rows?: number }) {
   return (
-    <div>
-      <Label htmlFor={name} required={required}>
-        {label}
-      </Label>
+    <div className="group relative">
       <textarea
         id={name}
         name={name}
         required={required}
         defaultValue={defaultValue}
-        placeholder={placeholder}
+        placeholder=" "
         rows={rows}
-        className="mt-2 block w-full border border-line bg-paper/40 px-4 py-3 text-base text-ink transition-colors focus:border-champagne focus:outline-none"
+        className="peer block w-full border-0 border-b border-line bg-transparent px-0 pb-2 pt-6 text-base text-ink transition-colors focus:border-champagne focus:outline-none focus:ring-0"
       />
+      <label
+        htmlFor={name}
+        className="pointer-events-none absolute left-0 top-4 origin-left font-mono text-[11px] uppercase tracking-[0.22em] text-ink-soft transition-all duration-300 peer-placeholder-shown:top-4 peer-placeholder-shown:text-sm peer-placeholder-shown:tracking-normal peer-placeholder-shown:normal-case peer-focus:top-0 peer-focus:text-[10px] peer-focus:uppercase peer-focus:tracking-[0.22em] peer-focus:text-champagne peer-[:not(:placeholder-shown)]:top-0 peer-[:not(:placeholder-shown)]:text-[10px] peer-[:not(:placeholder-shown)]:uppercase peer-[:not(:placeholder-shown)]:tracking-[0.22em] peer-[:not(:placeholder-shown)]:text-champagne"
+      >
+        {label}
+        {required && <span aria-hidden className="ml-1 text-ink-soft">*</span>}
+      </label>
+      {placeholder && (
+        <p className="mt-2 font-mono text-[9px] uppercase tracking-[0.18em] text-ink-soft/70">
+          {placeholder}
+        </p>
+      )}
     </div>
   );
 }
+
 
 export function Select({
   label,
