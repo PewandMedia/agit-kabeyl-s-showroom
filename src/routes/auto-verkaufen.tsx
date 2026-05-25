@@ -142,6 +142,32 @@ function SellCarPage() {
           </div>
         </div>
       </section>
+
+      <section className="border-t border-line bg-paper">
+        <div className="mx-auto max-w-[1400px] px-5 py-16 md:px-10 md:py-24">
+          <div className="grid gap-14 md:grid-cols-12 md:gap-20">
+            <div className="md:col-span-4">
+              <p className="kicker">FAQ Ankauf</p>
+              <h2 className="mt-4 font-display text-3xl text-ink md:text-4xl">
+                Häufige Fragen zum Ankauf.
+              </h2>
+            </div>
+            <div className="md:col-span-8 divide-y divide-line border-y border-line">
+              {PURCHASE_FAQS.map((f) => (
+                <details key={f.q} className="group py-5">
+                  <summary className="flex cursor-pointer items-center justify-between gap-6 list-none">
+                    <span className="font-display text-lg text-ink md:text-xl">{f.q}</span>
+                    <span className="font-display text-2xl text-champagne transition-transform group-open:rotate-45">+</span>
+                  </summary>
+                  <p className="mt-3 max-w-2xl text-sm leading-relaxed text-ink-soft md:text-base">
+                    {f.a}
+                  </p>
+                </details>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
     </SiteLayout>
   );
 }
