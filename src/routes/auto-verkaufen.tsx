@@ -7,11 +7,11 @@ import { dealer, telLink, whatsappLink } from "@/data/dealer";
 export const Route = createFileRoute("/auto-verkaufen")({
   head: () => ({
     meta: [
-      { title: "Auto verkaufen in Velbert — Autohaus AK GmbH" },
+      { title: "Auto verkaufen Velbert — Ankauf | Autohaus AK" },
       {
         name: "description",
         content:
-          "Faire Bewertung, schnelle Abwicklung, sofortige Auszahlung. Markenübergreifender Fahrzeugankauf vom Autohaus AK GmbH in Velbert.",
+          "Wir kaufen Ihr Fahrzeug — markenübergreifend, fair bewertet, sofort ausgezahlt. Ankauf in Velbert und NRW.",
       },
       { property: "og:title", content: "Auto verkaufen — Autohaus AK GmbH" },
       {
@@ -22,9 +22,42 @@ export const Route = createFileRoute("/auto-verkaufen")({
       { property: "og:url", content: "/auto-verkaufen" },
     ],
     links: [{ rel: "canonical", href: "/auto-verkaufen" }],
+    scripts: [
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "FAQPage",
+          mainEntity: PURCHASE_FAQS.map((f) => ({
+            "@type": "Question",
+            name: f.q,
+            acceptedAnswer: { "@type": "Answer", text: f.a },
+          })),
+        }),
+      },
+    ],
   }),
   component: SellCarPage,
 });
+
+const PURCHASE_FAQS = [
+  {
+    q: "Welche Fahrzeuge kaufen Sie an?",
+    a: "Marken- und modellübergreifend — Pkw, SUV und Transporter. Auch Unfall- oder Reparaturfahrzeuge bewerten wir gern.",
+  },
+  {
+    q: "Wie schnell erfolgt die Auszahlung?",
+    a: "Auf Wunsch noch am Tag der Übergabe — per Überweisung oder in bar nach Vereinbarung.",
+  },
+  {
+    q: "Übernehmen Sie die Abmeldung?",
+    a: "Ja. Wir übernehmen Abmeldung und alle Formalitäten — Sie geben das Fahrzeug ab und sind fertig.",
+  },
+  {
+    q: "Kaufen Sie auch bei laufender Finanzierung?",
+    a: "Ja. Wir lösen die Restschuld direkt bei Ihrer Bank ab und rechnen die Differenz mit Ihnen ab.",
+  },
+];
 
 function SellCarPage() {
   return (
