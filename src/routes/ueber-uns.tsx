@@ -44,7 +44,65 @@ function AboutPage() {
         </div>
       </section>
 
+
+      {/* ───── KABAYEL STORY ───── */}
+      <section className="border-b border-line bg-ink text-paper">
+        <div className="mx-auto grid max-w-[1400px] grid-cols-1 gap-10 px-5 py-20 md:grid-cols-12 md:gap-16 md:px-10 md:py-32">
+          <div className="md:col-span-5">
+            <div className="relative aspect-[4/5] overflow-hidden">
+              {/* TODO: Echtes Pressefoto von Agit Kabayel einsetzen, sobald Lizenz geklärt. */}
+              <img
+                src={championPortrait}
+                alt="Agit Kabayel — WBC #1 Contender Heavyweight"
+                width={1024}
+                height={1280}
+                loading="lazy"
+                className="h-full w-full object-cover"
+              />
+              <div className="absolute left-4 top-4 border border-champagne/70 bg-ink/70 px-3 py-2 font-mono text-[10px] font-bold uppercase tracking-[0.3em] text-champagne backdrop-blur-sm">
+                WBC · #1 Contender
+              </div>
+            </div>
+          </div>
+          <div className="md:col-span-7">
+            <p className="font-mono text-[10px] font-bold uppercase tracking-[0.4em] text-champagne">
+              Team Kabayel
+            </p>
+            <h2 className="mt-4 font-display text-4xl font-extrabold leading-[1.05] tracking-[-0.02em] text-paper md:text-6xl">
+              Boxen & Autos —<br />
+              <span className="text-champagne">gleiche Haltung.</span>
+            </h2>
+            <p className="mt-7 max-w-xl text-base leading-relaxed text-paper/80 md:text-lg">
+              Autohaus AK ist das Autohaus von <strong>Agit Kabayel</strong> —
+              Schwergewichts-Boxer aus Bochum und aktuell die Nummer 1 im
+              WBC-Ranking. Was ihn auszeichnet, gilt auch für uns: konsequente
+              Vorbereitung, ehrliche Arbeit, kein Kompromiss bei Qualität.
+            </p>
+            <p className="mt-5 max-w-xl text-base leading-relaxed text-paper/80 md:text-lg">
+              Wer hier ein Fahrzeug kauft, kauft beim Team eines Profisportlers,
+              der weiß, was Disziplin bedeutet — und der seinen Namen
+              dahinterstellt.
+            </p>
+
+            <dl className="mt-10 grid grid-cols-3 gap-px overflow-hidden border border-champagne/20 bg-champagne/20">
+              <KStat label="WBC Rang" value="#1" />
+              <KStat label="Gewichtsklasse" value="Heavyweight" />
+              <KStat label="Heimat" value="Bochum" />
+            </dl>
+
+            <blockquote className="mt-10 border-l-2 border-champagne pl-5 font-display text-xl leading-snug text-paper md:text-2xl">
+              „Im Ring und im Geschäft — du gewinnst durch Vorbereitung,
+              nicht durch Glück."
+              <footer className="mt-3 font-mono text-[10px] font-medium uppercase tracking-[0.3em] text-champagne">
+                — Team Kabayel
+              </footer>
+            </blockquote>
+          </div>
+        </div>
+      </section>
+
       <section className="bg-paper">
+
         <div className="mx-auto grid max-w-[1400px] gap-14 px-5 py-20 md:grid-cols-12 md:gap-20 md:px-10 md:py-32">
           <div className="md:col-span-3">
             <p className="kicker">Werte</p>
