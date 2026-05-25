@@ -142,7 +142,7 @@
   }
 
   input, textarea, select {
-    color-scheme: dark;
+    color-scheme: light;
     color: var(--color-ink);
   }
   /* Default field chrome only when not explicitly overridden */
