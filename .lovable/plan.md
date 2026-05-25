@@ -1,157 +1,94 @@
+## Ziel
 
-# Autohaus AK GmbH – Vollständiger Build-Plan
+Die Website auf "Nummer-1-Premium-Level" heben — Mischung aus Luxus-Autohaus, High-End-Sportmarke und Tech-Plattform. Basis: gewählte Richtung **Tech Platform** mit **Emerald Prestige** Palette, **Sora + Manrope + JetBrains Mono** Typografie und **Split-Screen Hero**.
 
-Aktueller Stand: Phase 1 (Frontend-Foundation, Design-Tokens, 5 Seiten mit Mock-Daten) ist fertig. Dieser Plan ergänzt **alle fehlenden Seiten, Funktionen, das mobile.de-Import-System und den Admin-Bereich** und hebt das Design auf das angeforderte Champion/Premium-Niveau.
+## 1. Design Tokens (`src/styles.css`)
 
----
+Komplette Token-Überarbeitung — verbatim aus dem gewählten Prototyp:
 
-## 1. Design-Upgrade (vor allem Anderen)
+- `--background: #064e3b` (deep emerald)
+- `--surface / card: #043d2e` (deeper emerald)
+- `--foreground / paper: #f5f0e0` (warm off-white)
+- `--primary / gold: #c9a84c` (champagne gold)
+- `--border: #f5f0e0` @ 10% / `--border-strong: #c9a84c` @ 40%
+- Neue Utilities: `.font-display` (Sora), `.font-mono` (JetBrains Mono), `.text-eyebrow` (10px uppercase tracking-[0.4em] gold), `.tech-card`, `.gold-rule`, `.spec-grid`
+- Subtile Animationen: `scan-line` keyframe, längere `duration-700` hover-grayscale-out, image-zoom-on-hover
+- Body-Font auf Manrope, Headlines auf Sora, technische Labels/Stock-Refs/Specs auf JetBrains Mono
+- Globaler dunkler Emerald-Hintergrund statt anthrazit
 
-Aktuell: Editorial (off-white, Serif, hell). User will: **dunkler Premium-Look**.
+## 2. Font-Import (`src/routes/__root.tsx`)
 
-Umbau in `src/styles.css`:
-- Dark-Mode als Default: `--background` ≈ `#0A0A0B` (Schwarz), `--surface` Anthrazit `#141416`, `--foreground` Off-white `#F5F4F1`
-- Akzente: Champagner-Gold `#C9A14A` (primär), tiefes Grün `#1F3A2E` (sekundär, dezent)
-- Glassmorphism-Utility: `bg-white/5 backdrop-blur-xl border border-white/10`
-- Premium-Cards mit feinen Gold-Linien (`border-[hsl(var(--accent))]/20`)
-- Headlines: bleibt Instrument Serif (groß, tight tracking), UI bleibt Inter
-- Smooth Animationen via Tailwind `transition-*` + bestehendes `tw-animate-css`
-- Subtile Gold-Gradient-Hairlines als Trenner statt harter Borders
+Sora + Manrope + JetBrains Mono via Google Fonts laden (preconnect + display=swap).
 
-Neue Shared-Komponenten:
-- `GlassCard`, `GoldDivider`, `SectionHeader`, `StatBadge`, `TrustBar`
-- `MobileStickyBar` (fixed bottom, 4 Aktionen: Fahrzeuge / Anrufen / WhatsApp / Anfrage)
+## 3. Shared Components (`src/components/site/`)
 
----
+- **Header.tsx** — Logo-Block mit AK + Gold-Eyebrow, Sora-Brand, Mono-Telefonnummer, klare Tracking-Widest-Links, Border-Bottom in Gold/20, Sticky + Backdrop-Blur
+- **Footer.tsx** — drei Spalten mit Mono-Labels, Gold-Hairlines, "System"-Footer-Note
+- **VehicleCard.tsx** — Komplett-Redesign nach Tech-Card-Vorlage:
+  - Aspect-Video Bild, grayscale → group-hover farbig + scale
+  - Top-Left Gold-Badge ("Geprüft"/"Sofort verfügbar") in Mono
+  - Marke/Modell-Header (Mono-Eyebrow + Sora-Bold), Preis rechts in Gold
+  - 2-Spalten Mono-Spec-Grid (Power, Mileage, Year, Fuel) mit 1px-Gap-Linien
+  - Full-width CTA "Datenblatt öffnen" mit Gold-Hover-Invert
+- **MobileStickyBar.tsx** — Polishing: gold/paper Buttons in 10px-Mono-Uppercase, klare Trennung
+- **Eyebrow.tsx** (neu) — wiederverwendbares `--/SYSTEM STATUS: …` Label
+- **DataBadge.tsx** (neu) — Mono-Label + Wert für Hero/Trust-Sektionen
+- **PrecisionConversionBand.tsx** (neu) — wiederverwendbare CTA-Sektion mit AK-Logomark, Response-Time, Call+WhatsApp
 
-## 2. Seitenstruktur (9 Routen)
+## 4. Homepage (`src/routes/index.tsx`)
 
-| Route | Status | Inhalt |
-|---|---|---|
-| `/` | umbauen | Premium-Hero, Trust-Bar, Story, Highlight-Fahrzeuge, Bestand-Teaser, Ankauf-Teaser, Finanzierung-Teaser, "Warum AK", Bewertungen, FAQ, Kontakt-CTA |
-| `/fahrzeuge` | vorhanden, polieren | Filter (Marke, Preis, KM, Jahr, Kraftstoff, Getriebe), Sortierung, Grid mit GlassCards |
-| `/fahrzeuge/$id` | vorhanden, polieren | Galerie, Specs, Features, Anfrage-/WhatsApp-/Finanzierungs-CTA, ähnliche Fahrzeuge |
-| `/auto-verkaufen` | **neu** | Ankauf-Formular (Marke, Modell, EZ, KM, Zustand, Fotos-Upload, Kontakt) |
-| `/finanzierung` | **neu** | Rechner (Kaufpreis, Anzahlung, Laufzeit, Zins-Indikation), Finanzierungsanfrage-Formular |
-| `/ueber-uns` | vorhanden, polieren | Story Champion-Mentalität, Werte, Team-Andeutung, Standort |
-| `/kontakt` | vorhanden, polieren | Formular, Karte, Öffnungszeiten, Direktkontakte |
-| `/impressum` | vorhanden | Platzhalter bis Realdaten |
-| `/datenschutz` | vorhanden | Standardtext |
-| `/admin` + `/admin/fahrzeuge` + `/admin/leads` + `/admin/import` | **neu** | Login, CRUD, Lead-Inbox, mobile.de-Import |
+Komplette Neukomposition entlang des Prototyps:
 
-Jede Route mit eigenem `head()` (Title, Description, OG).
+1. **Hero (Split-Screen)** — links: Eyebrow "System Status: Active" + Sora-Display "Champion / Mentalität." (Gold-Zeile 2) + Manrope-Lead + zwei CTAs (Gold solid + Gold-outline). Rechts: cinematisches Fahrzeugbild mit Overlay-DataPanels (Available Units / Quality Score), Mono-Stock-Ref oben links.
+2. **Trust-Band** — vier Mono-Datenbadges (Geprüft 110-Punkte / Finanzierung 3,99 % / Ankauf 24 h / WhatsApp < 15 min) auf surface mit Gold-Trennlinien
+3. **Highlights** — `Current / Selection` H2 (Sora) + "Browse System [01–03]" Mono-Link → 3 VehicleCards im Tech-Stil
+4. **Brand Story (Champion-Standard)** — bestehender Text in neuer Typo, große Sora-Numerik (01/02/03)
+5. **Bestand-Teaser**, **Ankauf-Teaser**, **Finanzierung-Teaser** — als Bento-artige Surface-Cards mit Gold-left-border
+6. **Stimmen** (Testimonials) — typografische Karten, Mono-Attribution
+7. **FAQ** — gleiche Inhalte, neues Styling (Gold-Hairlines, Sora-Fragen, Manrope-Antworten)
+8. **Precision Conversion Band** (neue Komponente) als finaler CTA
+9. **Standort** — beibehaltene OSM-Map mit neuem Frame
 
----
+JSON-LD AutoDealer / FAQPage bleiben erhalten.
 
-## 3. Fahrzeug-System (Cloud)
+## 5. Unterseiten (visueller Sweep)
 
-Lovable Cloud aktivieren. Tabellen:
+Alle Routes erben automatisch die neuen Tokens. Spezifische Anpassungen:
 
-```text
-vehicles
-  id, mobile_ad_id (nullable, unique), title, make, model, variant,
-  year, first_registration (date), mileage_km, price_eur, vat_reportable,
-  fuel, transmission, power_kw, power_ps, exterior_color, interior,
-  body_type, doors, seats, features (text[]), description (text),
-  images (text[]),  -- public URLs
-  status ('available'|'reserved'|'sold'|'draft'),
-  source ('manual'|'csv'|'xml'|'mobile_api'),
-  is_highlight (bool),
-  created_at, updated_at
+- **`/fahrzeuge`** — Filter-Bar im Mono-Stil, VehicleCards neu, Grid-Spacing erhöht
+- **`/fahrzeuge/$id`** — Spec-Tabelle als 2-Spalten Mono-Grid mit Gold-Akzentlinien, große Bildgalerie (grayscale-hover), CTA-Band unten
+- **`/auto-verkaufen`**, **`/finanzierung`**, **`/kontakt`** — Form-Styling: dunkle Surface-Inputs, Gold-Focus-Ring, Mono-Labels, Sora-H1
+- **`/ueber-uns`**, **`/leistungen`** — Eyebrows + Sora-Display + ruhige Bildränder
+- **`/impressum`**, **`/datenschutz`** — typografisches Refresh
 
-leads
-  id, vehicle_id (nullable FK), type ('inquiry'|'sellcar'|'financing'|'callback'|'contact'),
-  name, phone, email, message, payload (jsonb), channel ('form'|'whatsapp'),
-  status ('new'|'open'|'won'|'lost'), created_at
+## 6. Mobile
 
-user_roles  (siehe Knowledge: Rollen NIE auf profiles)
-  id, user_id (FK auth.users), role (enum 'admin'|'editor')
+- Sticky Bottom-Bar (3 Buttons: Anrufen | WhatsApp | Anfrage) in Gold/Paper
+- Hero stapelt: Bild zuerst (cinematic), dann Text mit reduzierter Schriftgröße
+- Trust-Band wird zu 2×2 Grid
+- VehicleCards einspaltig, größere Bilder
 
-has_role(uuid, app_role) SECURITY DEFINER  -- für RLS
-```
+## 7. Animationen (subtil)
 
-Storage-Bucket `vehicles` (public read) für Bilder + `sellcar` (private) für Ankauf-Uploads.
+- Hero-Headline: fade-up beim Mount
+- Bilder: grayscale → color + scale-105 over 700ms on hover
+- Buttons: bg-Invert (Gold ↔ Paper) over 500ms
+- Section-Reveal via Intersection Observer (fade-in-up, einmalig)
 
-### RLS
-- `vehicles`: public SELECT wo `status='available'`; admin alles via `has_role`
-- `leads`: public INSERT (mit Validierung + Honeypot + Rate-Limit serverseitig); SELECT nur admin
-- `user_roles`: nur admin SELECT/INSERT
+## 8. Was bleibt unverändert
 
-### Server Functions (`createServerFn`)
-- `listVehicles`, `getVehicle(id)` – public
-- `createLead`, `createSellCarLead`, `createFinancingLead` – public, Zod-validiert
-- `adminUpsertVehicle`, `adminDeleteVehicle`, `adminListLeads` – via `requireSupabaseAuth` + `has_role('admin')`
-- `importMobileDeXml(file)`, `importVehiclesCsv(file)` – admin
+- Daten in `src/data/vehicles.ts` und `src/data/dealer.ts` (nur Anzeige-Layer)
+- Routing-Struktur
+- Server-/Cloud-Setup (nicht angefragt)
 
----
+## Technische Hinweise
 
-## 4. mobile.de-Anbindung (3 Stufen)
+- Tokens werden in `oklch()` in `src/styles.css` definiert; Hex-Werte oben sind Referenz.
+- Keine willkürlichen `bg-[#…]`-Klassen in Komponenten — alles via semantische Tokens (`bg-background`, `bg-card`, `text-primary`, …).
+- Sora wird als `font-display`, Manrope als Default-Body, JetBrains Mono als `font-mono` via Tailwind theme erweitert.
+- Bestehende AI-Fahrzeugbilder werden weiterverwendet; Filter `grayscale group-hover:grayscale-0` schafft den editorial-tech Look ohne neue Asset-Generierung.
 
-Da direkter API-Zugang einen mobile.de-Händlervertrag voraussetzt, bauen wir **alle drei Wege**, sodass jeder genutzt werden kann sobald verfügbar:
+## Offen / nicht im Scope
 
-1. **Manuell** – Admin-CRUD mit Multi-Image-Upload (sofort nutzbar).
-2. **CSV/XML-Bulk-Import** – Upload im Admin, Parser mappt mobile.de-Felder (`make`, `model`, `mileage`, `price`, `firstRegistration` etc.) auf unser Schema. Bilder werden per URL importiert und nach Storage gespiegelt. Re-Import via `mobile_ad_id` als Upsert-Key.
-3. **API-Stub** – Server-Function `syncMobileDeApi()` mit Auth-Header-Platzhalter und ENV `MOBILE_DE_USER` / `MOBILE_DE_PASS`. Aktiviert sobald Zugangsdaten vorhanden.
-
----
-
-## 5. Formulare & Leads
-
-Alle Formulare:
-- Zod-Validierung (client + server), Honeypot-Feld, Längenlimits
-- Bei Erfolg: Lead in `leads`, Toast, optional WhatsApp-Deeplink mit vorausgefülltem Text
-- WhatsApp-Deeplink-Helper: `https://wa.me/<num>?text=<encoded>` mit Fahrzeug-Kontext
-
-Formulare:
-- Fahrzeug-Anfrage (Detailseite)
-- Ankauf (mit Foto-Upload)
-- Finanzierungsanfrage
-- Rückruf
-- Allgemeines Kontaktformular
-
-Mobile Sticky Bar global aktiv auf `/fahrzeuge` und `/fahrzeuge/$id`.
-
----
-
-## 6. Admin-Bereich
-
-- `/login` – Email+Passwort (Supabase Auth, `onAuthStateChange` korrekt verdrahtet)
-- `_authenticated` Layout-Route prüft Session + `has_role('admin')`
-- `/admin` Dashboard (Counts: Fahrzeuge, neue Leads)
-- `/admin/fahrzeuge` Liste + Create/Edit-Drawer (alle Felder, Bild-Upload, Highlight-Flag, Status)
-- `/admin/leads` Inbox mit Filter nach Typ/Status
-- `/admin/import` CSV-/XML-Upload + Preview + Commit
-
----
-
-## 7. SEO & Performance
-
-- Pro Route eigenes `head()`; OG-Image nur auf Leaf-Routen
-- JSON-LD: `AutoDealer` global, `Vehicle` auf Detailseite, `FAQPage` auf Startseite-FAQ
-- `sitemap.xml` + `robots.txt` (relativ, da noch keine Domain)
-- Bilder als JPG, lazy, responsive `sizes`
-
----
-
-## 8. Build-Reihenfolge (Phasen)
-
-1. **Design-Umbau auf Dark-Premium** (`styles.css`, Header/Footer, Hero, Cards) + Mobile Sticky Bar
-2. **Startseite neu aufbauen** mit allen 11 Sektionen + Mock-Bewertungen + FAQ
-3. **Neue Seiten**: `/auto-verkaufen`, `/finanzierung` (mit Rechner-UI, Mock-Berechnung)
-4. **Cloud aktivieren** + Schema + RLS + Storage + `has_role`
-5. **Server-Functions** + Lead-Formulare an Cloud anbinden
-6. **Admin-Login + CRUD + Lead-Inbox**
-7. **CSV/XML-Import + mobile.de-API-Stub**
-8. **SEO-Feinschliff** (JSON-LD, sitemap, robots)
-
----
-
-## 9. Offene Punkte (parallel klärbar, blockieren Build nicht)
-
-Real-Daten werden später in `src/data/dealer.ts` ersetzt – Platzhalter bleiben bis dahin:
-- Adresse, Telefon, WhatsApp-Nummer, Email, Öffnungszeiten
-- Geschäftsführer, HRB, USt-IdNr.
-- mobile.de Händler-Login (für Import-Stufe 2/3)
-- Echte Fahrzeugbilder oder weiterhin KI-Studio-Bilder
-
-Mit „Implement plan" starte ich Phase 1–8 durchgehend.
+- Cloud-Aktivierung (DB, Admin, mobile.de-Import) — separate Phase
+- Echte Dealer-Daten (Adresse, Telefon, WhatsApp, HRB, USt-ID) — Platzhalter bleiben bis du sie lieferst
