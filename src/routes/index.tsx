@@ -212,32 +212,34 @@ function BrandStory() {
 function Highlights() {
   return (
     <section className="border-t border-line bg-paper">
-      <div className="mx-auto max-w-[1400px] px-5 py-20 md:px-10 md:py-32">
-        <div className="flex items-end justify-between gap-6">
+      <div className="mx-auto max-w-[1400px] px-5 py-24 md:px-10 md:py-32">
+        <div className="flex items-end justify-between gap-6 border-b border-line pb-6">
           <div>
-            <p className="kicker">Auswahl</p>
-            <h2 className="mt-4 font-serif text-4xl text-ink md:text-5xl">
-              Aktuelle Highlights.
+            <p className="font-mono text-[10px] font-bold uppercase tracking-[0.4em] text-champagne">
+              Selected Inventory
+            </p>
+            <h2 className="mt-4 font-display text-4xl font-extrabold tracking-tight text-ink md:text-5xl">
+              Current / <span className="text-champagne">Selection</span>
             </h2>
           </div>
           <Link
             to="/fahrzeuge"
-            className="hidden text-xs uppercase tracking-[0.22em] text-ink-soft transition-colors hover:text-ink md:inline-flex"
+            className="hidden font-mono text-[10px] font-bold uppercase tracking-[0.3em] text-champagne transition-opacity hover:opacity-70 md:inline-flex"
           >
-            Alle ansehen →
+            Browse System [01–{String(vehicles.length).padStart(2, "0")}] →
           </Link>
         </div>
 
-        <div className="mt-12 grid gap-10 md:mt-16 md:grid-cols-3">
+        <div className="mt-12 grid gap-6 md:mt-14 md:grid-cols-3">
           {featuredVehicles.map((v) => (
             <VehicleCard key={v.id} vehicle={v} />
           ))}
         </div>
 
-        <div className="mt-12 md:hidden">
+        <div className="mt-10 md:hidden">
           <Link
             to="/fahrzeuge"
-            className="block w-full border border-ink/40 py-4 text-center text-xs uppercase tracking-[0.22em] text-ink"
+            className="block w-full border border-champagne/40 py-4 text-center font-mono text-[10px] font-bold uppercase tracking-[0.3em] text-champagne"
           >
             Alle Fahrzeuge ansehen
           </Link>
