@@ -1,39 +1,27 @@
-# Plan: Echte Flyer-Bilder als Highlights nutzen
+# Plan: Detail-Seite reparieren + mehrere Bilder pro Fahrzeug
 
-Du hast 3 fertige Flyer hochgeladen (Porsche Cayenne GTS, Range Rover Sport HSE, Mercedes V300 d). Diese sollen direkt als die 3 Highlight-Karten auf der Startseite angezeigt werden — keine Nachbau-Komponente mehr.
+## Problem 1 — Klick auf "Details" wirkt wie Scroll nach oben
+Die Detail-Route `/fahrzeuge/$id` existiert und rendert bereits alle Daten inkl. Ausstattung (10 Fahrzeuge, je 8-10 Features in `src/data/vehicles.ts`). Der Klick scheint aber nicht zu navigieren — Runtime-Log zeigt `Failed to fetch dynamically imported module … tanstack-start-client-entry`. Ursache: stale Vite-Modulgraph nach den letzten Edits.
 
-## Änderungen
+**Fix:** Dev-Server neu starten, danach in der Preview auf RS5 klicken und Detail-Seite (Galerie · Eckdaten · Ausstattung · Tech. Daten · Anfrage) verifizieren.
 
-### 1. Flyer als Assets einbinden
-- `src/assets/flyer-porsche-cayenne-gts.png` — aus `Porsche_Cayenne_Bearbeite_Version_Extrem-3.png`
-- `src/assets/flyer-range-rover-sport-hse.png` — aus `Range_Rover-3.png`
-- `src/assets/flyer-mercedes-v300d.png` — aus `Mercedes_Benz_V300_Bild_1-3.png` (Bild 1, weil sauberere Komposition)
+## Problem 2 — In der Galerie ist nur 1 Bild zu sehen
+Die `VehicleGallery` rendert bereits mehrere Bilder mit Thumbnails. Aktuell teilen sich aber alle Fahrzeuge nur 5 Stock-Fotos (`hero-car.jpg`, `car-1…4.jpg`) — d.h. pro Auto sieht man 3-4× sehr ähnliche/gleiche Bilder. Es fehlen echte fahrzeugspezifische Aufnahmen.
 
-### 2. `src/components/site/HighlightFlyerCard.tsx` — komplett vereinfachen
-Statt nachgebautem Layout: nur noch ein klickbarer Link, der den ganzen Flyer als Bild anzeigt + dezenter Hover-Effekt + kleine "Zum Fahrzeug →"-Leiste am unteren Rand (overlay).
+**Fix:** Für jedes der 10 Fahrzeuge generiere ich **3 markenspezifische Bilder** mit dem Agent-Image-Tool (cineastische Showroom-Aufnahmen passend zu Marke/Modell/Farbe — Exterieur Front 3/4, Heck 3/4, Interieur/Cockpit). Speichere unter `src/assets/vehicles/<id>-{1,2,3}.jpg`, lege sie als Lovable-Asset-Pointer an (CDN, kein Repo-Bloat) und verdrahte sie in `vehicles.ts` als `images: [hero, side, interior]`.
 
-Props: `image`, `alt`, `to` (Fahrzeug-Detail-Link), `priority`.
+### Bildbeschreibungen (Beispiele)
+- **AK-2024-001** Mercedes S 500 Obsidianschwarz: dunkler Showroom, AMG-Line Front 3/4, Heck-Schräg, MBUX-Cockpit
+- **AK-2024-002** BMW M4 Comp Brooklyn Grey: Front mit Carbon-Dach, Heck mit Quad-Auspuff, M-Sportsitze
+- **AK-2024-003** Porsche 911 GT-Silber: Front, Heckflügel-Detail, Sport-Chrono-Interieur
+- **AK-2024-004** Audi RS5 Sportback Nardograu: Coupé-Linie 3/4, Heck mit Diffusor, Virtual Cockpit
+- … analog für 005-010 (G-Klasse, Cayenne, M3, RS Q8, Range Rover Sport, AMG GT)
 
-```tsx
-<Link to={to} className="group block overflow-hidden rounded-2xl ring-1 ring-paper-line bg-paper-deep shadow-paper hover:shadow-xl transition">
-  <img src={image} alt={alt} className="w-full h-auto block transition-transform duration-500 group-hover:scale-[1.02]" loading={priority?'eager':'lazy'} />
-  <div className="px-4 py-3 flex items-center justify-between text-sm">
-    <span className="font-medium">Zum Fahrzeug</span>
-    <ArrowRight className="size-4 transition-transform group-hover:translate-x-1" />
-  </div>
-</Link>
-```
+3 Bilder × 10 Autos = **30 Generierungen** (Tier `fast`, 4:3, ~6-8 Min total). Falls Zeit/Cost knapp wird, fallback auf **2 Bilder × 10 Autos**.
 
-### 3. `src/routes/index.tsx` — Highlights-Section
-- 3-Spalten-Grid (`grid md:grid-cols-3 gap-6`) bleibt.
-- 3 Cards mit den neuen Flyern, verknüpft auf `/fahrzeuge/<id>` der 3 passenden Bestandsfahrzeuge (Porsche Cayenne, Range Rover Sport, Mercedes V-Klasse). Falls eines im Bestand fehlt, verlinkt auf `/fahrzeuge`.
-- "Weiter zum Bestand →"-Button bleibt zentriert darunter.
+### Dateien
+- **neu:** `src/assets/vehicles/<id>-{1,2,3}.jpg.asset.json` (30 Asset-Pointer, keine Binaries im Repo)
+- **bearbeitet:** `src/data/vehicles.ts` (pro Fahrzeug `images: […]` auf die neuen URLs umstellen)
+- **Dev-Server-Restart** für den Navigations-Fix
 
-### 4. Bestand-Matching prüfen
-Kurzer Lookup in `src/data/vehicles.ts` (oder wo der Bestand definiert ist), um die richtigen IDs für die 3 verlinkten Fahrzeuge zu finden. Falls keine 1:1-Treffer existieren, verlinke auf `/fahrzeuge` mit Marken-Filter im Query.
-
-## Dateien
-- **neu:** 3 Asset-PNGs in `src/assets/`
-- **bearbeitet:** `src/components/site/HighlightFlyerCard.tsx` (radikal vereinfacht), `src/routes/index.tsx` (Cards-Daten)
-
-Kein Backend, keine Style-Tokens-Änderung.
+Keine Backend-Änderung, kein Schema-Wechsel.

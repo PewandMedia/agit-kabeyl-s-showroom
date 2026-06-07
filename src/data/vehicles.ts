@@ -1,8 +1,33 @@
-import heroCar from "@/assets/hero-car.jpg";
-import car1 from "@/assets/car-1.jpg";
-import car2 from "@/assets/car-2.jpg";
-import car3 from "@/assets/car-3.jpg";
-import car4 from "@/assets/car-4.jpg";
+import v001a from "@/assets/vehicles/AK-2024-001-1.jpg";
+import v001b from "@/assets/vehicles/AK-2024-001-2.jpg";
+import v001c from "@/assets/vehicles/AK-2024-001-3.jpg";
+import v002a from "@/assets/vehicles/AK-2024-002-1.jpg";
+import v002b from "@/assets/vehicles/AK-2024-002-2.jpg";
+import v002c from "@/assets/vehicles/AK-2024-002-3.jpg";
+import v003a from "@/assets/vehicles/AK-2024-003-1.jpg";
+import v003b from "@/assets/vehicles/AK-2024-003-2.jpg";
+import v003c from "@/assets/vehicles/AK-2024-003-3.jpg";
+import v004a from "@/assets/vehicles/AK-2024-004-1.jpg";
+import v004b from "@/assets/vehicles/AK-2024-004-2.jpg";
+import v004c from "@/assets/vehicles/AK-2024-004-3.jpg";
+import v005a from "@/assets/vehicles/AK-2024-005-1.jpg";
+import v005b from "@/assets/vehicles/AK-2024-005-2.jpg";
+import v005c from "@/assets/vehicles/AK-2024-005-3.jpg";
+import v006a from "@/assets/vehicles/AK-2024-006-1.jpg";
+import v006b from "@/assets/vehicles/AK-2024-006-2.jpg";
+import v006c from "@/assets/vehicles/AK-2024-006-3.jpg";
+import v007a from "@/assets/vehicles/AK-2024-007-1.jpg";
+import v007b from "@/assets/vehicles/AK-2024-007-2.jpg";
+import v007c from "@/assets/vehicles/AK-2024-007-3.jpg";
+import v008a from "@/assets/vehicles/AK-2024-008-1.jpg";
+import v008b from "@/assets/vehicles/AK-2024-008-2.jpg";
+import v008c from "@/assets/vehicles/AK-2024-008-3.jpg";
+import v009a from "@/assets/vehicles/AK-2024-009-1.jpg";
+import v009b from "@/assets/vehicles/AK-2024-009-2.jpg";
+import v009c from "@/assets/vehicles/AK-2024-009-3.jpg";
+import v010a from "@/assets/vehicles/AK-2024-010-1.jpg";
+import v010b from "@/assets/vehicles/AK-2024-010-2.jpg";
+import v010c from "@/assets/vehicles/AK-2024-010-3.jpg";
 
 export type VehicleStatus =
   | "available"
@@ -59,7 +84,7 @@ export const vehicles: Vehicle[] = [
     exteriorColor: "Obsidianschwarz Metallic",
     condition: "Gebraucht",
     previousOwners: 1,
-    images: [heroCar, car1, car2, car3],
+    images: [v001a, v001b, v001c],
     features: [
       "Burmester 3D-Soundsystem",
       "Panorama-Schiebedach",
@@ -92,7 +117,7 @@ export const vehicles: Vehicle[] = [
     exteriorColor: "Brooklyn Grey Metallic",
     condition: "Gebraucht",
     previousOwners: 1,
-    images: [car1, car2, car3, car4],
+    images: [v002a, v002b, v002c],
     features: [
       "Harman Kardon Surround",
       "Carbon-Dach",
@@ -122,7 +147,7 @@ export const vehicles: Vehicle[] = [
     exteriorColor: "Gentianblau Metallic",
     condition: "Gebraucht",
     previousOwners: 1,
-    images: [car2, heroCar, car1, car4],
+    images: [v003a, v003b, v003c],
     features: [
       "Sport Chrono Paket",
       "BOSE Surround",
@@ -152,7 +177,7 @@ export const vehicles: Vehicle[] = [
     exteriorColor: "Nardograu",
     condition: "Jahreswagen",
     previousOwners: 1,
-    images: [car3, car1, car2, heroCar],
+    images: [v004a, v004b, v004c],
     features: [
       "B&O Premium Sound",
       "RS-Designpaket",
@@ -181,7 +206,7 @@ export const vehicles: Vehicle[] = [
     exteriorColor: "Polarweiß",
     condition: "Gebraucht",
     previousOwners: 1,
-    images: [car4, heroCar, car2, car3],
+    images: [v005a, v005b, v005c],
     features: [
       "AMG Line",
       "Burmester",
@@ -211,7 +236,7 @@ export const vehicles: Vehicle[] = [
     exteriorColor: "Karbongraumetallic",
     condition: "Gebraucht",
     previousOwners: 1,
-    images: [car2, car4, car1, heroCar],
+    images: [v006a, v006b, v006c],
     features: [
       "Sport Chrono",
       "Panoramadach",
@@ -240,7 +265,7 @@ export const vehicles: Vehicle[] = [
     exteriorColor: "Isle of Man Green Metallic",
     condition: "Jahreswagen",
     previousOwners: 1,
-    images: [car1, car3, heroCar, car2],
+    images: [v007a, v007b, v007c],
     features: [
       "M Carbon-Sitze",
       "Harman Kardon",
@@ -269,7 +294,7 @@ export const vehicles: Vehicle[] = [
     exteriorColor: "Daytonagrau Perleffekt",
     condition: "Gebraucht",
     previousOwners: 1,
-    images: [car3, car4, car1, heroCar],
+    images: [v008a, v008b, v008c],
     features: [
       "Keramikbremsen",
       "B&O Advanced",
@@ -298,7 +323,7 @@ export const vehicles: Vehicle[] = [
     exteriorColor: "Belgravia Green",
     condition: "Jahreswagen",
     previousOwners: 1,
-    images: [car4, car2, heroCar, car1],
+    images: [v009a, v009b, v009c],
     features: [
       "Meridian Signature Sound",
       "Panoramadach",
@@ -327,7 +352,7 @@ export const vehicles: Vehicle[] = [
     exteriorColor: "AMG Selenitgrau Magno",
     condition: "Gebraucht",
     previousOwners: 1,
-    images: [heroCar, car3, car4, car1],
+    images: [v010a, v010b, v010c],
     features: [
       "AMG Performance Sitze",
       "Burmester High-End",
