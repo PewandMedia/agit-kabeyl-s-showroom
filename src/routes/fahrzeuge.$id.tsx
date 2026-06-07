@@ -295,14 +295,14 @@ function VehicleDetail() {
               href={whatsappLink(whatsappText)}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex min-h-[56px] items-center justify-center border-r border-line bg-[oklch(0.62_0.17_150)] font-mono text-[11px] font-bold uppercase tracking-[0.18em] text-white"
+              className="flex min-h-[56px] items-center justify-center border-r border-line bg-champagne font-mono text-[11px] font-bold uppercase tracking-[0.18em] text-foreground"
             >
               WhatsApp
             </a>
             <button
               type="button"
               onClick={() => setTestDriveOpen(true)}
-              className="flex min-h-[56px] items-center justify-center bg-champagne font-mono text-[11px] font-bold uppercase tracking-[0.18em] text-paper"
+              className="flex min-h-[56px] items-center justify-center bg-surface-2 font-mono text-[11px] font-bold uppercase tracking-[0.18em] text-ink"
             >
               Probefahrt
             </button>
@@ -311,6 +311,15 @@ function VehicleDetail() {
 
       </article>
     </SiteLayout>
+  );
+}
+
+function FactChip({ label, value }: { label: string; value: string }) {
+  return (
+    <div className="border border-line bg-surface px-4 py-4">
+      <div className="font-mono text-[9px] uppercase tracking-[0.22em] text-champagne">{label}</div>
+      <div className="mt-2 text-sm font-semibold text-ink md:text-base">{value}</div>
+    </div>
   );
 }
 
