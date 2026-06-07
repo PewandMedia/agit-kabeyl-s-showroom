@@ -1,70 +1,80 @@
+# Redesign-Plan
 
-# Premium-Refresh — Cinematic Champion Edition
+Ziel: Die aktuelle helle Farbwelt wird durch einen deutlich hochwertigeren, dunklen Performance-Look ersetzt. Zusätzlich bekommen die Fahrzeug-Detailseiten einen starken Inserat-Stil nach dem Vorbild deiner Referenzen – aber angepasst auf Kabayels Autohaus.
 
-Ziel: Aus der jetzigen Seite eine "Awwwards-würdige" Vorlage machen. Hero-Bild auf ein neues Level, Hero-Composition cineastischer, Sektionen visuell aufgewertet, Mobile poliert, Formulare verifiziert.
+## Was ich umbaue
 
-Rechtlicher Rahmen: Echte Kabayel-Fotos (auch aus der Google-Suche) sind urheberrechtlich geschützt. Ich nutze daher **stilisierte, rechtssichere KI-Bilder** und lasse klare TODO-Marker im Code, damit später lizenzierte Pressefotos eingesetzt werden können.
+### 1. Neue Farbwelt für die ganze Seite
+Ich stelle die Seite von dem jetzigen hellen Gold/Weiß-Look auf einen dunklen Premium-Look um:
+- Grundfarben: Schwarz, Anthrazit, Tiefgrau
+- Akzentfarbe: kräftiges Rot
+- Sekundärakzent: dezente Metall-/Champagner-Töne nur sehr sparsam
+- Weniger „editorial hell“, mehr „performance showroom“
 
-## 1. Neues Hero-Bild (das Kernstück)
+Das betrifft:
+- Header
+- Buttons
+- Karten
+- Fahrzeuglisten
+- Formulare
+- Footer
+- Mobile Sticky Bar
+- allgemeine Hintergründe, Linien, Hover-Zustände
 
-Ein einziges, starkes Editorial-Bild statt nur Portrait — **Premium-Quality**:
-- **Motiv**: Dramatische Boxer-Silhouette von hinten (Schulterpartie, Bandagen, kein erkennbares Gesicht → rechtssicher) vor einem dunklen, halbbeleuchteten Premium-Coupé in einer Werkstatt-Halle. Goldenes Rim-Light auf Schulter + Autodach, harter Schatten, kinematografisch.
-- **Format**: 3:4 hoch (1280×1707) für die Hero-Spalte
-- **Datei**: `src/assets/champion-hero.jpg` (alt `champion-portrait.jpg` bleibt als Fallback in /ueber-uns)
-- **Model**: `imagegen` premium
+### 2. Fahrzeugkarten klarer auf „Details“ ausrichten
+Die Karten verlinken bereits korrekt auf echte Detailseiten. Ich mache das sichtbarer und hochwertiger:
+- deutlicherer CTA auf den Karten
+- stärkere Hierarchie bei Preis, Modell und Status
+- optisch klarer, dass man in die Fahrzeug-Details reingehen kann
 
-## 2. Hero-Sektion neu komponieren
+### 3. Neue Fahrzeug-Detailseite im Inserat-Stil
+Die Detailseiten werden oben komplett neu aufgebaut – inspiriert von deinen Referenzen.
 
-- **Volle Viewport-Höhe** (min-h-[92vh]) mit cineastischem Layout
-- Linke Spalte (5/12): das neue Bild, mit overlaying gold-rim & subtilem Ken-Burns-ähnlichen Scale-on-Load
-- Rechte Spalte (7/12):
-  - Eyebrow mit animierter Goldlinie
-  - **Riesige Headline** (font-size bis 96px) mit gemischter Display-Schrift + Italic-Akzent ("WBC #1 Contender" in italic gold)
-  - Subline + zwei CTAs (Primary "Fahrzeuge ansehen" / Secondary "Story lesen")
-  - **Stat-Strip** wird visuell aufgewertet (animated count-up, dünne Goldlinien zwischen den Werten)
-- **Scroll-Indicator** unten (dünne animierte Vertikal-Linie + "Scroll" Label)
-- Dezenter **Grain-Overlay** + radialer Spotlight-Verlauf in der Sektion
+Geplant ist eine Komposition mit:
+- starkem dunklem Hero-Bereich
+- großem Fahrzeugtitel
+- Key-Facts-Leiste direkt sichtbar (EZ, km, PS/kW, Getriebe, Kraftstoff etc.)
+- prominenter Preisfläche
+- Highlight-Sektion im Stil eines Premium-Inserats
+- technische Daten als hochwertiges Datenpanel
+- Bildbereiche/Galerie in einer spannenderen, inserat-artigen Anordnung
+- CTA-Bereich für WhatsApp, Anruf, Finanzierung, Probefahrt
 
-## 3. Sektions-Politur
+Wichtig: Ich kopiere die Beispielgrafiken nicht 1:1, sondern übernehme die Logik und den Premium-Charakter für Kabayels Autohaus.
 
-| Sektion | Upgrade |
-|---|---|
-| **TrustBar** | Icons in goldenem Kreis, Hover-Lift, animated fade-in on scroll |
-| **BrandStory** | Marquee-Style Mini-Tag-Reel ("VELBERT · SEIT 2018 · TEAM KABAYEL · …") als dünne Bewegung über der Sektion |
-| **Highlights (Fahrzeug-Grid)** | Section-Header bekommt ein dezent animiertes Goldband, Cards heben sich stärker bei Hover (Schatten + Image-Zoom verstärken) |
-| **SellCar / Financing** | Klarere Hierarchie, große Editorial-Zahlen (01/02/03) als Designelement |
-| **FAQ** | Sauberes Accordion mit Gold-Linien |
-| **ContactCTA** | Vollbreite dunkle Sektion mit Gold-Accent — visueller Bruch zum Footer |
+### 4. Stilrichtung der Inserate
+Da du „Schwarz + Rot“ gewählt hast, setze ich die Fahrzeugseiten so um:
+- schwarze/dunkle Flächen als Bühne
+- rote Akzentlinien, Badges und CTA-Flächen
+- sportlichere Typografie-Hierarchie
+- technischere, aggressivere Darstellung als aktuell
 
-## 4. Globale Design-Politur
+### 5. Bestehende Funktionen erhalten
+Ich ändere nur Design und Präsentation, nicht unnötig die Logik.
+Dabei prüfe ich beim Umbau besonders:
+- Klick von Fahrzeugliste → Detailseite
+- WhatsApp/Telefon/Probefahrt/Finanzierung auf Detailseiten
+- ähnliche Fahrzeuge am Ende der Detailseite
+- mobile Darstellung
 
-- **Smooth scroll-reveals** via Intersection Observer auf Sektions-Headlines (fade-up, kein heavy library)
-- **Header**: beim Scroll dezenter Gold-Hairline darunter
-- **Mobile Sticky Bar**: weiße Glas-Optik mit Gold-Akzent (existiert schon, wird visuell geschliffen)
-- **Cursor-Friendly**: alle Hover-States konsistent (500ms easing)
-- **Typography Scale**: H1 größer, mehr Tracking-Differenzierung zwischen Display und Mono
-
-## 5. Feature-Check (Funktion)
-
-Da nicht klar war, was konkret defekt sein soll, gehe ich pragmatisch durch:
-1. **Alle Lead-Formulare** (Anfrage, Probefahrt, Rückruf, Finanzierung, Ankauf) per Browser-Tool öffnen und Submit testen
-2. **Fahrzeug-Filter** auf `/fahrzeuge` durchklicken
-3. **Mobile Viewport (375px)** alle Hauptseiten visuell prüfen
-4. Fundstellen werden direkt gefixt; Issues, die ich nicht reproduzieren kann, dokumentiere ich im Ergebnis
-
-## 6. Aus dem Scope
-
-- Echtes Kabayel-Pressefoto (Lizenz fehlt) — TODO im Code bleibt
-- Backend-Änderungen, mobile.de-Import (separater Auftrag)
-- Komplette Komponenten-Logik bleibt unverändert; nur Präsentation + neue Hero-Composition
+## Betroffene Bereiche
+Voraussichtlich vor allem:
+- `src/styles.css`
+- `src/components/site/VehicleCard.tsx`
+- `src/routes/fahrzeuge.$id.tsx`
+- ggf. `src/components/site/Header.tsx`
+- ggf. `src/components/site/Footer.tsx`
+- ggf. weitere kleine UI-Komponenten für CTA-/Fact-/Badge-Darstellung
 
 ## Technische Details
+- Bestehende Fahrzeugdaten reichen für den Umbau bereits aus
+- Die Detailseiten müssen nicht neu erfunden werden, sondern werden visuell neu strukturiert
+- Die hochgeladenen Bilder nutze ich als Stilreferenz, nicht direkt als Website-Assets
+- Kein Backend-Umbau nötig
 
-- Neue Datei: `src/assets/champion-hero.jpg` via `imagegen` (premium, 3:4)
-- Editierte Dateien: `src/routes/index.tsx` (Hero rebuild + Sektions-Politur), `src/styles.css` (neue Animation-Utilities: reveal, marquee, gold-spot), evtl. `src/components/site/Header.tsx` (Hairline), `src/components/site/MobileStickyBar.tsx` (Politur)
-- Keine neuen npm-Pakete nötig (alles mit CSS + IntersectionObserver lösbar)
-- Verifikation via Browser-Preview (Desktop 1440, Mobile 375)
-
-## Nächster Schritt
-
-Switch to Build Mode → Bild generieren, Hero neu bauen, Sektionen polieren, Mobile prüfen, Formulare durchklicken.
+## Ergebnis
+Nach dem Umbau soll die Seite:
+- deutlich moderner wirken
+- farblich viel stärker und hochwertiger sein
+- bei den Fahrzeugen nach echten Premium-Inseraten aussehen
+- klar zeigen, dass man jedes Auto im Detail ansehen und direkt anfragen kann

@@ -10,10 +10,10 @@ export function StatusBadge({
 }) {
   const { label, tone } = statusMeta(status);
   const styles: Record<string, string> = {
-    champagne: "bg-champagne text-paper",
+    champagne: "bg-champagne text-foreground",
     available: "bg-surface-2 text-ink border border-champagne/40",
-    reserved: "bg-ink/70 text-paper",
-    sold: "bg-[oklch(0.45_0.18_27)] text-white",
+    reserved: "bg-surface text-ink border border-line",
+    sold: "bg-champagne text-foreground",
   };
   return (
     <span

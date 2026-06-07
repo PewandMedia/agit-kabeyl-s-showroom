@@ -39,7 +39,7 @@ export function MobileStickyBar() {
         hidden ? "translate-y-full" : "translate-y-0"
       }`}
     >
-      <div className="border-t border-champagne/20 bg-emerald-deep/95 backdrop-blur-xl pb-safe">
+      <div className="border-t border-champagne/30 bg-paper/95 backdrop-blur-xl pb-safe">
         <div className="grid grid-cols-3">
           <BarSlot
             href={telLink()}
@@ -86,7 +86,7 @@ function BarSlot({
   ariaLabel?: string;
 }) {
   const cls = `relative flex h-[72px] flex-col items-center justify-center gap-1.5 font-mono text-[9px] font-bold uppercase tracking-[0.22em] transition-colors duration-300 ${
-    active ? "text-champagne" : "text-ink/85 active:text-champagne"
+    active ? "text-champagne" : "text-ink-soft active:text-champagne"
   }`;
   const accent = (
     <span

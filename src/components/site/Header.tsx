@@ -26,8 +26,8 @@ export function Header() {
     <header
       className={`fixed inset-x-0 top-0 z-50 border-b transition-all duration-300 ${
         scrolled || open
-          ? "border-champagne/20 bg-paper/90 backdrop-blur-xl"
-          : "border-transparent bg-paper/60 backdrop-blur-md"
+          ? "border-champagne/30 bg-paper/92 backdrop-blur-xl"
+          : "border-transparent bg-paper/72 backdrop-blur-md"
       }`}
     >
       <div className="mx-auto flex h-16 max-w-[1400px] items-center justify-between px-4 md:h-20 md:px-10">
@@ -45,7 +45,7 @@ export function Header() {
               Autohaus
             </span>
           </div>
-          <span className="hidden items-center gap-1.5 whitespace-nowrap border border-champagne/60 bg-paper px-2 py-1 font-mono text-[9px] font-bold uppercase tracking-[0.2em] text-champagne 2xl:inline-flex">
+          <span className="hidden items-center gap-1.5 whitespace-nowrap border border-champagne/70 bg-surface px-2 py-1 font-mono text-[9px] font-bold uppercase tracking-[0.2em] text-champagne 2xl:inline-flex">
             <span aria-hidden className="h-1 w-1 rotate-45 bg-champagne" />
             Team Kabayel · WBC #1
           </span>
