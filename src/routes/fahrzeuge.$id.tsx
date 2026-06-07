@@ -223,6 +223,14 @@ function VehicleDetail() {
                     >
                       Finanzierung anfragen
                     </Link>
+                    <button
+                      type="button"
+                      onClick={onDownloadFlyer}
+                      disabled={flyerLoading}
+                      className="block w-full border border-champagne/60 py-3 text-center font-mono text-[11px] uppercase tracking-[0.22em] text-champagne transition-colors hover:bg-champagne hover:text-paper disabled:opacity-50"
+                    >
+                      {flyerLoading ? "Erstelle PDF…" : "Flyer als PDF"}
+                    </button>
                   </div>
                 </div>
               </aside>
