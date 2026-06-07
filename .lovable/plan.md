@@ -1,20 +1,39 @@
-## 1. Highlight-Flyer wieder 3 nebeneinander
-- `HighlightFlyerCard.tsx` neu im kompakten OZ-Flyer-Stil, vertikal gestapelt für 3-Spalten-Grid: dunkler Hintergrund, Bild oben (16:10), darunter Marke + Modell-Headline (weiß + rot), Spec-Strip mit Icons (PS, km, EZ, Kraftstoff), 4–5 Highlights mit roten Check-Icons, Preisblock mit rotem Akzent, CTA „Weiter →".
-- `routes/index.tsx`: Sektion zurück auf `md:grid-cols-3 gap-6`, darunter zentrierter Primary-Button „Weiter zum Bestand →".
+# Plan: Echte Flyer-Bilder als Highlights nutzen
 
-## 2. Hero-Bild Agit Kabayel ans Design angleichen
-- `imagegen--edit_image` auf `src/assets/hero-kabayel-bmw7.jpg`: Farb-Grading dunkler/cinematischer, Showroom-Gelbstich raus, dezenter Champagner-Ton, Vignette, BMW + Subjekt durch Spotlight hervorheben. 4:5 bleibt.
-- Hero-Overlay in `index.tsx` etwas stärker (oben/unten), damit Bild nahtlos in Paper-BG übergeht und Caption lesbar bleibt.
+Du hast 3 fertige Flyer hochgeladen (Porsche Cayenne GTS, Range Rover Sport HSE, Mercedes V300 d). Diese sollen direkt als die 3 Highlight-Karten auf der Startseite angezeigt werden — keine Nachbau-Komponente mehr.
 
-## 3. Detailseite klarer
-`routes/fahrzeuge.$id.tsx`:
-- Eckdaten-Grid auf 8 Felder erweitern: EZ, Laufleistung, Leistung (kW/PS), Getriebe, Kraftstoff, Farbe, **Vorbesitzer**, **Zustand** — größere Chips mit Icons.
-- Ausstattungs-Box im Flyer-Stil: dunkler Hintergrund, rote Check-Icons, 2-spaltige Liste, Header „Ausstattung & Highlights" mit Anzahl.
-- Technische Daten kompakter aber vollständig.
-- Reihenfolge: Galerie → Eckdaten XL → Beschreibung → Ausstattung → Tech. Daten → Anfrage → Ähnliche.
+## Änderungen
+
+### 1. Flyer als Assets einbinden
+- `src/assets/flyer-porsche-cayenne-gts.png` — aus `Porsche_Cayenne_Bearbeite_Version_Extrem-3.png`
+- `src/assets/flyer-range-rover-sport-hse.png` — aus `Range_Rover-3.png`
+- `src/assets/flyer-mercedes-v300d.png` — aus `Mercedes_Benz_V300_Bild_1-3.png` (Bild 1, weil sauberere Komposition)
+
+### 2. `src/components/site/HighlightFlyerCard.tsx` — komplett vereinfachen
+Statt nachgebautem Layout: nur noch ein klickbarer Link, der den ganzen Flyer als Bild anzeigt + dezenter Hover-Effekt + kleine "Zum Fahrzeug →"-Leiste am unteren Rand (overlay).
+
+Props: `image`, `alt`, `to` (Fahrzeug-Detail-Link), `priority`.
+
+```tsx
+<Link to={to} className="group block overflow-hidden rounded-2xl ring-1 ring-paper-line bg-paper-deep shadow-paper hover:shadow-xl transition">
+  <img src={image} alt={alt} className="w-full h-auto block transition-transform duration-500 group-hover:scale-[1.02]" loading={priority?'eager':'lazy'} />
+  <div className="px-4 py-3 flex items-center justify-between text-sm">
+    <span className="font-medium">Zum Fahrzeug</span>
+    <ArrowRight className="size-4 transition-transform group-hover:translate-x-1" />
+  </div>
+</Link>
+```
+
+### 3. `src/routes/index.tsx` — Highlights-Section
+- 3-Spalten-Grid (`grid md:grid-cols-3 gap-6`) bleibt.
+- 3 Cards mit den neuen Flyern, verknüpft auf `/fahrzeuge/<id>` der 3 passenden Bestandsfahrzeuge (Porsche Cayenne, Range Rover Sport, Mercedes V-Klasse). Falls eines im Bestand fehlt, verlinkt auf `/fahrzeuge`.
+- "Weiter zum Bestand →"-Button bleibt zentriert darunter.
+
+### 4. Bestand-Matching prüfen
+Kurzer Lookup in `src/data/vehicles.ts` (oder wo der Bestand definiert ist), um die richtigen IDs für die 3 verlinkten Fahrzeuge zu finden. Falls keine 1:1-Treffer existieren, verlinke auf `/fahrzeuge` mit Marken-Filter im Query.
 
 ## Dateien
-- `src/assets/hero-kabayel-bmw7.jpg`
-- `src/components/site/HighlightFlyerCard.tsx`
-- `src/routes/index.tsx`
-- `src/routes/fahrzeuge.$id.tsx`
+- **neu:** 3 Asset-PNGs in `src/assets/`
+- **bearbeitet:** `src/components/site/HighlightFlyerCard.tsx` (radikal vereinfacht), `src/routes/index.tsx` (Cards-Daten)
+
+Kein Backend, keine Style-Tokens-Änderung.

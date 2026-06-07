@@ -8,6 +8,34 @@ import { featuredVehicles, vehicles } from "@/data/vehicles";
 import { dealer, telLink, whatsappLink } from "@/data/dealer";
 import heroCar from "@/assets/hero-car.jpg";
 import championHero from "@/assets/hero-kabayel-bmw7.jpg";
+import flyerPorsche from "@/assets/flyer-porsche-cayenne-gts.png.asset.json";
+import flyerRangeRover from "@/assets/flyer-range-rover-sport-hse.png.asset.json";
+import flyerMercedes from "@/assets/flyer-mercedes-v300d.png.asset.json";
+
+const HIGHLIGHT_FLYERS: Array<{
+  image: string;
+  alt: string;
+  to: string;
+  params?: Record<string, string>;
+}> = [
+  {
+    image: flyerPorsche.url,
+    alt: "Porsche Cayenne GTS — Highlight-Inserat",
+    to: "/fahrzeuge/$id",
+    params: { id: "AK-2024-006" },
+  },
+  {
+    image: flyerRangeRover.url,
+    alt: "Range Rover Sport HSE — Highlight-Inserat",
+    to: "/fahrzeuge/$id",
+    params: { id: "AK-2024-009" },
+  },
+  {
+    image: flyerMercedes.url,
+    alt: "Mercedes-Benz V 300 d Avantgarde Edition Lang — Highlight-Inserat",
+    to: "/fahrzeuge",
+  },
+];
 
 
 
@@ -281,8 +309,15 @@ function Highlights() {
         </div>
 
         <div className="mt-10 grid gap-6 md:mt-14 md:grid-cols-3">
-          {featuredVehicles.slice(0, 3).map((v, i) => (
-            <HighlightFlyerCard key={v.id} vehicle={v} priority={i === 0} />
+          {HIGHLIGHT_FLYERS.map((f, i) => (
+            <HighlightFlyerCard
+              key={f.image}
+              image={f.image}
+              alt={f.alt}
+              to={f.to}
+              params={f.params}
+              priority={i === 0}
+            />
           ))}
         </div>
 
