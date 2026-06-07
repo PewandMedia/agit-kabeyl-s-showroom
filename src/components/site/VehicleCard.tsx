@@ -17,9 +17,8 @@ export function VehicleCard({
     <Link
       to="/fahrzeuge/$id"
       params={{ id: vehicle.id }}
-      className="group relative block bg-surface transition-colors duration-500 hover:bg-surface-2"
+      className="group relative block overflow-hidden border border-line bg-surface transition-all duration-500 hover:border-champagne/60 hover:bg-surface-2"
     >
-      {/* Image — taller, editorial */}
       <div className="relative aspect-[5/4] overflow-hidden bg-emerald-deep">
         <img
           src={vehicle.images[0]}
@@ -33,29 +32,22 @@ export function VehicleCard({
             isSold ? "opacity-40 grayscale" : ""
           }`}
         />
-        {/* Vignette */}
-        <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-ink/60 via-transparent to-transparent" />
-
-        {/* Status — top left */}
+        <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-paper via-paper/10 to-transparent" />
         {(isSold || isReserved) && (
           <div className="absolute left-5 top-5">
-            <span className="flex items-center gap-2 font-mono text-[10px] font-bold uppercase tracking-[0.3em] text-paper">
+            <span className="flex items-center gap-2 font-mono text-[10px] font-bold uppercase tracking-[0.3em] text-ink">
               <span aria-hidden className="h-px w-6 bg-champagne" />
               {isSold ? "Verkauft" : "Reserviert"}
             </span>
           </div>
         )}
-
-        {/* Slide-in CTA bar */}
-        <div className="pointer-events-none absolute inset-x-0 bottom-0 flex translate-y-full items-center justify-between bg-champagne px-5 py-3.5 font-mono text-[10px] font-bold uppercase tracking-[0.28em] text-paper transition-transform duration-500 ease-[cubic-bezier(0.22,0.61,0.36,1)] group-hover:translate-y-0">
-          <span>Details ansehen</span>
+        <div className="pointer-events-none absolute inset-x-0 bottom-0 flex translate-y-full items-center justify-between bg-champagne px-5 py-3.5 font-mono text-[10px] font-bold uppercase tracking-[0.28em] text-foreground transition-transform duration-500 ease-[cubic-bezier(0.22,0.61,0.36,1)] group-hover:translate-y-0">
+          <span>Zu den Details</span>
           <span aria-hidden>→</span>
         </div>
       </div>
 
-      {/* Info block */}
-      <div className="border-t border-champagne/10 p-6 md:p-7">
-        {/* Make + ID row */}
+      <div className="border-t border-line p-6 md:p-7">
         <div className="flex items-center justify-between gap-4">
           <div className="font-mono text-[10px] font-medium uppercase tracking-[0.32em] text-champagne">
             {vehicle.make}
@@ -65,13 +57,11 @@ export function VehicleCard({
           </div>
         </div>
 
-        {/* Model — display serif feeling */}
         <h3 className="mt-3 font-display text-2xl font-extrabold leading-[1.05] tracking-[-0.02em] text-ink md:text-[26px]">
           {vehicle.title}
         </h3>
 
-        {/* Spec row — mono with dot separators */}
-        <p className="mt-4 font-mono text-[11px] uppercase tracking-[0.16em] text-ink/75">
+        <p className="mt-4 font-mono text-[11px] uppercase tracking-[0.16em] text-ink-soft">
           {formatKm(vehicle.mileageKm)}
           <span className="mx-2 text-champagne">·</span>
           {vehicle.firstRegistration}
@@ -81,13 +71,12 @@ export function VehicleCard({
           {vehicle.fuel}
         </p>
 
-        {/* Price block — bottom-aligned */}
-        <div className="mt-7 flex items-end justify-between border-t border-champagne/10 pt-5">
+        <div className="mt-7 flex items-end justify-between border-t border-line pt-5">
           <div>
             <div className="font-mono text-[9px] uppercase tracking-[0.28em] text-ink-soft">
               ab {monthlyRate(vehicle.priceEur)} €/Monat*
             </div>
-            <div className="mt-1 font-mono text-[9px] uppercase tracking-[0.2em] text-ink-soft/70">
+            <div className="mt-1 font-mono text-[9px] uppercase tracking-[0.2em] text-ink-soft/80">
               {vehicle.transmission}
             </div>
           </div>
@@ -95,8 +84,8 @@ export function VehicleCard({
             <div className="font-display text-3xl font-extrabold leading-none tracking-[-0.02em] text-champagne md:text-4xl">
               {formatPrice(vehicle.priceEur)}
             </div>
-            <div className="mt-1 font-mono text-[9px] uppercase tracking-[0.2em] text-ink-soft">
-              inkl. MwSt.
+            <div className="mt-3 inline-flex items-center gap-2 border border-champagne/40 px-3 py-1 font-mono text-[9px] uppercase tracking-[0.2em] text-champagne">
+              Details ansehen →
             </div>
           </div>
         </div>
