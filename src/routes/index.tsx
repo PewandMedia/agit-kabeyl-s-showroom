@@ -280,9 +280,9 @@ function Highlights() {
           </Link>
         </div>
 
-        <div className="mt-10 grid gap-6 md:mt-14 md:grid-cols-3">
+        <div className="mx-auto mt-10 flex max-w-5xl flex-col gap-10 md:mt-14 md:gap-14">
           {featuredVehicles.slice(0, 3).map((v, i) => (
-            <HighlightFlyerCard key={v.id} vehicle={v} priority={i < 2} />
+            <HighlightFlyerCard key={v.id} vehicle={v} priority={i === 0} />
           ))}
         </div>
 
