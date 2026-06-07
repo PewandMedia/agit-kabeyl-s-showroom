@@ -9,7 +9,7 @@ import {
 } from "@/components/site/VehicleFilters";
 import { vehicles, statusMeta, type VehicleStatus } from "@/data/vehicles";
 
-export const Route = createFileRoute("/fahrzeuge")({
+export const Route = createFileRoute("/fahrzeuge/")({
   head: () => ({
     meta: [
       { title: "Gebrauchtwagen Velbert — Bestand | Autohaus AK" },
