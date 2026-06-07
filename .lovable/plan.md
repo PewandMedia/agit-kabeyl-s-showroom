@@ -1,80 +1,86 @@
-# Redesign-Plan
+## Ziel
 
-Ziel: Die aktuelle helle Farbwelt wird durch einen deutlich hochwertigeren, dunklen Performance-Look ersetzt. Zusätzlich bekommen die Fahrzeug-Detailseiten einen starken Inserat-Stil nach dem Vorbild deiner Referenzen – aber angepasst auf Kabayels Autohaus.
+Drei Probleme an einem Stück fixen:
+1. Fahrzeug-Karten führen zuverlässig zur Detailseite.
+2. Pro Fahrzeug ein echter, druckbarer Flyer im Stil der gezeigten Inserate für Kabayels Autohaus.
+3. Gesamtauftritt seriöser: weniger Text, mehr Bild, ruhigere Hierarchie.
 
-## Was ich umbaue
+---
 
-### 1. Neue Farbwelt für die ganze Seite
-Ich stelle die Seite von dem jetzigen hellen Gold/Weiß-Look auf einen dunklen Premium-Look um:
-- Grundfarben: Schwarz, Anthrazit, Tiefgrau
-- Akzentfarbe: kräftiges Rot
-- Sekundärakzent: dezente Metall-/Champagner-Töne nur sehr sparsam
-- Weniger „editorial hell“, mehr „performance showroom“
+## 1. Detail-Klick reparieren
 
-Das betrifft:
-- Header
-- Buttons
-- Karten
-- Fahrzeuglisten
-- Formulare
-- Footer
-- Mobile Sticky Bar
-- allgemeine Hintergründe, Linien, Hover-Zustände
+Bei `<Link>` mit verschachtelten interaktiven Elementen (z. B. das "Details ansehen" Pseudo-Button in `VehicleCard.tsx`) kann der Klick verschluckt wirken, wenn der innere Hover-Overlay (`absolute inset-x-0 bottom-0 ... pointer-events-auto`) zwischen Maus und Karte liegt oder der Status-Badge das Image überlagert.
 
-### 2. Fahrzeugkarten klarer auf „Details“ ausrichten
-Die Karten verlinken bereits korrekt auf echte Detailseiten. Ich mache das sichtbarer und hochwertiger:
-- deutlicherer CTA auf den Karten
-- stärkere Hierarchie bei Preis, Modell und Status
-- optisch klarer, dass man in die Fahrzeug-Details reingehen kann
+Maßnahmen in `src/components/site/VehicleCard.tsx`:
+- Die gesamte Karte bleibt **ein** `<Link>` (kein verschachteltes `<button>`/`<a>` innen).
+- Alle dekorativen Layer (`Zu den Details`, "Details ansehen →", Status-Badge, Hover-Stripe) bekommen `pointer-events: none`, damit der Klick immer den Link trifft.
+- Tap-Target ≥ 44 px, `aria-label` mit Titel + Preis.
+- Bilder bekommen `draggable=false`, damit auf Touch kein Bild-Drag den Tap frisst.
+- Auf der Bestandsseite und der Startseite wird **dieselbe** Karte genutzt — Fix wirkt überall.
 
-### 3. Neue Fahrzeug-Detailseite im Inserat-Stil
-Die Detailseiten werden oben komplett neu aufgebaut – inspiriert von deinen Referenzen.
+Außerdem in `fahrzeuge.$id.tsx`: prüfen, dass `getVehicle(id)` korrekt matched (sonst landet man im `notFoundComponent`, was sich wie "nicht klickbar" anfühlt). Falls ID-Mismatch besteht, fixen.
 
-Geplant ist eine Komposition mit:
-- starkem dunklem Hero-Bereich
-- großem Fahrzeugtitel
-- Key-Facts-Leiste direkt sichtbar (EZ, km, PS/kW, Getriebe, Kraftstoff etc.)
-- prominenter Preisfläche
-- Highlight-Sektion im Stil eines Premium-Inserats
-- technische Daten als hochwertiges Datenpanel
-- Bildbereiche/Galerie in einer spannenderen, inserat-artigen Anordnung
-- CTA-Bereich für WhatsApp, Anruf, Finanzierung, Probefahrt
+---
 
-Wichtig: Ich kopiere die Beispielgrafiken nicht 1:1, sondern übernehme die Logik und den Premium-Charakter für Kabayels Autohaus.
+## 2. Fahrzeug-Flyer (PDF + Web-Flyer)
 
-### 4. Stilrichtung der Inserate
-Da du „Schwarz + Rot“ gewählt hast, setze ich die Fahrzeugseiten so um:
-- schwarze/dunkle Flächen als Bühne
-- rote Akzentlinien, Badges und CTA-Flächen
-- sportlichere Typografie-Hierarchie
-- technischere, aggressivere Darstellung als aktuell
+Zweigleisig, weil die geschickten Beispiele wie echte Inserate aussehen:
 
-### 5. Bestehende Funktionen erhalten
-Ich ändere nur Design und Präsentation, nicht unnötig die Logik.
-Dabei prüfe ich beim Umbau besonders:
-- Klick von Fahrzeugliste → Detailseite
-- WhatsApp/Telefon/Probefahrt/Finanzierung auf Detailseiten
-- ähnliche Fahrzeuge am Ende der Detailseite
-- mobile Darstellung
+### 2a) Web-Flyer (Detailseite im Inserat-Stil)
+`src/routes/fahrzeuge.$id.tsx` wird zu einem "Print-Inserat im Web":
+- Großes Hero-Bild des Autos (16:10), darüber kleines Marken-Lockup "Autohaus AK · Velbert" und Status-Badge.
+- Titelzeile gross, eine knappe Untertitel-Zeile (Variante).
+- Fakten-Streifen (EZ · KM · PS · Getriebe · Kraftstoff) als ruhige Chips.
+- Preisblock rechts (sticky auf Desktop), darunter WhatsApp / Anrufen / Probefahrt / Finanzierung.
+- "Ausstattung" knapp in zwei Spalten, keine Marketing-Floskeln.
+- "Technische Daten" als kompakte Definitionsliste.
+- Galerie nur als Strip (Thumbnails) statt großem Block, mehr Bilder weniger Text.
+- "Ähnliche Fahrzeuge" beibehalten, aber kleiner.
 
-## Betroffene Bereiche
-Voraussichtlich vor allem:
-- `src/styles.css`
-- `src/components/site/VehicleCard.tsx`
-- `src/routes/fahrzeuge.$id.tsx`
-- ggf. `src/components/site/Header.tsx`
-- ggf. `src/components/site/Footer.tsx`
-- ggf. weitere kleine UI-Komponenten für CTA-/Fact-/Badge-Darstellung
+### 2b) PDF-Download pro Fahrzeug
+Auf der Detailseite ein Button "Flyer als PDF" der einen klassisch gesetzten 1-Seiten-Flyer erzeugt (DIN A4 quer-/hochformat, Logo, Hauptbild, Fakten, Preis, Kontakt + QR-Code zur Detailseite).
+- Implementierung clientseitig mit `jspdf` + `html2canvas` (in Browser-Runtime erlaubt), keine Server-Funktion nötig.
+- Daten kommen direkt aus `vehicles.ts`, keine zusätzliche Backend-Anbindung.
+- Vorlage liegt in `src/components/site/VehicleFlyer.tsx` (versteckt off-screen gerendert, dann zu PDF konvertiert).
 
-## Technische Details
-- Bestehende Fahrzeugdaten reichen für den Umbau bereits aus
-- Die Detailseiten müssen nicht neu erfunden werden, sondern werden visuell neu strukturiert
-- Die hochgeladenen Bilder nutze ich als Stilreferenz, nicht direkt als Website-Assets
-- Kein Backend-Umbau nötig
+Falls `jspdf`/`html2canvas` Probleme machen, Fallback: Druck-optimierte CSS-Seite `/fahrzeuge/$id/flyer` (eigene Route, A4-Layout, `@media print`), Nutzer wählt im Browser "Als PDF speichern". Damit funktioniert es garantiert.
 
-## Ergebnis
-Nach dem Umbau soll die Seite:
-- deutlich moderner wirken
-- farblich viel stärker und hochwertiger sein
-- bei den Fahrzeugen nach echten Premium-Inseraten aussehen
-- klar zeigen, dass man jedes Auto im Detail ansehen und direkt anfragen kann
+---
+
+## 3. Seriöser, bildlastiger Auftritt
+
+Reduktion auf der Startseite (`src/routes/index.tsx`) und in `Header.tsx`:
+- Hero: Bild bleibt dominant, Headline kürzer ("Geprüfte Gebrauchtwagen aus Velbert."), Box-Untertitel auf 1–2 Sätze.
+- "Team Kabayel · WBC #1"-Story als kleine, dezente Notiz unten im Hero — nicht als Hauptbotschaft.
+- TrustBar: 4 Punkte, nur Icon + Label, keine doppelte Zeile.
+- BrandStory: einen einzigen ruhigen Satz statt mehrerer Absätze.
+- Highlights: nur Fahrzeug-Grid, kein zusätzlicher Erklärtext.
+- Lange Sektionen WhyAK / Testimonials / Financing-Erklärung verschlanken oder zusammenführen (max. eine kurze Zeile + CTA).
+- FAQ einklappbar, default zu.
+- Farbe: aktuelles Schwarz behalten, Rot zurückhaltender einsetzen (nur Akzente, Hover, Preis, CTAs) — keine roten Flächen ohne Funktion.
+- Typografie: Headlines bleiben, Fließtext eine Stufe kleiner und mit mehr Weiß drumherum.
+
+Bestand (`fahrzeuge.tsx`): Hero-Block kürzer (nur Kicker + H1, keine Marketing-Beschreibung).
+
+---
+
+## 4. Funktionen prüfen
+
+Letzter Durchgang in der Vorschau:
+- Karte → Detail → WhatsApp / Anrufen / Probefahrt-Modal / Rückruf-Modal / Finanzierung-Link / PDF-Flyer-Download → alle klickbar.
+- Mobile Sticky-Bar überdeckt keine CTAs.
+- Filter/Sort auf `/fahrzeuge` funktionieren weiter.
+
+---
+
+## Betroffene Dateien
+- `src/components/site/VehicleCard.tsx` (Klick-Fix, ruhigeres Layout)
+- `src/routes/fahrzeuge.$id.tsx` (Inserat-Look + PDF-Button)
+- `src/components/site/VehicleFlyer.tsx` (neu, PDF-Vorlage)
+- evtl. `src/routes/fahrzeuge.$id.flyer.tsx` (Fallback-Druckseite)
+- `src/routes/index.tsx` (weniger Text, mehr Bild)
+- `src/routes/fahrzeuge.tsx` (kürzerer Header)
+- `src/styles.css` (Rot dezenter, ruhigere Token)
+- `bun add jspdf html2canvas qrcode` für PDF + QR
+
+Keine Backend-/DB-Änderungen.
