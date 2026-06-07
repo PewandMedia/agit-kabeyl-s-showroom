@@ -65,47 +65,46 @@
 :root {
   --radius: 0.125rem;
 
-  /* Champion White & Gold — light editorial palette */
-  --background: oklch(0.985 0.002 250);
-  --foreground: oklch(0.18 0.01 250);
+  /* Performance Black + Red */
+  --background: oklch(0.12 0.01 260);
+  --foreground: oklch(0.96 0.004 250);
 
-  --card: oklch(1 0 0);
-  --card-foreground: oklch(0.18 0.01 250);
-  --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.18 0.01 250);
+  --card: oklch(0.16 0.01 260);
+  --card-foreground: oklch(0.96 0.004 250);
+  --popover: oklch(0.14 0.01 260);
+  --popover-foreground: oklch(0.96 0.004 250);
 
-  --primary: oklch(0.18 0.01 250);
-  --primary-foreground: oklch(0.985 0.002 250);
+  --primary: oklch(0.58 0.22 25);
+  --primary-foreground: oklch(0.98 0.004 250);
 
-  --secondary: oklch(0.95 0.004 250);
-  --secondary-foreground: oklch(0.18 0.01 250);
-  --muted: oklch(0.95 0.004 250);
-  --muted-foreground: oklch(0.45 0.008 250);
-  --accent: oklch(0.68 0.12 80);
-  --accent-foreground: oklch(0.18 0.01 250);
+  --secondary: oklch(0.2 0.01 260);
+  --secondary-foreground: oklch(0.96 0.004 250);
+  --muted: oklch(0.18 0.01 260);
+  --muted-foreground: oklch(0.75 0.01 250);
+  --accent: oklch(0.58 0.22 25);
+  --accent-foreground: oklch(0.98 0.004 250);
 
   --destructive: oklch(0.6 0.22 27);
-  --destructive-foreground: oklch(0.985 0.002 250);
+  --destructive-foreground: oklch(0.98 0.004 250);
 
-  --border: oklch(0.18 0.01 250 / 0.12);
-  --input: oklch(0.18 0.01 250 / 0.18);
-  --ring: oklch(0.68 0.12 80);
+  --border: oklch(0.96 0.004 250 / 0.12);
+  --input: oklch(0.96 0.004 250 / 0.12);
+  --ring: oklch(0.58 0.22 25);
 
-  /* Brand tokens — Champion edition */
-  --paper: oklch(0.985 0.002 250);          /* #fafbfc */
-  --surface: oklch(1 0 0);                   /* #ffffff cards */
-  --surface-2: oklch(0.955 0.006 80);       /* warm cream sections */
-  --ink: oklch(0.18 0.01 250);               /* near-black text */
-  --ink-soft: oklch(0.42 0.008 250 / 0.85); /* muted gray */
-  --champagne: oklch(0.68 0.12 80);          /* gold ~ #c9a84c */
-  --champagne-soft: oklch(0.78 0.115 86);   /* lighter gold hover */
-  --emerald-deep: oklch(0.93 0.004 250);    /* repurposed: light placeholder bg */
-  --line: oklch(0.18 0.01 250 / 0.10);
-  --champion-red: oklch(0.55 0.18 25);       /* WBC accent */
+  /* Brand tokens */
+  --paper: oklch(0.1 0.01 260);
+  --surface: oklch(0.14 0.01 260);
+  --surface-2: oklch(0.18 0.01 260);
+  --ink: oklch(0.96 0.004 250);
+  --ink-soft: oklch(0.74 0.008 250 / 0.88);
+  --champagne: oklch(0.58 0.22 25);
+  --champagne-soft: oklch(0.67 0.2 24);
+  --emerald-deep: oklch(0.12 0.01 260);
+  --line: oklch(0.96 0.004 250 / 0.12);
+  --champion-red: oklch(0.58 0.22 25);
 }
 
 .dark {
-  /* Default theme is already dark — keep tokens identical. */
 }
 
 @layer base {
