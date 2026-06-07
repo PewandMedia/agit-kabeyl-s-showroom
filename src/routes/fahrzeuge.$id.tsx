@@ -1,5 +1,6 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { useState } from "react";
+import { Calendar, Gauge, Zap, Cog, Fuel, Palette } from "lucide-react";
 import { SiteLayout } from "@/components/site/SiteLayout";
 import { VehicleGallery } from "@/components/site/VehicleGallery";
 import { VehicleInquiryForm } from "@/components/forms/VehicleInquiryForm";
@@ -180,12 +181,13 @@ function VehicleDetail() {
                   {v.description}
                 </p>
 
-                <div className="mt-8 grid grid-cols-2 gap-3 md:grid-cols-5">
-                  <FactChip label="EZ" value={v.firstRegistration} />
-                  <FactChip label="KM" value={formatKm(v.mileageKm)} />
-                  <FactChip label="Leistung" value={formatKw(v.powerKw)} />
-                  <FactChip label="Getriebe" value={v.transmission} />
-                  <FactChip label="Kraftstoff" value={v.fuel} />
+                <div className="mt-8 grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-6">
+                  <FactChip icon={<Calendar size={18} strokeWidth={1.6} />} label="Erstzulassung" value={v.firstRegistration} />
+                  <FactChip icon={<Gauge size={18} strokeWidth={1.6} />} label="Laufleistung" value={formatKm(v.mileageKm)} />
+                  <FactChip icon={<Zap size={18} strokeWidth={1.6} />} label="Leistung" value={formatKw(v.powerKw)} />
+                  <FactChip icon={<Cog size={18} strokeWidth={1.6} />} label="Getriebe" value={v.transmission} />
+                  <FactChip icon={<Fuel size={18} strokeWidth={1.6} />} label="Kraftstoff" value={v.fuel} />
+                  <FactChip icon={<Palette size={18} strokeWidth={1.6} />} label="Farbe" value={v.exteriorColor} />
                 </div>
               </div>
 
@@ -335,11 +337,12 @@ function VehicleDetail() {
   );
 }
 
-function FactChip({ label, value }: { label: string; value: string }) {
+function FactChip({ icon, label, value }: { icon?: React.ReactNode; label: string; value: string }) {
   return (
-    <div className="border border-line bg-surface px-4 py-4">
+    <div className="border border-line bg-surface px-4 py-4 transition-colors hover:border-champagne/60">
+      {icon && <div className="text-champagne mb-2">{icon}</div>}
       <div className="font-mono text-[9px] uppercase tracking-[0.22em] text-champagne">{label}</div>
-      <div className="mt-2 text-sm font-semibold text-ink md:text-base">{value}</div>
+      <div className="mt-1.5 text-sm font-semibold text-ink md:text-base leading-tight">{value}</div>
     </div>
   );
 }

@@ -1,11 +1,15 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
+import { ShieldCheck, CreditCard, Handshake, UserRound } from "lucide-react";
 import { SiteLayout } from "@/components/site/SiteLayout";
 import { VehicleCard } from "@/components/site/VehicleCard";
+import { HighlightFlyerCard } from "@/components/site/HighlightFlyerCard";
 import { BtnLink, BtnA } from "@/components/ui/Btn";
 import { featuredVehicles, vehicles } from "@/data/vehicles";
 import { dealer, telLink, whatsappLink } from "@/data/dealer";
 import heroCar from "@/assets/hero-car.jpg";
-import championHero from "@/assets/champion-hero.jpg";
+import championHero from "@/assets/hero-kabayel-bmw7.jpg";
+
+
 
 
 export const Route = createFileRoute("/")({
@@ -80,7 +84,7 @@ function Hero() {
           <div className="group relative aspect-[4/5] w-full overflow-hidden bg-ink">
             <img
               src={championHero}
-              alt="Schwarzes Performance-Coupé im Showroom — Autohaus AK Velbert"
+              alt="Agit Kabayel · WBC #1 Contender mit seinem BMW 7er im Showroom — Symbolbild"
               width={1024}
               height={1280}
               fetchPriority="high"
@@ -182,36 +186,28 @@ function Stat({ label, value }: { label: string; value: string }) {
 }
 
 /* ─────────────────────── TRUST BAR (compact) ─────────────────────── */
-const TRUSTS: { label: string; value: string; icon: "shield" | "card" | "handshake" | "user" }[] = [
-  { label: "Geprüft", value: "Eigene Eingangsprüfung", icon: "shield" },
-  { label: "Finanzierung", value: "Auf Wunsch", icon: "card" },
-  { label: "Ankauf", value: "Faire Bewertung", icon: "handshake" },
-  { label: "Persönlich", value: "Direkter Ansprechpartner", icon: "user" },
-];
-
-function TrustIcon({ name }: { name: "shield" | "card" | "handshake" | "user" }) {
-  const common = { width: 28, height: 28, viewBox: "0 0 24 24", fill: "none", stroke: "currentColor", strokeWidth: 1.25 } as const;
-  if (name === "shield") return <svg {...common} aria-hidden><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6l8-3z" /><path d="M9 12l2 2 4-4" /></svg>;
-  if (name === "card") return <svg {...common} aria-hidden><rect x="3" y="6" width="18" height="13" rx="1" /><path d="M3 10h18M7 15h3" /></svg>;
-  if (name === "handshake") return <svg {...common} aria-hidden><path d="M2 13l4-4 4 2 4-3 4 3 4-2v6l-4 2-4-2-4 3-4-2-4 2z" /></svg>;
-  return <svg {...common} aria-hidden><circle cx="12" cy="8" r="4" /><path d="M4 21c1.5-4 5-6 8-6s6.5 2 8 6" /></svg>;
-}
+const TRUSTS = [
+  { label: "Geprüft", value: "Eigene Eingangsprüfung", Icon: ShieldCheck },
+  { label: "Finanzierung", value: "Auf Wunsch", Icon: CreditCard },
+  { label: "Ankauf", value: "Faire Bewertung", Icon: Handshake },
+  { label: "Persönlich", value: "Direkter Ansprechpartner", Icon: UserRound },
+] as const;
 
 function TrustBar() {
   return (
     <section className="border-y border-champagne/15 bg-surface">
       <div className="mx-auto grid max-w-[1440px] grid-cols-2 gap-px bg-line md:grid-cols-4">
-        {TRUSTS.map((t) => (
-          <div key={t.label} className="group flex flex-col gap-5 bg-surface px-8 py-12 transition-colors duration-500 hover:bg-surface-2 md:py-16">
+        {TRUSTS.map(({ label, value, Icon }) => (
+          <div key={label} className="group flex flex-col gap-5 bg-surface px-8 py-12 transition-colors duration-500 hover:bg-surface-2 md:py-16">
             <div className="text-champagne">
-              <TrustIcon name={t.icon} />
+              <Icon size={28} strokeWidth={1.5} aria-hidden />
             </div>
             <div>
               <div className="font-mono text-[10px] font-medium uppercase tracking-[0.35em] text-champagne">
-                {t.label}
+                {label}
               </div>
               <div className="mt-3 font-display text-xl font-bold leading-tight text-ink md:text-2xl">
-                {t.value}
+                {value}
               </div>
             </div>
           </div>
@@ -270,10 +266,10 @@ function Highlights() {
         <div className="flex items-end justify-between gap-6 border-b border-line pb-6">
           <div>
             <p className="font-mono text-[10px] font-bold uppercase tracking-[0.4em] text-champagne">
-              Aus unserem Bestand
+              Aktuelle Highlights
             </p>
             <h2 className="mt-4 font-display text-4xl font-extrabold tracking-tight text-ink md:text-5xl">
-              Aktuelle <span className="text-champagne">Auswahl</span>
+              Drei Inserate, <span className="text-champagne">drei Geschichten.</span>
             </h2>
           </div>
           <Link
@@ -285,8 +281,8 @@ function Highlights() {
         </div>
 
         <div className="mt-10 grid gap-6 md:mt-14 md:grid-cols-3">
-          {featuredVehicles.map((v, i) => (
-            <VehicleCard key={v.id} vehicle={v} priority={i < 2} />
+          {featuredVehicles.slice(0, 3).map((v, i) => (
+            <HighlightFlyerCard key={v.id} vehicle={v} priority={i < 2} />
           ))}
         </div>
 
