@@ -1,5 +1,6 @@
 import { Link, useRouterState } from "@tanstack/react-router";
 import { useEffect, useRef, useState } from "react";
+import { Phone, MessageCircle, CalendarDays } from "lucide-react";
 import { dealer, telLink, whatsappLink } from "@/data/dealer";
 
 /**
