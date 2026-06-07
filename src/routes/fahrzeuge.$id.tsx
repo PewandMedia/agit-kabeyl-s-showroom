@@ -145,64 +145,87 @@ function VehicleDetail() {
         <CallbackForm context={`Fahrzeug ${v.title} (ID ${v.id})`} />
       </Modal>
       <article>
-        <section className="bg-paper">
-          <div className="mx-auto max-w-[1400px] px-5 pt-8 md:px-10 md:pt-12">
+        <section className="border-b border-line bg-paper">
+          <div className="mx-auto max-w-[1400px] px-5 pb-12 pt-8 md:px-10 md:pb-16 md:pt-12">
             <Link
               to="/fahrzeuge"
               className="inline-flex items-center font-mono text-[10px] uppercase tracking-[0.22em] text-ink-soft hover:text-champagne"
             >
               ← Bestand
             </Link>
-          </div>
-          <div className="mx-auto max-w-[1400px] px-5 pb-10 pt-6 md:px-10 md:pb-16">
-            <VehicleGallery
-              images={v.images}
-              alt={`${v.title}, ${v.firstRegistration}`}
-            />
+
+            <div className="mt-6 grid gap-10 md:grid-cols-12 md:items-start">
+              <div className="md:col-span-8">
+                <div className="flex flex-wrap items-center gap-3">
+                  <p className="kicker">{v.make}</p>
+                  <StatusBadge status={v.status} />
+                </div>
+                <h1 className="mt-4 font-display text-4xl leading-[0.95] text-ink md:text-6xl xl:text-7xl">
+                  {v.title}
+                </h1>
+                <p className="mt-4 max-w-3xl text-base leading-relaxed text-ink-soft md:text-lg">
+                  {v.description}
+                </p>
+
+                <div className="mt-8 grid grid-cols-2 gap-3 md:grid-cols-5">
+                  <FactChip label="EZ" value={v.firstRegistration} />
+                  <FactChip label="KM" value={formatKm(v.mileageKm)} />
+                  <FactChip label="Leistung" value={formatKw(v.powerKw)} />
+                  <FactChip label="Getriebe" value={v.transmission} />
+                  <FactChip label="Kraftstoff" value={v.fuel} />
+                </div>
+              </div>
+
+              <aside className="md:col-span-4">
+                <div className="border border-champagne/30 bg-surface p-6 md:p-8">
+                  <p className="font-mono text-[10px] uppercase tracking-[0.3em] text-champagne">Preis</p>
+                  <p className="mt-3 font-display text-4xl text-champagne md:text-5xl">{formatPrice(v.priceEur)}</p>
+                  <p className="mt-2 text-xs text-ink-soft">Inkl. MwSt. ausweisbar · zzgl. Überführung</p>
+                  {v.monthlyRateEur && (
+                    <p className="mt-4 font-mono text-[11px] uppercase tracking-[0.18em] text-ink-soft">
+                      ab <span className="text-ink">{formatPrice(v.monthlyRateEur)} / Monat</span>
+                    </p>
+                  )}
+                  <div className="mt-6 space-y-3">
+                    <a
+                      href={whatsappLink(whatsappText)}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className={`flex w-full items-center justify-center bg-champagne px-6 py-4 font-mono text-[11px] font-bold uppercase tracking-[0.22em] text-foreground ${isSold ? "pointer-events-none opacity-40" : ""}`}
+                    >
+                      Anfrage per WhatsApp
+                    </a>
+                    <button
+                      type="button"
+                      onClick={() => setTestDriveOpen(true)}
+                      disabled={isSold}
+                      className="block w-full border border-line py-3 text-center font-mono text-[11px] uppercase tracking-[0.22em] text-ink transition-colors hover:border-champagne hover:text-champagne disabled:cursor-not-allowed disabled:opacity-40"
+                    >
+                      Probefahrt anfragen
+                    </button>
+                    <Link
+                      to="/finanzierung"
+                      search={{ fahrzeug: v.id } as never}
+                      className={`block w-full border border-line py-3 text-center font-mono text-[11px] uppercase tracking-[0.22em] text-ink hover:border-champagne hover:text-champagne ${isSold ? "pointer-events-none opacity-40" : ""}`}
+                    >
+                      Finanzierung anfragen
+                    </Link>
+                  </div>
+                </div>
+              </aside>
+            </div>
+
+            <div className="mt-8">
+              <VehicleGallery images={v.images} alt={`${v.title}, ${v.firstRegistration}`} />
+            </div>
           </div>
         </section>
 
         <section className="bg-paper">
-          <div className="mx-auto grid max-w-[1400px] gap-14 px-5 py-12 md:grid-cols-12 md:gap-16 md:px-10 md:py-20">
+          <div className="mx-auto grid max-w-[1400px] gap-10 px-5 py-12 md:grid-cols-12 md:px-10 md:py-16">
             <div className="md:col-span-7">
-              <div className="flex flex-wrap items-center gap-3">
-                <p className="kicker">{v.make}</p>
-                <StatusBadge status={v.status} />
-              </div>
-              <h1 className="mt-4 font-display text-4xl text-ink md:text-6xl">
-                {v.title}
-              </h1>
-              <p className="mt-3 font-mono text-[11px] uppercase tracking-[0.22em] text-ink-soft">
-                ID {v.id}  ·  EZ {v.firstRegistration}  ·  {formatKm(v.mileageKm)}
-              </p>
-
-              <p className="mt-8 max-w-2xl text-base leading-relaxed text-ink-soft md:text-lg">
-                {v.description}
-              </p>
-
-              <div className="mt-12">
-                <p className="kicker">Technische Daten</p>
-                <dl className="mt-6 grid grid-cols-2 gap-y-5 text-sm md:grid-cols-3">
-                  <SpecItem label="Marke" value={v.make} />
-                  <SpecItem label="Modell" value={v.model} />
-                  <SpecItem label="Variante" value={v.variant} />
-                  <SpecItem label="Erstzulassung" value={v.firstRegistration} />
-                  <SpecItem label="Kilometerstand" value={formatKm(v.mileageKm)} />
-                  <SpecItem label="Leistung" value={formatKw(v.powerKw)} />
-                  <SpecItem label="Kraftstoff" value={v.fuel} />
-                  <SpecItem label="Getriebe" value={v.transmission} />
-                  <SpecItem label="Farbe" value={v.exteriorColor} />
-                  <SpecItem label="Zustand" value={v.condition} />
-                  <SpecItem label="Vorbesitzer" value={String(v.previousOwners)} />
-                  <SpecItem
-                    label="Finanzierung"
-                    value={v.financingAvailable ? "Verfügbar" : "Auf Anfrage"}
-                  />
-                </dl>
-              </div>
-
-              <div className="mt-12">
-                <p className="kicker">Ausstattung</p>
+              <div className="border border-line bg-surface p-6 md:p-8">
+                <p className="kicker">Highlights</p>
                 <ul className="mt-6 grid grid-cols-1 gap-y-3 text-sm text-ink sm:grid-cols-2">
                   {v.features.map((f: string) => (
                     <li key={f} className="flex items-start gap-3">
@@ -213,21 +236,11 @@ function VehicleDetail() {
                 </ul>
               </div>
 
-              <div className="mt-16 border-t border-line pt-12">
+              <div className="mt-8 border border-line bg-surface p-6 md:p-8">
                 <p className="kicker">Anfrage</p>
-                <h2 className="mt-3 font-display text-2xl text-ink md:text-3xl">
-                  Direkt zu diesem Fahrzeug.
-                </h2>
-                <p className="mt-3 max-w-xl text-sm text-ink-soft">
-                  Hinterlassen Sie kurz Ihre Kontaktdaten — wir melden uns
-                  innerhalb weniger Stunden mit allen Details.
-                </p>
+                <h2 className="mt-3 font-display text-2xl text-ink md:text-3xl">Direkt zu diesem Fahrzeug.</h2>
                 <div className="mt-8 max-w-xl">
-                  <VehicleInquiryForm
-                    vehicleTitle={v.title}
-                    vehicleId={v.id}
-                    disabled={isSold}
-                  />
+                  <VehicleInquiryForm vehicleTitle={v.title} vehicleId={v.id} disabled={isSold} />
                 </div>
                 <div className="mt-10 max-w-xl">
                   <TrustBlock />
@@ -235,83 +248,35 @@ function VehicleDetail() {
               </div>
             </div>
 
-            <aside className="md:col-span-5">
-              <div className="sticky top-24 border border-line bg-surface p-6 md:p-8">
-                <div className="flex items-center justify-between">
-                  <p className="kicker">Preis</p>
-                  <StatusBadge status={v.status} />
-                </div>
-                <p className="mt-3 font-display text-4xl text-champagne md:text-5xl">
-                  {formatPrice(v.priceEur)}
-                </p>
-                <p className="mt-2 text-xs text-ink-soft">
-                  Inkl. MwSt. ausweisbar · zzgl. Überführung
-                </p>
-                {v.monthlyRateEur && (
-                  <p className="mt-4 font-mono text-[11px] uppercase tracking-[0.18em] text-ink-soft">
-                    ab{" "}
-                    <span className="text-ink">
-                      {formatPrice(v.monthlyRateEur)} / Monat
-                    </span>
-                  </p>
-                )}
+            <div className="md:col-span-5">
+              <div className="border border-line bg-surface p-6 md:p-8">
+                <p className="kicker">Technische Daten</p>
+                <dl className="mt-6 grid grid-cols-2 gap-x-6 gap-y-5 text-sm">
+                  <SpecItem label="Marke" value={v.make} />
+                  <SpecItem label="Modell" value={v.model} />
+                  <SpecItem label="Variante" value={v.variant} />
+                  <SpecItem label="Farbe" value={v.exteriorColor} />
+                  <SpecItem label="Zustand" value={v.condition} />
+                  <SpecItem label="Vorbesitzer" value={String(v.previousOwners)} />
+                  <SpecItem label="Telefon" value={dealer.phoneDisplay} />
+                  <SpecItem label="Fahrzeug-ID" value={v.id} />
+                </dl>
 
                 {isSold && (
                   <div className="mt-6 border border-line bg-paper/40 p-4 text-xs text-ink-soft">
-                    Dieses Fahrzeug ist bereits verkauft. Sprechen Sie uns für
-                    ähnliche Modelle an — wir finden Ihr Wunschfahrzeug.
+                    Dieses Fahrzeug ist bereits verkauft. Sprechen Sie uns für ähnliche Modelle an.
                   </div>
                 )}
 
-                <div className="mt-8 space-y-3">
-                  <a
-                    href={whatsappLink(whatsappText)}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className={`flex w-full items-center justify-center bg-champagne px-6 py-4 font-mono text-[11px] font-bold uppercase tracking-[0.22em] text-paper transition-opacity hover:opacity-90 ${
-                      isSold ? "pointer-events-none opacity-40" : ""
-                    }`}
-                  >
-                    Anfrage per WhatsApp
-                  </a>
-                  <a
-                    href={telLink()}
-                    className="flex w-full items-center justify-center border border-champagne px-6 py-4 font-mono text-[11px] uppercase tracking-[0.22em] text-champagne hover:bg-champagne hover:text-paper"
-                  >
-                    {dealer.phoneDisplay}
-                  </a>
-                  <Link
-                    to="/finanzierung"
-                    search={{ fahrzeug: v.id } as never}
-                    className={`block w-full border border-line py-3 text-center font-mono text-[11px] uppercase tracking-[0.22em] text-ink hover:border-champagne hover:text-champagne ${
-                      isSold ? "pointer-events-none opacity-40" : ""
-                    }`}
-                  >
-                    Finanzierung anfragen
-                  </Link>
-                  <button
-                    type="button"
-                    onClick={() => setTestDriveOpen(true)}
-                    disabled={isSold}
-                    className="block w-full border border-line py-3 text-center font-mono text-[11px] uppercase tracking-[0.22em] text-ink transition-colors hover:border-champagne hover:text-champagne disabled:cursor-not-allowed disabled:opacity-40"
-                  >
-                    Probefahrt anfragen
-                  </button>
-                  <button
-                    type="button"
-                    onClick={() => setCallbackOpen(true)}
-                    className="block w-full text-center font-mono text-[11px] uppercase tracking-[0.22em] text-ink-soft transition-colors hover:text-champagne"
-                  >
-                    Rückruf anfordern →
-                  </button>
-                </div>
-
-                <div className="mt-8 border-t border-line pt-6 font-mono text-[10px] uppercase tracking-[0.18em] text-ink-soft">
-                  <p>Fahrzeug-ID</p>
-                  <p className="mt-1 text-ink">{v.id}</p>
-                </div>
+                <button
+                  type="button"
+                  onClick={() => setCallbackOpen(true)}
+                  className="mt-6 block w-full text-center font-mono text-[11px] uppercase tracking-[0.22em] text-ink-soft transition-colors hover:text-champagne"
+                >
+                  Rückruf anfordern →
+                </button>
               </div>
-            </aside>
+            </div>
           </div>
         </section>
 
