@@ -1,11 +1,15 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
+import { ShieldCheck, CreditCard, Handshake, UserRound } from "lucide-react";
 import { SiteLayout } from "@/components/site/SiteLayout";
 import { VehicleCard } from "@/components/site/VehicleCard";
+import { HighlightFlyerCard } from "@/components/site/HighlightFlyerCard";
 import { BtnLink, BtnA } from "@/components/ui/Btn";
 import { featuredVehicles, vehicles } from "@/data/vehicles";
 import { dealer, telLink, whatsappLink } from "@/data/dealer";
 import heroCar from "@/assets/hero-car.jpg";
-import championHero from "@/assets/champion-hero.jpg";
+import championHero from "@/assets/hero-kabayel-bmw7.jpg";
+
+
 
 
 export const Route = createFileRoute("/")({
