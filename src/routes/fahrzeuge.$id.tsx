@@ -1,6 +1,6 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { useState } from "react";
-import { Calendar, Gauge, Zap, Cog, Fuel, Palette } from "lucide-react";
+import { Calendar, Gauge, Zap, Cog, Fuel, Palette, Users, Award, Check } from "lucide-react";
 import { SiteLayout } from "@/components/site/SiteLayout";
 import { VehicleGallery } from "@/components/site/VehicleGallery";
 import { VehicleInquiryForm } from "@/components/forms/VehicleInquiryForm";
@@ -181,13 +181,15 @@ function VehicleDetail() {
                   {v.description}
                 </p>
 
-                <div className="mt-8 grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-6">
+                <div className="mt-8 grid grid-cols-2 gap-3 sm:grid-cols-4 lg:grid-cols-4 xl:grid-cols-8">
                   <FactChip icon={<Calendar size={18} strokeWidth={1.6} />} label="Erstzulassung" value={v.firstRegistration} />
                   <FactChip icon={<Gauge size={18} strokeWidth={1.6} />} label="Laufleistung" value={formatKm(v.mileageKm)} />
-                  <FactChip icon={<Zap size={18} strokeWidth={1.6} />} label="Leistung" value={formatKw(v.powerKw)} />
+                  <FactChip icon={<Zap size={18} strokeWidth={1.6} />} label="Leistung" value={`${Math.round(v.powerKw * 1.359)} PS`} sub={formatKw(v.powerKw)} />
                   <FactChip icon={<Cog size={18} strokeWidth={1.6} />} label="Getriebe" value={v.transmission} />
                   <FactChip icon={<Fuel size={18} strokeWidth={1.6} />} label="Kraftstoff" value={v.fuel} />
                   <FactChip icon={<Palette size={18} strokeWidth={1.6} />} label="Farbe" value={v.exteriorColor} />
+                  <FactChip icon={<Users size={18} strokeWidth={1.6} />} label="Vorbesitzer" value={String(v.previousOwners)} />
+                  <FactChip icon={<Award size={18} strokeWidth={1.6} />} label="Zustand" value={v.condition} />
                 </div>
               </div>
 
@@ -247,13 +249,26 @@ function VehicleDetail() {
         <section className="bg-paper">
           <div className="mx-auto grid max-w-[1400px] gap-10 px-5 py-12 md:grid-cols-12 md:px-10 md:py-16">
             <div className="md:col-span-7">
-              <div className="border border-line bg-surface p-6 md:p-8">
-                <p className="kicker">Highlights</p>
-                <ul className="mt-6 grid grid-cols-1 gap-y-3 text-sm text-ink sm:grid-cols-2">
+              <div className="relative overflow-hidden border border-line bg-ink p-6 text-paper md:p-8">
+                <span aria-hidden className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-primary to-transparent opacity-70" />
+                <div className="flex items-end justify-between gap-4">
+                  <div>
+                    <p className="font-mono text-[10px] font-bold uppercase tracking-[0.32em] text-primary">Ausstattung & Highlights</p>
+                    <h2 className="mt-3 font-display text-2xl font-extrabold tracking-tight text-paper md:text-3xl">
+                      Was dieses Fahrzeug auszeichnet.
+                    </h2>
+                  </div>
+                  <span className="hidden font-mono text-[10px] uppercase tracking-[0.22em] text-champagne sm:inline">
+                    {v.features.length} Highlights
+                  </span>
+                </div>
+                <ul className="mt-7 grid grid-cols-1 gap-x-8 gap-y-3 text-[13.5px] sm:grid-cols-2">
                   {v.features.map((f: string) => (
-                    <li key={f} className="flex items-start gap-3">
-                      <span aria-hidden className="mt-2 h-px w-4 bg-champagne" />
-                      {f}
+                    <li key={f} className="flex items-start gap-3 text-paper/90">
+                      <span className="mt-0.5 inline-flex h-4 w-4 flex-none items-center justify-center rounded-full border border-primary/70 text-primary">
+                        <Check size={10} strokeWidth={3} />
+                      </span>
+                      <span>{f}</span>
                     </li>
                   ))}
                 </ul>
@@ -337,12 +352,13 @@ function VehicleDetail() {
   );
 }
 
-function FactChip({ icon, label, value }: { icon?: React.ReactNode; label: string; value: string }) {
+function FactChip({ icon, label, value, sub }: { icon?: React.ReactNode; label: string; value: string; sub?: string }) {
   return (
     <div className="border border-line bg-surface px-4 py-4 transition-colors hover:border-champagne/60">
       {icon && <div className="text-champagne mb-2">{icon}</div>}
       <div className="font-mono text-[9px] uppercase tracking-[0.22em] text-champagne">{label}</div>
       <div className="mt-1.5 text-sm font-semibold text-ink md:text-base leading-tight">{value}</div>
+      {sub && <div className="mt-0.5 font-mono text-[10px] text-ink-soft">{sub}</div>}
     </div>
   );
 }
