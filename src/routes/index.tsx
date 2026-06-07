@@ -204,10 +204,10 @@ function TrustBar() {
             </div>
             <div>
               <div className="font-mono text-[10px] font-medium uppercase tracking-[0.35em] text-champagne">
-                {t.label}
+                {label}
               </div>
               <div className="mt-3 font-display text-xl font-bold leading-tight text-ink md:text-2xl">
-                {t.value}
+                {value}
               </div>
             </div>
           </div>
