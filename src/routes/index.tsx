@@ -64,27 +64,45 @@ function HomePage() {
   );
 }
 
-/* ─────────────────────────── HERO — Champion Edition ─────────────────────────── */
+/* ─────────────────────────── HERO — Cinematic Champion Edition ─────────────────────────── */
 function Hero() {
   return (
-    <section className="relative isolate overflow-hidden bg-paper pt-24 md:pt-28">
-      <div className="mx-auto grid max-w-[1440px] grid-cols-1 gap-10 px-6 pb-16 md:grid-cols-12 md:gap-12 md:px-12 md:pb-24 md:pt-12">
-        {/* LEFT — Portrait */}
+    <section className="relative isolate overflow-hidden bg-paper">
+      {/* Radial spotlight backdrop */}
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-0 -z-10"
+        style={{
+          background:
+            "radial-gradient(900px 600px at 80% 20%, color-mix(in oklab, var(--color-champagne) 12%, transparent), transparent 60%), radial-gradient(700px 500px at 10% 80%, color-mix(in oklab, var(--color-ink) 6%, transparent), transparent 65%)",
+        }}
+      />
+
+      <div className="mx-auto grid min-h-[88vh] max-w-[1440px] grid-cols-1 items-center gap-10 px-6 pb-20 pt-28 md:grid-cols-12 md:gap-14 md:px-12 md:pb-28 md:pt-32">
+        {/* LEFT — Cinematic image */}
         <div className="relative md:col-span-5 lg:col-span-5">
-          <div className="relative aspect-[4/5] w-full overflow-hidden bg-ink">
+          <div className="group relative aspect-[4/5] w-full overflow-hidden bg-ink">
             {/* TODO: Echtes Pressefoto von Agit Kabayel hier einsetzen, sobald Lizenz geklärt. */}
             <img
-              src={championPortrait}
-              alt="Agit Kabayel — WBC #1 Contender Heavyweight, Markenbotschafter des Autohaus AK"
+              src={championHero}
+              alt="Boxer-Silhouette vor Premium-Coupé — Autohaus AK, Team Kabayel"
               width={1024}
-              height={1280}
+              height={1344}
               fetchPriority="high"
               decoding="async"
-              className="h-full w-full object-cover"
+              className="h-full w-full object-cover transition-transform duration-[2400ms] ease-[cubic-bezier(0.22,0.61,0.36,1)] group-hover:scale-[1.04]"
             />
-            <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-ink/70 via-transparent to-transparent" />
+            {/* Gold rim light overlay */}
+            <div
+              aria-hidden
+              className="pointer-events-none absolute inset-0"
+              style={{
+                background:
+                  "linear-gradient(180deg, transparent 55%, color-mix(in oklab, var(--color-ink) 65%, transparent) 100%), linear-gradient(90deg, color-mix(in oklab, var(--color-ink) 30%, transparent) 0%, transparent 35%)",
+              }}
+            />
 
-            {/* Floating champion badge */}
+            {/* Top corner badge */}
             <div className="absolute left-5 top-5 flex items-center gap-2.5 border border-champagne/60 bg-ink/70 px-3 py-2 backdrop-blur-sm">
               <span aria-hidden className="h-1.5 w-1.5 rotate-45 bg-champagne" />
               <span className="font-mono text-[10px] font-bold uppercase tracking-[0.3em] text-champagne">
@@ -93,19 +111,23 @@ function Hero() {
             </div>
 
             {/* Bottom caption */}
-            <div className="absolute inset-x-0 bottom-0 p-5 md:p-6">
+            <div className="absolute inset-x-0 bottom-0 p-5 md:p-7">
               <div className="font-mono text-[10px] font-medium uppercase tracking-[0.32em] text-champagne">
                 Heavyweight · Bochum
               </div>
               <div className="mt-1 font-display text-2xl font-extrabold text-paper md:text-3xl">
-                Agit Kabayel
+                Team Kabayel
               </div>
             </div>
+
+            {/* Corner crosshair marks */}
+            <span aria-hidden className="absolute right-5 top-5 h-3 w-3 border-r border-t border-champagne/70" />
+            <span aria-hidden className="absolute bottom-5 right-5 h-3 w-3 border-b border-r border-champagne/70" />
           </div>
         </div>
 
         {/* RIGHT — Story */}
-        <div className="md:col-span-7 lg:col-span-7 md:py-6 lg:py-10">
+        <div className="md:col-span-7 lg:col-span-7">
           <div className="flex items-center gap-3 animate-fade-up">
             <span className="h-px w-10 bg-champagne" />
             <span className="font-mono text-[10px] font-semibold uppercase tracking-[0.4em] text-champagne">
@@ -113,20 +135,22 @@ function Hero() {
             </span>
           </div>
 
-          <h1 className="mt-6 font-display text-[40px] font-extrabold leading-[0.98] tracking-[-0.035em] text-ink sm:text-5xl md:text-6xl lg:text-[76px] animate-fade-up">
+          <h1 className="mt-7 font-display text-[44px] font-extrabold leading-[0.95] tracking-[-0.04em] text-ink sm:text-6xl md:text-7xl lg:text-[88px] animate-fade-up">
             Das Autohaus
             <br />
-            des <span className="text-champagne">WBC #1 Contender</span>.
+            des <span className="italic font-serif text-gradient-gold">WBC&nbsp;#1</span>
+            <br />
+            Contender.
           </h1>
 
-          <p className="mt-7 max-w-xl text-base leading-relaxed text-ink-soft md:text-lg animate-fade-up">
+          <p className="mt-8 max-w-xl text-base leading-relaxed text-ink-soft md:text-lg animate-fade-up">
             Hinter dem Autohaus AK steht das Team von <strong className="font-semibold text-ink">Agit Kabayel</strong> —
             Schwergewichts-Boxer aus Bochum, aktuell <strong className="font-semibold text-ink">Nummer 1 im
             WBC-Ranking</strong>. Die gleiche Disziplin, die ihn zur Weltspitze
             gebracht hat, prägt unsere Auswahl, Prüfung und Übergabe.
           </p>
 
-          <div className="mt-9 flex flex-col items-start gap-5 sm:flex-row sm:items-center sm:gap-6 animate-fade-up">
+          <div className="mt-10 flex flex-col items-start gap-5 sm:flex-row sm:items-center sm:gap-6 animate-fade-up">
             <BtnLink to="/fahrzeuge" variant="primary" size="lg">
               Fahrzeuge ansehen
             </BtnLink>
@@ -136,11 +160,31 @@ function Hero() {
           </div>
 
           {/* Stat strip */}
-          <dl className="mt-12 grid grid-cols-3 gap-px overflow-hidden border border-line bg-line">
+          <dl className="mt-14 grid grid-cols-3 gap-px overflow-hidden border border-line bg-line">
             <Stat label="Bestand" value={String(vehicles.length).padStart(2, "0")} />
             <Stat label="WBC Rang" value="#1" />
             <Stat label="Garantie" value="12 Mt." />
           </dl>
+        </div>
+      </div>
+
+      {/* Bottom marquee strip */}
+      <div className="relative border-y border-line bg-ink/[0.02] py-3 overflow-hidden">
+        <div className="flex whitespace-nowrap animate-marquee gap-12 font-mono text-[10px] font-bold uppercase tracking-[0.35em] text-ink-soft">
+          {Array.from({ length: 2 }).map((_, k) => (
+            <div key={k} className="flex shrink-0 items-center gap-12">
+              <span>Velbert · seit 2018</span>
+              <span className="text-champagne">◆</span>
+              <span>Team Kabayel · WBC #1</span>
+              <span className="text-champagne">◆</span>
+              <span>Geprüfte Premium-Fahrzeuge</span>
+              <span className="text-champagne">◆</span>
+              <span>Persönliche Übergabe</span>
+              <span className="text-champagne">◆</span>
+              <span>Finanzierung · Ankauf · Service</span>
+              <span className="text-champagne">◆</span>
+            </div>
+          ))}
         </div>
       </div>
     </section>
