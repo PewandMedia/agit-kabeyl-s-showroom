@@ -51,13 +51,9 @@ function HomePage() {
     <SiteLayout transparentHeader>
       <Hero />
       <TrustBar />
-      <BrandStory />
       <Highlights />
-      <Inventory />
       <SellCar />
       <Financing />
-      <WhyAK />
-      <Testimonials />
       <FAQ />
       <ContactCTA />
     </SiteLayout>
@@ -131,23 +127,21 @@ function Hero() {
           <div className="flex items-center gap-3 animate-fade-up">
             <span className="h-px w-10 bg-champagne" />
             <span className="font-mono text-[10px] font-semibold uppercase tracking-[0.4em] text-champagne">
-              Team Kabayel · {dealer.city}
+              Autohaus AK · {dealer.city}
             </span>
           </div>
 
-          <h1 className="mt-7 font-display text-[44px] font-extrabold leading-[0.95] tracking-[-0.04em] text-ink sm:text-6xl md:text-7xl lg:text-[88px] animate-fade-up">
-            Das Autohaus
+          <h1 className="mt-7 font-display text-[44px] font-extrabold leading-[0.95] tracking-[-0.04em] text-ink sm:text-6xl md:text-7xl lg:text-[84px] animate-fade-up">
+            Geprüfte
             <br />
-            des <span className="italic font-serif text-gradient-gold">WBC&nbsp;#1</span>
+            Gebrauchtwagen
             <br />
-            Contender.
+            aus <span className="text-champagne">Velbert.</span>
           </h1>
 
-          <p className="mt-8 max-w-xl text-base leading-relaxed text-ink-soft md:text-lg animate-fade-up">
-            Hinter dem Autohaus AK steht das Team von <strong className="font-semibold text-ink">Agit Kabayel</strong> —
-            Schwergewichts-Boxer aus Bochum, aktuell <strong className="font-semibold text-ink">Nummer 1 im
-            WBC-Ranking</strong>. Die gleiche Disziplin, die ihn zur Weltspitze
-            gebracht hat, prägt unsere Auswahl, Prüfung und Übergabe.
+          <p className="mt-8 max-w-lg text-base leading-relaxed text-ink-soft md:text-lg animate-fade-up">
+            Persönlich ausgewählt, geprüft und transparent dokumentiert.
+            Verkauf, Ankauf und Finanzierung aus einer Hand.
           </p>
 
           <div className="mt-10 flex flex-col items-start gap-5 sm:flex-row sm:items-center sm:gap-6 animate-fade-up">
@@ -162,7 +156,7 @@ function Hero() {
           {/* Stat strip */}
           <dl className="mt-14 grid grid-cols-3 gap-px overflow-hidden border border-line bg-line">
             <Stat label="Bestand" value={String(vehicles.length).padStart(2, "0")} />
-            <Stat label="WBC Rang" value="#1" />
+            <Stat label="Standort" value="Velbert" />
             <Stat label="Garantie" value="12 Mt." />
           </dl>
         </div>
