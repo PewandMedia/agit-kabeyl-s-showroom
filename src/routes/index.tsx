@@ -101,7 +101,7 @@ function Hero() {
             <div className="absolute left-5 top-5 flex items-center gap-2.5 border border-champagne/60 bg-paper/70 px-3 py-2 backdrop-blur-sm">
               <span aria-hidden className="h-1.5 w-1.5 rotate-45 bg-champagne" />
               <span className="font-mono text-[10px] font-bold uppercase tracking-[0.3em] text-champagne">
-                Performance · Showroom
+                Verkauf · Ankauf
               </span>
             </div>
 
