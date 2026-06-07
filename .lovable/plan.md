@@ -1,86 +1,69 @@
 ## Ziel
 
-Drei Probleme an einem Stück fixen:
-1. Fahrzeug-Karten führen zuverlässig zur Detailseite.
-2. Pro Fahrzeug ein echter, druckbarer Flyer im Stil der gezeigten Inserate für Kabayels Autohaus.
-3. Gesamtauftritt seriöser: weniger Text, mehr Bild, ruhigere Hierarchie.
+Vier zusammenhängende Verbesserungen:
+1. Schriftbild aufwerten (seriöser, lesbarer).
+2. Icons in höherer Qualität (einheitliches Set, scharf, konsistent).
+3. Neues Hero-Bild: Agit Kabayel (WBC #1 Contender) mit seinem BMW 7er mit Spoiler.
+4. Eckdaten auf der Fahrzeug-Detailseite klar sichtbar + auf der Startseite 3 hervorgehobene "Flyer"-Anzeigen als Eyecatcher.
 
 ---
 
-## 1. Detail-Klick reparieren
+## 1. Typografie
 
-Bei `<Link>` mit verschachtelten interaktiven Elementen (z. B. das "Details ansehen" Pseudo-Button in `VehicleCard.tsx`) kann der Klick verschluckt wirken, wenn der innere Hover-Overlay (`absolute inset-x-0 bottom-0 ... pointer-events-auto`) zwischen Maus und Karte liegt oder der Status-Badge das Image überlagert.
+- Headlines: Wechsel von der aktuellen Display-Font auf eine modernere, seriöse Kombination — **"Manrope"** (Headlines, kräftig, geometrisch) + **"Inter"** (Fließtext, top Lesbarkeit). Beide via Google Fonts in `index.html` oder `styles.css`.
+- Tracking enger (`-0.02em` bei Headlines), Body normalisiert (`0`).
+- Größenstufen reduziert auf eine klare Skala (H1 / H2 / H3 / Body / Mono), keine Zwischengrößen mehr.
+- Mono-Akzente (Kicker, IDs) bleiben, aber auf **"JetBrains Mono"** für Schärfe.
+- Datei: `src/styles.css` (Font-Imports + Token), evtl. `src/routes/__root.tsx` für Preload.
 
-Maßnahmen in `src/components/site/VehicleCard.tsx`:
-- Die gesamte Karte bleibt **ein** `<Link>` (kein verschachteltes `<button>`/`<a>` innen).
-- Alle dekorativen Layer (`Zu den Details`, "Details ansehen →", Status-Badge, Hover-Stripe) bekommen `pointer-events: none`, damit der Klick immer den Link trifft.
-- Tap-Target ≥ 44 px, `aria-label` mit Titel + Preis.
-- Bilder bekommen `draggable=false`, damit auf Touch kein Bild-Drag den Tap frisst.
-- Auf der Bestandsseite und der Startseite wird **dieselbe** Karte genutzt — Fix wirkt überall.
+## 2. Icons
 
-Außerdem in `fahrzeuge.$id.tsx`: prüfen, dass `getVehicle(id)` korrekt matched (sonst landet man im `notFoundComponent`, was sich wie "nicht klickbar" anfühlt). Falls ID-Mismatch besteht, fixen.
+- Konsolidierung auf **lucide-react** (bereits im Projekt verfügbar) mit einheitlichem `strokeWidth={1.5}` und fester Größe (16 / 20 / 24).
+- Alle Emoji-/Custom-SVG-Ersatz-Icons (Trust-Bar, Features, USPs) durch Lucide-Icons ersetzen.
+- Icon-Wrapper-Komponente `src/components/ui/Icon.tsx` für konsistente Größe + Stroke + Farbe (champagne / ink / muted).
+- Retina-scharf, da Lucide reines SVG ist — keine Bitmap-Icons mehr.
 
----
+## 3. Hero-Bild Agit Kabayel + BMW 7er
 
-## 2. Fahrzeug-Flyer (PDF + Web-Flyer)
+- Neues Hero-Bild generieren: **Agit Kabayel im Anzug neben seinem schwarzen BMW 7er mit Heckspoiler**, abendliche Studio-/Showroom-Atmosphäre, kinoreif, hochformatige Tiefenschärfe.
+- Speicherort: `src/assets/hero-kabayel-bmw7.jpg` (ersetzt `champion-hero.jpg` als Hero-Quelle).
+- Einsatz in `src/routes/index.tsx` Hero-Sektion, mit dezenter dunkler Vignette für Lesbarkeit der Headline.
+- Bildunterschrift / Caption klein unten rechts: "Agit Kabayel · WBC #1 Contender · sein BMW 7er mit Spoiler — einzigartig in Deutschland".
+- Rechtlicher Hinweis: KI-generiertes Symbolbild, keine echte Persönlichkeitsabbildung — als unsichtbarer Kommentar im Code dokumentiert, im UI als "Symbolbild" klein vermerkt.
 
-Zweigleisig, weil die geschickten Beispiele wie echte Inserate aussehen:
+## 4. Eckdaten + 3 Flyer-Highlights
 
-### 2a) Web-Flyer (Detailseite im Inserat-Stil)
-`src/routes/fahrzeuge.$id.tsx` wird zu einem "Print-Inserat im Web":
-- Großes Hero-Bild des Autos (16:10), darüber kleines Marken-Lockup "Autohaus AK · Velbert" und Status-Badge.
-- Titelzeile gross, eine knappe Untertitel-Zeile (Variante).
-- Fakten-Streifen (EZ · KM · PS · Getriebe · Kraftstoff) als ruhige Chips.
-- Preisblock rechts (sticky auf Desktop), darunter WhatsApp / Anrufen / Probefahrt / Finanzierung.
-- "Ausstattung" knapp in zwei Spalten, keine Marketing-Floskeln.
-- "Technische Daten" als kompakte Definitionsliste.
-- Galerie nur als Strip (Thumbnails) statt großem Block, mehr Bilder weniger Text.
-- "Ähnliche Fahrzeuge" beibehalten, aber kleiner.
+### 4a) Detailseite (`src/routes/fahrzeuge.$id.tsx`)
+Eckdaten-Block direkt unter dem Hero-Bild, **prominent und scanbar**:
+- 6er-Grid: Erstzulassung · KM-Stand · Leistung (kW/PS) · Getriebe · Kraftstoff · Farbe
+- Jede Kachel: Lucide-Icon + kleiner Mono-Label + großer Wert
+- Darunter Zweispaltig: Ausstattung (links) · Technische Daten (rechts)
+- Preisblock bleibt sticky rechts (Desktop) / unten (Mobile)
 
-### 2b) PDF-Download pro Fahrzeug
-Auf der Detailseite ein Button "Flyer als PDF" der einen klassisch gesetzten 1-Seiten-Flyer erzeugt (DIN A4 quer-/hochformat, Logo, Hauptbild, Fakten, Preis, Kontakt + QR-Code zur Detailseite).
-- Implementierung clientseitig mit `jspdf` + `html2canvas` (in Browser-Runtime erlaubt), keine Server-Funktion nötig.
-- Daten kommen direkt aus `vehicles.ts`, keine zusätzliche Backend-Anbindung.
-- Vorlage liegt in `src/components/site/VehicleFlyer.tsx` (versteckt off-screen gerendert, dann zu PDF konvertiert).
-
-Falls `jspdf`/`html2canvas` Probleme machen, Fallback: Druck-optimierte CSS-Seite `/fahrzeuge/$id/flyer` (eigene Route, A4-Layout, `@media print`), Nutzer wählt im Browser "Als PDF speichern". Damit funktioniert es garantiert.
-
----
-
-## 3. Seriöser, bildlastiger Auftritt
-
-Reduktion auf der Startseite (`src/routes/index.tsx`) und in `Header.tsx`:
-- Hero: Bild bleibt dominant, Headline kürzer ("Geprüfte Gebrauchtwagen aus Velbert."), Box-Untertitel auf 1–2 Sätze.
-- "Team Kabayel · WBC #1"-Story als kleine, dezente Notiz unten im Hero — nicht als Hauptbotschaft.
-- TrustBar: 4 Punkte, nur Icon + Label, keine doppelte Zeile.
-- BrandStory: einen einzigen ruhigen Satz statt mehrerer Absätze.
-- Highlights: nur Fahrzeug-Grid, kein zusätzlicher Erklärtext.
-- Lange Sektionen WhyAK / Testimonials / Financing-Erklärung verschlanken oder zusammenführen (max. eine kurze Zeile + CTA).
-- FAQ einklappbar, default zu.
-- Farbe: aktuelles Schwarz behalten, Rot zurückhaltender einsetzen (nur Akzente, Hover, Preis, CTAs) — keine roten Flächen ohne Funktion.
-- Typografie: Headlines bleiben, Fließtext eine Stufe kleiner und mit mehr Weiß drumherum.
-
-Bestand (`fahrzeuge.tsx`): Hero-Block kürzer (nur Kicker + H1, keine Marketing-Beschreibung).
-
----
-
-## 4. Funktionen prüfen
-
-Letzter Durchgang in der Vorschau:
-- Karte → Detail → WhatsApp / Anrufen / Probefahrt-Modal / Rückruf-Modal / Finanzierung-Link / PDF-Flyer-Download → alle klickbar.
-- Mobile Sticky-Bar überdeckt keine CTAs.
-- Filter/Sort auf `/fahrzeuge` funktionieren weiter.
+### 4b) Startseite — 3 Flyer-Highlights (`src/routes/index.tsx`)
+Neue Sektion **"Aktuelle Highlights"** direkt unter dem Hero:
+- 3 große Flyer-Karten nebeneinander (Desktop) / gestapelt (Mobile)
+- Jede Karte = **Mini-Flyer im Inserat-Stil**:
+  - Großes Fahrzeugbild (16:10) mit dezentem Verlauf
+  - Status-Badge oben links ("Highlight" / "Neu eingetroffen")
+  - Marke + Modell als H3
+  - Eckdaten-Streifen (EZ · KM · PS · Getriebe) als Mono-Chips
+  - Preis groß in Champagner-Akzent
+  - CTA-Zeile: "Details ansehen →" + kleiner "Flyer als PDF"-Link
+- Auswahl automatisch aus `vehicles.ts` (Status `highlight` + `new-arrival`, erste 3).
+- Neue Komponente: `src/components/site/HighlightFlyerCard.tsx` (separater Stil, nicht die normale `VehicleCard`).
 
 ---
 
 ## Betroffene Dateien
-- `src/components/site/VehicleCard.tsx` (Klick-Fix, ruhigeres Layout)
-- `src/routes/fahrzeuge.$id.tsx` (Inserat-Look + PDF-Button)
-- `src/components/site/VehicleFlyer.tsx` (neu, PDF-Vorlage)
-- evtl. `src/routes/fahrzeuge.$id.flyer.tsx` (Fallback-Druckseite)
-- `src/routes/index.tsx` (weniger Text, mehr Bild)
-- `src/routes/fahrzeuge.tsx` (kürzerer Header)
-- `src/styles.css` (Rot dezenter, ruhigere Token)
-- `bun add jspdf html2canvas qrcode` für PDF + QR
+
+- `src/styles.css` — Font-Tokens, Skala
+- `src/routes/__root.tsx` — Font-Preload
+- `src/components/ui/Icon.tsx` — neu, Wrapper für Lucide
+- Alle Stellen mit Inline-Icons (TrustBar, Features, MobileStickyBar, Footer) — Icon-Komponente einsetzen
+- `src/assets/hero-kabayel-bmw7.jpg` — neu generiert
+- `src/routes/index.tsx` — neues Hero-Bild, neue Highlights-Sektion
+- `src/components/site/HighlightFlyerCard.tsx` — neu
+- `src/routes/fahrzeuge.$id.tsx` — Eckdaten-Grid prominent
 
 Keine Backend-/DB-Änderungen.
