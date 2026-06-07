@@ -17,6 +17,7 @@ import {
   type Vehicle,
 } from "@/data/vehicles";
 import { dealer, telLink, whatsappLink } from "@/data/dealer";
+import { downloadVehicleFlyer } from "@/lib/vehicleFlyer";
 
 export const Route = createFileRoute("/fahrzeuge/$id")({
   loader: ({ params }) => {
@@ -135,6 +136,18 @@ function VehicleDetail() {
   const whatsappText = `Hallo ${dealer.legalName}, ich interessiere mich für ${v.title}. Ist das Fahrzeug noch verfügbar?`;
   const [testDriveOpen, setTestDriveOpen] = useState(false);
   const [callbackOpen, setCallbackOpen] = useState(false);
+  const [flyerLoading, setFlyerLoading] = useState(false);
+
+  const onDownloadFlyer = async () => {
+    try {
+      setFlyerLoading(true);
+      await downloadVehicleFlyer(v);
+    } catch (e) {
+      console.error("Flyer-Download fehlgeschlagen", e);
+    } finally {
+      setFlyerLoading(false);
+    }
+  };
 
   return (
     <SiteLayout hideMobileBar hideFab>
