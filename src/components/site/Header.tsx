@@ -47,7 +47,7 @@ export function Header() {
           </div>
           <span className="hidden items-center gap-1.5 whitespace-nowrap border border-champagne/70 bg-surface px-2 py-1 font-mono text-[9px] font-bold uppercase tracking-[0.2em] text-champagne 2xl:inline-flex">
             <span aria-hidden className="h-1 w-1 rotate-45 bg-champagne" />
-            Team Kabayel · WBC #1
+            Velbert · seit 2018
           </span>
         </Link>
 
