@@ -84,7 +84,7 @@ export const vehicles: Vehicle[] = [
     exteriorColor: "Obsidianschwarz Metallic",
     condition: "Gebraucht",
     previousOwners: 1,
-    images: [heroCar, car1, car2, car3],
+    images: [v001a, v001b, v001c],
     features: [
       "Burmester 3D-Soundsystem",
       "Panorama-Schiebedach",
@@ -117,7 +117,7 @@ export const vehicles: Vehicle[] = [
     exteriorColor: "Brooklyn Grey Metallic",
     condition: "Gebraucht",
     previousOwners: 1,
-    images: [car1, car2, car3, car4],
+    images: [v002a, v002b, v002c],
     features: [
       "Harman Kardon Surround",
       "Carbon-Dach",
@@ -147,7 +147,7 @@ export const vehicles: Vehicle[] = [
     exteriorColor: "Gentianblau Metallic",
     condition: "Gebraucht",
     previousOwners: 1,
-    images: [car2, heroCar, car1, car4],
+    images: [v003a, v003b, v003c],
     features: [
       "Sport Chrono Paket",
       "BOSE Surround",
@@ -177,7 +177,7 @@ export const vehicles: Vehicle[] = [
     exteriorColor: "Nardograu",
     condition: "Jahreswagen",
     previousOwners: 1,
-    images: [car3, car1, car2, heroCar],
+    images: [v004a, v004b, v004c],
     features: [
       "B&O Premium Sound",
       "RS-Designpaket",
@@ -206,7 +206,7 @@ export const vehicles: Vehicle[] = [
     exteriorColor: "Polarweiß",
     condition: "Gebraucht",
     previousOwners: 1,
-    images: [car4, heroCar, car2, car3],
+    images: [v005a, v005b, v005c],
     features: [
       "AMG Line",
       "Burmester",
@@ -236,7 +236,7 @@ export const vehicles: Vehicle[] = [
     exteriorColor: "Karbongraumetallic",
     condition: "Gebraucht",
     previousOwners: 1,
-    images: [car2, car4, car1, heroCar],
+    images: [v006a, v006b, v006c],
     features: [
       "Sport Chrono",
       "Panoramadach",
@@ -265,7 +265,7 @@ export const vehicles: Vehicle[] = [
     exteriorColor: "Isle of Man Green Metallic",
     condition: "Jahreswagen",
     previousOwners: 1,
-    images: [car1, car3, heroCar, car2],
+    images: [v007a, v007b, v007c],
     features: [
       "M Carbon-Sitze",
       "Harman Kardon",
@@ -294,7 +294,7 @@ export const vehicles: Vehicle[] = [
     exteriorColor: "Daytonagrau Perleffekt",
     condition: "Gebraucht",
     previousOwners: 1,
-    images: [car3, car4, car1, heroCar],
+    images: [v008a, v008b, v008c],
     features: [
       "Keramikbremsen",
       "B&O Advanced",
@@ -323,7 +323,7 @@ export const vehicles: Vehicle[] = [
     exteriorColor: "Belgravia Green",
     condition: "Jahreswagen",
     previousOwners: 1,
-    images: [car4, car2, heroCar, car1],
+    images: [v009a, v009b, v009c],
     features: [
       "Meridian Signature Sound",
       "Panoramadach",
@@ -352,7 +352,7 @@ export const vehicles: Vehicle[] = [
     exteriorColor: "AMG Selenitgrau Magno",
     condition: "Gebraucht",
     previousOwners: 1,
-    images: [heroCar, car3, car4, car1],
+    images: [v010a, v010b, v010c],
     features: [
       "AMG Performance Sitze",
       "Burmester High-End",
