@@ -162,25 +162,8 @@ function Hero() {
         </div>
       </div>
 
-      {/* Bottom marquee strip */}
-      <div className="relative border-y border-line bg-ink/[0.02] py-3 overflow-hidden">
-        <div className="flex whitespace-nowrap animate-marquee gap-12 font-mono text-[10px] font-bold uppercase tracking-[0.35em] text-ink-soft">
-          {Array.from({ length: 2 }).map((_, k) => (
-            <div key={k} className="flex shrink-0 items-center gap-12">
-              <span>Velbert · seit 2018</span>
-              <span className="text-champagne">◆</span>
-              <span>Team Kabayel · WBC #1</span>
-              <span className="text-champagne">◆</span>
-              <span>Geprüfte Premium-Fahrzeuge</span>
-              <span className="text-champagne">◆</span>
-              <span>Persönliche Übergabe</span>
-              <span className="text-champagne">◆</span>
-              <span>Finanzierung · Ankauf · Service</span>
-              <span className="text-champagne">◆</span>
-            </div>
-          ))}
-        </div>
-      </div>
+      {/* Quiet bottom rule replaces the marquee for a more serious tone */}
+      <div className="border-t border-line" aria-hidden />
     </section>
   );
 }
