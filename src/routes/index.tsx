@@ -5,7 +5,7 @@ import { BtnLink, BtnA } from "@/components/ui/Btn";
 import { featuredVehicles, vehicles } from "@/data/vehicles";
 import { dealer, telLink, whatsappLink } from "@/data/dealer";
 import heroCar from "@/assets/hero-car.jpg";
-import championPortrait from "@/assets/champion-portrait.jpg";
+import championHero from "@/assets/champion-hero.jpg";
 
 
 export const Route = createFileRoute("/")({
