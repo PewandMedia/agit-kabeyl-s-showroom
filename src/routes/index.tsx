@@ -266,10 +266,10 @@ function Highlights() {
         <div className="flex items-end justify-between gap-6 border-b border-line pb-6">
           <div>
             <p className="font-mono text-[10px] font-bold uppercase tracking-[0.4em] text-champagne">
-              Aus unserem Bestand
+              Aktuelle Highlights
             </p>
             <h2 className="mt-4 font-display text-4xl font-extrabold tracking-tight text-ink md:text-5xl">
-              Aktuelle <span className="text-champagne">Auswahl</span>
+              Drei Inserate, <span className="text-champagne">drei Geschichten.</span>
             </h2>
           </div>
           <Link
@@ -281,8 +281,8 @@ function Highlights() {
         </div>
 
         <div className="mt-10 grid gap-6 md:mt-14 md:grid-cols-3">
-          {featuredVehicles.map((v, i) => (
-            <VehicleCard key={v.id} vehicle={v} priority={i < 2} />
+          {featuredVehicles.slice(0, 3).map((v, i) => (
+            <HighlightFlyerCard key={v.id} vehicle={v} priority={i < 2} />
           ))}
         </div>
 
