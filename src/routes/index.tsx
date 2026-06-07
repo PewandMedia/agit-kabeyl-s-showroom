@@ -280,20 +280,16 @@ function Highlights() {
           </Link>
         </div>
 
-        <div className="mx-auto mt-10 flex max-w-5xl flex-col gap-10 md:mt-14 md:gap-14">
+        <div className="mt-10 grid gap-6 md:mt-14 md:grid-cols-3">
           {featuredVehicles.slice(0, 3).map((v, i) => (
             <HighlightFlyerCard key={v.id} vehicle={v} priority={i === 0} />
           ))}
         </div>
 
-
-        <div className="mt-10 md:hidden">
-          <Link
-            to="/fahrzeuge"
-            className="block w-full border border-champagne/40 py-4 text-center font-mono text-[10px] font-bold uppercase tracking-[0.3em] text-champagne"
-          >
-            Alle Fahrzeuge ansehen
-          </Link>
+        <div className="mt-12 flex justify-center md:mt-16">
+          <BtnLink to="/fahrzeuge" variant="primary" size="lg" arrow>
+            Weiter zum Bestand
+          </BtnLink>
         </div>
       </div>
     </section>

@@ -1,56 +1,20 @@
-## Ziel
-1. Hero-Bild ersetzen: aus dem Instagram-Screenshot (unten rechts: Agit + Meltem mit erhobener Faust vor schwarzem BMW 7er) Meltem wegretuschieren, sodass nur Agit allein vor dem BMW steht. Dieses Bild wird das neue Hero auf der Startseite.
-2. Drei flyer-artige Highlight-Karten auf der Startseite im Stil der hochgeladenen OZ-Automobile-Flyer (dunkler Hintergrund, große Modell-Headline weiß + rot, Spec-Chips mit Icons, Highlights-Liste mit roten Häkchen, großer Preis-Block, mehrere Detailbilder im Collage-Layout).
+## 1. Highlight-Flyer wieder 3 nebeneinander
+- `HighlightFlyerCard.tsx` neu im kompakten OZ-Flyer-Stil, vertikal gestapelt für 3-Spalten-Grid: dunkler Hintergrund, Bild oben (16:10), darunter Marke + Modell-Headline (weiß + rot), Spec-Strip mit Icons (PS, km, EZ, Kraftstoff), 4–5 Highlights mit roten Check-Icons, Preisblock mit rotem Akzent, CTA „Weiter →".
+- `routes/index.tsx`: Sektion zurück auf `md:grid-cols-3 gap-6`, darunter zentrierter Primary-Button „Weiter zum Bestand →".
 
-## Umsetzung
+## 2. Hero-Bild Agit Kabayel ans Design angleichen
+- `imagegen--edit_image` auf `src/assets/hero-kabayel-bmw7.jpg`: Farb-Grading dunkler/cinematischer, Showroom-Gelbstich raus, dezenter Champagner-Ton, Vignette, BMW + Subjekt durch Spotlight hervorheben. 4:5 bleibt.
+- Hero-Overlay in `index.tsx` etwas stärker (oben/unten), damit Bild nahtlos in Paper-BG übergeht und Caption lesbar bleibt.
 
-### 1. Hero-Bild (`src/assets/hero-kabayel-bmw7.jpg`)
-- Quelle: rechte untere Kachel des hochgeladenen Instagram-Screenshots zuschneiden (Agit + Meltem vor schwarzem BMW 7er im Showroom, beide Faust hoch).
-- Mit `imagegen--edit_image` bearbeiten: Frau (links im Bild) komplett entfernen, Showroom-Hintergrund + BMW 7er + Agit (rechts, Faust hoch) erhalten. Cinematischer Look, leichter Kontrast-Boost. 16:9.
-- Datei `hero-kabayel-bmw7.jpg` überschreiben — bestehender Import in `src/routes/index.tsx` bleibt.
-- Caption bleibt: „Agit Kabayel · WBC #1 Contender · sein BMW 7er mit Spoiler".
-
-### 2. Flyer-Karten Redesign (`src/components/site/HighlightFlyerCard.tsx`)
-Komplett neu im OZ-Flyer-Stil, statt der jetzigen schlanken Karte:
-
-```
-┌──────────────────────────────────────────────┐
-│ [Logo AK]   STATUS-BADGE (z.B. Neu eingetroffen)│
-│                                              │
-│ PORSCHE                       [Hauptbild     │
-│ CAYENNE GTS  ← weiß+rot         großer       │
-│ Sport. Luxury. Performance.     Wagen]       │
-│                                              │
-│ ⚡441 PS  📏168.000 km  📅10/2016  ⛽Benzin   │
-│ ─────────────────────────────────────────── │
-│ HIGHLIGHTS              [3 kleine Thumbs   ] │
-│ ✓ GTS Sportpaket        [Innen/Felge/Heck  ] │
-│ ✓ Luftfederung                               │
-│ ✓ Panorama                                   │
-│ ✓ BOSE                  PREIS               │
-│ ✓ ...                   36.950 €             │
-│                                              │
-│ [Details ansehen →]   [Flyer als PDF ↓]      │
-└──────────────────────────────────────────────┘
-```
-
-Technisch:
-- Dunkles Karten-Background (`--card`), feiner roter Border-Accent, gold/champagne Preis.
-- Headline: Manrope Black, riesig, Modellname weiß + Variante in `--primary` (rot).
-- Spec-Chips: lucide Icons (Gauge, Route, Calendar, Fuel) mit JetBrains Mono Labels.
-- Highlights-Liste: 6–8 Stichpunkte aus `vehicle.equipment`, rote Check-Icons (lucide `Check` in `--primary`).
-- Mini-Bildcollage rechts (3 weitere Bilder aus `vehicle.images`, falls vorhanden — sonst nur Hauptbild größer).
-- Preis-Block mit `font-mono`, kontrastierender Box.
-- Zwei CTAs unten: Link zur Detailseite + „Flyer als PDF" (nutzt vorhandenes `generateVehicleFlyer`).
-
-### 3. Startseite (`src/routes/index.tsx`)
-- Bestehende „Drei Inserate" Sektion: Karten untereinander statt 3-spaltig (Karten sind groß, vertikal — wie echte Flyer). Auf Desktop max-w-4xl mittig, jede Karte mit großzügigem Abstand.
-- Sektions-Headline: „Aktuelle Highlights".
-- Quelle bleibt: erste 3 Fahrzeuge aus `vehicles.ts`.
+## 3. Detailseite klarer
+`routes/fahrzeuge.$id.tsx`:
+- Eckdaten-Grid auf 8 Felder erweitern: EZ, Laufleistung, Leistung (kW/PS), Getriebe, Kraftstoff, Farbe, **Vorbesitzer**, **Zustand** — größere Chips mit Icons.
+- Ausstattungs-Box im Flyer-Stil: dunkler Hintergrund, rote Check-Icons, 2-spaltige Liste, Header „Ausstattung & Highlights" mit Anzahl.
+- Technische Daten kompakter aber vollständig.
+- Reihenfolge: Galerie → Eckdaten XL → Beschreibung → Ausstattung → Tech. Daten → Anfrage → Ähnliche.
 
 ## Dateien
-- `src/assets/hero-kabayel-bmw7.jpg` (überschreiben via edit_image aus dem Upload-Screenshot-Crop)
-- `src/components/site/HighlightFlyerCard.tsx` (Redesign)
-- `src/routes/index.tsx` (Sektion-Layout anpassen)
-
-Keine Backend-Änderungen.
+- `src/assets/hero-kabayel-bmw7.jpg`
+- `src/components/site/HighlightFlyerCard.tsx`
+- `src/routes/index.tsx`
+- `src/routes/fahrzeuge.$id.tsx`
