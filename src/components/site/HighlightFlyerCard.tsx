@@ -20,9 +20,8 @@ export function HighlightFlyerCard({
 }) {
   return (
     <Link
-      // @ts-expect-error — dynamic route string
-      to={to}
-      params={params}
+      to={to as any}
+      params={params as any}
       className="group relative block overflow-hidden border border-line bg-ink shadow-[0_30px_80px_-40px_rgba(0,0,0,0.6)] transition-colors duration-500 hover:border-primary/60"
       aria-label={alt}
     >
