@@ -160,7 +160,7 @@ function VehicleDetail() {
       </Modal>
       <article>
         <section className="border-b border-line bg-paper">
-          <div className="mx-auto max-w-[1400px] px-5 pb-12 pt-8 md:px-10 md:pb-16 md:pt-12">
+          <div className="mx-auto max-w-[1400px] px-5 pb-6 pt-6 md:px-10 md:pb-8 md:pt-10">
             <Link
               to="/fahrzeuge"
               className="inline-flex items-center font-mono text-[10px] uppercase tracking-[0.22em] text-ink-soft hover:text-champagne"
@@ -168,16 +168,25 @@ function VehicleDetail() {
               ← Bestand
             </Link>
 
-            <div className="mt-6 grid gap-10 md:grid-cols-12 md:items-start">
+            <div className="mt-4 flex flex-wrap items-center gap-3">
+              <p className="kicker">{v.make}</p>
+              <StatusBadge status={v.status} />
+            </div>
+            <h1 className="mt-3 font-display text-3xl leading-[1.0] text-ink md:text-5xl xl:text-6xl">
+              {v.title}
+            </h1>
+          </div>
+
+          {/* GALERIE ZUERST — groß, swipebar */}
+          <div className="mx-auto max-w-[1400px] px-5 pb-10 md:px-10 md:pb-14">
+            <VehicleGallery images={v.images} alt={`${v.title}, ${v.firstRegistration}`} />
+          </div>
+
+          {/* DARUNTER: Infos + Preis */}
+          <div className="mx-auto max-w-[1400px] px-5 pb-12 md:px-10 md:pb-16">
+            <div className="grid gap-10 md:grid-cols-12 md:items-start">
               <div className="md:col-span-8">
-                <div className="flex flex-wrap items-center gap-3">
-                  <p className="kicker">{v.make}</p>
-                  <StatusBadge status={v.status} />
-                </div>
-                <h1 className="mt-4 font-display text-4xl leading-[0.95] text-ink md:text-6xl xl:text-7xl">
-                  {v.title}
-                </h1>
-                <p className="mt-4 max-w-3xl text-base leading-relaxed text-ink-soft md:text-lg">
+                <p className="max-w-3xl text-base leading-relaxed text-ink-soft md:text-lg">
                   {v.description}
                 </p>
 
@@ -238,10 +247,6 @@ function VehicleDetail() {
                   </div>
                 </div>
               </aside>
-            </div>
-
-            <div className="mt-8">
-              <VehicleGallery images={v.images} alt={`${v.title}, ${v.firstRegistration}`} />
             </div>
           </div>
         </section>

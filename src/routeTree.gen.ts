@@ -17,10 +17,10 @@ import { Route as LeistungenRouteImport } from './routes/leistungen'
 import { Route as KontaktRouteImport } from './routes/kontakt'
 import { Route as ImpressumRouteImport } from './routes/impressum'
 import { Route as FinanzierungRouteImport } from './routes/finanzierung'
-import { Route as FahrzeugeRouteImport } from './routes/fahrzeuge'
 import { Route as DatenschutzRouteImport } from './routes/datenschutz'
 import { Route as AutoVerkaufenRouteImport } from './routes/auto-verkaufen'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as FahrzeugeIndexRouteImport } from './routes/fahrzeuge.index'
 import { Route as FahrzeugeIdRouteImport } from './routes/fahrzeuge.$id'
 
 const UeberUnsRoute = UeberUnsRouteImport.update({
@@ -63,11 +63,6 @@ const FinanzierungRoute = FinanzierungRouteImport.update({
   path: '/finanzierung',
   getParentRoute: () => rootRouteImport,
 } as any)
-const FahrzeugeRoute = FahrzeugeRouteImport.update({
-  id: '/fahrzeuge',
-  path: '/fahrzeuge',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const DatenschutzRoute = DatenschutzRouteImport.update({
   id: '/datenschutz',
   path: '/datenschutz',
@@ -83,17 +78,21 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const FahrzeugeIndexRoute = FahrzeugeIndexRouteImport.update({
+  id: '/fahrzeuge/',
+  path: '/fahrzeuge/',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const FahrzeugeIdRoute = FahrzeugeIdRouteImport.update({
-  id: '/$id',
-  path: '/$id',
-  getParentRoute: () => FahrzeugeRoute,
+  id: '/fahrzeuge/$id',
+  path: '/fahrzeuge/$id',
+  getParentRoute: () => rootRouteImport,
 } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/auto-verkaufen': typeof AutoVerkaufenRoute
   '/datenschutz': typeof DatenschutzRoute
-  '/fahrzeuge': typeof FahrzeugeRouteWithChildren
   '/finanzierung': typeof FinanzierungRoute
   '/impressum': typeof ImpressumRoute
   '/kontakt': typeof KontaktRoute
@@ -103,12 +102,12 @@ export interface FileRoutesByFullPath {
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/ueber-uns': typeof UeberUnsRoute
   '/fahrzeuge/$id': typeof FahrzeugeIdRoute
+  '/fahrzeuge/': typeof FahrzeugeIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/auto-verkaufen': typeof AutoVerkaufenRoute
   '/datenschutz': typeof DatenschutzRoute
-  '/fahrzeuge': typeof FahrzeugeRouteWithChildren
   '/finanzierung': typeof FinanzierungRoute
   '/impressum': typeof ImpressumRoute
   '/kontakt': typeof KontaktRoute
@@ -118,13 +117,13 @@ export interface FileRoutesByTo {
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/ueber-uns': typeof UeberUnsRoute
   '/fahrzeuge/$id': typeof FahrzeugeIdRoute
+  '/fahrzeuge': typeof FahrzeugeIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/auto-verkaufen': typeof AutoVerkaufenRoute
   '/datenschutz': typeof DatenschutzRoute
-  '/fahrzeuge': typeof FahrzeugeRouteWithChildren
   '/finanzierung': typeof FinanzierungRoute
   '/impressum': typeof ImpressumRoute
   '/kontakt': typeof KontaktRoute
@@ -134,6 +133,7 @@ export interface FileRoutesById {
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/ueber-uns': typeof UeberUnsRoute
   '/fahrzeuge/$id': typeof FahrzeugeIdRoute
+  '/fahrzeuge/': typeof FahrzeugeIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -141,7 +141,6 @@ export interface FileRouteTypes {
     | '/'
     | '/auto-verkaufen'
     | '/datenschutz'
-    | '/fahrzeuge'
     | '/finanzierung'
     | '/impressum'
     | '/kontakt'
@@ -151,12 +150,12 @@ export interface FileRouteTypes {
     | '/sitemap.xml'
     | '/ueber-uns'
     | '/fahrzeuge/$id'
+    | '/fahrzeuge/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
     | '/auto-verkaufen'
     | '/datenschutz'
-    | '/fahrzeuge'
     | '/finanzierung'
     | '/impressum'
     | '/kontakt'
@@ -166,12 +165,12 @@ export interface FileRouteTypes {
     | '/sitemap.xml'
     | '/ueber-uns'
     | '/fahrzeuge/$id'
+    | '/fahrzeuge'
   id:
     | '__root__'
     | '/'
     | '/auto-verkaufen'
     | '/datenschutz'
-    | '/fahrzeuge'
     | '/finanzierung'
     | '/impressum'
     | '/kontakt'
@@ -181,13 +180,13 @@ export interface FileRouteTypes {
     | '/sitemap.xml'
     | '/ueber-uns'
     | '/fahrzeuge/$id'
+    | '/fahrzeuge/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AutoVerkaufenRoute: typeof AutoVerkaufenRoute
   DatenschutzRoute: typeof DatenschutzRoute
-  FahrzeugeRoute: typeof FahrzeugeRouteWithChildren
   FinanzierungRoute: typeof FinanzierungRoute
   ImpressumRoute: typeof ImpressumRoute
   KontaktRoute: typeof KontaktRoute
@@ -196,6 +195,8 @@ export interface RootRouteChildren {
   RueckrufRoute: typeof RueckrufRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
   UeberUnsRoute: typeof UeberUnsRoute
+  FahrzeugeIdRoute: typeof FahrzeugeIdRoute
+  FahrzeugeIndexRoute: typeof FahrzeugeIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -256,13 +257,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof FinanzierungRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/fahrzeuge': {
-      id: '/fahrzeuge'
-      path: '/fahrzeuge'
-      fullPath: '/fahrzeuge'
-      preLoaderRoute: typeof FahrzeugeRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/datenschutz': {
       id: '/datenschutz'
       path: '/datenschutz'
@@ -284,33 +278,27 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/fahrzeuge/': {
+      id: '/fahrzeuge/'
+      path: '/fahrzeuge'
+      fullPath: '/fahrzeuge/'
+      preLoaderRoute: typeof FahrzeugeIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/fahrzeuge/$id': {
       id: '/fahrzeuge/$id'
-      path: '/$id'
+      path: '/fahrzeuge/$id'
       fullPath: '/fahrzeuge/$id'
       preLoaderRoute: typeof FahrzeugeIdRouteImport
-      parentRoute: typeof FahrzeugeRoute
+      parentRoute: typeof rootRouteImport
     }
   }
 }
-
-interface FahrzeugeRouteChildren {
-  FahrzeugeIdRoute: typeof FahrzeugeIdRoute
-}
-
-const FahrzeugeRouteChildren: FahrzeugeRouteChildren = {
-  FahrzeugeIdRoute: FahrzeugeIdRoute,
-}
-
-const FahrzeugeRouteWithChildren = FahrzeugeRoute._addFileChildren(
-  FahrzeugeRouteChildren,
-)
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AutoVerkaufenRoute: AutoVerkaufenRoute,
   DatenschutzRoute: DatenschutzRoute,
-  FahrzeugeRoute: FahrzeugeRouteWithChildren,
   FinanzierungRoute: FinanzierungRoute,
   ImpressumRoute: ImpressumRoute,
   KontaktRoute: KontaktRoute,
@@ -319,6 +307,8 @@ const rootRouteChildren: RootRouteChildren = {
   RueckrufRoute: RueckrufRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
   UeberUnsRoute: UeberUnsRoute,
+  FahrzeugeIdRoute: FahrzeugeIdRoute,
+  FahrzeugeIndexRoute: FahrzeugeIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
