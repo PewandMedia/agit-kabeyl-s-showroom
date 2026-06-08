@@ -23,6 +23,28 @@ import macan22 from "@/assets/vehicles/macan-22.jpg.asset.json";
 import macan23 from "@/assets/vehicles/macan-23.jpg.asset.json";
 import macan24 from "@/assets/vehicles/macan-24.jpg.asset.json";
 import macan25 from "@/assets/vehicles/macan-25.jpg.asset.json";
+import cla01 from "@/assets/vehicles/cla45-01.png.asset.json";
+import cla02 from "@/assets/vehicles/cla45-02.png.asset.json";
+import cla03 from "@/assets/vehicles/cla45-03.png.asset.json";
+import cla04 from "@/assets/vehicles/cla45-04.png.asset.json";
+import cla05 from "@/assets/vehicles/cla45-05.png.asset.json";
+import cla06 from "@/assets/vehicles/cla45-06.png.asset.json";
+import cla07 from "@/assets/vehicles/cla45-07.png.asset.json";
+import cla08 from "@/assets/vehicles/cla45-08.png.asset.json";
+import cla09 from "@/assets/vehicles/cla45-09.png.asset.json";
+import cla10 from "@/assets/vehicles/cla45-10.png.asset.json";
+import cla11 from "@/assets/vehicles/cla45-11.png.asset.json";
+import cla12 from "@/assets/vehicles/cla45-12.png.asset.json";
+import cla13 from "@/assets/vehicles/cla45-13.png.asset.json";
+import cla14 from "@/assets/vehicles/cla45-14.png.asset.json";
+import cla15 from "@/assets/vehicles/cla45-15.png.asset.json";
+import cla16 from "@/assets/vehicles/cla45-16.png.asset.json";
+import cla17 from "@/assets/vehicles/cla45-17.png.asset.json";
+import cla18 from "@/assets/vehicles/cla45-18.png.asset.json";
+import cla19 from "@/assets/vehicles/cla45-19.png.asset.json";
+import cla20 from "@/assets/vehicles/cla45-20.png.asset.json";
+import cla21 from "@/assets/vehicles/cla45-21.png.asset.json";
+import cla22 from "@/assets/vehicles/cla45-22.png.asset.json";
 
 export type VehicleStatus =
   | "available"
