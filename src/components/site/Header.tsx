@@ -36,7 +36,12 @@ export function Header() {
           to="/"
           className="group flex items-center gap-3"
           aria-label={dealer.legalName}
-          onClick={() => setOpen(false)}
+          onClick={() => {
+            setOpen(false);
+            if (typeof window !== "undefined") {
+              window.scrollTo({ top: 0, behavior: "smooth" });
+            }
+          }}
         >
           <div className="flex items-baseline gap-2">
             <span className="font-display text-2xl font-extrabold tracking-tighter text-ink">
