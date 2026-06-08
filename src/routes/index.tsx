@@ -8,9 +8,7 @@ import { featuredVehicles, vehicles } from "@/data/vehicles";
 import { dealer, telLink, whatsappLink } from "@/data/dealer";
 import heroCar from "@/assets/hero-car.jpg";
 import championHero from "@/assets/hero-kabayel-bmw7.jpg";
-import flyerPorsche from "@/assets/flyer-porsche-cayenne-gts.png.asset.json";
-import flyerRangeRover from "@/assets/flyer-range-rover-sport-hse.png.asset.json";
-import flyerMercedes from "@/assets/flyer-mercedes-v300d.png.asset.json";
+import flyerMacan from "@/assets/flyer-porsche-macan.png.asset.json";
 
 const HIGHLIGHT_FLYERS: Array<{
   image: string;
@@ -19,21 +17,10 @@ const HIGHLIGHT_FLYERS: Array<{
   params?: Record<string, string>;
 }> = [
   {
-    image: flyerPorsche.url,
-    alt: "Porsche Cayenne GTS — Highlight-Inserat",
+    image: flyerMacan.url,
+    alt: "Porsche Macan 2.0 PDK — Highlight-Inserat",
     to: "/fahrzeuge/$id",
-    params: { id: "AK-2024-006" },
-  },
-  {
-    image: flyerRangeRover.url,
-    alt: "Range Rover Sport HSE — Highlight-Inserat",
-    to: "/fahrzeuge/$id",
-    params: { id: "AK-2024-009" },
-  },
-  {
-    image: flyerMercedes.url,
-    alt: "Mercedes-Benz V 300 d Avantgarde Edition Lang — Highlight-Inserat",
-    to: "/fahrzeuge",
+    params: { id: "AK-2025-001" },
   },
 ];
 
