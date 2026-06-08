@@ -1,6 +1,10 @@
 /**
- * Stammdaten Autohaus AK GmbH.
- * Adresse / Telefon / Rechtliches sind Platzhalter — bitte ersetzen.
+ * ⚠️ TODO VOR GO-LIVE ERSETZEN ⚠️
+ * Folgende Felder enthalten Platzhalter und MÜSSEN vor dem Publish mit
+ * echten Stammdaten ersetzt werden (sonst rechtl. Probleme / falsche Kontaktdaten):
+ *   street, postalCode, phone, phoneDisplay, whatsapp, email,
+ *   managingDirector, hrb, ustId
+ * Datenquelle: Handelsregisterauszug + Impressumsangaben des Autohauses.
  */
 export const dealer = {
   legalName: "Autohaus AK GmbH",
