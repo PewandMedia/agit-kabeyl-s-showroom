@@ -1,33 +1,28 @@
-import v001a from "@/assets/vehicles/AK-2024-001-1.jpg";
-import v001b from "@/assets/vehicles/AK-2024-001-2.jpg";
-import v001c from "@/assets/vehicles/AK-2024-001-3.jpg";
-import v002a from "@/assets/vehicles/AK-2024-002-1.jpg";
-import v002b from "@/assets/vehicles/AK-2024-002-2.jpg";
-import v002c from "@/assets/vehicles/AK-2024-002-3.jpg";
-import v003a from "@/assets/vehicles/AK-2024-003-1.jpg";
-import v003b from "@/assets/vehicles/AK-2024-003-2.jpg";
-import v003c from "@/assets/vehicles/AK-2024-003-3.jpg";
-import v004a from "@/assets/vehicles/AK-2024-004-1.jpg";
-import v004b from "@/assets/vehicles/AK-2024-004-2.jpg";
-import v004c from "@/assets/vehicles/AK-2024-004-3.jpg";
-import v005a from "@/assets/vehicles/AK-2024-005-1.jpg";
-import v005b from "@/assets/vehicles/AK-2024-005-2.jpg";
-import v005c from "@/assets/vehicles/AK-2024-005-3.jpg";
-import v006a from "@/assets/vehicles/AK-2024-006-1.jpg";
-import v006b from "@/assets/vehicles/AK-2024-006-2.jpg";
-import v006c from "@/assets/vehicles/AK-2024-006-3.jpg";
-import v007a from "@/assets/vehicles/AK-2024-007-1.jpg";
-import v007b from "@/assets/vehicles/AK-2024-007-2.jpg";
-import v007c from "@/assets/vehicles/AK-2024-007-3.jpg";
-import v008a from "@/assets/vehicles/AK-2024-008-1.jpg";
-import v008b from "@/assets/vehicles/AK-2024-008-2.jpg";
-import v008c from "@/assets/vehicles/AK-2024-008-3.jpg";
-import v009a from "@/assets/vehicles/AK-2024-009-1.jpg";
-import v009b from "@/assets/vehicles/AK-2024-009-2.jpg";
-import v009c from "@/assets/vehicles/AK-2024-009-3.jpg";
-import v010a from "@/assets/vehicles/AK-2024-010-1.jpg";
-import v010b from "@/assets/vehicles/AK-2024-010-2.jpg";
-import v010c from "@/assets/vehicles/AK-2024-010-3.jpg";
+import macan01 from "@/assets/vehicles/macan-01.jpg.asset.json";
+import macan02 from "@/assets/vehicles/macan-02.jpg.asset.json";
+import macan03 from "@/assets/vehicles/macan-03.jpg.asset.json";
+import macan04 from "@/assets/vehicles/macan-04.jpg.asset.json";
+import macan05 from "@/assets/vehicles/macan-05.jpg.asset.json";
+import macan06 from "@/assets/vehicles/macan-06.jpg.asset.json";
+import macan07 from "@/assets/vehicles/macan-07.jpg.asset.json";
+import macan08 from "@/assets/vehicles/macan-08.jpg.asset.json";
+import macan09 from "@/assets/vehicles/macan-09.jpg.asset.json";
+import macan10 from "@/assets/vehicles/macan-10.jpg.asset.json";
+import macan11 from "@/assets/vehicles/macan-11.jpg.asset.json";
+import macan12 from "@/assets/vehicles/macan-12.jpg.asset.json";
+import macan13 from "@/assets/vehicles/macan-13.jpg.asset.json";
+import macan14 from "@/assets/vehicles/macan-14.jpg.asset.json";
+import macan15 from "@/assets/vehicles/macan-15.jpg.asset.json";
+import macan16 from "@/assets/vehicles/macan-16.jpg.asset.json";
+import macan17 from "@/assets/vehicles/macan-17.jpg.asset.json";
+import macan18 from "@/assets/vehicles/macan-18.jpg.asset.json";
+import macan19 from "@/assets/vehicles/macan-19.jpg.asset.json";
+import macan20 from "@/assets/vehicles/macan-20.jpg.asset.json";
+import macan21 from "@/assets/vehicles/macan-21.jpg.asset.json";
+import macan22 from "@/assets/vehicles/macan-22.jpg.asset.json";
+import macan23 from "@/assets/vehicles/macan-23.jpg.asset.json";
+import macan24 from "@/assets/vehicles/macan-24.jpg.asset.json";
+import macan25 from "@/assets/vehicles/macan-25.jpg.asset.json";
 
 export type VehicleStatus =
   | "available"
@@ -69,302 +64,69 @@ function v(
   return { ...data, title, year };
 }
 
+const macanImages = [
+  macan01, macan02, macan03, macan04, macan05, macan06, macan07, macan08, macan09,
+  macan10, macan11, macan12, macan13, macan14, macan15, macan16, macan17, macan18,
+  macan19, macan20, macan21, macan22, macan23, macan24, macan25,
+].map((a) => a.url);
+
 export const vehicles: Vehicle[] = [
   v({
-    id: "AK-2024-001",
-    make: "Mercedes-Benz",
-    model: "S 500",
-    variant: "4MATIC L AMG-Line",
-    priceEur: 84900,
-    mileageKm: 42500,
-    firstRegistration: "03/2022",
-    fuel: "Benzin",
-    transmission: "Automatik",
-    powerKw: 320,
-    exteriorColor: "Obsidianschwarz Metallic",
-    condition: "Gebraucht",
-    previousOwners: 1,
-    images: [v001a, v001b, v001c],
-    features: [
-      "Burmester 3D-Soundsystem",
-      "Panorama-Schiebedach",
-      "Head-up Display",
-      "Sitzklimatisierung",
-      "Massagefunktion",
-      "Standheizung",
-      "360°-Kamera",
-      "Distronic Plus",
-      "MBUX Hyperscreen",
-      "Nappa-Leder Exklusiv",
-    ],
-    description:
-      "Repräsentative S-Klasse Lang in makellosem Zustand. Scheckheftgepflegt, lückenlose Historie, Erstbesitz, Nichtraucherfahrzeug. Frisch durch unsere Werkstatt geprüft.",
-    financingAvailable: true,
-    monthlyRateEur: 989,
-    status: "highlight",
-  }),
-  v({
-    id: "AK-2024-002",
-    make: "BMW",
-    model: "M4",
-    variant: "Competition Coupé",
-    priceEur: 76500,
-    mileageKm: 38900,
-    firstRegistration: "06/2021",
-    fuel: "Benzin",
-    transmission: "Automatik",
-    powerKw: 375,
-    exteriorColor: "Brooklyn Grey Metallic",
-    condition: "Gebraucht",
-    previousOwners: 1,
-    images: [v002a, v002b, v002c],
-    features: [
-      "Harman Kardon Surround",
-      "Carbon-Dach",
-      "M Sportabgasanlage",
-      "Adaptives M-Fahrwerk",
-      "Laserlicht",
-      "Head-up Display",
-      "M Driver's Package",
-    ],
-    description:
-      "M4 Competition mit voller Ausstattung. Garagenfahrzeug, scheckheftgeführt. Sofort verfügbar.",
-    financingAvailable: true,
-    monthlyRateEur: 879,
-    status: "available",
-  }),
-  v({
-    id: "AK-2024-003",
+    id: "AK-2025-001",
     make: "Porsche",
-    model: "911",
-    variant: "Carrera",
-    priceEur: 109800,
-    mileageKm: 28400,
-    firstRegistration: "09/2020",
+    model: "Macan",
+    variant: "2.0 PDK",
+    priceEur: 28870,
+    mileageKm: 149990,
+    firstRegistration: "10/2017",
     fuel: "Benzin",
     transmission: "Automatik",
-    powerKw: 283,
-    exteriorColor: "Gentianblau Metallic",
+    powerKw: 185,
+    exteriorColor: "Tiefschwarz Metallic",
     condition: "Gebraucht",
-    previousOwners: 1,
-    images: [v003a, v003b, v003c],
+    previousOwners: 3,
+    images: macanImages,
     features: [
-      "Sport Chrono Paket",
-      "BOSE Surround",
-      "Schiebedach",
-      "Sportabgasanlage",
-      "LED-Matrix",
-      "PASM",
-      "Sportsitze Plus",
+      "BOSE Soundsystem",
+      "Porsche Dynamic Light System (PDLS)",
+      "Bi-Xenon-Scheinwerfer",
+      "Navigationssystem / PCM",
+      "Rückfahrkamera",
+      "Parkassistent vorne und hinten",
+      "Parksensoren vorne und hinten",
+      "Sitzheizung",
+      "Volllederausstattung Schwarz",
+      "Klimaautomatik",
+      "Multifunktionslenkrad",
+      "Tempomat",
+      "Bluetooth",
+      "USB-Anschluss",
+      "Freisprecheinrichtung",
+      "Apple CarPlay",
+      "Android Auto",
+      "Elektrische Fensterheber",
+      "Elektrisch verstellbare Außenspiegel",
+      "Mittelarmlehne",
+      "Isofix",
+      "ABS",
+      "ESP",
+      "Traktionskontrolle",
+      "Reifendruckkontrolle",
+      "Airbags",
+      "Tagfahrlicht",
+      "Nebelscheinwerfer",
+      "20 Zoll RS Spyder Design Felgen",
+      "Allradantrieb",
+      "Hubraum 1.984 cm³",
+      "Schadstoffklasse Euro 6",
+      "Umweltplakette Grün",
+      "HU/AU bis 07/2027",
+      "Unfallfrei laut Inserat",
     ],
     description:
-      "Hochwertiger 911 Carrera in seltener Konfiguration. Erstbesitz, unfallfrei, alle Inspektionen lückenlos dokumentiert.",
+      "Sehr schöner Porsche Macan 2.0 PDK in Tiefschwarz Metallic mit schwarzer Volllederausstattung. Das Fahrzeug verfügt über eine umfangreiche Ausstattung, unter anderem BOSE Soundsystem, PDLS/Bi-Xenon, Rückfahrkamera, Navigationssystem PCM, Sitzheizung, Parkassistent vorne und hinten, Apple CarPlay/Android Auto sowie 20-Zoll RS Spyder Design Felgen.\n\nDer Macan bietet sportliches Fahrverhalten, hochwertige Verarbeitung und alltagstauglichen Komfort. Durch den Allradantrieb ist das Fahrzeug auch bei schlechter Witterung sehr souverän zu fahren.\n\nHU/AU ist gültig bis 07/2027.\n\nBesichtigung und Probefahrt nach Absprache möglich.",
     financingAvailable: true,
-    monthlyRateEur: 1249,
     status: "highlight",
-  }),
-  v({
-    id: "AK-2024-004",
-    make: "Audi",
-    model: "RS5",
-    variant: "Sportback quattro",
-    priceEur: 92400,
-    mileageKm: 18200,
-    firstRegistration: "01/2023",
-    fuel: "Benzin",
-    transmission: "Automatik",
-    powerKw: 331,
-    exteriorColor: "Nardograu",
-    condition: "Jahreswagen",
-    previousOwners: 1,
-    images: [v004a, v004b, v004c],
-    features: [
-      "B&O Premium Sound",
-      "RS-Designpaket",
-      "Matrix-LED",
-      "Panoramadach",
-      "Keramikbremsen",
-      "Quattro Sportdifferenzial",
-    ],
-    description:
-      "RS5 Sportback in dezenter Konfiguration, frische Inspektion, alle Service-Leistungen bei Audi durchgeführt.",
-    financingAvailable: true,
-    monthlyRateEur: 1059,
-    status: "new-arrival",
-  }),
-  v({
-    id: "AK-2024-005",
-    make: "Mercedes-Benz",
-    model: "G 400 d",
-    variant: "AMG-Line",
-    priceEur: 134900,
-    mileageKm: 31000,
-    firstRegistration: "04/2022",
-    fuel: "Diesel",
-    transmission: "Automatik",
-    powerKw: 243,
-    exteriorColor: "Polarweiß",
-    condition: "Gebraucht",
-    previousOwners: 1,
-    images: [v005a, v005b, v005c],
-    features: [
-      "AMG Line",
-      "Burmester",
-      "Standheizung",
-      "Distronic",
-      "AHK 3,5 t",
-      "Schiebedach",
-      "Widescreen Cockpit",
-    ],
-    description:
-      "G-Klasse in zeitloser Konfiguration. Lückenlos scheckheftgepflegt, Nichtraucherfahrzeug, sofort verfügbar.",
-    financingAvailable: true,
-    monthlyRateEur: 1499,
-    status: "available",
-  }),
-  v({
-    id: "AK-2024-006",
-    make: "Porsche",
-    model: "Cayenne",
-    variant: "E-Hybrid Coupé",
-    priceEur: 98500,
-    mileageKm: 24800,
-    firstRegistration: "11/2022",
-    fuel: "Hybrid",
-    transmission: "Automatik",
-    powerKw: 340,
-    exteriorColor: "Karbongraumetallic",
-    condition: "Gebraucht",
-    previousOwners: 1,
-    images: [v006a, v006b, v006c],
-    features: [
-      "Sport Chrono",
-      "Panoramadach",
-      "Luftfederung",
-      "BOSE Sound",
-      "Head-up Display",
-      "Sportabgasanlage",
-    ],
-    description:
-      "Cayenne E-Hybrid Coupé — Premium-SUV mit elektrischer Reichweite. Wartung Porsche-Zentrum, top gepflegt.",
-    financingAvailable: true,
-    monthlyRateEur: 1129,
-    status: "available",
-  }),
-  v({
-    id: "AK-2024-007",
-    make: "BMW",
-    model: "M3",
-    variant: "Competition xDrive Touring",
-    priceEur: 104900,
-    mileageKm: 12400,
-    firstRegistration: "05/2023",
-    fuel: "Benzin",
-    transmission: "Automatik",
-    powerKw: 375,
-    exteriorColor: "Isle of Man Green Metallic",
-    condition: "Jahreswagen",
-    previousOwners: 1,
-    images: [v007a, v007b, v007c],
-    features: [
-      "M Carbon-Sitze",
-      "Harman Kardon",
-      "M Driver's Package",
-      "Schiebedach",
-      "Laserlicht",
-      "M Sport Bremse",
-    ],
-    description:
-      "Der erste M3 Touring der Geschichte — extrem rar, sofort verfügbar, voll ausgestattet.",
-    financingAvailable: true,
-    monthlyRateEur: 1199,
-    status: "new-arrival",
-  }),
-  v({
-    id: "AK-2024-008",
-    make: "Audi",
-    model: "RS Q8",
-    variant: "TFSI quattro",
-    priceEur: 129800,
-    mileageKm: 22100,
-    firstRegistration: "08/2022",
-    fuel: "Benzin",
-    transmission: "Automatik",
-    powerKw: 441,
-    exteriorColor: "Daytonagrau Perleffekt",
-    condition: "Gebraucht",
-    previousOwners: 1,
-    images: [v008a, v008b, v008c],
-    features: [
-      "Keramikbremsen",
-      "B&O Advanced",
-      "Allradlenkung",
-      "Panoramadach",
-      "RS-Designpaket Plus",
-      "Matrix-LED",
-    ],
-    description:
-      "RS Q8 mit Vollausstattung. Reserviert für Probefahrt am Wochenende — kurzfristig wieder verfügbar.",
-    financingAvailable: true,
-    monthlyRateEur: 1459,
-    status: "reserved",
-  }),
-  v({
-    id: "AK-2024-009",
-    make: "Land Rover",
-    model: "Range Rover Sport",
-    variant: "P530 First Edition",
-    priceEur: 142500,
-    mileageKm: 15600,
-    firstRegistration: "02/2023",
-    fuel: "Benzin",
-    transmission: "Automatik",
-    powerKw: 390,
-    exteriorColor: "Belgravia Green",
-    condition: "Jahreswagen",
-    previousOwners: 1,
-    images: [v009a, v009b, v009c],
-    features: [
-      "Meridian Signature Sound",
-      "Panoramadach",
-      "Massagesitze",
-      "Hinterachslenkung",
-      "Head-up Display",
-      "22-Zoll Felgen",
-    ],
-    description:
-      "Range Rover Sport P530 First Edition — Top-Konfiguration, wie neu, scheckheftgepflegt.",
-    financingAvailable: true,
-    monthlyRateEur: 1599,
-    status: "highlight",
-  }),
-  v({
-    id: "AK-2024-010",
-    make: "Mercedes-Benz",
-    model: "AMG GT",
-    variant: "63 S 4MATIC+",
-    priceEur: 119900,
-    mileageKm: 34800,
-    firstRegistration: "10/2021",
-    fuel: "Benzin",
-    transmission: "Automatik",
-    powerKw: 470,
-    exteriorColor: "AMG Selenitgrau Magno",
-    condition: "Gebraucht",
-    previousOwners: 1,
-    images: [v010a, v010b, v010c],
-    features: [
-      "AMG Performance Sitze",
-      "Burmester High-End",
-      "Carbon Interieur",
-      "Performance Abgas",
-      "Keramikbremsen",
-      "Distronic",
-    ],
-    description:
-      "AMG GT 63 S — Performance der Spitzenklasse. Kürzlich verkauft, Foto-Referenz für ähnliche Anfragen.",
-    financingAvailable: true,
-    status: "sold",
   }),
 ];
 

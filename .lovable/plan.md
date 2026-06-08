@@ -1,29 +1,43 @@
 ## Ziel
-Beim Klick auf ein Fahrzeug im Bestand soll eine echte Detailansicht aufgehen: oben eine scroll-/swipebare Bildergalerie des Autos, direkt darunter die kompletten Fahrzeuginfos, Ausstattung und technische Daten. Der aktuelle Effekt, bei dem der Klick nur wieder auf der Seite landet bzw. sich falsch anfühlt, wird beseitigt.
 
-## Umsetzungsplan
-1. **Klickverhalten im Bestand korrigieren**
-   - Den Fahrzeug-Card-Link und die sichtbare „Details“-Interaktion so anpassen, dass der Klick eindeutig zur Route `/fahrzeuge/$id` führt.
-   - Verhindern, dass sich der Klick wie ein bloßer Sprung/Refresh derselben Seite verhält.
+Alle 10 KI-generierten Fahrzeuge aus dem Bestand entfernen und durch das echte Inserat **Porsche Macan 2.0 PDK** (28.870 €, 149.990 km, EZ 10/2017) mit allen 26 Originalbildern ersetzen.
 
-2. **Detailseite klar strukturieren**
-   - Die Fahrzeugdetailseite so aufbauen, dass zuerst die Bildergalerie kommt.
-   - Direkt darunter die Inhalte in sinnvoller Reihenfolge anzeigen: Kurzbeschreibung, Eckdaten, Ausstattung/Highlights und technische Daten.
+## Vorgehen
 
-3. **Galerie wirklich als Mehrbild-Ansicht ausbauen**
-   - Die vorhandenen mehreren Bilder pro Fahrzeug als horizontal nutzbare Galerie darstellen.
-   - Auf Mobilgeräten per Wischen/Scrollen nutzbar machen, auf Desktop mit klarer Navigation und Vorschaubildern.
-   - Sicherstellen, dass beim Wechsel zwischen Bildern nichts springt.
+### 1. Bilder als Lovable-Assets einbinden
+- Die 26 Bild-URLs aus dem hochgeladenen ZIP per `lovable-assets create --url …` als CDN-Assets registrieren.
+- Pro Bild entsteht eine `src/assets/vehicles/macan-NN.jpg.asset.json` (Pointer-Datei mit CDN-URL, kein Binary im Repo).
+- Vorteil: keine 26 Binärdateien im Repo, schnelles Laden über CDN, sauber für späteren Supabase-Umzug (URLs lassen sich direkt in eine DB-Spalte übernehmen).
 
-4. **Fahrzeugdaten pro Inserat sichtbar machen**
-   - Für jedes inserierte Auto die vorhandenen generierten Daten sauber auf der Detailseite ausgeben.
-   - Ausstattung, technische Angaben und Zustandsinfos lesbar und vollständig unter der Galerie platzieren.
+### 2. KI-Bilder aus dem Repo entfernen
+- `src/assets/vehicles/AK-2024-001-*.jpg` … `AK-2024-010-*.jpg` löschen (30 Dateien).
 
-5. **Preview prüfen**
-   - Im laufenden Preview testen, dass der Klick auf z. B. den Audi RS5 zuverlässig die Detailseite öffnet.
-   - Prüfen, dass mehrere Bilder sichtbar/navigierbar sind und die Informationen direkt darunter erscheinen.
+### 3. `src/data/vehicles.ts` neu aufbauen
+- Alle 10 alten KI-Einträge sowie ihre Imports entfernen.
+- Neuen Eintrag `AK-2025-001` (Porsche Macan) mit allen gelieferten Daten anlegen:
+  - Marke/Modell/Variante, Preis 28.870 €, 149.990 km, EZ 10/2017
+  - 185 kW (252 PS), Allrad, PDK, Benzin, Tiefschwarz Metallic, Vollleder Schwarz
+  - 3 Vorbesitzer, HU 07/2027, Euro 6, unfallfrei
+  - Vollständige Ausstattungsliste (BOSE, PDLS/Bi-Xenon, PCM, Rückfahrkamera, Parkassistent v/h, Sitzheizung, Apple CarPlay/Android Auto, 20" RS Spyder, etc.)
+  - Originalbeschreibung übernehmen
+  - 26 Bilder aus den Asset-Pointern als `images`-Array
+  - Status: `highlight`
+- `featuredVehicles` greift automatisch auf den einzigen verfügbaren Wagen zurück (Fallback ist bereits eingebaut).
 
-## Technische Details
-- Betroffene Bereiche: `src/components/site/VehicleCard.tsx`, `src/components/site/VehicleGallery.tsx`, `src/routes/fahrzeuge.$id.tsx`
-- Keine Backend-Änderung nötig.
-- Es werden nur Navigation, Layout-Reihenfolge und Galerie-Interaktion angepasst; die Fahrzeugdaten bleiben frontendseitig in `src/data/vehicles.ts`.
+### 4. Konsistenz prüfen
+- `VehicleCard` zeigt `images[0]` → erstes Bild als Vorschau ✓
+- `VehicleGallery` auf der Detailseite scrollt alle 26 Bilder ✓
+- Startseite (Highlights), `/fahrzeuge`-Liste und `/fahrzeuge/AK-2025-001` rendern korrekt.
+- Filter (`VehicleFilters`) funktionieren weiterhin (keine Strukturänderung am Type).
+
+### 5. Live-Preview verifizieren
+- `/fahrzeuge` zeigt nur noch den Macan.
+- Detailseite öffnet, Galerie mit 26 Bildern, alle Infos darunter sichtbar.
+
+## Hinweis zur späteren Datenbank
+Struktur bleibt identisch zu heute, nur Datenquelle ändert sich später. Die CDN-Bild-URLs lassen sich 1:1 in eine spätere `vehicles`-Tabelle übernehmen — kein Re-Upload nötig. Aktuell **keine** DB-Verbindung, kein Konflikt mit zukünftigem Lovable-Cloud/Supabase-Setup.
+
+## Geänderte Dateien
+- `src/data/vehicles.ts` (komplett neu)
+- `src/assets/vehicles/macan-01.jpg.asset.json` … `macan-26.jpg.asset.json` (26 neu)
+- 30 Dateien gelöscht: `src/assets/vehicles/AK-2024-0NN-*.jpg`
