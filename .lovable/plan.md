@@ -1,20 +1,21 @@
-## Favicon im Site-Stil
+## 1. „Grün" auf dem Handy → Schwarz/Rot
 
-Ersetze das bisherige grüne Platzhalter-Favicon durch eines, das exakt dem Header-Branding entspricht:
-- **Hintergrund:** dunkles `--paper` (≈ `#16161b`), abgerundete Ecken (8px Radius bei 64×64)
-- **„AK"**: weiß (`--ink`), extrabold, tight tracking — gleiche Behandlung wie im Header
-- **Champagne-Akzent:** kleiner Punkt/Strich unter „AK" in `--champagne` (≈ `#d2693f`), als visueller Anker analog zum kleinen Quadrat-Akzent im Header
-- Format: `public/favicon.svg` (skaliert nativ, ersetzt die bisherige Datei)
+Der grüne Eindruck kommt nicht vom Favicon (das ist bereits schwarz/rot), sondern vom **`theme-color` Meta-Tag** in `src/routes/__root.tsx` — aktuell `#064e3b` (Smaragdgrün). Das färbt die Adressleiste auf Mobilgeräten ein.
 
-## Stammdaten aktualisieren (`src/data/dealer.ts`)
+- `theme-color` von `#064e3b` → `#0a0a0a` (passend zum Favicon-Hintergrund).
+- Favicon-SVG bleibt wie gehabt (schwarz + rotes „AK" + roter Strich).
 
-Echte Daten einsetzen und die TODO-Markierungen entfernen:
-- `street`: `"Eckstraße 9a"`
-- `postalCode`: `"42551"`, `city`: `"Velbert"` (bleibt)
-- `phone`: `"+4916090919911"`, `phoneDisplay`: `"+49 160 90919911"`
-- `whatsapp`: `"4916090919911"` (intl. Format ohne `+`)
-- `email`: `"info@autohaus-ak.com"`
-- Datei-Kommentar oben: TODO-Block durch kurzen Hinweis ersetzen, dass `managingDirector`, `hrb`, `ustId` noch Platzhalter sind (für Impressum rechtlich erforderlich) — diese kann ich ohne Daten nicht erfinden.
+## 2. Bestand → Fahrzeugdetail: Mobile-Swipe für Galerie
 
-## Nicht enthalten
-- `managingDirector`, `hrb`, `ustId` bleiben Platzhalter (TODO im Datei-Kopf). Wenn du sie nachreichst, ergänze ich sie sofort.
+In `src/components/site/VehicleGallery.tsx` sind die Prev/Next-Buttons via `hidden md:flex` auf dem Handy **versteckt**, und es gibt keine Touch-Geste. Folge: man hängt auf Bild 1 fest.
+
+Lösung: Hauptbild auf Mobile als **horizontal scrollbarer Track mit Scroll-Snap** umbauen — native, ruckelfreie Wischgeste:
+
+- Container: `flex overflow-x-auto snap-x snap-mandatory` (nur mobil; ab `md` greift die bisherige Einzelbild-Ansicht mit Pfeil-Buttons).
+- Jedes Bild: `snap-center w-full shrink-0`.
+- Beim Scrollen wird `active` über `IntersectionObserver` aktualisiert, damit der Zähler „X / Y" und der Lightbox-Index synchron bleiben.
+- Tap auf ein Bild öffnet weiterhin den Lightbox.
+- Im Lightbox ebenfalls horizontaler Snap-Scroll für Mobile (gleiche Geste).
+- Thumbnails darunter bleiben unverändert und scrollen das Mobile-Karussell beim Klick zum richtigen Index.
+
+Desktop-Verhalten bleibt 1:1 wie heute (Einzelbild + ← → Buttons + Tastatur).
