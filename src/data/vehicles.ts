@@ -116,6 +116,25 @@ import targa33 from "@/assets/vehicles/targa-33.jpg.asset.json";
 import targa34 from "@/assets/vehicles/targa-34.jpg.asset.json";
 import targa35 from "@/assets/vehicles/targa-35.jpg.asset.json";
 import targa36 from "@/assets/vehicles/targa-36.jpg.asset.json";
+import cle01 from "@/assets/vehicles/cle-01.jpg.asset.json";
+import cle02 from "@/assets/vehicles/cle-02.jpg.asset.json";
+import cle03 from "@/assets/vehicles/cle-03.jpg.asset.json";
+import cle04 from "@/assets/vehicles/cle-04.jpg.asset.json";
+import cle05 from "@/assets/vehicles/cle-05.jpg.asset.json";
+import cle06 from "@/assets/vehicles/cle-06.jpg.asset.json";
+import cle07 from "@/assets/vehicles/cle-07.jpg.asset.json";
+import cle08 from "@/assets/vehicles/cle-08.jpg.asset.json";
+import cle09 from "@/assets/vehicles/cle-09.jpg.asset.json";
+import cle10 from "@/assets/vehicles/cle-10.jpg.asset.json";
+import cle11 from "@/assets/vehicles/cle-11.jpg.asset.json";
+import cle12 from "@/assets/vehicles/cle-12.jpg.asset.json";
+import cle13 from "@/assets/vehicles/cle-13.jpg.asset.json";
+import cle14 from "@/assets/vehicles/cle-14.jpg.asset.json";
+import cle15 from "@/assets/vehicles/cle-15.jpg.asset.json";
+import cle16 from "@/assets/vehicles/cle-16.jpg.asset.json";
+import cle17 from "@/assets/vehicles/cle-17.jpg.asset.json";
+import cle18 from "@/assets/vehicles/cle-18.jpg.asset.json";
+import cle19 from "@/assets/vehicles/cle-19.jpg.asset.json";
 
 export type VehicleStatus =
   | "available"
