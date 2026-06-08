@@ -8,7 +8,7 @@ import { featuredVehicles, vehicles } from "@/data/vehicles";
 import { dealer, telLink, whatsappLink } from "@/data/dealer";
 import heroCar from "@/assets/hero-car.jpg";
 import championHero from "@/assets/hero-kabayel-bmw7.jpg";
-import flyerMacan from "@/assets/flyer-porsche-macan.png.asset.json";
+import flyerMacan from "@/assets/flyer-porsche-macan.png";
 
 const HIGHLIGHT_FLYERS: Array<{
   image: string;
@@ -17,7 +17,7 @@ const HIGHLIGHT_FLYERS: Array<{
   params?: Record<string, string>;
 }> = [
   {
-    image: flyerMacan.url,
+    image: flyerMacan,
     alt: "Porsche Macan 2.0 PDK — Highlight-Inserat",
     to: "/fahrzeuge/$id",
     params: { id: "AK-2025-001" },

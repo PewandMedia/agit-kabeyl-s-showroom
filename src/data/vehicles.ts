@@ -1,140 +1,140 @@
-import macan01 from "@/assets/vehicles/macan-01.jpg.asset.json";
-import macan02 from "@/assets/vehicles/macan-02.jpg.asset.json";
-import macan03 from "@/assets/vehicles/macan-03.jpg.asset.json";
-import macan04 from "@/assets/vehicles/macan-04.jpg.asset.json";
-import macan05 from "@/assets/vehicles/macan-05.jpg.asset.json";
-import macan06 from "@/assets/vehicles/macan-06.jpg.asset.json";
-import macan07 from "@/assets/vehicles/macan-07.jpg.asset.json";
-import macan08 from "@/assets/vehicles/macan-08.jpg.asset.json";
-import macan09 from "@/assets/vehicles/macan-09.jpg.asset.json";
-import macan10 from "@/assets/vehicles/macan-10.jpg.asset.json";
-import macan11 from "@/assets/vehicles/macan-11.jpg.asset.json";
-import macan12 from "@/assets/vehicles/macan-12.jpg.asset.json";
-import macan13 from "@/assets/vehicles/macan-13.jpg.asset.json";
-import macan14 from "@/assets/vehicles/macan-14.jpg.asset.json";
-import macan15 from "@/assets/vehicles/macan-15.jpg.asset.json";
-import macan16 from "@/assets/vehicles/macan-16.jpg.asset.json";
-import macan17 from "@/assets/vehicles/macan-17.jpg.asset.json";
-import macan18 from "@/assets/vehicles/macan-18.jpg.asset.json";
-import macan19 from "@/assets/vehicles/macan-19.jpg.asset.json";
-import macan20 from "@/assets/vehicles/macan-20.jpg.asset.json";
-import macan21 from "@/assets/vehicles/macan-21.jpg.asset.json";
-import macan22 from "@/assets/vehicles/macan-22.jpg.asset.json";
-import macan23 from "@/assets/vehicles/macan-23.jpg.asset.json";
-import macan24 from "@/assets/vehicles/macan-24.jpg.asset.json";
-import macan25 from "@/assets/vehicles/macan-25.jpg.asset.json";
-import cla01 from "@/assets/vehicles/cla45-01.png.asset.json";
-import cla02 from "@/assets/vehicles/cla45-02.png.asset.json";
-import cla03 from "@/assets/vehicles/cla45-03.png.asset.json";
-import cla04 from "@/assets/vehicles/cla45-04.png.asset.json";
-import cla05 from "@/assets/vehicles/cla45-05.png.asset.json";
-import cla06 from "@/assets/vehicles/cla45-06.png.asset.json";
-import cla07 from "@/assets/vehicles/cla45-07.png.asset.json";
-import cla08 from "@/assets/vehicles/cla45-08.png.asset.json";
-import cla09 from "@/assets/vehicles/cla45-09.png.asset.json";
-import cla10 from "@/assets/vehicles/cla45-10.png.asset.json";
-import cla11 from "@/assets/vehicles/cla45-11.png.asset.json";
-import cla12 from "@/assets/vehicles/cla45-12.png.asset.json";
-import cla13 from "@/assets/vehicles/cla45-13.png.asset.json";
-import cla14 from "@/assets/vehicles/cla45-14.png.asset.json";
-import cla15 from "@/assets/vehicles/cla45-15.png.asset.json";
-import cla16 from "@/assets/vehicles/cla45-16.png.asset.json";
-import cla17 from "@/assets/vehicles/cla45-17.png.asset.json";
-import cla18 from "@/assets/vehicles/cla45-18.png.asset.json";
-import cla19 from "@/assets/vehicles/cla45-19.png.asset.json";
-import cla20 from "@/assets/vehicles/cla45-20.png.asset.json";
-import cla21 from "@/assets/vehicles/cla45-21.png.asset.json";
-import cla22 from "@/assets/vehicles/cla45-22.png.asset.json";
-import rs601 from "@/assets/vehicles/rs6-01.jpg.asset.json";
-import rs602 from "@/assets/vehicles/rs6-02.jpg.asset.json";
-import rs603 from "@/assets/vehicles/rs6-03.jpg.asset.json";
-import rs604 from "@/assets/vehicles/rs6-04.jpg.asset.json";
-import rs605 from "@/assets/vehicles/rs6-05.jpg.asset.json";
-import rs606 from "@/assets/vehicles/rs6-06.jpg.asset.json";
-import rs607 from "@/assets/vehicles/rs6-07.jpg.asset.json";
-import rs608 from "@/assets/vehicles/rs6-08.jpg.asset.json";
-import rs609 from "@/assets/vehicles/rs6-09.jpg.asset.json";
-import rs610 from "@/assets/vehicles/rs6-10.jpg.asset.json";
-import rs611 from "@/assets/vehicles/rs6-11.jpg.asset.json";
-import rs612 from "@/assets/vehicles/rs6-12.jpg.asset.json";
-import rs613 from "@/assets/vehicles/rs6-13.jpg.asset.json";
-import rs614 from "@/assets/vehicles/rs6-14.jpg.asset.json";
-import rs615 from "@/assets/vehicles/rs6-15.jpg.asset.json";
-import rs616 from "@/assets/vehicles/rs6-16.jpg.asset.json";
-import rs617 from "@/assets/vehicles/rs6-17.jpg.asset.json";
-import rs618 from "@/assets/vehicles/rs6-18.jpg.asset.json";
-import rs619 from "@/assets/vehicles/rs6-19.jpg.asset.json";
-import rs620 from "@/assets/vehicles/rs6-20.jpg.asset.json";
-import rs621 from "@/assets/vehicles/rs6-21.jpg.asset.json";
-import rs622 from "@/assets/vehicles/rs6-22.jpg.asset.json";
-import rs623 from "@/assets/vehicles/rs6-23.jpg.asset.json";
-import rs624 from "@/assets/vehicles/rs6-24.jpg.asset.json";
-import rs625 from "@/assets/vehicles/rs6-25.jpg.asset.json";
-import rs626 from "@/assets/vehicles/rs6-26.jpg.asset.json";
-import rs627 from "@/assets/vehicles/rs6-27.jpg.asset.json";
-import rs628 from "@/assets/vehicles/rs6-28.jpg.asset.json";
-import rs629 from "@/assets/vehicles/rs6-29.jpg.asset.json";
-import rs630 from "@/assets/vehicles/rs6-30.jpg.asset.json";
-import rs631 from "@/assets/vehicles/rs6-31.jpg.asset.json";
-import rs632 from "@/assets/vehicles/rs6-32.jpg.asset.json";
-import rs633 from "@/assets/vehicles/rs6-33.jpg.asset.json";
-import rs634 from "@/assets/vehicles/rs6-34.jpg.asset.json";
-import rs635 from "@/assets/vehicles/rs6-35.jpg.asset.json";
-import targa01 from "@/assets/vehicles/targa-01.jpg.asset.json";
-import targa02 from "@/assets/vehicles/targa-02.jpg.asset.json";
-import targa03 from "@/assets/vehicles/targa-03.jpg.asset.json";
-import targa04 from "@/assets/vehicles/targa-04.jpg.asset.json";
-import targa05 from "@/assets/vehicles/targa-05.jpg.asset.json";
-import targa06 from "@/assets/vehicles/targa-06.jpg.asset.json";
-import targa07 from "@/assets/vehicles/targa-07.jpg.asset.json";
-import targa08 from "@/assets/vehicles/targa-08.jpg.asset.json";
-import targa09 from "@/assets/vehicles/targa-09.jpg.asset.json";
-import targa10 from "@/assets/vehicles/targa-10.jpg.asset.json";
-import targa11 from "@/assets/vehicles/targa-11.jpg.asset.json";
-import targa12 from "@/assets/vehicles/targa-12.jpg.asset.json";
-import targa13 from "@/assets/vehicles/targa-13.jpg.asset.json";
-import targa14 from "@/assets/vehicles/targa-14.jpg.asset.json";
-import targa15 from "@/assets/vehicles/targa-15.jpg.asset.json";
-import targa16 from "@/assets/vehicles/targa-16.jpg.asset.json";
-import targa17 from "@/assets/vehicles/targa-17.jpg.asset.json";
-import targa18 from "@/assets/vehicles/targa-18.jpg.asset.json";
-import targa19 from "@/assets/vehicles/targa-19.jpg.asset.json";
-import targa20 from "@/assets/vehicles/targa-20.jpg.asset.json";
-import targa21 from "@/assets/vehicles/targa-21.jpg.asset.json";
-import targa22 from "@/assets/vehicles/targa-22.jpg.asset.json";
-import targa23 from "@/assets/vehicles/targa-23.jpg.asset.json";
-import targa24 from "@/assets/vehicles/targa-24.jpg.asset.json";
-import targa25 from "@/assets/vehicles/targa-25.jpg.asset.json";
-import targa26 from "@/assets/vehicles/targa-26.jpg.asset.json";
-import targa27 from "@/assets/vehicles/targa-27.jpg.asset.json";
-import targa28 from "@/assets/vehicles/targa-28.jpg.asset.json";
-import targa29 from "@/assets/vehicles/targa-29.jpg.asset.json";
-import targa30 from "@/assets/vehicles/targa-30.jpg.asset.json";
-import targa31 from "@/assets/vehicles/targa-31.jpg.asset.json";
-import targa32 from "@/assets/vehicles/targa-32.jpg.asset.json";
-import targa33 from "@/assets/vehicles/targa-33.jpg.asset.json";
-import targa34 from "@/assets/vehicles/targa-34.jpg.asset.json";
-import targa35 from "@/assets/vehicles/targa-35.jpg.asset.json";
-import targa36 from "@/assets/vehicles/targa-36.jpg.asset.json";
-import cle01 from "@/assets/vehicles/cle-01.jpg.asset.json";
-import cle02 from "@/assets/vehicles/cle-02.jpg.asset.json";
-import cle03 from "@/assets/vehicles/cle-03.jpg.asset.json";
-import cle04 from "@/assets/vehicles/cle-04.jpg.asset.json";
-import cle05 from "@/assets/vehicles/cle-05.jpg.asset.json";
-import cle06 from "@/assets/vehicles/cle-06.jpg.asset.json";
-import cle07 from "@/assets/vehicles/cle-07.jpg.asset.json";
-import cle08 from "@/assets/vehicles/cle-08.jpg.asset.json";
-import cle09 from "@/assets/vehicles/cle-09.jpg.asset.json";
-import cle10 from "@/assets/vehicles/cle-10.jpg.asset.json";
-import cle11 from "@/assets/vehicles/cle-11.jpg.asset.json";
-import cle12 from "@/assets/vehicles/cle-12.jpg.asset.json";
-import cle13 from "@/assets/vehicles/cle-13.jpg.asset.json";
-import cle14 from "@/assets/vehicles/cle-14.jpg.asset.json";
-import cle15 from "@/assets/vehicles/cle-15.jpg.asset.json";
-import cle16 from "@/assets/vehicles/cle-16.jpg.asset.json";
-import cle17 from "@/assets/vehicles/cle-17.jpg.asset.json";
-import cle18 from "@/assets/vehicles/cle-18.jpg.asset.json";
-import cle19 from "@/assets/vehicles/cle-19.jpg.asset.json";
+import macan01 from "@/assets/vehicles/macan-01.jpg";
+import macan02 from "@/assets/vehicles/macan-02.jpg";
+import macan03 from "@/assets/vehicles/macan-03.jpg";
+import macan04 from "@/assets/vehicles/macan-04.jpg";
+import macan05 from "@/assets/vehicles/macan-05.jpg";
+import macan06 from "@/assets/vehicles/macan-06.jpg";
+import macan07 from "@/assets/vehicles/macan-07.jpg";
+import macan08 from "@/assets/vehicles/macan-08.jpg";
+import macan09 from "@/assets/vehicles/macan-09.jpg";
+import macan10 from "@/assets/vehicles/macan-10.jpg";
+import macan11 from "@/assets/vehicles/macan-11.jpg";
+import macan12 from "@/assets/vehicles/macan-12.jpg";
+import macan13 from "@/assets/vehicles/macan-13.jpg";
+import macan14 from "@/assets/vehicles/macan-14.jpg";
+import macan15 from "@/assets/vehicles/macan-15.jpg";
+import macan16 from "@/assets/vehicles/macan-16.jpg";
+import macan17 from "@/assets/vehicles/macan-17.jpg";
+import macan18 from "@/assets/vehicles/macan-18.jpg";
+import macan19 from "@/assets/vehicles/macan-19.jpg";
+import macan20 from "@/assets/vehicles/macan-20.jpg";
+import macan21 from "@/assets/vehicles/macan-21.jpg";
+import macan22 from "@/assets/vehicles/macan-22.jpg";
+import macan23 from "@/assets/vehicles/macan-23.jpg";
+import macan24 from "@/assets/vehicles/macan-24.jpg";
+import macan25 from "@/assets/vehicles/macan-25.jpg";
+import cla01 from "@/assets/vehicles/cla45-01.png";
+import cla02 from "@/assets/vehicles/cla45-02.png";
+import cla03 from "@/assets/vehicles/cla45-03.png";
+import cla04 from "@/assets/vehicles/cla45-04.png";
+import cla05 from "@/assets/vehicles/cla45-05.png";
+import cla06 from "@/assets/vehicles/cla45-06.png";
+import cla07 from "@/assets/vehicles/cla45-07.png";
+import cla08 from "@/assets/vehicles/cla45-08.png";
+import cla09 from "@/assets/vehicles/cla45-09.png";
+import cla10 from "@/assets/vehicles/cla45-10.png";
+import cla11 from "@/assets/vehicles/cla45-11.png";
+import cla12 from "@/assets/vehicles/cla45-12.png";
+import cla13 from "@/assets/vehicles/cla45-13.png";
+import cla14 from "@/assets/vehicles/cla45-14.png";
+import cla15 from "@/assets/vehicles/cla45-15.png";
+import cla16 from "@/assets/vehicles/cla45-16.png";
+import cla17 from "@/assets/vehicles/cla45-17.png";
+import cla18 from "@/assets/vehicles/cla45-18.png";
+import cla19 from "@/assets/vehicles/cla45-19.png";
+import cla20 from "@/assets/vehicles/cla45-20.png";
+import cla21 from "@/assets/vehicles/cla45-21.png";
+import cla22 from "@/assets/vehicles/cla45-22.png";
+import rs601 from "@/assets/vehicles/rs6-01.jpg";
+import rs602 from "@/assets/vehicles/rs6-02.jpg";
+import rs603 from "@/assets/vehicles/rs6-03.jpg";
+import rs604 from "@/assets/vehicles/rs6-04.jpg";
+import rs605 from "@/assets/vehicles/rs6-05.jpg";
+import rs606 from "@/assets/vehicles/rs6-06.jpg";
+import rs607 from "@/assets/vehicles/rs6-07.jpg";
+import rs608 from "@/assets/vehicles/rs6-08.jpg";
+import rs609 from "@/assets/vehicles/rs6-09.jpg";
+import rs610 from "@/assets/vehicles/rs6-10.jpg";
+import rs611 from "@/assets/vehicles/rs6-11.jpg";
+import rs612 from "@/assets/vehicles/rs6-12.jpg";
+import rs613 from "@/assets/vehicles/rs6-13.jpg";
+import rs614 from "@/assets/vehicles/rs6-14.jpg";
+import rs615 from "@/assets/vehicles/rs6-15.jpg";
+import rs616 from "@/assets/vehicles/rs6-16.jpg";
+import rs617 from "@/assets/vehicles/rs6-17.jpg";
+import rs618 from "@/assets/vehicles/rs6-18.jpg";
+import rs619 from "@/assets/vehicles/rs6-19.jpg";
+import rs620 from "@/assets/vehicles/rs6-20.jpg";
+import rs621 from "@/assets/vehicles/rs6-21.jpg";
+import rs622 from "@/assets/vehicles/rs6-22.jpg";
+import rs623 from "@/assets/vehicles/rs6-23.jpg";
+import rs624 from "@/assets/vehicles/rs6-24.jpg";
+import rs625 from "@/assets/vehicles/rs6-25.jpg";
+import rs626 from "@/assets/vehicles/rs6-26.jpg";
+import rs627 from "@/assets/vehicles/rs6-27.jpg";
+import rs628 from "@/assets/vehicles/rs6-28.jpg";
+import rs629 from "@/assets/vehicles/rs6-29.jpg";
+import rs630 from "@/assets/vehicles/rs6-30.jpg";
+import rs631 from "@/assets/vehicles/rs6-31.jpg";
+import rs632 from "@/assets/vehicles/rs6-32.jpg";
+import rs633 from "@/assets/vehicles/rs6-33.jpg";
+import rs634 from "@/assets/vehicles/rs6-34.jpg";
+import rs635 from "@/assets/vehicles/rs6-35.jpg";
+import targa01 from "@/assets/vehicles/targa-01.jpg";
+import targa02 from "@/assets/vehicles/targa-02.jpg";
+import targa03 from "@/assets/vehicles/targa-03.jpg";
+import targa04 from "@/assets/vehicles/targa-04.jpg";
+import targa05 from "@/assets/vehicles/targa-05.jpg";
+import targa06 from "@/assets/vehicles/targa-06.jpg";
+import targa07 from "@/assets/vehicles/targa-07.jpg";
+import targa08 from "@/assets/vehicles/targa-08.jpg";
+import targa09 from "@/assets/vehicles/targa-09.jpg";
+import targa10 from "@/assets/vehicles/targa-10.jpg";
+import targa11 from "@/assets/vehicles/targa-11.jpg";
+import targa12 from "@/assets/vehicles/targa-12.jpg";
+import targa13 from "@/assets/vehicles/targa-13.jpg";
+import targa14 from "@/assets/vehicles/targa-14.jpg";
+import targa15 from "@/assets/vehicles/targa-15.jpg";
+import targa16 from "@/assets/vehicles/targa-16.jpg";
+import targa17 from "@/assets/vehicles/targa-17.jpg";
+import targa18 from "@/assets/vehicles/targa-18.jpg";
+import targa19 from "@/assets/vehicles/targa-19.jpg";
+import targa20 from "@/assets/vehicles/targa-20.jpg";
+import targa21 from "@/assets/vehicles/targa-21.jpg";
+import targa22 from "@/assets/vehicles/targa-22.jpg";
+import targa23 from "@/assets/vehicles/targa-23.jpg";
+import targa24 from "@/assets/vehicles/targa-24.jpg";
+import targa25 from "@/assets/vehicles/targa-25.jpg";
+import targa26 from "@/assets/vehicles/targa-26.jpg";
+import targa27 from "@/assets/vehicles/targa-27.jpg";
+import targa28 from "@/assets/vehicles/targa-28.jpg";
+import targa29 from "@/assets/vehicles/targa-29.jpg";
+import targa30 from "@/assets/vehicles/targa-30.jpg";
+import targa31 from "@/assets/vehicles/targa-31.jpg";
+import targa32 from "@/assets/vehicles/targa-32.jpg";
+import targa33 from "@/assets/vehicles/targa-33.jpg";
+import targa34 from "@/assets/vehicles/targa-34.jpg";
+import targa35 from "@/assets/vehicles/targa-35.jpg";
+import targa36 from "@/assets/vehicles/targa-36.jpg";
+import cle01 from "@/assets/vehicles/cle-01.jpg";
+import cle02 from "@/assets/vehicles/cle-02.jpg";
+import cle03 from "@/assets/vehicles/cle-03.jpg";
+import cle04 from "@/assets/vehicles/cle-04.jpg";
+import cle05 from "@/assets/vehicles/cle-05.jpg";
+import cle06 from "@/assets/vehicles/cle-06.jpg";
+import cle07 from "@/assets/vehicles/cle-07.jpg";
+import cle08 from "@/assets/vehicles/cle-08.jpg";
+import cle09 from "@/assets/vehicles/cle-09.jpg";
+import cle10 from "@/assets/vehicles/cle-10.jpg";
+import cle11 from "@/assets/vehicles/cle-11.jpg";
+import cle12 from "@/assets/vehicles/cle-12.jpg";
+import cle13 from "@/assets/vehicles/cle-13.jpg";
+import cle14 from "@/assets/vehicles/cle-14.jpg";
+import cle15 from "@/assets/vehicles/cle-15.jpg";
+import cle16 from "@/assets/vehicles/cle-16.jpg";
+import cle17 from "@/assets/vehicles/cle-17.jpg";
+import cle18 from "@/assets/vehicles/cle-18.jpg";
+import cle19 from "@/assets/vehicles/cle-19.jpg";
 
 export type VehicleStatus =
   | "available"
@@ -180,19 +180,19 @@ const macanImages = [
   macan01, macan02, macan03, macan04, macan05, macan06, macan07, macan08, macan09,
   macan10, macan11, macan12, macan13, macan14, macan15, macan16, macan17, macan18,
   macan19, macan20, macan21, macan22, macan23, macan24, macan25,
-].map((a) => a.url);
+].map((a) => a);
 
 const cla45Images = [
   cla01, cla02, cla03, cla04, cla05, cla06, cla07, cla08, cla09, cla10, cla11,
   cla12, cla13, cla14, cla15, cla16, cla17, cla18, cla19, cla20, cla21, cla22,
-].map((a) => a.url);
+].map((a) => a);
 
 const rs6Images = [
   rs601, rs602, rs603, rs604, rs605, rs606, rs607, rs608, rs609, rs610, rs611,
   rs612, rs613, rs614, rs615, rs616, rs617, rs618, rs619, rs620, rs621, rs622,
   rs623, rs624, rs625, rs626, rs627, rs628, rs629, rs630, rs631, rs632, rs633,
   rs634, rs635,
-].map((a) => a.url);
+].map((a) => a);
 
 const targa993Images = [
   targa01, targa02, targa03, targa04, targa05, targa06, targa07, targa08,
@@ -200,12 +200,12 @@ const targa993Images = [
   targa17, targa18, targa19, targa20, targa21, targa22, targa23, targa24,
   targa25, targa26, targa27, targa28, targa29, targa30, targa31, targa32,
   targa33, targa34, targa35, targa36,
-].map((a) => a.url);
+].map((a) => a);
 
 const cleImages = [
   cle01, cle02, cle03, cle04, cle05, cle06, cle07, cle08, cle09, cle10,
   cle11, cle12, cle13, cle14, cle15, cle16, cle17, cle18, cle19,
-].map((a) => a.url);
+].map((a) => a);
 
 
 export const vehicles: Vehicle[] = [
