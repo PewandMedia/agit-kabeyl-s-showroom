@@ -116,6 +116,25 @@ import targa33 from "@/assets/vehicles/targa-33.jpg.asset.json";
 import targa34 from "@/assets/vehicles/targa-34.jpg.asset.json";
 import targa35 from "@/assets/vehicles/targa-35.jpg.asset.json";
 import targa36 from "@/assets/vehicles/targa-36.jpg.asset.json";
+import cle01 from "@/assets/vehicles/cle-01.jpg.asset.json";
+import cle02 from "@/assets/vehicles/cle-02.jpg.asset.json";
+import cle03 from "@/assets/vehicles/cle-03.jpg.asset.json";
+import cle04 from "@/assets/vehicles/cle-04.jpg.asset.json";
+import cle05 from "@/assets/vehicles/cle-05.jpg.asset.json";
+import cle06 from "@/assets/vehicles/cle-06.jpg.asset.json";
+import cle07 from "@/assets/vehicles/cle-07.jpg.asset.json";
+import cle08 from "@/assets/vehicles/cle-08.jpg.asset.json";
+import cle09 from "@/assets/vehicles/cle-09.jpg.asset.json";
+import cle10 from "@/assets/vehicles/cle-10.jpg.asset.json";
+import cle11 from "@/assets/vehicles/cle-11.jpg.asset.json";
+import cle12 from "@/assets/vehicles/cle-12.jpg.asset.json";
+import cle13 from "@/assets/vehicles/cle-13.jpg.asset.json";
+import cle14 from "@/assets/vehicles/cle-14.jpg.asset.json";
+import cle15 from "@/assets/vehicles/cle-15.jpg.asset.json";
+import cle16 from "@/assets/vehicles/cle-16.jpg.asset.json";
+import cle17 from "@/assets/vehicles/cle-17.jpg.asset.json";
+import cle18 from "@/assets/vehicles/cle-18.jpg.asset.json";
+import cle19 from "@/assets/vehicles/cle-19.jpg.asset.json";
 
 export type VehicleStatus =
   | "available"
@@ -182,6 +201,12 @@ const targa993Images = [
   targa25, targa26, targa27, targa28, targa29, targa30, targa31, targa32,
   targa33, targa34, targa35, targa36,
 ].map((a) => a.url);
+
+const cleImages = [
+  cle01, cle02, cle03, cle04, cle05, cle06, cle07, cle08, cle09, cle10,
+  cle11, cle12, cle13, cle14, cle15, cle16, cle17, cle18, cle19,
+].map((a) => a.url);
+
 
 export const vehicles: Vehicle[] = [
   v({
@@ -477,6 +502,122 @@ export const vehicles: Vehicle[] = [
     financingAvailable: true,
     monthlyRateEur: 736,
     status: "available",
+  }),
+  v({
+    id: "AK-2025-005",
+    make: "Mercedes-Benz",
+    model: "CLE 450",
+    variant: "4Matic Cabrio",
+    title: "Mercedes-Benz CLE 450 4M Cabrio *AMG LINE PREM.*360°*HUD*BURM*",
+    priceEur: 69870,
+    mileageKm: 10000,
+    firstRegistration: "06/2024",
+    fuel: "Benzin",
+    transmission: "Automatik",
+    powerKw: 280,
+    exteriorColor: "Opalithweiß Metallic",
+    condition: "Gebraucht",
+    previousOwners: 1,
+    images: cleImages,
+    features: [
+      "Abgedunkelte Scheiben",
+      "ABS",
+      "Adaptives Kurvenlicht",
+      "Alarmanlage",
+      "Allradantrieb 4Matic",
+      "Ambiente-Beleuchtung",
+      "Android Auto",
+      "Apple CarPlay",
+      "Armlehne",
+      "Beheizbare Frontscheibe",
+      "Berganfahrassistent",
+      "Blendfreies Fernlicht",
+      "Bluetooth",
+      "Bordcomputer",
+      "Elektr. Fensterheber",
+      "Elektr. Seitenspiegel",
+      "Elektr. Seitenspiegel anklappbar",
+      "Elektr. Sitzeinstellung",
+      "Elektr. Sitzeinstellung mit Memory-Funktion",
+      "Elektr. Wegfahrsperre",
+      "ESP",
+      "Faltdach",
+      "Fernlichtassistent",
+      "Freisprecheinrichtung",
+      "Gepäckraumabtrennung",
+      "Geschwindigkeitsbegrenzer",
+      "Head-Up Display",
+      "Induktionsladen für Smartphones",
+      "Innenspiegel autom. abblendend",
+      "Isofix",
+      "Lederlenkrad",
+      "LED-Scheinwerfer",
+      "LED-Tagfahrlicht",
+      "Leichtmetallfelgen",
+      "Lichtsensor",
+      "Lordosenstütze",
+      "Massagesitze",
+      "Müdigkeitswarner",
+      "Multifunktionslenkrad",
+      "Navigationssystem",
+      "Navigationsvorbereitung",
+      "Nebelscheinwerfer",
+      "Nichtraucher-Fahrzeug",
+      "Notbremsassistent",
+      "Notrufsystem",
+      "Pannenkit",
+      "Radio DAB",
+      "Raucherpaket",
+      "Regensensor",
+      "Reifendruckkontrolle",
+      "Schaltwippen",
+      "Scheckheftgepflegt",
+      "Schlüssellose Zentralverriegelung (Keyless)",
+      "Servolenkung",
+      "Sitzbelüftung",
+      "Sitzheizung",
+      "Sommerreifen",
+      "Burmester Surround-Soundsystem",
+      "Sportfahrwerk",
+      "Sportpaket",
+      "Sportsitze",
+      "Sprachsteuerung",
+      "Spurhalteassistent",
+      "Start/Stopp-Automatik",
+      "Totwinkel-Assistent",
+      "Touchscreen",
+      "Traktionskontrolle",
+      "TV",
+      "USB",
+      "Verkehrszeichenerkennung",
+      "Volldigitales Kombiinstrument",
+      "Zentralverriegelung",
+      "360°-Kamera",
+      "Vollleder Braun (2-farbig)",
+      "6 Zylinder, 2.999 cm³ Mild-Hybrid",
+      "AMG Line Premium Plus",
+      "AMG Vielspeichen-Felgen",
+      "Night-Paket",
+      "MANUFAKTUR Opalith-Weiß Bright",
+      "Innenausstattung Holz Linde Anthrazit",
+      "Cabrio-Komfort-Paket",
+      "Windschott",
+      "Heckspoilerlippe",
+      "Doppel-Sonnenblenden",
+      "Fahrassistenz-Paket Plus",
+      "Energizing Plus",
+      "MBUX Premium",
+      "Digital Light",
+      "Schadstoffklasse Euro 6",
+      "Umweltplakette 4 (Grün)",
+      "HU bis 06/2027",
+      "Deutsche Ausführung",
+    ],
+    description:
+      "Mercedes-Benz CLE 450 4Matic Cabrio als Mild-Hybrid mit 297 kW Systemleistung (3,0 Liter Reihensechszylinder, 280 kW CGI). Deutsches Fahrzeug in der Ausstattung AMG-Line Premium Plus, lackiert in MANUFAKTUR Opalith-Weiß Bright mit 2-farbigem Lederinterieur in Braun und Holz Linde Anthrazit.\n\nUmfangreiche Sonderausstattung u. a.: Ausstattungs-Paket USB Plus, Energizing Plus, Doppel-Sonnenblenden, Fahrassistenz-Paket Plus, Heckspoilerlippe, AMG Vielspeichen-Felgen, Metallic-Lackierung, Night-Paket, Leder 2-farbig, Windschott. Weitere Highlights: AMG Premium Plus, AMG-Line Interieur, Digital Light, digitales Instrumenten-Display, Cabrio-Komfort-Paket, MBUX Premium, Park-Paket mit 360°-Kamera, Burmester Surround-Soundsystem, Sitz-Komfort-Paket, Sitzheizung vorne, Head-up-Display und Memory-Funktion.\n\nScheckheftgepflegt, 1. Hand, HU gültig bis 06/2027. Besichtigung und Probefahrt nach Absprache möglich.",
+    financingAvailable: true,
+    monthlyRateEur: 655,
+    status: "new-arrival",
   }),
 ];
 
