@@ -14,7 +14,7 @@ export default defineConfig({
   },
   vite: {
     server: {
-      allowedHosts: ["kaybel.pewandmedia.de"],
+      allowedHosts: ["kaybel.pewandmedia.de", "kabayel.pewandmedia.de"],
     },
   },
 });
