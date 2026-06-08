@@ -175,6 +175,14 @@ const rs6Images = [
   rs634, rs635,
 ].map((a) => a.url);
 
+const targa993Images = [
+  targa01, targa02, targa03, targa04, targa05, targa06, targa07, targa08,
+  targa09, targa10, targa11, targa12, targa13, targa14, targa15, targa16,
+  targa17, targa18, targa19, targa20, targa21, targa22, targa23, targa24,
+  targa25, targa26, targa27, targa28, targa29, targa30, targa31, targa32,
+  targa33, targa34, targa35, targa36,
+].map((a) => a.url);
+
 export const vehicles: Vehicle[] = [
   v({
     id: "AK-2025-001",
