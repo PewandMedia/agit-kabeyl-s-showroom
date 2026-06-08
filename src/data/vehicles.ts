@@ -80,6 +80,42 @@ import rs632 from "@/assets/vehicles/rs6-32.jpg.asset.json";
 import rs633 from "@/assets/vehicles/rs6-33.jpg.asset.json";
 import rs634 from "@/assets/vehicles/rs6-34.jpg.asset.json";
 import rs635 from "@/assets/vehicles/rs6-35.jpg.asset.json";
+import targa01 from "@/assets/vehicles/targa-01.jpg.asset.json";
+import targa02 from "@/assets/vehicles/targa-02.jpg.asset.json";
+import targa03 from "@/assets/vehicles/targa-03.jpg.asset.json";
+import targa04 from "@/assets/vehicles/targa-04.jpg.asset.json";
+import targa05 from "@/assets/vehicles/targa-05.jpg.asset.json";
+import targa06 from "@/assets/vehicles/targa-06.jpg.asset.json";
+import targa07 from "@/assets/vehicles/targa-07.jpg.asset.json";
+import targa08 from "@/assets/vehicles/targa-08.jpg.asset.json";
+import targa09 from "@/assets/vehicles/targa-09.jpg.asset.json";
+import targa10 from "@/assets/vehicles/targa-10.jpg.asset.json";
+import targa11 from "@/assets/vehicles/targa-11.jpg.asset.json";
+import targa12 from "@/assets/vehicles/targa-12.jpg.asset.json";
+import targa13 from "@/assets/vehicles/targa-13.jpg.asset.json";
+import targa14 from "@/assets/vehicles/targa-14.jpg.asset.json";
+import targa15 from "@/assets/vehicles/targa-15.jpg.asset.json";
+import targa16 from "@/assets/vehicles/targa-16.jpg.asset.json";
+import targa17 from "@/assets/vehicles/targa-17.jpg.asset.json";
+import targa18 from "@/assets/vehicles/targa-18.jpg.asset.json";
+import targa19 from "@/assets/vehicles/targa-19.jpg.asset.json";
+import targa20 from "@/assets/vehicles/targa-20.jpg.asset.json";
+import targa21 from "@/assets/vehicles/targa-21.jpg.asset.json";
+import targa22 from "@/assets/vehicles/targa-22.jpg.asset.json";
+import targa23 from "@/assets/vehicles/targa-23.jpg.asset.json";
+import targa24 from "@/assets/vehicles/targa-24.jpg.asset.json";
+import targa25 from "@/assets/vehicles/targa-25.jpg.asset.json";
+import targa26 from "@/assets/vehicles/targa-26.jpg.asset.json";
+import targa27 from "@/assets/vehicles/targa-27.jpg.asset.json";
+import targa28 from "@/assets/vehicles/targa-28.jpg.asset.json";
+import targa29 from "@/assets/vehicles/targa-29.jpg.asset.json";
+import targa30 from "@/assets/vehicles/targa-30.jpg.asset.json";
+import targa31 from "@/assets/vehicles/targa-31.jpg.asset.json";
+import targa32 from "@/assets/vehicles/targa-32.jpg.asset.json";
+import targa33 from "@/assets/vehicles/targa-33.jpg.asset.json";
+import targa34 from "@/assets/vehicles/targa-34.jpg.asset.json";
+import targa35 from "@/assets/vehicles/targa-35.jpg.asset.json";
+import targa36 from "@/assets/vehicles/targa-36.jpg.asset.json";
 
 export type VehicleStatus =
   | "available"
@@ -137,6 +173,14 @@ const rs6Images = [
   rs612, rs613, rs614, rs615, rs616, rs617, rs618, rs619, rs620, rs621, rs622,
   rs623, rs624, rs625, rs626, rs627, rs628, rs629, rs630, rs631, rs632, rs633,
   rs634, rs635,
+].map((a) => a.url);
+
+const targa993Images = [
+  targa01, targa02, targa03, targa04, targa05, targa06, targa07, targa08,
+  targa09, targa10, targa11, targa12, targa13, targa14, targa15, targa16,
+  targa17, targa18, targa19, targa20, targa21, targa22, targa23, targa24,
+  targa25, targa26, targa27, targa28, targa29, targa30, targa31, targa32,
+  targa33, targa34, targa35, targa36,
 ].map((a) => a.url);
 
 export const vehicles: Vehicle[] = [
@@ -365,6 +409,74 @@ export const vehicles: Vehicle[] = [
       "Der Audi RS6 Avant vereint sportliche Leistung mit praktischer Vielseitigkeit. Mit 600 PS aus einem 8-Zylinder-Aggregat und permanentem Allradantrieb bietet dieses Fahrzeug beeindruckende Fahrleistungen. Das Automatikgetriebe mit Schaltwippen sorgt für eine direkte Kraftübertragung, während das dynamische Fahrwerk und das Performance-Handling-System die Fahrdynamik gezielt unterstützen. Das Fahrzeug verfügt über eine vollständige Servicehistorie und hatte bisher nur einen Vorbesitzer.\n\nHighlights: 600 PS V8, Allradantrieb, Automatikgetriebe, dynamisches Fahrwerk, Performance-Handling-System, digitales Cockpit, Head-up-Display, 4-Zonen-Klimaautomatik, Sportsitze mit Massage/Belüftung/Heizung/Memory, Nachtsichtassistent, Totwinkelüberwachung, 360-Grad-Kamera, Apple CarPlay, Android Auto, WLAN-Hotspot, kabelloses Laden, schwenkbare Anhängerkupplung.\n\nPreis 84.870 € brutto (71.319 € netto, 19 % MwSt. ausweisbar). Besichtigung und Probefahrt nach Absprache möglich.",
     financingAvailable: true,
     status: "new-arrival",
+  }),
+  v({
+    id: "AK-2025-004",
+    make: "Porsche",
+    model: "993",
+    variant: "Targa",
+    title: "Porsche 993 Targa *2.HD*BRD*LEDER*POLARSILBER*",
+    priceEur: 69870,
+    mileageKm: 220000,
+    firstRegistration: "10/1995",
+    fuel: "Benzin",
+    transmission: "Schaltgetriebe",
+    powerKw: 210,
+    exteriorColor: "Polarsilber Metallic",
+    condition: "Gebraucht",
+    previousOwners: 3,
+    images: targa993Images,
+    features: [
+      "Abgedunkelte Scheiben",
+      "Blendfreies Fernlicht",
+      "CD-Spieler",
+      "Elektr. Fensterheber",
+      "Gepäckraumabtrennung",
+      "Geschwindigkeitsbegrenzer",
+      "Lederlenkrad",
+      "Leichtmetallfelgen",
+      "Lordosenstütze",
+      "Multi-CD-Wechsler",
+      "Panorama-Dach",
+      "Raucherpaket",
+      "Scheinwerferreinigung",
+      "Schiebedach",
+      "Sitzheizung",
+      "Sommerreifen",
+      "Sportfahrwerk",
+      "Sportpaket",
+      "Sportsitze",
+      "Tempomat",
+      "Tuner/Radio",
+      "Zentralverriegelung",
+      "Vollleder Schwarz",
+      "6 Zylinder, 3.600 cm³",
+      "Litronic Scheinwerfer",
+      "Fahrdyn. Sperrensystem",
+      "Sitzheizung links und rechts",
+      "Fahrzeug tiefergelegt",
+      "Motorsound Paket",
+      "Entfall d. Federbeinblockierer",
+      "Heckscheibenwischer",
+      "Autom. Geschwindigkeits-Regel-Anlage",
+      "Grünkeil in Frontscheibe",
+      "Bordcomputer",
+      "CD-Radio Porsche CDR-21",
+      "Raffledersitze",
+      "Airbag Lenkrad Komplett Leder",
+      "CD-Fächer hinter Handbremse",
+      "Schiebe-Glasdach",
+      "17 Zoll Michelin Pilot Sport",
+      "Heckscheibe heizbar",
+      "Armaturenbrett beledert",
+      "HU bis 10/2027",
+      "Deutsche Ausführung",
+    ],
+    description:
+      "Porsche 993 Targa in Polarsilber Metallic mit schwarzer Lederausstattung. Deutsches Fahrzeug aus 2. Hand – alter Brief vorhanden: 1. Hand Porsche Zentrum Stuttgart, danach 2 Eintragungen in Privatbesitz.\n\nOldtimerbegutachtung nach §23 StVZO liegt vor und wurde 10/2025 erfolgreich abgeschlossen inkl. HU/AU bis 10/2027. TÜV-Berichte der letzten 12 Jahre liegen vor. Bordmappe inkl. Scheckheft und Touring-Pass sind vorhanden. 2012 wurde eine umfassende Generalüberholung des Motors durchgeführt. Das Fahrzeug steht auf Michelin Pilot Sport Reifen (17 Zoll).\n\nAusstattung u. a.: Fahrdynamisches Sperrensystem, Sitzheizung links und rechts, Tieferlegung, Motorsound-Paket, Entfall der Federbeinblockierer, Heckscheibenwischer, automatische Geschwindigkeits-Regel-Anlage, Grünkeil in Frontscheibe, Lordosenstütze Fahrersitz, Litronic Scheinwerfer, Bordcomputer, CD-Radio Porsche CDR-21, Raffledersitze, beledertes Armaturenbrett, Schiebe-Glasdach, Scheinwerferreinigungsanlage, Raucher-Paket, heizbare Heckscheibe und Airbag-Lenkrad komplett in Leder.\n\nFahrzeugbesichtigung vor Ort ist möglich und wird nach Terminvereinbarung empfohlen. Inzahlungnahme und Tausch möglich.",
+    financingAvailable: true,
+    monthlyRateEur: 736,
+    status: "available",
   }),
 ];
 
