@@ -1,6 +1,8 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
-  <rect width="64" height="64" rx="12" fill="#064e3b"/>
-  <text x="50%" y="54%" text-anchor="middle" dominant-baseline="middle"
-        font-family="Manrope, Inter, system-ui, sans-serif" font-weight="800"
-        font-size="30" fill="#f5f2ea" letter-spacing="-1">AK</text>
+  <rect width="64" height="64" rx="10" fill="#16161b"/>
+  <text x="32" y="36" text-anchor="middle" dominant-baseline="middle"
+        font-family="Manrope, Inter, system-ui, sans-serif"
+        font-weight="800" font-size="30" fill="#f4f3ef"
+        letter-spacing="-2">AK</text>
+  <rect x="26" y="50" width="12" height="2.5" fill="#d2693f"/>
 </svg>
