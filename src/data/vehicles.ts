@@ -23,6 +23,28 @@ import macan22 from "@/assets/vehicles/macan-22.jpg.asset.json";
 import macan23 from "@/assets/vehicles/macan-23.jpg.asset.json";
 import macan24 from "@/assets/vehicles/macan-24.jpg.asset.json";
 import macan25 from "@/assets/vehicles/macan-25.jpg.asset.json";
+import cla01 from "@/assets/vehicles/cla45-01.png.asset.json";
+import cla02 from "@/assets/vehicles/cla45-02.png.asset.json";
+import cla03 from "@/assets/vehicles/cla45-03.png.asset.json";
+import cla04 from "@/assets/vehicles/cla45-04.png.asset.json";
+import cla05 from "@/assets/vehicles/cla45-05.png.asset.json";
+import cla06 from "@/assets/vehicles/cla45-06.png.asset.json";
+import cla07 from "@/assets/vehicles/cla45-07.png.asset.json";
+import cla08 from "@/assets/vehicles/cla45-08.png.asset.json";
+import cla09 from "@/assets/vehicles/cla45-09.png.asset.json";
+import cla10 from "@/assets/vehicles/cla45-10.png.asset.json";
+import cla11 from "@/assets/vehicles/cla45-11.png.asset.json";
+import cla12 from "@/assets/vehicles/cla45-12.png.asset.json";
+import cla13 from "@/assets/vehicles/cla45-13.png.asset.json";
+import cla14 from "@/assets/vehicles/cla45-14.png.asset.json";
+import cla15 from "@/assets/vehicles/cla45-15.png.asset.json";
+import cla16 from "@/assets/vehicles/cla45-16.png.asset.json";
+import cla17 from "@/assets/vehicles/cla45-17.png.asset.json";
+import cla18 from "@/assets/vehicles/cla45-18.png.asset.json";
+import cla19 from "@/assets/vehicles/cla45-19.png.asset.json";
+import cla20 from "@/assets/vehicles/cla45-20.png.asset.json";
+import cla21 from "@/assets/vehicles/cla45-21.png.asset.json";
+import cla22 from "@/assets/vehicles/cla45-22.png.asset.json";
 
 export type VehicleStatus =
   | "available"
@@ -68,6 +90,11 @@ const macanImages = [
   macan01, macan02, macan03, macan04, macan05, macan06, macan07, macan08, macan09,
   macan10, macan11, macan12, macan13, macan14, macan15, macan16, macan17, macan18,
   macan19, macan20, macan21, macan22, macan23, macan24, macan25,
+].map((a) => a.url);
+
+const cla45Images = [
+  cla01, cla02, cla03, cla04, cla05, cla06, cla07, cla08, cla09, cla10, cla11,
+  cla12, cla13, cla14, cla15, cla16, cla17, cla18, cla19, cla20, cla21, cla22,
 ].map((a) => a.url);
 
 export const vehicles: Vehicle[] = [
@@ -127,6 +154,57 @@ export const vehicles: Vehicle[] = [
       "Sehr schöner Porsche Macan 2.0 PDK in Tiefschwarz Metallic mit schwarzer Volllederausstattung. Das Fahrzeug verfügt über eine umfangreiche Ausstattung, unter anderem BOSE Soundsystem, PDLS/Bi-Xenon, Rückfahrkamera, Navigationssystem PCM, Sitzheizung, Parkassistent vorne und hinten, Apple CarPlay/Android Auto sowie 20-Zoll RS Spyder Design Felgen.\n\nDer Macan bietet sportliches Fahrverhalten, hochwertige Verarbeitung und alltagstauglichen Komfort. Durch den Allradantrieb ist das Fahrzeug auch bei schlechter Witterung sehr souverän zu fahren.\n\nHU/AU ist gültig bis 07/2027.\n\nBesichtigung und Probefahrt nach Absprache möglich.",
     financingAvailable: true,
     status: "highlight",
+  }),
+  v({
+    id: "AK-2025-002",
+    make: "Mercedes-Benz",
+    model: "CLA 45 AMG",
+    variant: "4Matic",
+    priceEur: 20870,
+    mileageKm: 165000,
+    firstRegistration: "09/2015",
+    fuel: "Benzin",
+    transmission: "Automatik",
+    powerKw: 280,
+    exteriorColor: "Kosmosschwarz Metallic",
+    condition: "Gebraucht",
+    previousOwners: 1,
+    images: cla45Images,
+    features: [
+      "AMG Performance Sport-Auspuffanlage mit Klappensteuerung",
+      "Harman/Kardon Logic 7 Soundsystem",
+      "Elektrische Sitzeinstellung mit Memory-Funktion",
+      "AMG Driver's Package",
+      "Night-Paket (AMG)",
+      "19 Zoll AMG Vielspeichenfelgen, mattschwarz/glanzgedreht",
+      "Bremssättel rot lackiert",
+      "Bi-Xenon Scheinwerfer",
+      "Ambiente-Beleuchtung",
+      "Abstandstempomat",
+      "Verkehrszeichenerkennung",
+      "Navigationssystem / COMAND Online",
+      "Rückfahrkamera",
+      "Einparkhilfe vorne und hinten",
+      "Sitzheizung",
+      "Sportfahrwerk",
+      "Sportpaket",
+      "Sportsitze",
+      "Allradantrieb 4Matic",
+      "Teilleder, Schwarz",
+      "Klimaanlage",
+      "Front-, Seiten- und weitere Airbags",
+      "Scheckheftgepflegt",
+      "Schadstoffklasse Euro 6",
+      "Umweltplakette 4 (Grün)",
+      "HU bis 08/2027",
+      "Hubraum 1.991 cm³",
+      "Deutsche Ausführung",
+    ],
+    description:
+      "Sportlicher Mercedes-Benz CLA 45 AMG 4Matic in Kosmosschwarz Metallic mit Teilleder-Ausstattung in Schwarz. Mit 280 kW (381 PS) aus dem 2,0-Liter Turbo-Vierzylinder und permanentem Allradantrieb bietet die AMG-Limousine kompromisslose Fahrdynamik.\n\nHochwertige Ausstattung u. a. mit AMG Performance Sport-Auspuffanlage mit Klappensteuerung, Harman/Kardon Soundsystem, elektrischen Memory-Sitzen, AMG Driver's Package, Night-Paket, 19-Zoll AMG Vielspeichenfelgen mattschwarz/glanzgedreht und rot lackierten Bremssätteln. Komfort- und Assistenzsysteme wie Abstandstempomat, Verkehrszeichenerkennung, COMAND Online Navigation, Rückfahrkamera und Einparkhilfe sind ebenfalls an Bord.\n\nScheckheftgepflegt, 1. Halter, HU gültig bis 08/2027. Deutsche Ausführung.\n\nBesichtigung und Probefahrt nach Absprache möglich.",
+    financingAvailable: true,
+    monthlyRateEur: 196,
+    status: "available",
   }),
 ];
 
