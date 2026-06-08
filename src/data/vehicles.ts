@@ -202,6 +202,12 @@ const targa993Images = [
   targa33, targa34, targa35, targa36,
 ].map((a) => a.url);
 
+const cleImages = [
+  cle01, cle02, cle03, cle04, cle05, cle06, cle07, cle08, cle09, cle10,
+  cle11, cle12, cle13, cle14, cle15, cle16, cle17, cle18, cle19,
+].map((a) => a.url);
+
+
 export const vehicles: Vehicle[] = [
   v({
     id: "AK-2025-001",
