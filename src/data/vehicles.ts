@@ -92,6 +92,11 @@ const macanImages = [
   macan19, macan20, macan21, macan22, macan23, macan24, macan25,
 ].map((a) => a.url);
 
+const cla45Images = [
+  cla01, cla02, cla03, cla04, cla05, cla06, cla07, cla08, cla09, cla10, cla11,
+  cla12, cla13, cla14, cla15, cla16, cla17, cla18, cla19, cla20, cla21, cla22,
+].map((a) => a.url);
+
 export const vehicles: Vehicle[] = [
   v({
     id: "AK-2025-001",
