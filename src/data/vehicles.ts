@@ -132,6 +132,13 @@ const cla45Images = [
   cla12, cla13, cla14, cla15, cla16, cla17, cla18, cla19, cla20, cla21, cla22,
 ].map((a) => a.url);
 
+const rs6Images = [
+  rs601, rs602, rs603, rs604, rs605, rs606, rs607, rs608, rs609, rs610, rs611,
+  rs612, rs613, rs614, rs615, rs616, rs617, rs618, rs619, rs620, rs621, rs622,
+  rs623, rs624, rs625, rs626, rs627, rs628, rs629, rs630, rs631, rs632, rs633,
+  rs634, rs635,
+].map((a) => a.url);
+
 export const vehicles: Vehicle[] = [
   v({
     id: "AK-2025-001",
