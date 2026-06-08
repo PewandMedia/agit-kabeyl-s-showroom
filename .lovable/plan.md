@@ -1,28 +1,31 @@
 ## Ziel
-Auf der Startseite im Highlights-Bereich die drei bisherigen KI-Flyer (Porsche Cayenne GTS, Range Rover Sport HSE, Mercedes V 300 d) entfernen und durch den neuen, hochgeladenen Porsche Macan 2.0 PDK Flyer ersetzen. Der Flyer verlinkt auf die Detailseite `AK-2025-001`.
+Mercedes-Benz CLA 45 AMG 4Matic als zweites Inserat in den Bestand aufnehmen. Daten und 22 Bilder kommen aus dem hochgeladenen ZIP.
 
 ## Schritte
 
-1. **Neuen Flyer als CDN-Asset anlegen**
-   - `lovable-assets create` mit der hochgeladenen Datei `ChatGPT Image 8. Juni 2026, 14_50_37.png`
-   - Pointer-Datei: `src/assets/flyer-porsche-macan.png.asset.json`
+1. **22 Bilder als CDN-Assets hochladen**
+   - `lovable-assets create` für `bild_01.png` … `bild_22.png`
+   - Pointer: `src/assets/vehicles/cla45-01.jpg.asset.json` … `cla45-22.jpg.asset.json`
+   *(Dateiendung im Pointer bleibt `.png` wenn Quelle `.png` ist — ich nutze `--filename cla45-XX.png`.)*
 
-2. **`src/routes/index.tsx` anpassen**
-   - Die drei Imports `flyerPorsche`, `flyerRangeRover`, `flyerMercedes` entfernen.
-   - Neuen Import `flyerMacan from "@/assets/flyer-porsche-macan.png.asset.json"` hinzufügen.
-   - `HIGHLIGHT_FLYERS` auf einen einzigen Eintrag reduzieren (Macan → `/fahrzeuge/$id` mit `id: "AK-2025-001"`).
-   - Im `Highlights()`-Layout das Grid so anpassen, dass eine einzelne Karte zentriert und in passender Maximalbreite dargestellt wird (statt `md:grid-cols-3`), z. B. zentrierte Karte mit `max-w-2xl`.
-   - Den Untertitel von „Drei Inserate, drei Geschichten." auf etwas Passendes für ein einzelnes Highlight ändern (z. B. „Unser aktuelles Highlight-Inserat.").
+2. **`src/data/vehicles.ts` erweitern**
+   - Imports für alle 22 neuen `cla45-*.png.asset.json` hinzufügen.
+   - Neuen `vehicles[]`-Eintrag `AK-2025-002` direkt nach dem Macan einfügen:
+     - Marke: Mercedes-Benz, Modell: CLA 45 AMG, Variante: 4Matic
+     - Preis: 20.870 €, Monatsrate: 196 €
+     - 165.000 km, EZ 09/2015, 280 kW, Benzin, Automatik
+     - Allrad, Kosmosschwarz Metallic, Teilleder Schwarz
+     - 1 Vorbesitzer, HU 08/2027, Euro 6, Gebraucht
+     - Features-Liste aus den Inseratdaten (Klappenauspuff, H&K, Memory, HD-Performance, AMG Driver's Package, Night-Paket, 19" AMG Felgen, Bi-Xenon, Abstandstempomat, Rückfahrkamera, Sportfahrwerk, etc.)
+     - Beschreibung kompakt aus den Inserat-Angaben generieren
+     - Status: `available` (Highlight bleibt der Macan auf der Startseite)
+     - `financingAvailable: true`
 
-3. **Alte Flyer-Assets löschen**
-   - `src/assets/flyer-porsche-cayenne-gts.png.asset.json`
-   - `src/assets/flyer-range-rover-sport-hse.png.asset.json`
-   - `src/assets/flyer-mercedes-v300d.png.asset.json`
-   (via `assets--delete_asset`, entfernt CDN-Datei + Pointer)
-
-4. **Verifikation**
-   - Preview auf `/` laden und prüfen, dass der Macan-Flyer einzeln, zentriert und scharf erscheint und der Klick auf die Detailseite des Macan führt.
+3. **Verifikation**
+   - `/fahrzeuge` zeigt Macan + CLA 45 AMG
+   - `/fahrzeuge/AK-2025-002` lädt mit Galerie aller 22 Bilder
+   - Startseiten-Flyer bleibt unverändert (Macan)
 
 ## Hinweise
-- Der Bestand (`vehicles.ts`) bleibt unverändert — dort steht bereits der Macan als `AK-2025-001`.
-- Header-Text „Drei Inserate…" wird auf einzelnes Highlight angepasst, damit nichts widersprüchlich wirkt.
+- Keine Änderungen an `HIGHLIGHT_FLYERS` auf der Startseite.
+- Der bestehende Macan-Eintrag (`AK-2025-001`) bleibt unverändert.
