@@ -45,6 +45,41 @@ import cla19 from "@/assets/vehicles/cla45-19.png.asset.json";
 import cla20 from "@/assets/vehicles/cla45-20.png.asset.json";
 import cla21 from "@/assets/vehicles/cla45-21.png.asset.json";
 import cla22 from "@/assets/vehicles/cla45-22.png.asset.json";
+import rs601 from "@/assets/vehicles/rs6-01.jpg.asset.json";
+import rs602 from "@/assets/vehicles/rs6-02.jpg.asset.json";
+import rs603 from "@/assets/vehicles/rs6-03.jpg.asset.json";
+import rs604 from "@/assets/vehicles/rs6-04.jpg.asset.json";
+import rs605 from "@/assets/vehicles/rs6-05.jpg.asset.json";
+import rs606 from "@/assets/vehicles/rs6-06.jpg.asset.json";
+import rs607 from "@/assets/vehicles/rs6-07.jpg.asset.json";
+import rs608 from "@/assets/vehicles/rs6-08.jpg.asset.json";
+import rs609 from "@/assets/vehicles/rs6-09.jpg.asset.json";
+import rs610 from "@/assets/vehicles/rs6-10.jpg.asset.json";
+import rs611 from "@/assets/vehicles/rs6-11.jpg.asset.json";
+import rs612 from "@/assets/vehicles/rs6-12.jpg.asset.json";
+import rs613 from "@/assets/vehicles/rs6-13.jpg.asset.json";
+import rs614 from "@/assets/vehicles/rs6-14.jpg.asset.json";
+import rs615 from "@/assets/vehicles/rs6-15.jpg.asset.json";
+import rs616 from "@/assets/vehicles/rs6-16.jpg.asset.json";
+import rs617 from "@/assets/vehicles/rs6-17.jpg.asset.json";
+import rs618 from "@/assets/vehicles/rs6-18.jpg.asset.json";
+import rs619 from "@/assets/vehicles/rs6-19.jpg.asset.json";
+import rs620 from "@/assets/vehicles/rs6-20.jpg.asset.json";
+import rs621 from "@/assets/vehicles/rs6-21.jpg.asset.json";
+import rs622 from "@/assets/vehicles/rs6-22.jpg.asset.json";
+import rs623 from "@/assets/vehicles/rs6-23.jpg.asset.json";
+import rs624 from "@/assets/vehicles/rs6-24.jpg.asset.json";
+import rs625 from "@/assets/vehicles/rs6-25.jpg.asset.json";
+import rs626 from "@/assets/vehicles/rs6-26.jpg.asset.json";
+import rs627 from "@/assets/vehicles/rs6-27.jpg.asset.json";
+import rs628 from "@/assets/vehicles/rs6-28.jpg.asset.json";
+import rs629 from "@/assets/vehicles/rs6-29.jpg.asset.json";
+import rs630 from "@/assets/vehicles/rs6-30.jpg.asset.json";
+import rs631 from "@/assets/vehicles/rs6-31.jpg.asset.json";
+import rs632 from "@/assets/vehicles/rs6-32.jpg.asset.json";
+import rs633 from "@/assets/vehicles/rs6-33.jpg.asset.json";
+import rs634 from "@/assets/vehicles/rs6-34.jpg.asset.json";
+import rs635 from "@/assets/vehicles/rs6-35.jpg.asset.json";
 
 export type VehicleStatus =
   | "available"
@@ -95,6 +130,13 @@ const macanImages = [
 const cla45Images = [
   cla01, cla02, cla03, cla04, cla05, cla06, cla07, cla08, cla09, cla10, cla11,
   cla12, cla13, cla14, cla15, cla16, cla17, cla18, cla19, cla20, cla21, cla22,
+].map((a) => a.url);
+
+const rs6Images = [
+  rs601, rs602, rs603, rs604, rs605, rs606, rs607, rs608, rs609, rs610, rs611,
+  rs612, rs613, rs614, rs615, rs616, rs617, rs618, rs619, rs620, rs621, rs622,
+  rs623, rs624, rs625, rs626, rs627, rs628, rs629, rs630, rs631, rs632, rs633,
+  rs634, rs635,
 ].map((a) => a.url);
 
 export const vehicles: Vehicle[] = [
@@ -205,6 +247,124 @@ export const vehicles: Vehicle[] = [
     financingAvailable: true,
     monthlyRateEur: 196,
     status: "available",
+  }),
+  v({
+    id: "AK-2025-003",
+    make: "Audi",
+    model: "RS6 Avant",
+    variant: "4.0 TFSI quattro",
+    title: "Audi RS6 Avant 4.0 TFSI quattro *HUD*SOFT*KERAMIK*SH*",
+    priceEur: 84870,
+    mileageKm: 87000,
+    firstRegistration: "06/2021",
+    fuel: "Benzin",
+    transmission: "Automatik",
+    powerKw: 441,
+    exteriorColor: "Audi exclusive Individuallackierung",
+    condition: "Gebraucht",
+    previousOwners: 1,
+    images: rs6Images,
+    features: [
+      "Abgedunkelte Scheiben",
+      "ABS",
+      "Abstandstempomat",
+      "Abstandswarner",
+      "Adaptives Fahrwerk",
+      "Adaptives Kurvenlicht",
+      "Alarmanlage",
+      "Allradantrieb",
+      "Ambiente-Beleuchtung",
+      "Android Auto",
+      "Anhängerkupplung schwenkbar",
+      "Anhängerrangierassistent",
+      "Apple CarPlay",
+      "Armlehne",
+      "Beheizbare Frontscheibe",
+      "Berganfahrassistent",
+      "Blendfreies Fernlicht",
+      "Bluetooth",
+      "Bordcomputer",
+      "CD-Spieler",
+      "Dachreling",
+      "Elektr. Fensterheber",
+      "Elektr. Heckklappe",
+      "Elektr. Seitenspiegel",
+      "Elektr. Seitenspiegel anklappbar",
+      "Elektr. Sitzeinstellung",
+      "Elektr. Sitzeinstellung mit Memory-Funktion",
+      "Elektr. Wegfahrsperre",
+      "ESP",
+      "Fernlichtassistent",
+      "Freisprecheinrichtung",
+      "Gepäckraumabtrennung",
+      "Geschwindigkeitsbegrenzer",
+      "Head-Up Display",
+      "Induktionsladen für Smartphones",
+      "Innenspiegel autom. abblendend",
+      "Isofix",
+      "Lederlenkrad",
+      "LED-Scheinwerfer",
+      "LED-Tagfahrlicht",
+      "Leichtmetallfelgen",
+      "Lichtsensor",
+      "Lordosenstütze",
+      "Massagesitze",
+      "Müdigkeitswarner",
+      "Multifunktionslenkrad",
+      "Musikstreaming integriert",
+      "Nachtsicht-Assistent",
+      "Navigationssystem",
+      "Navigationsvorbereitung",
+      "Nebelscheinwerfer",
+      "Nichtraucher-Fahrzeug",
+      "Notbremsassistent",
+      "Notrufsystem",
+      "Pannenkit",
+      "Radio DAB",
+      "Raucherpaket",
+      "Regensensor",
+      "Reifendruckkontrolle",
+      "Schaltwippen",
+      "Scheckheftgepflegt",
+      "Scheinwerferreinigung",
+      "Schlüssellose Zentralverriegelung (Keyless)",
+      "Servolenkung",
+      "Sitzbelüftung",
+      "Sitzheizung",
+      "Sitzheizung hinten",
+      "Sommerreifen",
+      "Soundsystem",
+      "Sportfahrwerk",
+      "Sportpaket",
+      "Sportsitze",
+      "Sprachsteuerung",
+      "Spurhalteassistent",
+      "Standheizung",
+      "Start/Stopp-Automatik",
+      "Totwinkel-Assistent",
+      "Touchscreen",
+      "Traktionskontrolle",
+      "TV",
+      "USB",
+      "Verkehrszeichenerkennung",
+      "Volldigitales Kombiinstrument",
+      "WLAN / Wifi Hotspot",
+      "Zentralverriegelung",
+      "360°-Kamera",
+      "4-Zonen-Klimaautomatik",
+      "Vollleder Schwarz",
+      "8 Zylinder, 3.996 cm³",
+      "Schadstoffklasse Euro 6",
+      "Umweltplakette 4 (Grün)",
+      "HU bis 08/2027",
+      "Letzte Wartung 01/2025 bei 68.000 km",
+      "Unfallfrei",
+      "Deutsche Ausführung",
+    ],
+    description:
+      "Der Audi RS6 Avant vereint sportliche Leistung mit praktischer Vielseitigkeit. Mit 600 PS aus einem 8-Zylinder-Aggregat und permanentem Allradantrieb bietet dieses Fahrzeug beeindruckende Fahrleistungen. Das Automatikgetriebe mit Schaltwippen sorgt für eine direkte Kraftübertragung, während das dynamische Fahrwerk und das Performance-Handling-System die Fahrdynamik gezielt unterstützen. Das Fahrzeug verfügt über eine vollständige Servicehistorie und hatte bisher nur einen Vorbesitzer.\n\nHighlights: 600 PS V8, Allradantrieb, Automatikgetriebe, dynamisches Fahrwerk, Performance-Handling-System, digitales Cockpit, Head-up-Display, 4-Zonen-Klimaautomatik, Sportsitze mit Massage/Belüftung/Heizung/Memory, Nachtsichtassistent, Totwinkelüberwachung, 360-Grad-Kamera, Apple CarPlay, Android Auto, WLAN-Hotspot, kabelloses Laden, schwenkbare Anhängerkupplung.\n\nPreis 84.870 € brutto (71.319 € netto, 19 % MwSt. ausweisbar). Besichtigung und Probefahrt nach Absprache möglich.",
+    financingAvailable: true,
+    status: "new-arrival",
   }),
 ];
 
