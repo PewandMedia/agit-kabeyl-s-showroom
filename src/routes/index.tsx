@@ -284,7 +284,7 @@ function Highlights() {
               Aktuelle Highlights
             </p>
             <h2 className="mt-4 font-display text-4xl font-extrabold tracking-tight text-ink md:text-5xl">
-              Drei Inserate, <span className="text-champagne">drei Geschichten.</span>
+              Unser aktuelles <span className="text-champagne">Highlight-Inserat.</span>
             </h2>
           </div>
           <Link
@@ -295,17 +295,19 @@ function Highlights() {
           </Link>
         </div>
 
-        <div className="mt-10 grid gap-6 md:mt-14 md:grid-cols-3">
-          {HIGHLIGHT_FLYERS.map((f, i) => (
-            <HighlightFlyerCard
-              key={f.image}
-              image={f.image}
-              alt={f.alt}
-              to={f.to}
-              params={f.params}
-              priority={i === 0}
-            />
-          ))}
+        <div className="mt-10 flex justify-center md:mt-14">
+          <div className="w-full max-w-2xl">
+            {HIGHLIGHT_FLYERS.map((f, i) => (
+              <HighlightFlyerCard
+                key={f.image}
+                image={f.image}
+                alt={f.alt}
+                to={f.to}
+                params={f.params}
+                priority={i === 0}
+              />
+            ))}
+          </div>
         </div>
 
         <div className="mt-12 flex justify-center md:mt-16">
