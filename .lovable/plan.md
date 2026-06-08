@@ -1,5 +1,23 @@
-## Header-Logo → immer nach ganz oben scrollen
+## Ziel
+Den Host `kaybel.pewandmedia.de` im Vite Dev-Server erlauben (sonst blockt Vite mit "Blocked request. This host is not allowed").
 
-In `src/components/site/Header.tsx` ist das „AK Autohaus"-Logo bereits ein `<Link to="/">`. Problem: Wenn man **schon** auf `/` ist, navigiert der Router nicht neu — und scrollt deshalb auch nicht hoch.
+## Änderung
+In `vite.config.ts` die zusätzliche Vite-Konfiguration via `defineConfig({ vite: { ... } })` erweitern und `server.allowedHosts` setzen:
 
-Fix: Im bestehenden `onClick` (der bereits das Mobile-Menü schließt) zusätzlich `window.scrollTo({ top: 0, behavior: "smooth" })` aufrufen. Funktioniert sowohl beim Klick von der Startseite (sofortiges Hochscrollen) als auch von Unterseiten (Router-Navigation + danach oben).
+```ts
+export default defineConfig({
+  tanstackStart: {
+    server: { entry: "server" },
+  },
+  vite: {
+    server: {
+      allowedHosts: ["kaybel.pewandmedia.de"],
+    },
+  },
+});
+```
+
+Die bestehenden Einstellungen aus `@lovable.dev/vite-tanstack-config` (Port, Host, strictPort, Sandbox-Detection) bleiben unverändert — wir ergänzen nur die Allowlist.
+
+## Hinweis
+Nach der Änderung startet der Dev-Server neu. Die Allowlist wirkt nur im Dev-Modus; in Produktion (Cloudflare Worker) ist sie irrelevant.
